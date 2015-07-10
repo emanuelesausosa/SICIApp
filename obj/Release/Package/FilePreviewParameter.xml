@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="emanuelsosa-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="IdentityContextDB-Web.config Connection String" description="" value="Data Source=SQL5016.Smarterasp.net;Initial Catalog=DB_9CB66F_SICIBD2;Persist Security Info=True;User ID=DB_9CB66F_SICIBD2_admin;Password=emso07PRO;Application Name=EntityFramework" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='IdentityContextDB']/@connectionString" />
+  </parameter>
+  <parameter name="SICIBD2Entities-Web.config Connection String" description="" value="metadata=res://*/DAL.SICIApp.csdl|res://*/DAL.SICIApp.ssdl|res://*/DAL.SICIApp.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=SQL5016.Smarterasp.net;initial catalog=DB_9CB66F_SICIBD2;persist security info=True;user id=DB_9CB66F_SICIBD2_admin;password=emso07PRO;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SICIBD2Entities']/@connectionString" />
+  </parameter>
+</parameters>
