@@ -61,6 +61,15 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
+  <EntityType Name="CENTROTERAPEUTICO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="IDCIUDADOPERACION" Type="int" />
+  </EntityType>
   <EntityType Name="CITY">
     <Key>
       <PropertyRef Name="ID" />
@@ -117,6 +126,28 @@
     <Property Name="FOTOGRAFIA" Type="nvarchar" MaxLength="255" />
     <Property Name="IDCIUDADORIGEN" Type="int" />
   </EntityType>
+  <EntityType Name="USUARIOCENTROCONSULTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCT" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IDUSUARIO" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FECHACREACION" Type="datetime" />
+    <Property Name="ACTIVO" Type="bit" />
+  </EntityType>
+  <Association Name="FK_CENTROTERAPEUTICO_CITY">
+    <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+    <End Role="CENTROTERAPEUTICO" Type="Self.CENTROTERAPEUTICO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="IDCIUDADOPERACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CITY_COUNTRY">
     <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
     <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
@@ -221,6 +252,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_USUARIOCENTROCONSULTA_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="USUARIOCENTROCONSULTA" Type="Self.USUARIOCENTROCONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="USUARIOCENTROCONSULTA">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO">
+    <End Role="CENTROTERAPEUTICO" Type="Self.CENTROTERAPEUTICO" Multiplicity="1" />
+    <End Role="USUARIOCENTROCONSULTA" Type="Self.USUARIOCENTROCONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIOCENTROCONSULTA">
+        <PropertyRef Name="IDCT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="spInsertNewCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="nvarchar" Mode="In" />
+    <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="SICIBD2ModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -228,10 +295,16 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CENTROTERAPEUTICO" EntityType="Self.CENTROTERAPEUTICO" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="CITY" EntityType="Self.CITY" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="COUNTRYLANGUAGE" EntityType="Self.COUNTRYLANGUAGE" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="DATOSPERSONALES" EntityType="Self.DATOSPERSONALES" Schema="SICI_GENERALES" store:Type="Tables" />
+    <EntitySet Name="USUARIOCENTROCONSULTA" EntityType="Self.USUARIOCENTROCONSULTA" Schema="SICI_GENERALES" store:Type="Tables" />
+    <AssociationSet Name="FK_CENTROTERAPEUTICO_CITY" Association="Self.FK_CENTROTERAPEUTICO_CITY">
+      <End Role="CITY" EntitySet="CITY" />
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICO" />
+    </AssociationSet>
     <AssociationSet Name="FK_CITY_COUNTRY" Association="Self.FK_CITY_COUNTRY">
       <End Role="COUNTRY" EntitySet="COUNTRY" />
       <End Role="CITY" EntitySet="CITY" />
@@ -263,6 +336,14 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOCENTROCONSULTA_AspNetUsers" Association="Self.FK_USUARIOCENTROCONSULTA_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="USUARIOCENTROCONSULTA" EntitySet="USUARIOCENTROCONSULTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" Association="Self.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICO" />
+      <End Role="USUARIOCENTROCONSULTA" EntitySet="USUARIOCENTROCONSULTA" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

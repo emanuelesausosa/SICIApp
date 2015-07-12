@@ -34,5 +34,7 @@ namespace SICIApp.Entities
         public virtual DbSet<COUNTRY> COUNTRies { get; set; }
         public virtual DbSet<COUNTRYLANGUAGE> COUNTRYLANGUAGEs { get; set; }
         public virtual DbSet<DATOSPERSONALE> DATOSPERSONALES { get; set; }
+        public virtual DbSet<CENTROTERAPEUTICO> CENTROTERAPEUTICOes { get; set; }
+        public virtual DbSet<USUARIOCENTROCONSULTA> USUARIOCENTROCONSULTAs { get; set; }
     }
 }

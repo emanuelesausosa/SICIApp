@@ -17,6 +17,7 @@ namespace SICIApp.Entities
         public CITY()
         {
             this.DATOSPERSONALES = new HashSet<DATOSPERSONALE>();
+            this.CENTROTERAPEUTICOes = new HashSet<CENTROTERAPEUTICO>();
         }
     
         public int ID { get; set; }
@@ -27,5 +28,6 @@ namespace SICIApp.Entities
     
         public virtual COUNTRY COUNTRY { get; set; }
         public virtual ICollection<DATOSPERSONALE> DATOSPERSONALES { get; set; }
+        public virtual ICollection<CENTROTERAPEUTICO> CENTROTERAPEUTICOes { get; set; }
     }
 }

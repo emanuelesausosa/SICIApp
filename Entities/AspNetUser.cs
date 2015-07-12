@@ -19,6 +19,7 @@ namespace SICIApp.Entities
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.USUARIOCENTROCONSULTAs = new HashSet<USUARIOCENTROCONSULTA>();
         }
     
         public string Id { get; set; }
@@ -38,5 +39,6 @@ namespace SICIApp.Entities
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         public virtual DATOSPERSONALE DATOSPERSONALE { get; set; }
+        public virtual ICollection<USUARIOCENTROCONSULTA> USUARIOCENTROCONSULTAs { get; set; }
     }
 }

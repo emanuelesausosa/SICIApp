@@ -123,5 +123,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CENTROTERAPEUTICOes">
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTROTERAPEUTICO">
+        <MappingFragment StoreEntitySet="CENTROTERAPEUTICO">
+          <ScalarProperty Name="IDCIUDADOPERACION" ColumnName="IDCIUDADOPERACION" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTROTERAPEUTICO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCentroTerapeutico">
+            <ScalarProperty Name="IDCIUDADOPERACION" ParameterName="IDCIUDADOPERACION" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ScalarProperty Name="ID" ParameterName="ID" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCentroTerapeutico">
+            <ScalarProperty Name="IDCIUDADOPERACION" ParameterName="IDCIUDADOPERACION" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOCENTROCONSULTAs">
+      <EntityTypeMapping TypeName="SICIBD2Model.USUARIOCENTROCONSULTA">
+        <MappingFragment StoreEntitySet="USUARIOCENTROCONSULTA">
+          <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+          <ScalarProperty Name="FECHACREACION" ColumnName="FECHACREACION" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="IDCT" ColumnName="IDCT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

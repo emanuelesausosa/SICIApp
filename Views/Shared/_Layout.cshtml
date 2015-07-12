@@ -19,45 +19,58 @@
 </head>
 <body class="background-dark">
 
-    <div class="logo">
-        <h4><a href="@Url.Action("Index", "Home")">SICI <strong>Proyecto Victoria</strong></a></h4>
-    </div>
-    <nav id="sidebar" class="sidebar nav-collapse collapse">
-        <ul id="side-nav" class="side-nav">
-            <li class="active">
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i><span class="name">Tablero de comandos</span></a>
-            </li>
-            <li class="panel">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#forms-collapse">
-                    <i class="fa fa-pencil"></i>
-                    <span class="name">Configuraciones</span>
-                </a>
-                <ul id="forms-collapse" class="panel-collapse collapse">
-                    <li class="">@Html.ActionLink("Gestión de Usuarios", "Register", "Account")</li>
-                    <li class="">@Html.ActionLink("Nuevo Permiso", "NuevoPermiso", "Permisos")</li>
-                </ul>
-            </li>
-            <li class="panel">
-                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse">
-                    <i class="fa fa-area-chart"></i>
-                    <span class="name">Reportes</span>
-                </a>
-                <ul id="stats-collapse" class="panel-collapse collapse">
-                    <li class="">@Html.ActionLink("Texto 1", "NuevoPermiso", "Permisos")</li>
-                    <li class="">@Html.ActionLink("Texto 2", "NuevoPermiso", "Permisos")</li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
+    @if(User.IsInRole("Admin"))
+    {
+        <div class="logo">
+            <h4><a href="@Url.Action("Index", "Home")">SICI <strong>Proyecto Victoria</strong></a></h4>
+        </div>
+        <nav id="sidebar" class="sidebar nav-collapse collapse">
+            <ul id="side-nav" class="side-nav">
+                <li class="active">
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i><span class="name">Tablero de comandos</span></a>
+                </li>
+                <li class="panel">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#forms-collapse">
+                        <i class="fa fa-pencil"></i>
+                        <span class="name">Configuraciones</span>
+                    </a>
+                    <ul id="forms-collapse" class="panel-collapse collapse">
+                        <li class="">@Html.ActionLink("Gestión de Usuarios", "Register", "Account")</li>
+                        <li class="">@Html.ActionLink("Nuevo Permiso", "NuevoPermiso", "Permisos")</li>
+                    </ul>
+                </li>
+                <li class="panel">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse">
+                        <i class="fa fa-area-chart"></i>
+                        <span class="name">Reportes</span>
+                    </a>
+                    <ul id="stats-collapse" class="panel-collapse collapse">
+                        <li class="">@Html.ActionLink("Texto 1", "NuevoPermiso", "Permisos")</li>
+                        <li class="">@Html.ActionLink("Texto 2", "NuevoPermiso", "Permisos")</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     <!-- Render Body-->
-    <div class="wrap">
-        <header class="page-header">
-            <div class="navbar">
-                <ul class="nav navbar-nav navbar-right pull-right">
-                    <li>Hola, @User.Identity.Name!</li>
-                </ul>
+        <div class="wrap">
+            <header class="page-header">
+                <div class="navbar">
+                    <ul class="nav navbar-nav navbar-right pull-right">
+                        <li>Hola, @User.Identity.Name!</li>
+                    </ul>
+                </div>
+            </header>
+            <div class="content container">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Dev by Emanuel Sosa</p>
+                </footer>
             </div>
-        </header>
+        </div>
+    }
+    else
+    {
         <div class="content container">
             @RenderBody()
             <hr />
@@ -65,7 +78,8 @@
                 <p>&copy; @DateTime.Now.Year - Dev by Emanuel Sosa</p>
             </footer>
         </div>
-    </div>
+    }
+
     @Scripts.Render("~/bundles/jquery")
 
     @Scripts.Render("~/bundles/chat")

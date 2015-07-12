@@ -150,3 +150,8 @@ C:\SICI\SICIApp\bin\itextsharp.xml
 C:\SICI\SICIApp\bin\Ninject.xml
 C:\SICI\SICIApp\bin\PagedList.xml
 C:\SICI\SICIApp\bin\PagedList.Mvc.xml
+C:\SICI\SICIApp\bin\System.Web.Helpers.dll
+C:\SICI\SICIApp\bin\System.Web.Razor.dll
+C:\SICI\SICIApp\bin\System.Web.WebPages.Deployment.dll
+C:\SICI\SICIApp\bin\System.Web.WebPages.dll
+C:\SICI\SICIApp\bin\System.Web.WebPages.Razor.dll
