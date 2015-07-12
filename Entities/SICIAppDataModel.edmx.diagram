@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1">
+      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1" ZoomLevel="55">
         <EntityTypeShape EntityType="SICIBD2Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
@@ -13,6 +13,14 @@
         <AssociationConnector Association="SICIBD2Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SICIBD2Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SICIBD2Model.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SICIBD2Model.CITY" Width="1.5" PointX="5.625" PointY="7.75" />
+        <EntityTypeShape EntityType="SICIBD2Model.COUNTRY" Width="1.5" PointX="3.375" PointY="8.125" />
+        <EntityTypeShape EntityType="SICIBD2Model.COUNTRYLANGUAGE" Width="1.5" PointX="5.625" PointY="10.875" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPERSONALE" Width="1.5" PointX="7.875" PointY="4" />
+        <AssociationConnector Association="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" />
+        <AssociationConnector Association="SICIBD2Model.FK_CITY_COUNTRY" />
+        <AssociationConnector Association="SICIBD2Model.FK_DATOSPERSONALES_CITY" />
+        <AssociationConnector Association="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

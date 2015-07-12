@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SICIBD2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SICIBD2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -66,6 +66,110 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="NAME" Type="char" MaxLength="35" Nullable="false" />
+          <Property Name="COUNTRYCODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="DISTRICT" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="POPULATION" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="NAME" Type="char" MaxLength="52" Nullable="false" />
+          <Property Name="CONTINENT" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="REGION" Type="char" MaxLength="26" Nullable="false" />
+          <Property Name="SURFACEAREA" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="INDEPYEAR" Type="smallint" />
+          <Property Name="POPULATION" Type="int" Nullable="false" />
+          <Property Name="LIFEEXPECTANCY" Type="decimal" Precision="3" Scale="1" />
+          <Property Name="GNP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="GNPOLD" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="LOCALNAME" Type="char" MaxLength="45" Nullable="false" />
+          <Property Name="GOVERNMENTFORM" Type="char" MaxLength="45" Nullable="false" />
+          <Property Name="HEADOFSTATE" Type="char" MaxLength="60" />
+          <Property Name="CAPITAL" Type="int" />
+          <Property Name="CODE2" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="COUNTRYLANGUAGE">
+          <Key>
+            <PropertyRef Name="COUNTRYCODE" />
+            <PropertyRef Name="LANGUAGE" />
+          </Key>
+          <Property Name="COUNTRYCODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="LANGUAGE" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="ISOFFICIAL" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="PERCENTAGE" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DATOSPERSONALES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PRIMERNOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="SEGUNDONOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="PRIMERAPELLIDO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SEGUNDOAPELLIDO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PROFESION" Type="nvarchar" MaxLength="25" />
+          <Property Name="NUMEROIDENTIDAD" Type="nvarchar" MaxLength="16" />
+          <Property Name="EXTRANJERO" Type="bit" />
+          <Property Name="NUMEROPASAPORTE" Type="nvarchar" MaxLength="25" />
+          <Property Name="FOTOGRAFIA" Type="nvarchar" MaxLength="255" />
+          <Property Name="IDCIUDADORIGEN" Type="int" />
+        </EntityType>
+        <Association Name="FK_CITY_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="COUNTRYCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COUNTRYLANGUAGE_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+          <End Role="COUNTRYLANGUAGE" Type="Self.COUNTRYLANGUAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="COUNTRYLANGUAGE">
+              <PropertyRef Name="COUNTRYCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATOSPERSONALES_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="DATOSPERSONALES" Type="Self.DATOSPERSONALES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DATOSPERSONALES">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATOSPERSONALES_CITY">
+          <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+          <End Role="DATOSPERSONALES" Type="Self.DATOSPERSONALES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DATOSPERSONALES">
+              <PropertyRef Name="IDCIUDADORIGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -129,6 +233,26 @@
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CITY" EntityType="Self.CITY" Schema="SICI_GENERALES" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="SICI_GENERALES" store:Type="Tables" />
+          <EntitySet Name="COUNTRYLANGUAGE" EntityType="Self.COUNTRYLANGUAGE" Schema="SICI_GENERALES" store:Type="Tables" />
+          <EntitySet Name="DATOSPERSONALES" EntityType="Self.DATOSPERSONALES" Schema="SICI_GENERALES" store:Type="Tables" />
+          <AssociationSet Name="FK_CITY_COUNTRY" Association="Self.FK_CITY_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="CITY" EntitySet="CITY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="Self.FK_COUNTRYLANGUAGE_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="COUNTRYLANGUAGE" EntitySet="COUNTRYLANGUAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATOSPERSONALES_AspNetUsers" Association="Self.FK_DATOSPERSONALES_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="DATOSPERSONALES" EntitySet="DATOSPERSONALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATOSPERSONALES_CITY" Association="Self.FK_DATOSPERSONALES_CITY">
+            <End Role="CITY" EntitySet="CITY" />
+            <End Role="DATOSPERSONALES" EntitySet="DATOSPERSONALES" />
+          </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -146,8 +270,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SICIBD2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -209,6 +332,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="DATOSPERSONALE" Relationship="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" FromRole="AspNetUser" ToRole="DATOSPERSONALE" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
@@ -260,7 +384,138 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="CITies" EntityType="SICIBD2Model.CITY" />
+          <EntitySet Name="COUNTRies" EntityType="SICIBD2Model.COUNTRY" />
+          <EntitySet Name="COUNTRYLANGUAGEs" EntityType="SICIBD2Model.COUNTRYLANGUAGE" />
+          <EntitySet Name="DATOSPERSONALES" EntityType="SICIBD2Model.DATOSPERSONALE" />
+          <AssociationSet Name="FK_DATOSPERSONALES_AspNetUsers" Association="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="DATOSPERSONALE" EntitySet="DATOSPERSONALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CITY_COUNTRY" Association="SICIBD2Model.FK_CITY_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="CITY" EntitySet="CITies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATOSPERSONALES_CITY" Association="SICIBD2Model.FK_DATOSPERSONALES_CITY">
+            <End Role="CITY" EntitySet="CITies" />
+            <End Role="DATOSPERSONALE" EntitySet="DATOSPERSONALES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRies" />
+            <End Role="COUNTRYLANGUAGE" EntitySet="COUNTRYLANGUAGEs" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CITY">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="35" FixedLength="true" Unicode="false" />
+          <Property Name="COUNTRYCODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="DISTRICT" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="POPULATION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="COUNTRY" Relationship="SICIBD2Model.FK_CITY_COUNTRY" FromRole="CITY" ToRole="COUNTRY" />
+          <NavigationProperty Name="DATOSPERSONALES" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY" FromRole="CITY" ToRole="DATOSPERSONALE" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="52" FixedLength="true" Unicode="false" />
+          <Property Name="CONTINENT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="REGION" Type="String" Nullable="false" MaxLength="26" FixedLength="true" Unicode="false" />
+          <Property Name="SURFACEAREA" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="INDEPYEAR" Type="Int16" />
+          <Property Name="POPULATION" Type="Int32" Nullable="false" />
+          <Property Name="LIFEEXPECTANCY" Type="Decimal" Precision="3" Scale="1" />
+          <Property Name="GNP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="GNPOLD" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="LOCALNAME" Type="String" Nullable="false" MaxLength="45" FixedLength="true" Unicode="false" />
+          <Property Name="GOVERNMENTFORM" Type="String" Nullable="false" MaxLength="45" FixedLength="true" Unicode="false" />
+          <Property Name="HEADOFSTATE" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+          <Property Name="CAPITAL" Type="Int32" />
+          <Property Name="CODE2" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CITies" Relationship="SICIBD2Model.FK_CITY_COUNTRY" FromRole="COUNTRY" ToRole="CITY" />
+          <NavigationProperty Name="COUNTRYLANGUAGEs" Relationship="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" FromRole="COUNTRY" ToRole="COUNTRYLANGUAGE" />
+        </EntityType>
+        <EntityType Name="COUNTRYLANGUAGE">
+          <Key>
+            <PropertyRef Name="COUNTRYCODE" />
+            <PropertyRef Name="LANGUAGE" />
+          </Key>
+          <Property Name="COUNTRYCODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="LANGUAGE" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+          <Property Name="ISOFFICIAL" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="PERCENTAGE" Type="Decimal" Nullable="false" Precision="4" Scale="1" />
+          <NavigationProperty Name="COUNTRY" Relationship="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" FromRole="COUNTRYLANGUAGE" ToRole="COUNTRY" />
+        </EntityType>
+        <EntityType Name="DATOSPERSONALE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PRIMERNOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEGUNDONOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PRIMERAPELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEGUNDOAPELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROFESION" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NUMEROIDENTIDAD" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="EXTRANJERO" Type="Boolean" />
+          <Property Name="NUMEROPASAPORTE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FOTOGRAFIA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IDCIUDADORIGEN" Type="Int32" />
+          <NavigationProperty Name="AspNetUser" Relationship="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" FromRole="DATOSPERSONALE" ToRole="AspNetUser" />
+          <NavigationProperty Name="CITY" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY" FromRole="DATOSPERSONALE" ToRole="CITY" />
+        </EntityType>
+        <Association Name="FK_DATOSPERSONALES_AspNetUsers">
+          <End Type="SICIBD2Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="SICIBD2Model.DATOSPERSONALE" Role="DATOSPERSONALE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DATOSPERSONALE">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CITY_COUNTRY">
+          <End Type="SICIBD2Model.COUNTRY" Role="COUNTRY" Multiplicity="1" />
+          <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="CITY">
+              <PropertyRef Name="COUNTRYCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATOSPERSONALES_CITY">
+          <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="0..1" />
+          <End Type="SICIBD2Model.DATOSPERSONALE" Role="DATOSPERSONALE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CITY">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DATOSPERSONALE">
+              <PropertyRef Name="IDCIUDADORIGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COUNTRYLANGUAGE_COUNTRY">
+          <End Type="SICIBD2Model.COUNTRY" Role="COUNTRY" Multiplicity="1" />
+          <End Type="SICIBD2Model.COUNTRYLANGUAGE" Role="COUNTRYLANGUAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="COUNTRYLANGUAGE">
+              <PropertyRef Name="COUNTRYCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -330,6 +585,65 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="CITies">
+            <EntityTypeMapping TypeName="SICIBD2Model.CITY">
+              <MappingFragment StoreEntitySet="CITY">
+                <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+                <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRies">
+            <EntityTypeMapping TypeName="SICIBD2Model.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="CODE2" ColumnName="CODE2" />
+                <ScalarProperty Name="CAPITAL" ColumnName="CAPITAL" />
+                <ScalarProperty Name="HEADOFSTATE" ColumnName="HEADOFSTATE" />
+                <ScalarProperty Name="GOVERNMENTFORM" ColumnName="GOVERNMENTFORM" />
+                <ScalarProperty Name="LOCALNAME" ColumnName="LOCALNAME" />
+                <ScalarProperty Name="GNPOLD" ColumnName="GNPOLD" />
+                <ScalarProperty Name="GNP" ColumnName="GNP" />
+                <ScalarProperty Name="LIFEEXPECTANCY" ColumnName="LIFEEXPECTANCY" />
+                <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+                <ScalarProperty Name="INDEPYEAR" ColumnName="INDEPYEAR" />
+                <ScalarProperty Name="SURFACEAREA" ColumnName="SURFACEAREA" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="CONTINENT" ColumnName="CONTINENT" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRYLANGUAGEs">
+            <EntityTypeMapping TypeName="SICIBD2Model.COUNTRYLANGUAGE">
+              <MappingFragment StoreEntitySet="COUNTRYLANGUAGE">
+                <ScalarProperty Name="PERCENTAGE" ColumnName="PERCENTAGE" />
+                <ScalarProperty Name="ISOFFICIAL" ColumnName="ISOFFICIAL" />
+                <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+                <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATOSPERSONALES">
+            <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALE">
+              <MappingFragment StoreEntitySet="DATOSPERSONALES">
+                <ScalarProperty Name="IDCIUDADORIGEN" ColumnName="IDCIUDADORIGEN" />
+                <ScalarProperty Name="FOTOGRAFIA" ColumnName="FOTOGRAFIA" />
+                <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
+                <ScalarProperty Name="EXTRANJERO" ColumnName="EXTRANJERO" />
+                <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+                <ScalarProperty Name="PROFESION" ColumnName="PROFESION" />
+                <ScalarProperty Name="SEGUNDOAPELLIDO" ColumnName="SEGUNDOAPELLIDO" />
+                <ScalarProperty Name="PRIMERAPELLIDO" ColumnName="PRIMERAPELLIDO" />
+                <ScalarProperty Name="SEGUNDONOMBRE" ColumnName="SEGUNDONOMBRE" />
+                <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

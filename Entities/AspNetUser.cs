@@ -37,5 +37,6 @@ namespace SICIApp.Entities
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual DATOSPERSONALE DATOSPERSONALE { get; set; }
     }
 }

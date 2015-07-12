@@ -64,5 +64,64 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="CITies">
+      <EntityTypeMapping TypeName="SICIBD2Model.CITY">
+        <MappingFragment StoreEntitySet="CITY">
+          <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+          <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+          <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COUNTRies">
+      <EntityTypeMapping TypeName="SICIBD2Model.COUNTRY">
+        <MappingFragment StoreEntitySet="COUNTRY">
+          <ScalarProperty Name="CODE2" ColumnName="CODE2" />
+          <ScalarProperty Name="CAPITAL" ColumnName="CAPITAL" />
+          <ScalarProperty Name="HEADOFSTATE" ColumnName="HEADOFSTATE" />
+          <ScalarProperty Name="GOVERNMENTFORM" ColumnName="GOVERNMENTFORM" />
+          <ScalarProperty Name="LOCALNAME" ColumnName="LOCALNAME" />
+          <ScalarProperty Name="GNPOLD" ColumnName="GNPOLD" />
+          <ScalarProperty Name="GNP" ColumnName="GNP" />
+          <ScalarProperty Name="LIFEEXPECTANCY" ColumnName="LIFEEXPECTANCY" />
+          <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+          <ScalarProperty Name="INDEPYEAR" ColumnName="INDEPYEAR" />
+          <ScalarProperty Name="SURFACEAREA" ColumnName="SURFACEAREA" />
+          <ScalarProperty Name="REGION" ColumnName="REGION" />
+          <ScalarProperty Name="CONTINENT" ColumnName="CONTINENT" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COUNTRYLANGUAGEs">
+      <EntityTypeMapping TypeName="SICIBD2Model.COUNTRYLANGUAGE">
+        <MappingFragment StoreEntitySet="COUNTRYLANGUAGE">
+          <ScalarProperty Name="PERCENTAGE" ColumnName="PERCENTAGE" />
+          <ScalarProperty Name="ISOFFICIAL" ColumnName="ISOFFICIAL" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPERSONALES">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALE">
+        <MappingFragment StoreEntitySet="DATOSPERSONALES">
+          <ScalarProperty Name="IDCIUDADORIGEN" ColumnName="IDCIUDADORIGEN" />
+          <ScalarProperty Name="FOTOGRAFIA" ColumnName="FOTOGRAFIA" />
+          <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
+          <ScalarProperty Name="EXTRANJERO" ColumnName="EXTRANJERO" />
+          <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+          <ScalarProperty Name="PROFESION" ColumnName="PROFESION" />
+          <ScalarProperty Name="SEGUNDOAPELLIDO" ColumnName="SEGUNDOAPELLIDO" />
+          <ScalarProperty Name="PRIMERAPELLIDO" ColumnName="PRIMERAPELLIDO" />
+          <ScalarProperty Name="SEGUNDONOMBRE" ColumnName="SEGUNDONOMBRE" />
+          <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

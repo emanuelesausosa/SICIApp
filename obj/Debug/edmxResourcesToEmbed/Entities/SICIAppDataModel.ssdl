@@ -61,6 +61,110 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
+  <EntityType Name="CITY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NAME" Type="char" MaxLength="35" Nullable="false" />
+    <Property Name="COUNTRYCODE" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="DISTRICT" Type="char" MaxLength="20" Nullable="false" />
+    <Property Name="POPULATION" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COUNTRY">
+    <Key>
+      <PropertyRef Name="CODE" />
+    </Key>
+    <Property Name="CODE" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="NAME" Type="char" MaxLength="52" Nullable="false" />
+    <Property Name="CONTINENT" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="REGION" Type="char" MaxLength="26" Nullable="false" />
+    <Property Name="SURFACEAREA" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="INDEPYEAR" Type="smallint" />
+    <Property Name="POPULATION" Type="int" Nullable="false" />
+    <Property Name="LIFEEXPECTANCY" Type="decimal" Precision="3" Scale="1" />
+    <Property Name="GNP" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="GNPOLD" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="LOCALNAME" Type="char" MaxLength="45" Nullable="false" />
+    <Property Name="GOVERNMENTFORM" Type="char" MaxLength="45" Nullable="false" />
+    <Property Name="HEADOFSTATE" Type="char" MaxLength="60" />
+    <Property Name="CAPITAL" Type="int" />
+    <Property Name="CODE2" Type="char" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COUNTRYLANGUAGE">
+    <Key>
+      <PropertyRef Name="COUNTRYCODE" />
+      <PropertyRef Name="LANGUAGE" />
+    </Key>
+    <Property Name="COUNTRYCODE" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="LANGUAGE" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="ISOFFICIAL" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="PERCENTAGE" Type="decimal" Precision="4" Scale="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DATOSPERSONALES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PRIMERNOMBRE" Type="nvarchar" MaxLength="50" />
+    <Property Name="SEGUNDONOMBRE" Type="nvarchar" MaxLength="50" />
+    <Property Name="PRIMERAPELLIDO" Type="nvarchar" MaxLength="50" />
+    <Property Name="SEGUNDOAPELLIDO" Type="nvarchar" MaxLength="50" />
+    <Property Name="PROFESION" Type="nvarchar" MaxLength="25" />
+    <Property Name="NUMEROIDENTIDAD" Type="nvarchar" MaxLength="16" />
+    <Property Name="EXTRANJERO" Type="bit" />
+    <Property Name="NUMEROPASAPORTE" Type="nvarchar" MaxLength="25" />
+    <Property Name="FOTOGRAFIA" Type="nvarchar" MaxLength="255" />
+    <Property Name="IDCIUDADORIGEN" Type="int" />
+  </EntityType>
+  <Association Name="FK_CITY_COUNTRY">
+    <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+    <End Role="CITY" Type="Self.CITY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="CITY">
+        <PropertyRef Name="COUNTRYCODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COUNTRYLANGUAGE_COUNTRY">
+    <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
+    <End Role="COUNTRYLANGUAGE" Type="Self.COUNTRYLANGUAGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="COUNTRYLANGUAGE">
+        <PropertyRef Name="COUNTRYCODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="DATOSPERSONALES" Type="Self.DATOSPERSONALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY">
+    <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+    <End Role="DATOSPERSONALES" Type="Self.DATOSPERSONALES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES">
+        <PropertyRef Name="IDCIUDADORIGEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -124,6 +228,26 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CITY" EntityType="Self.CITY" Schema="SICI_GENERALES" store:Type="Tables" />
+    <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="SICI_GENERALES" store:Type="Tables" />
+    <EntitySet Name="COUNTRYLANGUAGE" EntityType="Self.COUNTRYLANGUAGE" Schema="SICI_GENERALES" store:Type="Tables" />
+    <EntitySet Name="DATOSPERSONALES" EntityType="Self.DATOSPERSONALES" Schema="SICI_GENERALES" store:Type="Tables" />
+    <AssociationSet Name="FK_CITY_COUNTRY" Association="Self.FK_CITY_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRY" />
+      <End Role="CITY" EntitySet="CITY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="Self.FK_COUNTRYLANGUAGE_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRY" />
+      <End Role="COUNTRYLANGUAGE" EntitySet="COUNTRYLANGUAGE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_AspNetUsers" Association="Self.FK_DATOSPERSONALES_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="DATOSPERSONALES" EntitySet="DATOSPERSONALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY" Association="Self.FK_DATOSPERSONALES_CITY">
+      <End Role="CITY" EntitySet="CITY" />
+      <End Role="DATOSPERSONALES" EntitySet="DATOSPERSONALES" />
+    </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />

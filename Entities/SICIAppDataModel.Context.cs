@@ -30,5 +30,9 @@ namespace SICIApp.Entities
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<CITY> CITies { get; set; }
+        public virtual DbSet<COUNTRY> COUNTRies { get; set; }
+        public virtual DbSet<COUNTRYLANGUAGE> COUNTRYLANGUAGEs { get; set; }
+        public virtual DbSet<DATOSPERSONALE> DATOSPERSONALES { get; set; }
     }
 }
