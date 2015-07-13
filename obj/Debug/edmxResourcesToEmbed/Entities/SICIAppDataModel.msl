@@ -139,7 +139,6 @@
             <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
             <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
             <ScalarProperty Name="ID" ParameterName="ID" />
-            <ResultBinding Name="ID" ColumnName="ID" />
           </InsertFunction>
           <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCentroTerapeutico">
             <ScalarProperty Name="IDCIUDADOPERACION" ParameterName="IDCIUDADOPERACION" Version="Current" />

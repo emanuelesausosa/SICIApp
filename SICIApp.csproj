@@ -181,9 +181,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Dominio\DBRepository.cs" />
+    <Compile Include="Dominio\EmailSender.cs" />
     <Compile Include="Entities\AspNetRole.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -237,9 +238,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
-    <Compile Include="Interfaces\IDBRepository.cs" />
+    <Compile Include="Interfaces\IEmailSender.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Configuraciones.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2030,6 +2032,9 @@
     <Content Include="Scripts\json\emails.json" />
     <Content Include="Scripts\json\folders.json" />
     <Content Include="Scripts\json\pageable-territories.json" />
+    <Content Include="Views\Configuraciones\Index.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoCentroTerapeutico.cshtml" />
+    <Content Include="Views\Configuraciones\CentrosTerapeuticos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

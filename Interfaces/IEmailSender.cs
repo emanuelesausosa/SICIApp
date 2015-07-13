@@ -7,8 +7,8 @@ using SICIApp.Entities;
 
 namespace SICIApp.Interfaces
 {
-    public interface IDBRepository
+    public interface IEmailSender
     {
-        async Task<CrearCentroTerapeutico> CrearCentroTerapeutico(CENTROTERAPEUTICO _CentroTerapeutico);
+        EnviarEmailCreateStatus EnviarEmail(string para, string asunto, string cuerpo);
     }
 }

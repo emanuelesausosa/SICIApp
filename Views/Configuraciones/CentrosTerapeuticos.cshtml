@@ -1,0 +1,57 @@
+﻿@model IEnumerable<SICIApp.Entities.CENTROTERAPEUTICO>
+
+@{
+    ViewBag.Title = "Centros Terapéuticos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="page-title">
+    Todos -
+    <span class="fw-semi-bold">Los Centros Terapéuticos</span>
+</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <section class="widget">
+            <header>Centros Terapéuticos</header>
+            @Html.ActionLink("Crear nuevo", "NuevoCentroTerapeutico")
+            <div class="body">
+                <table class="table " table-striped>
+                    <tr>
+                        <th class="hidden-xs">
+                            @Html.DisplayNameFor(model => model.NOMBRE)
+                        </th>
+                        <th class="hidden-xs">
+                            @Html.DisplayNameFor(model => model.DESCRIPCION)
+                        </th>
+                        <th class="hidden-xs">
+                            @Html.DisplayNameFor(model => model.CITY.NAME)
+                        </th>
+                        <th class="hidden-xs"></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="hidden-xs">
+                                @Html.DisplayFor(modelItem => item.NOMBRE)
+                            </td>
+                            <td class="hidden-xs">
+                                @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                            </td>
+                            <td class="hidden-xs">
+                                @Html.DisplayFor(modelItem => item.CITY.NAME)
+                            </td>
+                            <td class="hidden-xs">
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+

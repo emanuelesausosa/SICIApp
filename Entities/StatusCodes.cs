@@ -16,4 +16,15 @@ namespace SICIApp.Entities
 
         ClaveNula = 4,
     }
+
+    public enum EnviarEmailCreateStatus
+    {
+        Exito = 0,
+
+        ErrorDeSMTP = 1,
+
+        ErrorGeneral = 2,
+
+        
+    }
 }
