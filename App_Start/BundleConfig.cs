@@ -8,100 +8,330 @@ namespace SICIApp
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/lib/jquery-pjax/jquery.pjax.js",
-                        "~/lib/bootstrap-sass-official/assets/javascripts/bootstrap.js",
-                        "~/lib/widgster/widgster.js",
-                        "~/lib/underscore/underscore.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-            //          "~/Scripts/bootstrap.js",
-            //          "~/Scripts/respond.js"));
-            // general scripts
-            // app and chat
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                        "~/Scripts/app.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/chat").Include(
-                        "~/Scripts/chat.js"));
-            //component
-            bundles.Add(new ScriptBundle("~/bundles/component").Include(
-                        "~/Scripts/component-*"));
-
-            // forms
-            bundles.Add(new ScriptBundle("~/bundles/forms").Include(
-                        "~/Scripts/forms.js",
-                        "~/Scripts/forms-*"));
-            // grid
-            bundles.Add(new ScriptBundle("~/bundles/grid").Include(
-                        "~/Scripts/grid-live.js"));
-            //inbox
-            bundles.Add(new ScriptBundle("~/bundles/inbox").Include(
-                        "~/Scripts/inbox.js"));
-            // index
-            bundles.Add(new ScriptBundle("~/bundles/index").Include(
-                        "~/Scripts/index.js"));
-            // landing
-            bundles.Add(new ScriptBundle("~/bundles/landing").Include(
-                        "~/Scripts/landing.js"));
-
-            //print
-            bundles.Add(new ScriptBundle("~/bundles/print").Include(
-                        "~/Scripts/print.js"));
-            // setings
-            bundles.Add(new ScriptBundle("~/bundles/settings").Include(
-                        "~/Scripts/settings.js"));
-            //stats
-            bundles.Add(new ScriptBundle("~/bundles/stat").Include(
-                        "~/Scripts/stat-*"));
-
-            //tables
-            bundles.Add(new ScriptBundle("~/bundles/tables").Include(
-                        "~/Scripts/tables-*"));
-            // iu-s
-            bundles.Add(new ScriptBundle("~/bundles/ui").Include(
-                        "~/Scripts/ui-*"));
-
-            //nvd3
-            bundles.Add(new ScriptBundle("~/bundles/nvd3").Include(
-                        "~/Scripts/nvd3-custom-lb1.0/nv.d3.custom.js",
-                        "~/Scripts/nvd3-custom-lb1.0/stream_layers.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/axis.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/legend.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/line.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/lineChart.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/multiBar.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/multiBarChart.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/pie.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/pieChartTotal.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/scatter.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/stackedArea.js",
-                        "~/Scripts/nvd3-custom-lb1.0/src/models/stackedAreaChart.js"));
-
-            //page specific scripts
-            bundles.Add(new ScriptBundle("~/bundles/specific").Include(
-                       "~/lib/slimScroll/jquery.slimscroll.min.js",
-                       "~/lib/jquery.sparkline/index.js",
-                       "~/lib/backbone/backbone.js",
-                       "~/lib/d3/d3.min.js",
-                       "~/lib/nvd3/nv.d3.min.js"));
-
-            // css
+            // CSS style (bootstrap/inspinia)
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/application.css"));
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/animate.css",
+                      "~/Content/style.css"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/application-theme.css",
-            //          "~/Content/site.css"));
+            // Font Awesome icons
+            bundles.Add(new StyleBundle("~/font-awesome/css").Include(
+                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+
+            // jQuery
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-2.1.1.min.js"));
+
+            // jQueryUI CSS
+            bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
+                        "~/Scripts/plugins/jquery-ui/jquery-ui.css"));
+
+            // jQueryUI 
+            bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
+
+            // Bootstrap
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                      "~/Scripts/bootstrap.min.js"));
+
+            // Inspinia script
+            bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
+                      "~/Scripts/plugins/metisMenu/metisMenu.min.js",
+                      "~/Scripts/plugins/pace/pace.min.js",
+                      "~/Scripts/app/inspinia.min.js"));
+
+            // Inspinia skin config script
+            bundles.Add(new ScriptBundle("~/bundles/skinConfig").Include(
+                      "~/Scripts/app/skin.config.min.js"));
+
+            // SlimScroll
+            bundles.Add(new ScriptBundle("~/plugins/slimScroll").Include(
+                      "~/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"));
+
+            // Peity
+            bundles.Add(new ScriptBundle("~/plugins/peity").Include(
+                      "~/Scripts/plugins/peity/jquery.peity.min.js"));
+
+            // Video responsible
+            bundles.Add(new ScriptBundle("~/plugins/videoResponsible").Include(
+                      "~/Scripts/plugins/video/responsible-video.js"));
+
+            // Lightbox gallery css styles
+            bundles.Add(new StyleBundle("~/Content/plugins/blueimp/css/").Include(
+                      "~/Content/plugins/blueimp/css/blueimp-gallery.min.css"));
+
+            // Lightbox gallery
+            bundles.Add(new ScriptBundle("~/plugins/lightboxGallery").Include(
+                      "~/Scripts/plugins/blueimp/jquery.blueimp-gallery.min.js"));
+
+            // Sparkline
+            bundles.Add(new ScriptBundle("~/plugins/sparkline").Include(
+                      "~/Scripts/plugins/sparkline/jquery.sparkline.min.js"));
+
+            // Morriss chart css styles
+            bundles.Add(new StyleBundle("~/plugins/morrisStyles").Include(
+                      "~/Content/plugins/morris/morris-0.4.3.min.css"));
+
+            // Morriss chart
+            bundles.Add(new ScriptBundle("~/plugins/morris").Include(
+                      "~/Scripts/plugins/morris/raphael-2.1.0.min.js",
+                      "~/Scripts/plugins/morris/morris.js"));
+
+            // Flot chart
+            bundles.Add(new ScriptBundle("~/plugins/flot").Include(
+                      "~/Scripts/plugins/flot/jquery.flot.js",
+                      "~/Scripts/plugins/flot/jquery.flot.tooltip.min.js",
+                      "~/Scripts/plugins/flot/jquery.flot.resize.js",
+                      "~/Scripts/plugins/flot/jquery.flot.pie.js",
+                      "~/Scripts/plugins/flot/jquery.flot.time.js",
+                      "~/Scripts/plugins/flot/jquery.flot.spline.js"));
+
+            // Rickshaw chart
+            bundles.Add(new ScriptBundle("~/plugins/rickshaw").Include(
+                      "~/Scripts/plugins/rickshaw/vendor/d3.v3.js",
+                      "~/Scripts/plugins/rickshaw/rickshaw.min.js"));
+
+            // ChartJS chart
+            bundles.Add(new ScriptBundle("~/plugins/chartJs").Include(
+                      "~/Scripts/plugins/chartjs/Chart.min.js"));
+
+            // iCheck css styles
+            bundles.Add(new StyleBundle("~/Content/plugins/iCheck/iCheckStyles").Include(
+                      "~/Content/plugins/iCheck/custom.css"));
+
+            // iCheck
+            bundles.Add(new ScriptBundle("~/plugins/iCheck").Include(
+                      "~/Scripts/plugins/iCheck/icheck.min.js"));
+
+            // dataTables css styles
+            bundles.Add(new StyleBundle("~/Content/plugins/dataTables/dataTablesStyles").Include(
+                      "~/Content/plugins/dataTables/dataTables.bootstrap.css",
+                      "~/Content/plugins/dataTables/dataTables.responsive.css",
+                      "~/Content/plugins/dataTables/dataTables.tableTools.min.css"));
+
+            // dataTables 
+            bundles.Add(new ScriptBundle("~/plugins/dataTables").Include(
+                      "~/Scripts/plugins/dataTables/jquery.dataTables.js",
+                      "~/Scripts/plugins/dataTables/dataTables.bootstrap.js",
+                      "~/Scripts/plugins/dataTables/dataTables.responsive.js",
+                      "~/Scripts/plugins/dataTables/dataTables.tableTools.min.js"));
+
+            // jeditable 
+            bundles.Add(new ScriptBundle("~/plugins/jeditable").Include(
+                      "~/Scripts/plugins/jeditable/jquery.jeditable.js"));
+
+            // jqGrid styles
+            bundles.Add(new StyleBundle("~/Content/plugins/jqGrid/jqGridStyles").Include(
+                      "~/Content/plugins/jqGrid/ui.jqgrid.css"));
+
+            // jqGrid 
+            bundles.Add(new ScriptBundle("~/plugins/jqGrid").Include(
+                      "~/Scripts/plugins/jqGrid/i18n/grid.locale-en.js",
+                      "~/Scripts/plugins/jqGrid/jquery.jqGrid.min.js"));
+
+            // codeEditor styles
+            bundles.Add(new StyleBundle("~/plugins/codeEditorStyles").Include(
+                      "~/Content/plugins/codemirror/codemirror.css",
+                      "~/Content/plugins/codemirror/ambiance.css"));
+
+            // codeEditor 
+            bundles.Add(new ScriptBundle("~/plugins/codeEditor").Include(
+                      "~/Scripts/plugins/codemirror/codemirror.js",
+                      "~/Scripts/plugins/codemirror/mode/javascript/javascript.js"));
+
+            // codeEditor 
+            bundles.Add(new ScriptBundle("~/plugins/nestable").Include(
+                      "~/Scripts/plugins/nestable/jquery.nestable.js"));
+
+            // validate 
+            bundles.Add(new ScriptBundle("~/plugins/validate").Include(
+                      "~/Scripts/plugins/validate/jquery.validate.min.js"));
+
+            // fullCalendar styles
+            bundles.Add(new StyleBundle("~/plugins/fullCalendarStyles").Include(
+                      "~/Content/plugins/fullcalendar/fullcalendar.css"));
+
+            // fullCalendar 
+            bundles.Add(new ScriptBundle("~/plugins/fullCalendar").Include(
+                      "~/Scripts/plugins/fullcalendar/moment.min.js",
+                      "~/Scripts/plugins/fullcalendar/fullcalendar.min.js"));
+
+            // vectorMap 
+            bundles.Add(new ScriptBundle("~/plugins/vectorMap").Include(
+                      "~/Scripts/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
+                      "~/Scripts/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"));
+
+            // ionRange styles
+            bundles.Add(new StyleBundle("~/Content/plugins/ionRangeSlider/ionRangeStyles").Include(
+                      "~/Content/plugins/ionRangeSlider/ion.rangeSlider.css",
+                      "~/Content/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css"));
+
+            // ionRange 
+            bundles.Add(new ScriptBundle("~/plugins/ionRange").Include(
+                      "~/Scripts/plugins/ionRangeSlider/ion.rangeSlider.min.js"));
+
+            // dataPicker styles
+            bundles.Add(new StyleBundle("~/plugins/dataPickerStyles").Include(
+                      "~/Content/plugins/datapicker/datepicker3.css"));
+
+            // dataPicker 
+            bundles.Add(new ScriptBundle("~/plugins/dataPicker").Include(
+                      "~/Scripts/plugins/datapicker/bootstrap-datepicker.js"));
+
+            // nouiSlider styles
+            bundles.Add(new StyleBundle("~/plugins/nouiSliderStyles").Include(
+                      "~/Content/plugins/nouslider/jquery.nouislider.css"));
+
+            // nouiSlider 
+            bundles.Add(new ScriptBundle("~/plugins/nouiSlider").Include(
+                      "~/Scripts/plugins/nouslider/jquery.nouislider.min.js"));
+
+            // jasnyBootstrap styles
+            bundles.Add(new StyleBundle("~/plugins/jasnyBootstrapStyles").Include(
+                      "~/Content/plugins/jasny/jasny-bootstrap.min.css"));
+
+            // jasnyBootstrap 
+            bundles.Add(new ScriptBundle("~/plugins/jasnyBootstrap").Include(
+                      "~/Scripts/plugins/jasny/jasny-bootstrap.min.js"));
+
+            // switchery styles
+            bundles.Add(new StyleBundle("~/plugins/switcheryStyles").Include(
+                      "~/Content/plugins/switchery/switchery.css"));
+
+            // switchery 
+            bundles.Add(new ScriptBundle("~/plugins/switchery").Include(
+                      "~/Scripts/plugins/switchery/switchery.js"));
+
+            // chosen styles
+            bundles.Add(new StyleBundle("~/Content/plugins/chosen/chosenStyles").Include(
+                      "~/Content/plugins/chosen/chosen.css"));
+
+            // chosen 
+            bundles.Add(new ScriptBundle("~/plugins/chosen").Include(
+                      "~/Scripts/plugins/chosen/chosen.jquery.js"));
+
+            // knob 
+            bundles.Add(new ScriptBundle("~/plugins/knob").Include(
+                      "~/Scripts/plugins/jsKnob/jquery.knob.js"));
+
+            // wizardSteps styles
+            bundles.Add(new StyleBundle("~/plugins/wizardStepsStyles").Include(
+                      "~/Content/plugins/steps/jquery.steps.css"));
+
+            // wizardSteps 
+            bundles.Add(new ScriptBundle("~/plugins/wizardSteps").Include(
+                      "~/Scripts/plugins/staps/jquery.steps.min.js"));
+
+            // dropZone styles
+            bundles.Add(new StyleBundle("~/Content/plugins/dropzone/dropZoneStyles").Include(
+                      "~/Content/plugins/dropzone/basic.css",
+                      "~/Content/plugins/dropzone/dropzone.css"));
+
+            // dropZone 
+            bundles.Add(new ScriptBundle("~/plugins/dropZone").Include(
+                      "~/Scripts/plugins/dropzone/dropzone.js"));
+
+            // summernote styles
+            bundles.Add(new StyleBundle("~/plugins/summernoteStyles").Include(
+                      "~/Content/plugins/summernote/summernote.css",
+                      "~/Content/plugins/summernote/summernote-bs3.css"));
+
+            // summernote 
+            bundles.Add(new ScriptBundle("~/plugins/summernote").Include(
+                      "~/Scripts/plugins/summernote/summernote.min.js"));
+
+            // toastr notification 
+            bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
+                      "~/Scripts/plugins/toastr/toastr.min.js"));
+
+            // toastr notification styles
+            bundles.Add(new StyleBundle("~/plugins/toastrStyles").Include(
+                      "~/Content/plugins/toastr/toastr.min.css"));
+
+            // color picker
+            bundles.Add(new ScriptBundle("~/plugins/colorpicker").Include(
+                      "~/Scripts/plugins/colorpicker/bootstrap-colorpicker.min.js"));
+
+            // color picker styles
+            bundles.Add(new StyleBundle("~/Content/plugins/colorpicker/colorpickerStyles").Include(
+                      "~/Content/plugins/colorpicker/bootstrap-colorpicker.min.css"));
+
+            // image cropper
+            bundles.Add(new ScriptBundle("~/plugins/imagecropper").Include(
+                      "~/Scripts/plugins/cropper/cropper.min.js"));
+
+            // image cropper styles
+            bundles.Add(new StyleBundle("~/plugins/imagecropperStyles").Include(
+                      "~/Content/plugins/cropper/cropper.min.css"));
+
+            // jsTree
+            bundles.Add(new ScriptBundle("~/plugins/jsTree").Include(
+                      "~/Scripts/plugins/jsTree/jstree.min.js"));
+
+            // jsTree styles
+            bundles.Add(new StyleBundle("~/Content/plugins/jsTree").Include(
+                      "~/Content/plugins/jsTree/style.css"));
+
+            // Diff
+            bundles.Add(new ScriptBundle("~/plugins/diff").Include(
+                      "~/Scripts/plugins/diff_match_patch/javascript/diff_match_patch.js",
+                      "~/Scripts/plugins/preetyTextDiff/jquery.pretty-text-diff.min.js"));
+
+            // Idle timer
+            bundles.Add(new ScriptBundle("~/plugins/idletimer").Include(
+                      "~/Scripts/plugins/idle-timer/idle-timer.min.js"));
+
+            // Tinycon
+            bundles.Add(new ScriptBundle("~/plugins/tinycon").Include(
+                      "~/Scripts/plugins/tinycon/tinycon.min.js"));
+
+            // Chartist
+            bundles.Add(new StyleBundle("~/plugins/chartistStyles").Include(
+                      "~/Content/plugins/chartist/chartist.min.css"));
+
+            // jsTree styles
+            bundles.Add(new ScriptBundle("~/plugins/chartist").Include(
+                      "~/Scripts/plugins/chartist/chartist.min.js"));
+
+            // Awesome bootstrap checkbox
+            bundles.Add(new StyleBundle("~/plugins/awesomeCheckboxStyles").Include(
+                      "~/Content/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"));
+
+            // Clockpicker styles
+            bundles.Add(new StyleBundle("~/plugins/clockpickerStyles").Include(
+                      "~/Content/plugins/clockpicker/clockpicker.css"));
+
+            // Clockpicker
+            bundles.Add(new ScriptBundle("~/plugins/clockpicker").Include(
+                      "~/Scripts/plugins/clockpicker/clockpicker.js"));
+
+            // Date range picker Styless
+            bundles.Add(new StyleBundle("~/plugins/dateRangeStyles").Include(
+                      "~/Content/plugins/daterangepicker/daterangepicker-bs3.css"));
+
+            // Date range picker
+            bundles.Add(new ScriptBundle("~/plugins/dateRange").Include(
+                // Date range use moment.js same as full calendar plugin 
+                      "~/Scripts/plugins/fullcalendar/moment.min.js",
+                      "~/Scripts/plugins/daterangepicker/daterangepicker.js"));
+
+            // Sweet alert Styless
+            bundles.Add(new StyleBundle("~/plugins/sweetAlertStyles").Include(
+                      "~/Content/plugins/sweetalert/sweetalert.css"));
+
+            // Sweet alert
+            bundles.Add(new ScriptBundle("~/plugins/sweetAlert").Include(
+                      "~/Scripts/plugins/sweetalert/sweetalert.min.js"));
+
+            // Footable Styless
+            bundles.Add(new StyleBundle("~/plugins/footableStyles").Include(
+                      "~/Content/plugins/footable/footable.core.css", new CssRewriteUrlTransform()));
+
+            // Footable alert
+            bundles.Add(new ScriptBundle("~/plugins/footable").Include(
+                      "~/Scripts/plugins/footable/footable.all.min.js"));
+
         }
     }
 }
