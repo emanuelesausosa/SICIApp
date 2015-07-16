@@ -160,5 +160,360 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="APARATOSSISTEMAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.APARATOSSISTEMAS">
+        <MappingFragment StoreEntitySet="APARATOSSISTEMAS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DIAGNOSTICO" ColumnName="DIAGNOSTICO" />
+          <ScalarProperty Name="IDAPARATOSISTEMA" ColumnName="IDAPARATOSISTEMA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APARATOSSISTEMAS_SISTEMAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS">
+        <MappingFragment StoreEntitySet="APARATOSSISTEMAS_SISTEMAS">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EVALUACIONMEDICADETALLE">
+      <EntityTypeMapping TypeName="SICIBD2Model.EVALUACIONMEDICADETALLE">
+        <MappingFragment StoreEntitySet="EVALUACIONMEDICADETALLE">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="IDTIPOEVALUACIONMEDICA" ColumnName="IDTIPOEVALUACIONMEDICA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIGNOSVITALES">
+      <EntityTypeMapping TypeName="SICIBD2Model.SIGNOSVITALES">
+        <MappingFragment StoreEntitySet="SIGNOSVITALES">
+          <ScalarProperty Name="MEDICORESPONSABLE" ColumnName="MEDICORESPONSABLE" />
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="PRESIONARTERIAL" ColumnName="PRESIONARTERIAL" />
+          <ScalarProperty Name="FRECUENCIACARDIACA" ColumnName="FRECUENCIACARDIACA" />
+          <ScalarProperty Name="PESO" ColumnName="PESO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOEVALUACIONMEDICA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOEVALUACIONMEDICA">
+        <MappingFragment StoreEntitySet="TIPOEVALUACIONMEDICA">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSSOCIOECONOMICOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSSOCIOECONOMICOS">
+        <MappingFragment StoreEntitySet="DATOSSOCIOECONOMICOS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="SITUACIONSOACIAL" ColumnName="SITUACIONSOACIAL" />
+          <ScalarProperty Name="CONDICIONFAMILIAR" ColumnName="CONDICIONFAMILIAR" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOMENTAL">
+      <EntityTypeMapping TypeName="SICIBD2Model.ESTADOMENTAL">
+        <MappingFragment StoreEntitySet="ESTADOMENTAL">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO">
+          <ScalarProperty Name="PROFESIONALRESPONDABLE" ColumnName="PROFESIONALRESPONDABLE" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="CALIFICACIONFINAL" ColumnName="CALIFICACIONFINAL" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_EXAMEN">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_EXAMEN">
+          <ScalarProperty Name="ARCHIVOFISOCO" ColumnName="ARCHIVOFISOCO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="TITULO" ColumnName="TITULO" />
+          <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+          <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="VALORACION" ColumnName="VALORACION" />
+          <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+          <ScalarProperty Name="IDPREGUNTA" ColumnName="IDPREGUNTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+          <ScalarProperty Name="CALIFICACIONOBTENIDA" ColumnName="CALIFICACIONOBTENIDA" />
+          <ScalarProperty Name="IDPREGUNTA" ColumnName="IDPREGUNTA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HISTORIALPERSONALFAMILIAR">
+      <EntityTypeMapping TypeName="SICIBD2Model.HISTORIALPERSONALFAMILIAR">
+        <MappingFragment StoreEntitySet="HISTORIALPERSONALFAMILIAR">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMPRESIONDIAGNOSTICA">
+      <EntityTypeMapping TypeName="SICIBD2Model.IMPRESIONDIAGNOSTICA">
+        <MappingFragment StoreEntitySet="IMPRESIONDIAGNOSTICA">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OBERVACIONPRELIMINAR">
+      <EntityTypeMapping TypeName="SICIBD2Model.OBERVACIONPRELIMINAR">
+        <MappingFragment StoreEntitySet="OBERVACIONPRELIMINAR">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="PROBLEMAS" ColumnName="PROBLEMAS" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECOMENDACIONES">
+      <EntityTypeMapping TypeName="SICIBD2Model.RECOMENDACIONES">
+        <MappingFragment StoreEntitySet="RECOMENDACIONES">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAUSASEGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESO">
+        <MappingFragment StoreEntitySet="CAUSASEGRESO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAUSASEGRESOINTERNO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESOINTERNO">
+        <MappingFragment StoreEntitySet="CAUSASEGRESOINTERNO">
+          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+          <ScalarProperty Name="IDCAUSAEGRESO" ColumnName="IDCAUSAEGRESO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_ENFERMEDADES">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_ENFERMEDADES">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRESINOMIMO" ColumnName="NOMBRESINOMIMO" />
+          <ScalarProperty Name="NOMBRECIENTIFICO" ColumnName="NOMBRECIENTIFICO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_INGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INGRESO">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_INGRESO">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="ONSERVACIONESGENERALES" ColumnName="ONSERVACIONESGENERALES" />
+          <ScalarProperty Name="HASIDOOPERADO" ColumnName="HASIDOOPERADO" />
+          <ScalarProperty Name="PADECENERVIOS" ColumnName="PADECENERVIOS" />
+          <ScalarProperty Name="DUERMEBIEN" ColumnName="DUERMEBIEN" />
+          <ScalarProperty Name="TIENEIMPEDIMENTOS" ColumnName="TIENEIMPEDIMENTOS" />
+          <ScalarProperty Name="RECIBIOTRATAMIENTO" ColumnName="RECIBIOTRATAMIENTO" />
+          <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+          <ScalarProperty Name="PADECE" ColumnName="PADECE" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_INTERNOENFERMEDADES">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_INTERNOENFERMEDADES">
+          <ScalarProperty Name="IDENFERMEDAD" ColumnName="IDENFERMEDAD" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSDELICTIVOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSDELICTIVOS">
+        <MappingFragment StoreEntitySet="DATOSDELICTIVOS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESTALLESRECLUSION" ColumnName="DESTALLESRECLUSION" />
+          <ScalarProperty Name="HAESTADOPRESO" ColumnName="HAESTADOPRESO" />
+          <ScalarProperty Name="DETALLESACTOS" ColumnName="DETALLESACTOS" />
+          <ScalarProperty Name="HACOMETIDO" ColumnName="HACOMETIDO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_CONSUMO">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_CONSUMO">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="TRATAMIENTOMEDICO" ColumnName="TRATAMIENTOMEDICO" />
+          <ScalarProperty Name="PROBLEMAMENTAL" ColumnName="PROBLEMAMENTAL" />
+          <ScalarProperty Name="PROBLEMAFISICO" ColumnName="PROBLEMAFISICO" />
+          <ScalarProperty Name="INTENTODEJARLAS" ColumnName="INTENTODEJARLAS" />
+          <ScalarProperty Name="EDADCOMIENZO" ColumnName="EDADCOMIENZO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+          <ScalarProperty Name="IDDROGA" ColumnName="IDDROGA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_DROGAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_DROGAS">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRECOMUN" ColumnName="NOMBRECOMUN" />
+          <ScalarProperty Name="NOMBRECIENTIFICO" ColumnName="NOMBRECIENTIFICO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESCOLARIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESCOLARIDAD">
+          <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ColumnName="DESCRIPCIONESCOLARIDAD" />
+          <ScalarProperty Name="NOMBREESCOLARIDAD" ColumnName="NOMBREESCOLARIDAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="SABELEERYESCRIBIR" ColumnName="SABELEERYESCRIBIR" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+          <ScalarProperty Name="IDESCOLARIDAD" ColumnName="IDESCOLARIDAD" />
+          <ScalarProperty Name="IDESTUDIOS" ColumnName="IDESTUDIOS" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+          <ScalarProperty Name="IDOFICIOS" ColumnName="IDOFICIOS" />
+          <ScalarProperty Name="IDESTUDIOS" ColumnName="IDESTUDIOS" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_OFICIOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_OFICIOS">
+          <ScalarProperty Name="DESCRIPCIONOFICIO" ColumnName="DESCRIPCIONOFICIO" />
+          <ScalarProperty Name="NOMBREOFICIO" ColumnName="NOMBREOFICIO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.INGRESO">
+        <MappingFragment StoreEntitySet="INGRESO">
+          <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
+          <ScalarProperty Name="CONTRATO" ColumnName="CONTRATO" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="FECHAINGRESOSISTEMA" ColumnName="FECHAINGRESOSISTEMA" />
+          <ScalarProperty Name="FECHAEGRESOPV" ColumnName="FECHAEGRESOPV" />
+          <ScalarProperty Name="FECHAREALINGRESOPV" ColumnName="FECHAREALINGRESOPV" />
+          <ScalarProperty Name="FECHAFIRMAACUERDO" ColumnName="FECHAFIRMAACUERDO" />
+          <ScalarProperty Name="FECHAUTORIZACION" ColumnName="FECHAUTORIZACION" />
+          <ScalarProperty Name="NUMEXPEDIENTE" ColumnName="NUMEXPEDIENTE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MOTIVOSINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.MOTIVOSINGRESO">
+        <MappingFragment StoreEntitySet="MOTIVOSINGRESO">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="FECHAFIRMAACUERDO" ColumnName="FECHAFIRMAACUERDO" />
+          <ScalarProperty Name="DISPUESTOASUJETARSEPV" ColumnName="DISPUESTOASUJETARSEPV" />
+          <ScalarProperty Name="VOLUNTARIAMENTE" ColumnName="VOLUNTARIAMENTE" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPERSONALES1">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALES1">
+        <MappingFragment StoreEntitySet="DATOSPERSONALES1">
+          <ScalarProperty Name="IDPAISNACIONALIDAD" ColumnName="IDPAISNACIONALIDAD" />
+          <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ColumnName="IDCIUDADRESIDENCIAACTUAL" />
+          <ScalarProperty Name="IDCIUDADNATAL" ColumnName="IDCIUDADNATAL" />
+          <ScalarProperty Name="NUMEROHERMANOS" ColumnName="NUMEROHERMANOS" />
+          <ScalarProperty Name="CONQUIENVIVE" ColumnName="CONQUIENVIVE" />
+          <ScalarProperty Name="VIVECONPADRE" ColumnName="VIVECONPADRE" />
+          <ScalarProperty Name="NOMBREPADRE" ColumnName="NOMBREPADRE" />
+          <ScalarProperty Name="VIVECONMADRE" ColumnName="VIVECONMADRE" />
+          <ScalarProperty Name="NOMBREMADRE" ColumnName="NOMBREMADRE" />
+          <ScalarProperty Name="NUMERODEHIJOS" ColumnName="NUMERODEHIJOS" />
+          <ScalarProperty Name="ESTADOCIVIL" ColumnName="ESTADOCIVIL" />
+          <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+          <ScalarProperty Name="LUGARNACIMIENTO" ColumnName="LUGARNACIMIENTO" />
+          <ScalarProperty Name="TELEFONOMOVIL" ColumnName="TELEFONOMOVIL" />
+          <ScalarProperty Name="TELEFONOFIJO" ColumnName="TELEFONOFIJO" />
+          <ScalarProperty Name="DIRECCIONDOMICILIO" ColumnName="DIRECCIONDOMICILIO" />
+          <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FICHA">
+      <EntityTypeMapping TypeName="SICIBD2Model.FICHA">
+        <MappingFragment StoreEntitySet="FICHA">
+          <ScalarProperty Name="NACIONALIDAD" ColumnName="NACIONALIDAD" />
+          <ScalarProperty Name="SEGUNDOAPELLIDO" ColumnName="SEGUNDOAPELLIDO" />
+          <ScalarProperty Name="PRIMERAPELLIDO" ColumnName="PRIMERAPELLIDO" />
+          <ScalarProperty Name="SEGUNDONOMBRE" ColumnName="SEGUNDONOMBRE" />
+          <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
+          <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
+          <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

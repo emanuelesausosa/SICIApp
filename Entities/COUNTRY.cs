@@ -18,6 +18,7 @@ namespace SICIApp.Entities
         {
             this.CITies = new HashSet<CITY>();
             this.COUNTRYLANGUAGEs = new HashSet<COUNTRYLANGUAGE>();
+            this.DATOSPERSONALES1 = new HashSet<DATOSPERSONALES1>();
         }
     
         public string CODE { get; set; }
@@ -38,5 +39,6 @@ namespace SICIApp.Entities
     
         public virtual ICollection<CITY> CITies { get; set; }
         public virtual ICollection<COUNTRYLANGUAGE> COUNTRYLANGUAGEs { get; set; }
+        public virtual ICollection<DATOSPERSONALES1> DATOSPERSONALES1 { get; set; }
     }
 }

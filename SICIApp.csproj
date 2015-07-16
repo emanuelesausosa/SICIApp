@@ -185,6 +185,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Dominio\EmailSender.cs" />
+    <Compile Include="Entities\APARATOSSISTEMAS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\APARATOSSISTEMAS_SISTEMAS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\AspNetRole.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -197,10 +203,25 @@
     <Compile Include="Entities\AspNetUserLogin.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CAUSASEGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CAUSASEGRESOINTERNO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\CENTROTERAPEUTICO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\CITY.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONDICIONFISICA_ENFERMEDADES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONDICIONFISICA_INGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONDICIONFISICA_INTERNOENFERMEDADES.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\COUNTRY.cs">
@@ -212,7 +233,79 @@
     <Compile Include="Entities\C__MigrationHistory.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\DATOSDELICTIVOS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\DATOSPERSONALE.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DATOSPERSONALES1.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DATOSPROBLEMADROGAS_CONSUMO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DATOSPROBLEMADROGAS_CONSUMODROGAS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DATOSPROBLEMADROGAS_DROGAS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DATOSSOCIOECONOMICOS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ESTADOMENTAL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EVALUACIONMEDICADETALLE.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EXAMENPSICOMETRICO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EXAMENPSICOMETRICO_EXAMEN.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EXAMENPSICOMETRICO_EXAMENCONTENIDO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EXAMENPSICOMETRICO_INTERNOCALIFICACIONES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FICHA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\HISTORIALPERSONALFAMILIAR.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\IMPRESIONDIAGNOSTICA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INFORMACIONACADEMICA_ESCOLARIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INFORMACIONACADEMICA_ESTUDIOS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INFORMACIONACADEMICA_ESTUDIOSOFICIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INFORMACIONACADEMICA_OFICIOS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\INGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\MOTIVOSINGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\OBERVACIONPRELIMINAR.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\RECOMENDACIONES.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\SICIAppDataModel.Context.cs">
@@ -230,7 +323,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SICIAppDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\SIGNOSVITALES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\StatusCodes.cs" />
+    <Compile Include="Entities\TIPOEVALUACIONMEDICA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\USUARIOCENTROCONSULTA.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>

@@ -36,5 +36,38 @@ namespace SICIApp.Entities
         public virtual DbSet<DATOSPERSONALE> DATOSPERSONALES { get; set; }
         public virtual DbSet<CENTROTERAPEUTICO> CENTROTERAPEUTICOes { get; set; }
         public virtual DbSet<USUARIOCENTROCONSULTA> USUARIOCENTROCONSULTAs { get; set; }
+        public virtual DbSet<APARATOSSISTEMAS> APARATOSSISTEMAS { get; set; }
+        public virtual DbSet<APARATOSSISTEMAS_SISTEMAS> APARATOSSISTEMAS_SISTEMAS { get; set; }
+        public virtual DbSet<EVALUACIONMEDICADETALLE> EVALUACIONMEDICADETALLE { get; set; }
+        public virtual DbSet<SIGNOSVITALES> SIGNOSVITALES { get; set; }
+        public virtual DbSet<TIPOEVALUACIONMEDICA> TIPOEVALUACIONMEDICA { get; set; }
+        public virtual DbSet<DATOSSOCIOECONOMICOS> DATOSSOCIOECONOMICOS { get; set; }
+        public virtual DbSet<ESTADOMENTAL> ESTADOMENTAL { get; set; }
+        public virtual DbSet<EXAMENPSICOMETRICO> EXAMENPSICOMETRICO { get; set; }
+        public virtual DbSet<EXAMENPSICOMETRICO_EXAMEN> EXAMENPSICOMETRICO_EXAMEN { get; set; }
+        public virtual DbSet<EXAMENPSICOMETRICO_EXAMENCONTENIDO> EXAMENPSICOMETRICO_EXAMENCONTENIDO { get; set; }
+        public virtual DbSet<EXAMENPSICOMETRICO_INTERNOCALIFICACIONES> EXAMENPSICOMETRICO_INTERNOCALIFICACIONES { get; set; }
+        public virtual DbSet<HISTORIALPERSONALFAMILIAR> HISTORIALPERSONALFAMILIAR { get; set; }
+        public virtual DbSet<IMPRESIONDIAGNOSTICA> IMPRESIONDIAGNOSTICA { get; set; }
+        public virtual DbSet<OBERVACIONPRELIMINAR> OBERVACIONPRELIMINAR { get; set; }
+        public virtual DbSet<RECOMENDACIONES> RECOMENDACIONES { get; set; }
+        public virtual DbSet<CAUSASEGRESO> CAUSASEGRESO { get; set; }
+        public virtual DbSet<CAUSASEGRESOINTERNO> CAUSASEGRESOINTERNO { get; set; }
+        public virtual DbSet<CONDICIONFISICA_ENFERMEDADES> CONDICIONFISICA_ENFERMEDADES { get; set; }
+        public virtual DbSet<CONDICIONFISICA_INGRESO> CONDICIONFISICA_INGRESO { get; set; }
+        public virtual DbSet<CONDICIONFISICA_INTERNOENFERMEDADES> CONDICIONFISICA_INTERNOENFERMEDADES { get; set; }
+        public virtual DbSet<DATOSDELICTIVOS> DATOSDELICTIVOS { get; set; }
+        public virtual DbSet<DATOSPROBLEMADROGAS_CONSUMO> DATOSPROBLEMADROGAS_CONSUMO { get; set; }
+        public virtual DbSet<DATOSPROBLEMADROGAS_CONSUMODROGAS> DATOSPROBLEMADROGAS_CONSUMODROGAS { get; set; }
+        public virtual DbSet<DATOSPROBLEMADROGAS_DROGAS> DATOSPROBLEMADROGAS_DROGAS { get; set; }
+        public virtual DbSet<INFORMACIONACADEMICA_ESCOLARIDAD> INFORMACIONACADEMICA_ESCOLARIDAD { get; set; }
+        public virtual DbSet<INFORMACIONACADEMICA_ESTUDIOS> INFORMACIONACADEMICA_ESTUDIOS { get; set; }
+        public virtual DbSet<INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD> INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD { get; set; }
+        public virtual DbSet<INFORMACIONACADEMICA_ESTUDIOSOFICIO> INFORMACIONACADEMICA_ESTUDIOSOFICIO { get; set; }
+        public virtual DbSet<INFORMACIONACADEMICA_OFICIOS> INFORMACIONACADEMICA_OFICIOS { get; set; }
+        public virtual DbSet<INGRESO> INGRESO { get; set; }
+        public virtual DbSet<MOTIVOSINGRESO> MOTIVOSINGRESO { get; set; }
+        public virtual DbSet<DATOSPERSONALES1> DATOSPERSONALES1 { get; set; }
+        public virtual DbSet<FICHA> FICHA { get; set; }
     }
 }

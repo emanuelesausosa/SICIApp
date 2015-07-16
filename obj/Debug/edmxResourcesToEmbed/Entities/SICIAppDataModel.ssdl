@@ -61,6 +61,139 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
+  <EntityType Name="APARATOSSISTEMAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDAPARATOSISTEMA" Type="int" />
+    <Property Name="DIAGNOSTICO" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="APARATOSSISTEMAS_SISTEMAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="100" />
+    <Property Name="DESCRIPCION" Type="text" />
+  </EntityType>
+  <EntityType Name="EVALUACIONMEDICADETALLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDTIPOEVALUACIONMEDICA" Type="int" />
+    <Property Name="OBSERVACIONES" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SIGNOSVITALES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="PESO" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FRECUENCIACARDIACA" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PRESIONARTERIAL" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+    <Property Name="MEDICORESPONSABLE" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TIPOEVALUACIONMEDICA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CATEGORIA" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+  </EntityType>
+  <EntityType Name="DATOSSOCIOECONOMICOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="CONDICIONFAMILIAR" Type="text" />
+    <Property Name="SITUACIONSOACIAL" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ESTADOMENTAL">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="CALIFICACIONFINAL" Type="int" />
+    <Property Name="OBSERVACIONES" Type="text" />
+    <Property Name="PROFESIONALRESPONDABLE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_EXAMEN">
+    <Key>
+      <PropertyRef Name="IDEXAMEN" />
+    </Key>
+    <Property Name="IDEXAMEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TITULO" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="ARCHIVOFISOCO" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+    <Key>
+      <PropertyRef Name="IDPREGUNTA" />
+    </Key>
+    <Property Name="IDPREGUNTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DETALLE" Type="varchar" MaxLength="150" />
+    <Property Name="VALORACION" Type="int" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="IDEXAMEN" Type="int" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDPREGUNTA" Type="int" />
+    <Property Name="CALIFICACIONOBTENIDA" Type="int" />
+  </EntityType>
+  <EntityType Name="HISTORIALPERSONALFAMILIAR">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="IMPRESIONDIAGNOSTICA">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OBERVACIONPRELIMINAR">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="PROBLEMAS" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RECOMENDACIONES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
   <EntityType Name="CENTROTERAPEUTICO">
     <Key>
       <PropertyRef Name="ID" />
@@ -136,6 +269,243 @@
     <Property Name="FECHACREACION" Type="datetime" />
     <Property Name="ACTIVO" Type="bit" />
   </EntityType>
+  <EntityType Name="CAUSASEGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+  </EntityType>
+  <EntityType Name="CAUSASEGRESOINTERNO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDCAUSAEGRESO" Type="int" />
+    <Property Name="COMENTARIO" Type="text" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_ENFERMEDADES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRECIENTIFICO" Type="varchar" MaxLength="50" />
+    <Property Name="NOMBRESINOMIMO" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_INGRESO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="PADECE" Type="bit" />
+    <Property Name="DETALLE" Type="text" />
+    <Property Name="RECIBIOTRATAMIENTO" Type="bit" />
+    <Property Name="TIENEIMPEDIMENTOS" Type="bit" />
+    <Property Name="DUERMEBIEN" Type="bit" />
+    <Property Name="PADECENERVIOS" Type="bit" />
+    <Property Name="HASIDOOPERADO" Type="bit" />
+    <Property Name="ONSERVACIONESGENERALES" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_INTERNOENFERMEDADES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDENFERMEDAD" Type="int" />
+  </EntityType>
+  <EntityType Name="DATOSDELICTIVOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="HACOMETIDO" Type="bit" />
+    <Property Name="DETALLESACTOS" Type="text" />
+    <Property Name="HAESTADOPRESO" Type="bit" />
+    <Property Name="DESTALLESRECLUSION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_CONSUMO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="EDADCOMIENZO" Type="int" />
+    <Property Name="INTENTODEJARLAS" Type="bit" />
+    <Property Name="PROBLEMAFISICO" Type="bit" />
+    <Property Name="PROBLEMAMENTAL" Type="bit" />
+    <Property Name="TRATAMIENTOMEDICO" Type="bit" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDDROGA" Type="int" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_DROGAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRECIENTIFICO" Type="varchar" MaxLength="50" />
+    <Property Name="NOMBRECOMUN" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESCOLARIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBREESCOLARIDAD" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCIONESCOLARIDAD" Type="text" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="SABELEERYESCRIBIR" Type="bit" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDESTUDIOS" Type="int" />
+    <Property Name="IDESCOLARIDAD" Type="int" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDESTUDIOS" Type="int" />
+    <Property Name="IDOFICIOS" Type="int" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_OFICIOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBREOFICIO" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCIONOFICIO" Type="text" />
+  </EntityType>
+  <EntityType Name="INGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NUMEXPEDIENTE" Type="varchar" MaxLength="15" />
+    <Property Name="FECHAUTORIZACION" Type="datetime" />
+    <Property Name="FECHAFIRMAACUERDO" Type="datetime" />
+    <Property Name="FECHAREALINGRESOPV" Type="datetime" />
+    <Property Name="FECHAEGRESOPV" Type="datetime" />
+    <Property Name="FECHAINGRESOSISTEMA" Type="datetime" />
+    <Property Name="OBSERVACIONES" Type="text" />
+    <Property Name="CONTRATO" Type="varchar" MaxLength="255" />
+    <Property Name="IDPERSONA" Type="int" />
+  </EntityType>
+  <EntityType Name="MOTIVOSINGRESO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="VOLUNTARIAMENTE" Type="bit" />
+    <Property Name="DISPUESTOASUJETARSEPV" Type="bit" />
+    <Property Name="FECHAFIRMAACUERDO" Type="datetime" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DATOSPERSONALES1">
+    <Key>
+      <PropertyRef Name="IDPERSONA" />
+    </Key>
+    <Property Name="IDPERSONA" Type="int" Nullable="false" />
+    <Property Name="DIRECCIONDOMICILIO" Type="text" />
+    <Property Name="TELEFONOFIJO" Type="varchar" MaxLength="15" />
+    <Property Name="TELEFONOMOVIL" Type="varchar" MaxLength="15" />
+    <Property Name="LUGARNACIMIENTO" Type="varchar" MaxLength="50" />
+    <Property Name="FECHANACIMIENTO" Type="date" />
+    <Property Name="ESTADOCIVIL" Type="varchar" MaxLength="15" />
+    <Property Name="NUMERODEHIJOS" Type="int" />
+    <Property Name="NOMBREMADRE" Type="varchar" MaxLength="50" />
+    <Property Name="VIVECONMADRE" Type="bit" />
+    <Property Name="NOMBREPADRE" Type="varchar" MaxLength="50" />
+    <Property Name="VIVECONPADRE" Type="bit" />
+    <Property Name="CONQUIENVIVE" Type="varchar" MaxLength="50" />
+    <Property Name="NUMEROHERMANOS" Type="int" />
+    <Property Name="IDCIUDADNATAL" Type="int" />
+    <Property Name="IDCIUDADRESIDENCIAACTUAL" Type="int" />
+    <Property Name="IDPAISNACIONALIDAD" Type="char" MaxLength="3" />
+  </EntityType>
+  <EntityType Name="FICHA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NUMEROIDENTIDAD" Type="varchar" MaxLength="13" />
+    <Property Name="NUMEROPASAPORTE" Type="varchar" MaxLength="25" />
+    <Property Name="PRIMERNOMBRE" Type="varchar" MaxLength="25" />
+    <Property Name="SEGUNDONOMBRE" Type="varchar" MaxLength="25" />
+    <Property Name="PRIMERAPELLIDO" Type="varchar" MaxLength="25" />
+    <Property Name="SEGUNDOAPELLIDO" Type="varchar" MaxLength="25" />
+    <Property Name="NACIONALIDAD" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <Association Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
+    <End Role="APARATOSSISTEMAS_SISTEMAS" Type="Self.APARATOSSISTEMAS_SISTEMAS" Multiplicity="0..1" />
+    <End Role="APARATOSSISTEMAS" Type="Self.APARATOSSISTEMAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APARATOSSISTEMAS_SISTEMAS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="APARATOSSISTEMAS">
+        <PropertyRef Name="IDAPARATOSISTEMA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APARATOSSISTEMAS_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="APARATOSSISTEMAS" Type="Self.APARATOSSISTEMAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="APARATOSSISTEMAS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAUSASEGRESOINTERNO_CAUSASEGRESO">
+    <End Role="CAUSASEGRESO" Type="Self.CAUSASEGRESO" Multiplicity="0..1" />
+    <End Role="CAUSASEGRESOINTERNO" Type="Self.CAUSASEGRESOINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAUSASEGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAUSASEGRESOINTERNO">
+        <PropertyRef Name="IDCAUSAEGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAUSASEGRESOINTERNO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="CAUSASEGRESOINTERNO" Type="Self.CAUSASEGRESOINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAUSASEGRESOINTERNO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CENTROTERAPEUTICO_CITY">
     <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
     <End Role="CENTROTERAPEUTICO" Type="Self.CENTROTERAPEUTICO" Multiplicity="*" />
@@ -160,6 +530,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CONDICIONFISICA_INGRESO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="CONDICIONFISICA_INGRESO" Type="Self.CONDICIONFISICA_INGRESO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES">
+    <End Role="CONDICIONFISICA_ENFERMEDADES" Type="Self.CONDICIONFISICA_ENFERMEDADES" Multiplicity="0..1" />
+    <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" Type="Self.CONDICIONFISICA_INTERNOENFERMEDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONDICIONFISICA_ENFERMEDADES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INTERNOENFERMEDADES">
+        <PropertyRef Name="IDENFERMEDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" Type="Self.CONDICIONFISICA_INTERNOENFERMEDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INTERNOENFERMEDADES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_COUNTRYLANGUAGE_COUNTRY">
     <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="1" />
     <End Role="COUNTRYLANGUAGE" Type="Self.COUNTRYLANGUAGE" Multiplicity="*" />
@@ -169,6 +575,18 @@
       </Principal>
       <Dependent Role="COUNTRYLANGUAGE">
         <PropertyRef Name="COUNTRYCODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSDELICTIVOS_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="DATOSDELICTIVOS" Type="Self.DATOSDELICTIVOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSDELICTIVOS">
+        <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -193,6 +611,102 @@
       </Principal>
       <Dependent Role="DATOSPERSONALES">
         <PropertyRef Name="IDCIUDADORIGEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY1">
+    <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+    <End Role="DATOSPERSONALES1" Type="Self.DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDCIUDADNATAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY11">
+    <End Role="CITY" Type="Self.CITY" Multiplicity="0..1" />
+    <End Role="DATOSPERSONALES1" Type="Self.DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDCIUDADRESIDENCIAACTUAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_COUNTRY">
+    <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+    <End Role="DATOSPERSONALES1" Type="Self.DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDPAISNACIONALIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_FICHA">
+    <End Role="FICHA" Type="Self.FICHA" Multiplicity="1" />
+    <End Role="DATOSPERSONALES1" Type="Self.DATOSPERSONALES1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="FICHA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDPERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="DATOSPROBLEMADROGAS_CONSUMO" Type="Self.DATOSPROBLEMADROGAS_CONSUMO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS">
+    <End Role="DATOSPROBLEMADROGAS_DROGAS" Type="Self.DATOSPROBLEMADROGAS_DROGAS" Multiplicity="0..1" />
+    <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" Type="Self.DATOSPROBLEMADROGAS_CONSUMODROGAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOSPROBLEMADROGAS_DROGAS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <PropertyRef Name="IDDROGA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" Type="Self.DATOSPROBLEMADROGAS_CONSUMODROGAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSSOCIOECONOMICOS_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="DATOSSOCIOECONOMICOS" Type="Self.DATOSSOCIOECONOMICOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSSOCIOECONOMICOS">
+        <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -252,6 +766,234 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ESTADOMENTAL_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="ESTADOMENTAL" Type="Self.ESTADOMENTAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ESTADOMENTAL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACIONMEDICADETALLE_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="EVALUACIONMEDICADETALLE" Type="Self.EVALUACIONMEDICADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EVALUACIONMEDICADETALLE">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA">
+    <End Role="TIPOEVALUACIONMEDICA" Type="Self.TIPOEVALUACIONMEDICA" Multiplicity="0..1" />
+    <End Role="EVALUACIONMEDICADETALLE" Type="Self.EVALUACIONMEDICADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOEVALUACIONMEDICA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EVALUACIONMEDICADETALLE">
+        <PropertyRef Name="IDTIPOEVALUACIONMEDICA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN">
+    <End Role="EXAMENPSICOMETRICO_EXAMEN" Type="Self.EXAMENPSICOMETRICO_EXAMEN" Multiplicity="0..1" />
+    <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Type="Self.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EXAMENPSICOMETRICO_EXAMEN">
+        <PropertyRef Name="IDEXAMEN" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <PropertyRef Name="IDEXAMEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="EXAMENPSICOMETRICO" Type="Self.EXAMENPSICOMETRICO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+    <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Type="Self.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Multiplicity="0..1" />
+    <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Type="Self.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <PropertyRef Name="IDPREGUNTA" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <PropertyRef Name="IDPREGUNTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Type="Self.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HISTORIALPERSONALFAMILIAR_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="HISTORIALPERSONALFAMILIAR" Type="Self.HISTORIALPERSONALFAMILIAR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HISTORIALPERSONALFAMILIAR">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMPRESIONDIAGNOSTICA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="IMPRESIONDIAGNOSTICA" Type="Self.IMPRESIONDIAGNOSTICA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IMPRESIONDIAGNOSTICA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="INFORMACIONACADEMICA_ESTUDIOS" Type="Self.INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD">
+    <End Role="INFORMACIONACADEMICA_ESCOLARIDAD" Type="Self.INFORMACIONACADEMICA_ESCOLARIDAD" Multiplicity="0..1" />
+    <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Type="Self.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESCOLARIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <PropertyRef Name="IDESCOLARIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS">
+    <End Role="INFORMACIONACADEMICA_ESTUDIOS" Type="Self.INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Type="Self.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <PropertyRef Name="IDESTUDIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS">
+    <End Role="INFORMACIONACADEMICA_ESTUDIOS" Type="Self.INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Type="Self.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <PropertyRef Name="IDESTUDIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS">
+    <End Role="INFORMACIONACADEMICA_OFICIOS" Type="Self.INFORMACIONACADEMICA_OFICIOS" Multiplicity="0..1" />
+    <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Type="Self.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_OFICIOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <PropertyRef Name="IDOFICIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INGRESO_FICHA">
+    <End Role="FICHA" Type="Self.FICHA" Multiplicity="0..1" />
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FICHA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INGRESO">
+        <PropertyRef Name="IDPERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MOTIVOSINGRESO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="MOTIVOSINGRESO" Type="Self.MOTIVOSINGRESO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MOTIVOSINGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OBERVACIONPRELIMINAR_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="OBERVACIONPRELIMINAR" Type="Self.OBERVACIONPRELIMINAR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OBERVACIONPRELIMINAR">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECOMENDACIONES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="RECOMENDACIONES" Type="Self.RECOMENDACIONES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECOMENDACIONES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SIGNOSVITALES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="SIGNOSVITALES" Type="Self.SIGNOSVITALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SIGNOSVITALES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_USUARIOCENTROCONSULTA_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="USUARIOCENTROCONSULTA" Type="Self.USUARIOCENTROCONSULTA" Multiplicity="*" />
@@ -295,12 +1037,61 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APARATOSSISTEMAS" EntityType="Self.APARATOSSISTEMAS" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
+    <EntitySet Name="APARATOSSISTEMAS_SISTEMAS" EntityType="Self.APARATOSSISTEMAS_SISTEMAS" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
+    <EntitySet Name="EVALUACIONMEDICADETALLE" EntityType="Self.EVALUACIONMEDICADETALLE" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
+    <EntitySet Name="SIGNOSVITALES" EntityType="Self.SIGNOSVITALES" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
+    <EntitySet Name="TIPOEVALUACIONMEDICA" EntityType="Self.TIPOEVALUACIONMEDICA" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
+    <EntitySet Name="DATOSSOCIOECONOMICOS" EntityType="Self.DATOSSOCIOECONOMICOS" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="ESTADOMENTAL" EntityType="Self.ESTADOMENTAL" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="EXAMENPSICOMETRICO" EntityType="Self.EXAMENPSICOMETRICO" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="EXAMENPSICOMETRICO_EXAMEN" EntityType="Self.EXAMENPSICOMETRICO_EXAMEN" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntityType="Self.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntityType="Self.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="HISTORIALPERSONALFAMILIAR" EntityType="Self.HISTORIALPERSONALFAMILIAR" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="IMPRESIONDIAGNOSTICA" EntityType="Self.IMPRESIONDIAGNOSTICA" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="OBERVACIONPRELIMINAR" EntityType="Self.OBERVACIONPRELIMINAR" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="RECOMENDACIONES" EntityType="Self.RECOMENDACIONES" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
     <EntitySet Name="CENTROTERAPEUTICO" EntityType="Self.CENTROTERAPEUTICO" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="CITY" EntityType="Self.CITY" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="COUNTRYLANGUAGE" EntityType="Self.COUNTRYLANGUAGE" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="DATOSPERSONALES" EntityType="Self.DATOSPERSONALES" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="USUARIOCENTROCONSULTA" EntityType="Self.USUARIOCENTROCONSULTA" Schema="SICI_GENERALES" store:Type="Tables" />
+    <EntitySet Name="CAUSASEGRESO" EntityType="Self.CAUSASEGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="CAUSASEGRESOINTERNO" EntityType="Self.CAUSASEGRESOINTERNO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="CONDICIONFISICA_ENFERMEDADES" EntityType="Self.CONDICIONFISICA_ENFERMEDADES" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="CONDICIONFISICA_INGRESO" EntityType="Self.CONDICIONFISICA_INGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="CONDICIONFISICA_INTERNOENFERMEDADES" EntityType="Self.CONDICIONFISICA_INTERNOENFERMEDADES" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DATOSDELICTIVOS" EntityType="Self.DATOSDELICTIVOS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMO" EntityType="Self.DATOSPROBLEMADROGAS_CONSUMO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntityType="Self.DATOSPROBLEMADROGAS_CONSUMODROGAS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_DROGAS" EntityType="Self.DATOSPROBLEMADROGAS_DROGAS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESCOLARIDAD" EntityType="Self.INFORMACIONACADEMICA_ESCOLARIDAD" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOS" EntityType="Self.INFORMACIONACADEMICA_ESTUDIOS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntityType="Self.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntityType="Self.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INFORMACIONACADEMICA_OFICIOS" EntityType="Self.INFORMACIONACADEMICA_OFICIOS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="INGRESO" EntityType="Self.INGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="MOTIVOSINGRESO" EntityType="Self.MOTIVOSINGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DATOSPERSONALES1" EntityType="Self.DATOSPERSONALES1" Schema="SICI_PERSONA" Table="DATOSPERSONALES" store:Type="Tables" />
+    <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="SICI_PERSONA" store:Type="Tables" />
+    <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="Self.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
+      <End Role="APARATOSSISTEMAS_SISTEMAS" EntitySet="APARATOSSISTEMAS_SISTEMAS" />
+      <End Role="APARATOSSISTEMAS" EntitySet="APARATOSSISTEMAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APARATOSSISTEMAS_INGRESO" Association="Self.FK_APARATOSSISTEMAS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="APARATOSSISTEMAS" EntitySet="APARATOSSISTEMAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAUSASEGRESOINTERNO_CAUSASEGRESO" Association="Self.FK_CAUSASEGRESOINTERNO_CAUSASEGRESO">
+      <End Role="CAUSASEGRESO" EntitySet="CAUSASEGRESO" />
+      <End Role="CAUSASEGRESOINTERNO" EntitySet="CAUSASEGRESOINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAUSASEGRESOINTERNO_INGRESO" Association="Self.FK_CAUSASEGRESOINTERNO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CAUSASEGRESOINTERNO" EntitySet="CAUSASEGRESOINTERNO" />
+    </AssociationSet>
     <AssociationSet Name="FK_CENTROTERAPEUTICO_CITY" Association="Self.FK_CENTROTERAPEUTICO_CITY">
       <End Role="CITY" EntitySet="CITY" />
       <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICO" />
@@ -309,9 +1100,25 @@
       <End Role="COUNTRY" EntitySet="COUNTRY" />
       <End Role="CITY" EntitySet="CITY" />
     </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INGRESO_INGRESO" Association="Self.FK_CONDICIONFISICA_INGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONDICIONFISICA_INGRESO" EntitySet="CONDICIONFISICA_INGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES" Association="Self.FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES">
+      <End Role="CONDICIONFISICA_ENFERMEDADES" EntitySet="CONDICIONFISICA_ENFERMEDADES" />
+      <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" EntitySet="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO" Association="Self.FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" EntitySet="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    </AssociationSet>
     <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="Self.FK_COUNTRYLANGUAGE_COUNTRY">
       <End Role="COUNTRY" EntitySet="COUNTRY" />
       <End Role="COUNTRYLANGUAGE" EntitySet="COUNTRYLANGUAGE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSDELICTIVOS_INGRESO" Association="Self.FK_DATOSDELICTIVOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSDELICTIVOS" EntitySet="DATOSDELICTIVOS" />
     </AssociationSet>
     <AssociationSet Name="FK_DATOSPERSONALES_AspNetUsers" Association="Self.FK_DATOSPERSONALES_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -320,6 +1127,38 @@
     <AssociationSet Name="FK_DATOSPERSONALES_CITY" Association="Self.FK_DATOSPERSONALES_CITY">
       <End Role="CITY" EntitySet="CITY" />
       <End Role="DATOSPERSONALES" EntitySet="DATOSPERSONALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY1" Association="Self.FK_DATOSPERSONALES_CITY1">
+      <End Role="CITY" EntitySet="CITY" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY11" Association="Self.FK_DATOSPERSONALES_CITY11">
+      <End Role="CITY" EntitySet="CITY" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_COUNTRY" Association="Self.FK_DATOSPERSONALES_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRY" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_FICHA" Association="Self.FK_DATOSPERSONALES_FICHA">
+      <End Role="FICHA" EntitySet="FICHA" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO" Association="Self.FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMO" EntitySet="DATOSPROBLEMADROGAS_CONSUMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS" Association="Self.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS">
+      <End Role="DATOSPROBLEMADROGAS_DROGAS" EntitySet="DATOSPROBLEMADROGAS_DROGAS" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO" Association="Self.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSSOCIOECONOMICOS_INGRESO" Association="Self.FK_DATOSSOCIOECONOMICOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSSOCIOECONOMICOS" EntitySet="DATOSSOCIOECONOMICOS" />
     </AssociationSet>
     <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -336,6 +1175,82 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTADOMENTAL_INGRESO" Association="Self.FK_ESTADOMENTAL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="ESTADOMENTAL" EntitySet="ESTADOMENTAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACIONMEDICADETALLE_INGRESO" Association="Self.FK_EVALUACIONMEDICADETALLE_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EVALUACIONMEDICADETALLE" EntitySet="EVALUACIONMEDICADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA" Association="Self.FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA">
+      <End Role="TIPOEVALUACIONMEDICA" EntitySet="TIPOEVALUACIONMEDICA" />
+      <End Role="EVALUACIONMEDICADETALLE" EntitySet="EVALUACIONMEDICADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN" Association="Self.FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN">
+      <End Role="EXAMENPSICOMETRICO_EXAMEN" EntitySet="EXAMENPSICOMETRICO_EXAMEN" />
+      <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INGRESO" Association="Self.FK_EXAMENPSICOMETRICO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EXAMENPSICOMETRICO" EntitySet="EXAMENPSICOMETRICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO" Association="Self.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+      <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+      <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO" Association="Self.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HISTORIALPERSONALFAMILIAR_INGRESO" Association="Self.FK_HISTORIALPERSONALFAMILIAR_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="HISTORIALPERSONALFAMILIAR" EntitySet="HISTORIALPERSONALFAMILIAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMPRESIONDIAGNOSTICA_INGRESO" Association="Self.FK_IMPRESIONDIAGNOSTICA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="IMPRESIONDIAGNOSTICA" EntitySet="IMPRESIONDIAGNOSTICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO" Association="Self.FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD" Association="Self.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD">
+      <End Role="INFORMACIONACADEMICA_ESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESCOLARIDAD" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS" Association="Self.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS">
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS" Association="Self.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS">
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS" Association="Self.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS">
+      <End Role="INFORMACIONACADEMICA_OFICIOS" EntitySet="INFORMACIONACADEMICA_OFICIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INGRESO_FICHA" Association="Self.FK_INGRESO_FICHA">
+      <End Role="FICHA" EntitySet="FICHA" />
+      <End Role="INGRESO" EntitySet="INGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MOTIVOSINGRESO_INGRESO" Association="Self.FK_MOTIVOSINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="MOTIVOSINGRESO" EntitySet="MOTIVOSINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OBERVACIONPRELIMINAR_INGRESO" Association="Self.FK_OBERVACIONPRELIMINAR_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="OBERVACIONPRELIMINAR" EntitySet="OBERVACIONPRELIMINAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECOMENDACIONES_INGRESO" Association="Self.FK_RECOMENDACIONES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="RECOMENDACIONES" EntitySet="RECOMENDACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SIGNOSVITALES_INGRESO" Association="Self.FK_SIGNOSVITALES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="SIGNOSVITALES" EntitySet="SIGNOSVITALES" />
     </AssociationSet>
     <AssociationSet Name="FK_USUARIOCENTROCONSULTA_AspNetUsers" Association="Self.FK_USUARIOCENTROCONSULTA_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
