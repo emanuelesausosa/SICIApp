@@ -1137,6 +1137,10 @@
           <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
           <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="spInsertNewTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
         <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="nvarchar" Mode="In" />
           <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
@@ -1171,6 +1175,11 @@
           <Parameter Name="IDCIUDADNATAL" Type="int" Mode="In" />
           <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
           <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
+        </Function>
+        <Function Name="spUpdateTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
         </Function>
         <EntityContainer Name="SICIBD2ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
@@ -3050,6 +3059,20 @@
                 <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.TIPOEVALUACIONMEDICA">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoEvaluacionMedica">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" />
+                  <ResultBinding Name="ID" ColumnName="ID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoEvaluacionMedica">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DATOSSOCIOECONOMICOS">

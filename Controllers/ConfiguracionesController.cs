@@ -296,12 +296,203 @@ namespace SICIApp.Controllers
             }
 
             //buscamos el ID
-            //var _S
+            var _tipoem = await _context.TIPOEVALUACIONMEDICA.FindAsync(ID);
+
+            if(_tipoem == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            // seteamos el  modelo
+
+            var _model = new TIPOEVALUACIONMEDICA { 
+                 ID = _tipoem.ID,
+                 CATEGORIA = _tipoem.CATEGORIA,
+                 DESCRIPCION = _tipoem.DESCRIPCION,
+                 EVALUACIONMEDICADETALLE = _tipoem.EVALUACIONMEDICADETALLE
+            };
+
+            // model to View
+
+            return View(_model);
+        }
+         
+        // Action metodo para crrear un nuevo tipo evaluaci+on médica
+
+        public ActionResult NuevoTipoEvaluacionMedica()
+        {
+            var _model = new TIPOEVALUACIONMEDICAMODEL();
+            return View(_model);
+        }
+
+        public async Task<ActionResult> NuevoTipoEvaluacionMedica(TIPOEVALUACIONMEDICAMODEL _model)
+        {
+            // el modelo está validado
+            if(ModelState.IsValid)
+            {
+                //si el nombre ya existe
+                if (_context.TIPOEVALUACIONMEDICA.Select(t => t.CATEGORIA == _model.CATEGORIA) != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Este nombre de categoría ya está asignado, por favor elija otro!");
+                    return View(_model);
+                }
+                else
+                { 
+                    // trasladomos el modelo a entity
+                    var _tipoem = new TIPOEVALUACIONMEDICA { 
+                    CATEGORIA = _model.CATEGORIA,
+                    DESCRIPCION = _model.DESCRIPCION
+                    };
+                    
+                    // se guarda el registro de forma asíncrona
+                    _context.TIPOEVALUACIONMEDICA.Add(_tipoem);
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("TiposEvaluacionesMedicas", "Configuraciones");
+                }
+            }
+            return View(_model);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> EditarTipoEvaluacionMedica(int? ID)
+        {
+            // si el ID es nulo o 0
+            if (ID == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //buscamos el ID
+            var _tipoem = await _context.TIPOEVALUACIONMEDICA.FindAsync(ID);
+
+            if (_tipoem == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            // seteamos el  modelo
+
+            var _model = new TIPOEVALUACIONMEDICA
+            {
+                ID = _tipoem.ID,
+                CATEGORIA = _tipoem.CATEGORIA,
+                DESCRIPCION = _tipoem.DESCRIPCION,
+                EVALUACIONMEDICADETALLE = _tipoem.EVALUACIONMEDICADETALLE
+            };
+
+            // model to View
+
+            return View(_model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> EditarTipoEvaluacionMedica(TIPOEVALUACIONMEDICA _model)
+        {
+            try { 
+
+                if(ModelState.IsValid)
+                {
+                    //si el nombre ya existe
+                    if (_context.TIPOEVALUACIONMEDICA.Select(t => t.CATEGORIA == _model.CATEGORIA && t.ID != _model.ID) != null)
+                    {
+                        ModelState.AddModelError(string.Empty, "Este nombre de categoría ya está asignado, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // trasladomos el modelo a entity
+                        var _tipoem = new TIPOEVALUACIONMEDICA
+                        {
+                            ID = _model.ID,
+                            CATEGORIA = _model.CATEGORIA,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // se actualiza el registro de forma asíncrona
+                        _context.Entry(_tipoem).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        return RedirectToAction("TiposEvaluacionesMedicas", "Configuraciones");
+                    }
+                }
+            }catch(DbUpdateConcurrencyException ex)
+            {
+
+            }catch(RetryLimitExceededException /*dex*/)
+            {
+
+            }
 
             return View();
         }
 
         #endregion
+        
+
+        // acciones para mantenieneto de aparatos sistemas
+
+        #region Acciones de Aparatos sistemas
+
+        // todos los aparatos sistemas
+        public async Task<ActionResult> AparatosSistemas()
+        {
+            // from entity database context
+            var _aparatos = this._context.APARATOSSISTEMAS_SISTEMAS;
+
+            await _aparatos.ToListAsync();
+
+            //to Model
+            List<APARATOSSISTEMAS_SISTEMASMODEL> _model = new List<APARATOSSISTEMAS_SISTEMASMODEL>();
+
+            foreach(APARATOSSISTEMAS_SISTEMAS aparato in _aparatos)
+            {
+                _model.Add(new APARATOSSISTEMAS_SISTEMASMODEL { 
+                     ID = aparato.ID,
+                     NOMBRE = aparato.NOMBRE,
+                     DESCRIPCION = aparato.DESCRIPCION,
+                });
+            }
+
+            // a  la vista
+            return View(_model);
+        }
+            
+
+        // detalle de aparato sistema 
+        public async Task<ActionResult> DetalleAparatoSistema(int? ID)
+        {
+           if(ID == 0)
+           {
+               return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+           }
+
+            // buecamos el entity
+           var _aparatoSistema = await this._context.APARATOSSISTEMAS_SISTEMAS.FindAsync(ID);
+
+            if(_aparatoSistema == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set to model
+            var _model = new APARATOSSISTEMAS_SISTEMASMODEL { 
+                    ID = _aparatoSistema.ID,
+                    NOMBRE = _aparatoSistema.NOMBRE,
+                    DESCRIPCION = _aparatoSistema.DESCRIPCION,
+                    APARATOSSISTEMAS = _aparatoSistema.APARATOSSISTEMAS
+            };
+
+            // model to view
+            return View(_model);
+        }
+
+
+        #endregion
+
 
 
     }
