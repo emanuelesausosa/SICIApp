@@ -16,6 +16,7 @@ using SICIApp.Entities;
 using SICIApp.Interfaces;
 using SICIApp.Models;
 using SICIApp.Services;
+using System.Data.Entity.Infrastructure;
 
 namespace SICIApp.Controllers
 {
@@ -49,15 +50,16 @@ namespace SICIApp.Controllers
 
         #region Acciones para manteniento y configuración de CT
         [Authorize]
-        public ActionResult CentrosTerapeuticos()
+        public async Task<ActionResult> CentrosTerapeuticos()
         {
             // se crea la lista de centros Terapeúticos
             // se va a usar el MODEL DE CT
-            return View(_context.CENTROTERAPEUTICOes);
+            var _centrosTerapeuticos = _context.CENTROTERAPEUTICOes;
+            return View(await _centrosTerapeuticos.ToListAsync());
         }
 
         // DETALLE DEL CT
-        public ActionResult DetalleCentroTerapeutico(string ID)
+        public async Task<ActionResult> DetalleCentroTerapeutico(string ID)
         {
             // si es una cadena vacía, es una petición fallida
             if(ID.Equals(string.Empty))
@@ -65,7 +67,7 @@ namespace SICIApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var _centroTerapeutico = this._context.CENTROTERAPEUTICOes.Find(ID);
+            var _centroTerapeutico = await this._context.CENTROTERAPEUTICOes.FindAsync(ID);
 
             // si el resultado es nulo se envía una mensaje al cliente de no encontrado
             if(_centroTerapeutico == null)
@@ -147,14 +149,14 @@ namespace SICIApp.Controllers
         // Edición de  un CT
         // GET
         [Authorize]
-        public ActionResult EditarCentroTerapeutico(string ID)
+        public async Task<ActionResult> EditarCentroTerapeutico(string ID)
         {
             if(ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var _centroTerapeutico = _context.CENTROTERAPEUTICOes.Find(ID);
+            var _centroTerapeutico = await _context.CENTROTERAPEUTICOes.FindAsync(ID);
 
             if(_centroTerapeutico == null)
             {
@@ -184,7 +186,9 @@ namespace SICIApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditarCentroTerapeutico(CENTROTERAPEUTICOMODEL _model)
         {
-            if (ModelState.IsValid)
+            try { 
+            
+                if (ModelState.IsValid)
             {
                 var _updateCT = new CENTROTERAPEUTICO
                 {
@@ -216,6 +220,39 @@ namespace SICIApp.Controllers
 
 
             }
+
+            }catch(DbUpdateConcurrencyException ex)
+            {
+                var vEntry = ex.Entries.Single(); 
+                var vClientValue = (CENTROTERAPEUTICO)vEntry.Entity;
+                var vDataBaseEntry = vEntry.GetDatabaseValues();
+
+                if(vDataBaseEntry == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Imposible hacer cambios, el CENTRO TERAPEUTICO ha sido eliminado por otro usuario");
+                }else
+                {
+                    var vDatabaseValues = (CENTROTERAPEUTICO)vDataBaseEntry.ToObject();
+
+                    if(vDatabaseValues.NOMBRE != vClientValue.NOMBRE)
+                         ModelState.AddModelError("NOMBRE", "VALOR ACTUAL: " + vDatabaseValues.NOMBRE);
+                    if(vDatabaseValues.DESCRIPCION != vClientValue.DESCRIPCION)
+                        ModelState.AddModelError("DESCRIPCION", "VALOR ACTUAL: " + String.Format("{0:C}", vDatabaseValues.DESCRIPCION));
+                    if(vDatabaseValues.IDCIUDADOPERACION != vClientValue.IDCIUDADOPERACION)
+                        ModelState.AddModelError("IDCIUDADOPERACION", "VALOR ACTUAL: "+ _context.CITies.Find(vDatabaseValues.IDCIUDADOPERACION).NAME);
+                    ModelState.AddModelError(string.Empty, "El registro que intenta modificar, fue modificado por otro usuario después "
+                        +"que se tuvo un valor original. La operación de Edición fue cancelada. Si deseas seguir intentado, guarda e cambio de nuevo, sino "
+                        +" haz clic en la lista de todos los registros");
+
+                }
+             }
+
+            catch(RetryLimitExceededException /* dex */ )
+            {
+                // log
+                ModelState.AddModelError(string.Empty, "No se pueden guardar los cambios, si el problema persiste, por favor contacar a los administradores del sistema");
+            }
+
             // se redirige a la misma página, con el detalle de sus errores
             _model.CITIES = _context.CITies;
             return View(_model);
@@ -236,6 +273,36 @@ namespace SICIApp.Controllers
             return Json(vCiudades, JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Acciones para mantenimiento y configuración de tipo evaluación médica
+
+        // lista de tipos de evaluación médica
+        // lista asíncorona
+        // Configuraciones/TiposEvaluacionesMedicas
+        public async Task<ActionResult> TiposEvaluacionesMedicas()
+        {
+            // establcemiento de un intermedio
+            var _tiposem = _context.TIPOEVALUACIONMEDICA;
+            return View(await _tiposem.ToListAsync());
+        }
+
+        // detalle de tipo evaluación médica
+        public async Task<ActionResult> DetalleTipoEvaluacionMedica(int? ID)
+        {
+            // si el ID es nulo o 0
+            if(ID == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //buscamos el ID
+            //var _S
+
+            return View();
+        }
+
+        #endregion
+
 
     }
 }
