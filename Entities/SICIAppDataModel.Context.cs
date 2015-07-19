@@ -69,5 +69,8 @@ namespace SICIApp.Entities
         public virtual DbSet<MOTIVOSINGRESO> MOTIVOSINGRESO { get; set; }
         public virtual DbSet<DATOSPERSONALES1> DATOSPERSONALES1 { get; set; }
         public virtual DbSet<FICHA> FICHA { get; set; }
+        public virtual DbSet<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
+        public virtual DbSet<TIPOSDOCUMENTO> TIPOSDOCUMENTO { get; set; }
+        public virtual DbSet<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
     }
 }

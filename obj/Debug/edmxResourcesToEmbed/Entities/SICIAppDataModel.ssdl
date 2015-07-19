@@ -286,6 +286,17 @@
     <Property Name="IDCAUSAEGRESO" Type="int" />
     <Property Name="COMENTARIO" Type="text" />
   </EntityType>
+  <EntityType Name="CENTRODESARROLLOINGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHATRASLADO" Type="datetime" />
+    <Property Name="ACTIVO" Type="bit" />
+    <Property Name="FECHAREGISTRO" Type="datetime" />
+    <Property Name="IDCENTROTERAPEUTICO" Type="nvarchar" MaxLength="10" />
+    <Property Name="IDINGRESO" Type="int" />
+  </EntityType>
   <EntityType Name="CONDICIONFISICA_ENFERMEDADES">
     <Key>
       <PropertyRef Name="ID" />
@@ -358,6 +369,17 @@
     <Property Name="NOMBRECOMUN" Type="varchar" MaxLength="50" />
     <Property Name="DESCRIPCION" Type="text" />
   </EntityType>
+  <EntityType Name="DOCUMENTOSINGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="RUTA" Type="varchar" MaxLength="255" />
+    <Property Name="FECHACARGADO" Type="datetime" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDTIPODOCUMENTO" Type="int" />
+  </EntityType>
   <EntityType Name="INFORMACIONACADEMICA_ESCOLARIDAD">
     <Key>
       <PropertyRef Name="ID" />
@@ -412,6 +434,8 @@
     <Property Name="OBSERVACIONES" Type="text" />
     <Property Name="CONTRATO" Type="varchar" MaxLength="255" />
     <Property Name="IDPERSONA" Type="int" />
+    <Property Name="ACEPTADO" Type="bit" />
+    <Property Name="STATUSFLOW" Type="int" />
   </EntityType>
   <EntityType Name="MOTIVOSINGRESO">
     <Key>
@@ -422,6 +446,14 @@
     <Property Name="DISPUESTOASUJETARSEPV" Type="bit" />
     <Property Name="FECHAFIRMAACUERDO" Type="datetime" />
     <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TIPOSDOCUMENTO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRETIPO" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="text" />
   </EntityType>
   <EntityType Name="DATOSPERSONALES1">
     <Key>
@@ -502,6 +534,30 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CAUSASEGRESOINTERNO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO">
+    <End Role="CENTROTERAPEUTICO" Type="Self.CENTROTERAPEUTICO" Multiplicity="0..1" />
+    <End Role="CENTRODESARROLLOINGRESO" Type="Self.CENTRODESARROLLOINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTRODESARROLLOINGRESO">
+        <PropertyRef Name="IDCENTROTERAPEUTICO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CENTRODESARROLLOINGRESO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="CENTRODESARROLLOINGRESO" Type="Self.CENTRODESARROLLOINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTRODESARROLLOINGRESO">
         <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
@@ -766,6 +822,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DOCUMENTOSINGRESO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="DOCUMENTOSINGRESO" Type="Self.DOCUMENTOSINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOSINGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO">
+    <End Role="TIPOSDOCUMENTO" Type="Self.TIPOSDOCUMENTO" Multiplicity="0..1" />
+    <End Role="DOCUMENTOSINGRESO" Type="Self.DOCUMENTOSINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOSDOCUMENTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOSINGRESO">
+        <PropertyRef Name="IDTIPODOCUMENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ESTADOMENTAL_INGRESO">
     <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
     <End Role="ESTADOMENTAL" Type="Self.ESTADOMENTAL" Multiplicity="0..1" />
@@ -1024,11 +1104,68 @@
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
     <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
   </Function>
+  <Function Name="spInsertNewDatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPERSONA" Type="int" Mode="In" />
+    <Parameter Name="DIRECCIONDOMICILIO" Type="text" Mode="In" />
+    <Parameter Name="TELEFONOFIJO" Type="varchar" Mode="In" />
+    <Parameter Name="TELEFONOMOVIL" Type="varchar" Mode="In" />
+    <Parameter Name="LUGARNACIMIENTO" Type="varchar" Mode="In" />
+    <Parameter Name="FECHANACIMIENTO" Type="date" Mode="In" />
+    <Parameter Name="ESTADOCIVIL" Type="varchar" Mode="In" />
+    <Parameter Name="NUMERODEHIJOS" Type="int" Mode="In" />
+    <Parameter Name="NOMBREMADRE" Type="varchar" Mode="In" />
+    <Parameter Name="VIVECONMADRE" Type="bit" Mode="In" />
+    <Parameter Name="NOMBREPADRE" Type="varchar" Mode="In" />
+    <Parameter Name="VIVECONPADRE" Type="bit" Mode="In" />
+    <Parameter Name="CONQUIENVIVE" Type="varchar" Mode="In" />
+    <Parameter Name="NUMEROHERMANOS" Type="int" Mode="In" />
+    <Parameter Name="IDCIUDADNATAL" Type="int" Mode="In" />
+    <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
+    <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewFichaPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NUMEROIDENTIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="NUMEROPASAPORTE" Type="varchar" Mode="In" />
+    <Parameter Name="PRIMERNOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="SEGUNDONOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="PRIMERAPELLIDO" Type="varchar" Mode="In" />
+    <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
+    <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="nvarchar" Mode="In" />
     <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
     <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateFicha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NUMEROIDENTIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="NUMEROPASAPORTE" Type="varchar" Mode="In" />
+    <Parameter Name="PRIMERNOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="SEGUNDONOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="PRIMERAPELLIDO" Type="varchar" Mode="In" />
+    <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
+    <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spUpdateSICIPERSONADatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPERSONA" Type="int" Mode="In" />
+    <Parameter Name="DIRECCIONDOMICILIO" Type="text" Mode="In" />
+    <Parameter Name="TELEFONOFIJO" Type="varchar" Mode="In" />
+    <Parameter Name="TELEFONOMOVIL" Type="varchar" Mode="In" />
+    <Parameter Name="LUGARNACIMIENTO" Type="varchar" Mode="In" />
+    <Parameter Name="FECHANACIMIENTO" Type="date" Mode="In" />
+    <Parameter Name="ESTADOCIVIL" Type="varchar" Mode="In" />
+    <Parameter Name="NUMERODEHIJOS" Type="int" Mode="In" />
+    <Parameter Name="NOMBREMADRE" Type="varchar" Mode="In" />
+    <Parameter Name="VIVECONMADRE" Type="bit" Mode="In" />
+    <Parameter Name="NOMBREPADRE" Type="varchar" Mode="In" />
+    <Parameter Name="VIVECONPADRE" Type="bit" Mode="In" />
+    <Parameter Name="CONQUIENVIVE" Type="varchar" Mode="In" />
+    <Parameter Name="NUMEROHERMANOS" Type="int" Mode="In" />
+    <Parameter Name="IDCIUDADNATAL" Type="int" Mode="In" />
+    <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
+    <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
   </Function>
   <EntityContainer Name="SICIBD2ModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
@@ -1060,6 +1197,7 @@
     <EntitySet Name="USUARIOCENTROCONSULTA" EntityType="Self.USUARIOCENTROCONSULTA" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="CAUSASEGRESO" EntityType="Self.CAUSASEGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="CAUSASEGRESOINTERNO" EntityType="Self.CAUSASEGRESOINTERNO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="CENTRODESARROLLOINGRESO" EntityType="Self.CENTRODESARROLLOINGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="CONDICIONFISICA_ENFERMEDADES" EntityType="Self.CONDICIONFISICA_ENFERMEDADES" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="CONDICIONFISICA_INGRESO" EntityType="Self.CONDICIONFISICA_INGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="CONDICIONFISICA_INTERNOENFERMEDADES" EntityType="Self.CONDICIONFISICA_INTERNOENFERMEDADES" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
@@ -1067,6 +1205,7 @@
     <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMO" EntityType="Self.DATOSPROBLEMADROGAS_CONSUMO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntityType="Self.DATOSPROBLEMADROGAS_CONSUMODROGAS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="DATOSPROBLEMADROGAS_DROGAS" EntityType="Self.DATOSPROBLEMADROGAS_DROGAS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="DOCUMENTOSINGRESO" EntityType="Self.DOCUMENTOSINGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="INFORMACIONACADEMICA_ESCOLARIDAD" EntityType="Self.INFORMACIONACADEMICA_ESCOLARIDAD" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOS" EntityType="Self.INFORMACIONACADEMICA_ESTUDIOS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntityType="Self.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
@@ -1074,6 +1213,7 @@
     <EntitySet Name="INFORMACIONACADEMICA_OFICIOS" EntityType="Self.INFORMACIONACADEMICA_OFICIOS" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="INGRESO" EntityType="Self.INGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="MOTIVOSINGRESO" EntityType="Self.MOTIVOSINGRESO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
+    <EntitySet Name="TIPOSDOCUMENTO" EntityType="Self.TIPOSDOCUMENTO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="DATOSPERSONALES1" EntityType="Self.DATOSPERSONALES1" Schema="SICI_PERSONA" Table="DATOSPERSONALES" store:Type="Tables" />
     <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="SICI_PERSONA" store:Type="Tables" />
     <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="Self.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
@@ -1091,6 +1231,14 @@
     <AssociationSet Name="FK_CAUSASEGRESOINTERNO_INGRESO" Association="Self.FK_CAUSASEGRESOINTERNO_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="CAUSASEGRESOINTERNO" EntitySet="CAUSASEGRESOINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" Association="Self.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICO" />
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CENTRODESARROLLOINGRESO_INGRESO" Association="Self.FK_CENTRODESARROLLOINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
     </AssociationSet>
     <AssociationSet Name="FK_CENTROTERAPEUTICO_CITY" Association="Self.FK_CENTROTERAPEUTICO_CITY">
       <End Role="CITY" EntitySet="CITY" />
@@ -1175,6 +1323,14 @@
     <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCUMENTOSINGRESO_INGRESO" Association="Self.FK_DOCUMENTOSINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DOCUMENTOSINGRESO" EntitySet="DOCUMENTOSINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO" Association="Self.FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO">
+      <End Role="TIPOSDOCUMENTO" EntitySet="TIPOSDOCUMENTO" />
+      <End Role="DOCUMENTOSINGRESO" EntitySet="DOCUMENTOSINGRESO" />
     </AssociationSet>
     <AssociationSet Name="FK_ESTADOMENTAL_INGRESO" Association="Self.FK_ESTADOMENTAL_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />

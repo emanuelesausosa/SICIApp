@@ -203,3 +203,4 @@ C:\SICIAPP\SICIApp\obj\Debug\SICIApp.csprojResolveAssemblyReference.cache
 C:\SICIAPP\SICIApp\obj\Debug\SICIApp.dll
 C:\SICIAPP\SICIApp\obj\Debug\SICIApp.pdb
 C:\SICIAPP\SICIApp\bin\Newtonsoft.Json.xml
+C:\SICI\SICIApp\bin\Newtonsoft.Json.dll

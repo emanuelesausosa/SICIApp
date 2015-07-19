@@ -210,6 +210,9 @@
     <Compile Include="Entities\CAUSASEGRESOINTERNO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CENTRODESARROLLOINGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\CENTROTERAPEUTICO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -253,6 +256,9 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\DATOSSOCIOECONOMICOS.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DOCUMENTOSINGRESO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ESTADOMENTAL.cs">
@@ -329,6 +335,9 @@
     </Compile>
     <Compile Include="Entities\StatusCodes.cs" />
     <Compile Include="Entities\TIPOEVALUACIONMEDICA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TIPOSDOCUMENTO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\USUARIOCENTROCONSULTA.cs">

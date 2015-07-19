@@ -454,6 +454,8 @@
     <EntitySetMapping Name="INGRESO">
       <EntityTypeMapping TypeName="SICIBD2Model.INGRESO">
         <MappingFragment StoreEntitySet="INGRESO">
+          <ScalarProperty Name="STATUSFLOW" ColumnName="STATUSFLOW" />
+          <ScalarProperty Name="ACEPTADO" ColumnName="ACEPTADO" />
           <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
           <ScalarProperty Name="CONTRATO" ColumnName="CONTRATO" />
           <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
@@ -511,6 +513,39 @@
           <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
           <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
           <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCUMENTOSINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.DOCUMENTOSINGRESO">
+        <MappingFragment StoreEntitySet="DOCUMENTOSINGRESO">
+          <ScalarProperty Name="IDTIPODOCUMENTO" ColumnName="IDTIPODOCUMENTO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="FECHACARGADO" ColumnName="FECHACARGADO" />
+          <ScalarProperty Name="RUTA" ColumnName="RUTA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOSDOCUMENTO">
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOSDOCUMENTO">
+        <MappingFragment StoreEntitySet="TIPOSDOCUMENTO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRETIPO" ColumnName="NOMBRETIPO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CENTRODESARROLLOINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTRODESARROLLOINGRESO">
+        <MappingFragment StoreEntitySet="CENTRODESARROLLOINGRESO">
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="IDCENTROTERAPEUTICO" ColumnName="IDCENTROTERAPEUTICO" />
+          <ScalarProperty Name="FECHAREGISTRO" ColumnName="FECHAREGISTRO" />
+          <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+          <ScalarProperty Name="FECHATRASLADO" ColumnName="FECHATRASLADO" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -22,6 +22,8 @@ namespace SICIApp.Entities
             this.CAUSASEGRESOINTERNO = new HashSet<CAUSASEGRESOINTERNO>();
             this.CONDICIONFISICA_INTERNOENFERMEDADES = new HashSet<CONDICIONFISICA_INTERNOENFERMEDADES>();
             this.DATOSPROBLEMADROGAS_CONSUMODROGAS = new HashSet<DATOSPROBLEMADROGAS_CONSUMODROGAS>();
+            this.DOCUMENTOSINGRESO = new HashSet<DOCUMENTOSINGRESO>();
+            this.CENTRODESARROLLOINGRESO = new HashSet<CENTRODESARROLLOINGRESO>();
         }
     
         public int ID { get; set; }
@@ -34,6 +36,8 @@ namespace SICIApp.Entities
         public string OBSERVACIONES { get; set; }
         public string CONTRATO { get; set; }
         public Nullable<int> IDPERSONA { get; set; }
+        public Nullable<bool> ACEPTADO { get; set; }
+        public Nullable<int> STATUSFLOW { get; set; }
     
         public virtual ICollection<APARATOSSISTEMAS> APARATOSSISTEMAS { get; set; }
         public virtual ICollection<EVALUACIONMEDICADETALLE> EVALUACIONMEDICADETALLE { get; set; }
@@ -55,5 +59,7 @@ namespace SICIApp.Entities
         public virtual INFORMACIONACADEMICA_ESTUDIOS INFORMACIONACADEMICA_ESTUDIOS { get; set; }
         public virtual FICHA FICHA { get; set; }
         public virtual MOTIVOSINGRESO MOTIVOSINGRESO { get; set; }
+        public virtual ICollection<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
+        public virtual ICollection<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
     }
 }
