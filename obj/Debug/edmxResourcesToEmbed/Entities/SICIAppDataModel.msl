@@ -211,6 +211,20 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOEVALUACIONMEDICA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoEvaluacionMedica">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoEvaluacionMedica">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DATOSSOCIOECONOMICOS">
       <EntityTypeMapping TypeName="SICIBD2Model.DATOSSOCIOECONOMICOS">

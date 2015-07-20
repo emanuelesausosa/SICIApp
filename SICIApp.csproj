@@ -1088,10 +1088,22 @@
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Views\Shared\_TopNavbar2.cshtml" />
+    <Content Include="Views\Configuraciones\Index.cshtml" />
+    <Content Include="Views\Configuraciones\CentrosTerapeuticos.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCentroTerapeutico.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoCentroTerapeutico.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCentroTerapeutico.cshtml" />
+    <Content Include="Views\Configuraciones\TiposEvaluacionesMedicas.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleTipoEvaluacionMedica.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoTipoEvaluacionMedica.cshtml" />
+    <Content Include="Views\Configuraciones\EditarTipoEvaluacionMedica.cshtml" />
+    <Content Include="Views\Configuraciones\AparatosSistemas.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleAparatoSistema.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoAparatoSistema.cshtml" />
+    <Content Include="Views\Configuraciones\EditarAparatoSistema.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Configuraciones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -55,7 +55,23 @@ namespace SICIApp.Controllers
             // se crea la lista de centros Terapeúticos
             // se va a usar el MODEL DE CT
             var _centrosTerapeuticos = _context.CENTROTERAPEUTICOes;
-            return View(await _centrosTerapeuticos.ToListAsync());
+
+            // set model
+            List<CENTROTERAPEUTICOMODEL> _modelList = new List<CENTROTERAPEUTICOMODEL>();
+
+            // método asíncrono
+        var vCts =   await _centrosTerapeuticos.ToListAsync();
+
+        foreach (CENTROTERAPEUTICO ct in vCts)
+            {
+                _modelList.Add(new CENTROTERAPEUTICOMODEL { 
+                    ID = ct.ID,
+                    DESCRIPCION = ct.DESCRIPCION,
+                    NOMBRE = ct.NOMBRE, 
+                    IDCIUDADOPERACION = ct.IDCIUDADOPERACION
+                });
+            }
+            return View(_modelList);
         }
 
         // DETALLE DEL CT
@@ -283,7 +299,23 @@ namespace SICIApp.Controllers
         {
             // establcemiento de un intermedio
             var _tiposem = _context.TIPOEVALUACIONMEDICA;
-            return View(await _tiposem.ToListAsync());
+
+            // set model
+            List<TIPOEVALUACIONMEDICAMODEL> _model = new List<TIPOEVALUACIONMEDICAMODEL>();
+
+            await _tiposem.ToListAsync();
+
+            foreach(TIPOEVALUACIONMEDICA tm in _tiposem)
+            {
+                _model.Add(new TIPOEVALUACIONMEDICAMODEL { 
+                    ID = tm.ID,
+                    CATEGORIA = tm.CATEGORIA,
+                    DESCRIPCION = tm.DESCRIPCION
+
+                });
+            }
+
+            return View(_model);
         }
 
         // detalle de tipo evaluación médica
@@ -432,9 +464,6 @@ namespace SICIApp.Controllers
 
         #endregion
         
-
-        // acciones para mantenieneto de aparatos sistemas
-
         #region Acciones de Aparatos sistemas
 
         // todos los aparatos sistemas
@@ -490,7 +519,107 @@ namespace SICIApp.Controllers
             return View(_model);
         }
 
+        // Crea un nuevo registro
+        
 
+        // GET
+        public ActionResult NuevoAparatoSistema()
+        {
+            //
+            var _model = new APARATOSSISTEMAS_SISTEMASMODEL();
+            return View(_model);
+        }
+
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoAparatoSistema(APARATOSSISTEMAS_SISTEMASMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // si existe un nombre igual
+                if(_context.APARATOSSISTEMAS_SISTEMAS.Select(a=>a.NOMBRE == _model.NOMBRE) != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Ya existe un registro con este mismo nombre, por favor elija uno diferente");
+                    return View(_model);
+                }
+
+                // from model to entity
+                var _aparatosistema = new APARATOSSISTEMAS_SISTEMAS { 
+                NOMBRE = _model.NOMBRE,
+                DESCRIPCION = _model.DESCRIPCION
+                };
+                // guardar el registro
+                _context.APARATOSSISTEMAS_SISTEMAS.Add(_aparatosistema);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("AparatosSistemas", "Configuraciones");
+            }
+
+            return View(_model);
+        }
+
+        //editar el registro
+        // GET
+        public async Task<ActionResult> EditarAparatoSistema(int? ID)
+        {
+            if (ID == 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // buecamos el entity
+            var _aparatoSistema = await this._context.APARATOSSISTEMAS_SISTEMAS.FindAsync(ID);
+
+            if (_aparatoSistema == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set to model
+            var _model = new APARATOSSISTEMAS_SISTEMASMODEL
+            {
+                ID = _aparatoSistema.ID,
+                NOMBRE = _aparatoSistema.NOMBRE,
+                DESCRIPCION = _aparatoSistema.DESCRIPCION,
+                APARATOSSISTEMAS = _aparatoSistema.APARATOSSISTEMAS
+            };
+
+            // model to view
+            return View(_model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarAparatoSistema(APARATOSSISTEMAS_SISTEMASMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // si existe un nombre igual
+                if (_context.APARATOSSISTEMAS_SISTEMAS.Select(a => a.NOMBRE == _model.NOMBRE && a.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Ya existe un registro con este mismo nombre, por favor elija uno diferente");
+                    return View(_model);
+                }
+
+                // from model to entity
+                var _aparatosistema = new APARATOSSISTEMAS_SISTEMAS
+                {
+                    ID = _model.ID,
+                    NOMBRE = _model.NOMBRE,
+                    DESCRIPCION = _model.DESCRIPCION
+                };
+                // guardar el registro
+                _context.Entry(_aparatosistema).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("AparatosSistemas", "Configuraciones");
+            }
+
+            return View(_model);
+        }
         #endregion
 
 

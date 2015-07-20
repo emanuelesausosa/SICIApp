@@ -283,7 +283,7 @@ namespace SICIApp.Models
     {
         public INFORMACIONACADEMICA_ESCOLARIDADMODEL()
         {
-            this.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD = new HashSet<INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD>();
+            this.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD = new HashSet<INFORMACIONACADEMICA_ESTUDIOSESCOLARIDADMODEL>();
         }
 
         [Key]
@@ -298,7 +298,7 @@ namespace SICIApp.Models
         [Display(Name = "DESCRIPCIÓN")]
         public string DESCRIPCIONESCOLARIDAD { get; set; }
 
-        public virtual ICollection<INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD> INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD { get; set; }
+        public virtual ICollection<INFORMACIONACADEMICA_ESTUDIOSESCOLARIDADMODEL> INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD { get; set; }
     }
     #endregion
 
@@ -306,7 +306,7 @@ namespace SICIApp.Models
     
     #region eSTUDIOS ESCOLARIDAD -- MODEL
 
-    public partial class INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD
+    public partial class INFORMACIONACADEMICA_ESTUDIOSESCOLARIDADMODEL
     {
         [Key]
         [HiddenInput(DisplayValue=false)]
