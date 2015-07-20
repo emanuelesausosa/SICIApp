@@ -358,6 +358,9 @@ namespace SICIApp.Controllers
             return View(_model);
         }
 
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> NuevoTipoEvaluacionMedica(TIPOEVALUACIONMEDICAMODEL _model)
         {
             // el modelo está validado
