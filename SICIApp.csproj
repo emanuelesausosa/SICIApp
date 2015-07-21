@@ -1079,15 +1079,9 @@
     <Content Include="Scripts\plugins\diff_match_patch\COPYING" />
     <Content Include="Scripts\plugins\justified-gallery\README.md" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Shared\_Layout_2.cshtml" />
-    <Content Include="Views\Shared\_Layout_3.cshtml" />
-    <Content Include="Views\Shared\_Layout_4.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
-    <Content Include="Views\Shared\_NavigationOffCanvas.cshtml" />
-    <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Shared\_SkinConfig.cshtml" />
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
-    <Content Include="Views\Shared\_TopNavbar2.cshtml" />
     <Content Include="Views\Configuraciones\Index.cshtml" />
     <Content Include="Views\Configuraciones\CentrosTerapeuticos.cshtml" />
     <Content Include="Views\Configuraciones\DetalleCentroTerapeutico.cshtml" />
@@ -1101,6 +1095,10 @@
     <Content Include="Views\Configuraciones\DetalleAparatoSistema.cshtml" />
     <Content Include="Views\Configuraciones\NuevoAparatoSistema.cshtml" />
     <Content Include="Views\Configuraciones\EditarAparatoSistema.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
