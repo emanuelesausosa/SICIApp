@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<SICIApp.Models.TIPOEVALUACIONMEDICAMODEL>
 
 @{
-    ViewBag.Title = "TiposEvaluacionesMedicas";
+    ViewBag.Title = "Tipos Evaluaciones Médicas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>TiposEvaluacionesMedicas</h2>
+        <h2>Tipos Evaluaciones Médicas</h2>
         <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Configuraciones","Index")
+            </li>
             <li class="active">
-                <strong>TIPOEVALUACIONMEDICAMODEL</strong>
+                <strong>TIPO EVALUACIÓN MEDICA</strong>
             </li>
         </ol>
     </div>
@@ -22,9 +25,9 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>List of TIPOEVALUACIONMEDICAMODEL</h5>
+                    <h5>Lista de TIPO EVALUACION MÉDICA</h5>
 					<div class="ibox-tools">
-						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
+						@Html.ActionLink("Crear Nueva", "NuevoTipoEvaluacionMedica", null, new { @class = "btn btn-primary btn-xs"})
 					</div>
                 </div>
                 <div class="ibox-content">
@@ -49,9 +52,8 @@
             @Html.DisplayFor(modelItem => item.DESCRIPCION)
         </td>
         <td>
-			@Html.ActionLink("Details", "Details", new { id=item.ID }, new { @class = "btn btn-primary btn-sm"})
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }, new { @class = "btn btn-white btn-sm"})
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-white btn-sm"})
+			@Html.ActionLink("Detalles", "DetalleTipoEvaluacionMedica", new { ID=item.ID }, new { @class = "btn btn-primary btn-sm"})
+            @Html.ActionLink("Editar", "EditarTipoEvaluacionMedica", new { ID=item.ID }, new { @class = "btn btn-white btn-sm"})            
         </td>
     </tr>
 }

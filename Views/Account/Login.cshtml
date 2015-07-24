@@ -11,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Login</title>
+    <title>SICI | Login</title>
 
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
     <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -28,8 +28,8 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Welcom in Inspinia App</h4>
-                <small>Use a local account to log in.</small>
+                <h4>Bienvenido a SICI</h4>
+                <small>Usa tu cuenta local para ingresar.</small>
                 <hr />
                 @Html.ValidationSummary(true)
                 <div class="form-group">
@@ -58,10 +58,7 @@
                     <div class="col-md-offset-2 col-md-8">
                         <input type="submit" value="Log in" class="btn btn-primary" />
                     </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register", "Register") if you don't have a local account.
-                </p>
+                </div>                
             }
         </div>
     </div>

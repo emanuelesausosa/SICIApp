@@ -1,25 +1,25 @@
 ﻿@model SICIApp.Models.TIPOEVALUACIONMEDICAMODEL
 
 @{
-    ViewBag.Title = "EditarTipoEvaluacionMedica";
+    ViewBag.Title = "Editar Tipo Evaluación Medica";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>EditarTipoEvaluacionMedica</h2>
+        <h2>Editar Tipo Evaluacion Medica</h2>
         <ol class="breadcrumb">
             <li>
-                @Html.ActionLink("List", "Index")
+                @Html.ActionLink("Todas", "TiposEvaluacionesMedicas")
             </li>
             <li class="active">
-                <strong>EditarTipoEvaluacionMedica</strong>
+                <strong>Editar Tipo Evaluacion Medica</strong>
             </li>
         </ol>
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+			@Html.ActionLink("Todas", "TiposEvaluacionesMedicas", null, new { @class = "btn btn-primary"})
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>EditarTipoEvaluacionMedica TIPOEVALUACIONMEDICAMODEL</h5>
+                    <h5>Editar Tipo Evaluacion Medica</h5>
                 </div>
                 <div class="ibox-content">
 
@@ -63,8 +63,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "TiposEvaluacionesMedicas", null, new { @class = "btn btn-white"})
             </div>
         </div>
     </div>

@@ -17,10 +17,11 @@ namespace SICIApp.Models
         {
             this.USUARIOCENTROCONSULTAs = new HashSet<USUARIOCENTROCONSULTA>();
             this.CITIES = new HashSet<CITY>();
+            this.COUNTRIES = new HashSet<COUNTRY>();
         }
 
         //es la referencia para el filtro de elección de la ciudad
-        public string CODIGOPAIS { get; set; }
+        
 
         [Required]
         [Display(Name = "CODIGO DEL CENTRO")]
@@ -35,15 +36,18 @@ namespace SICIApp.Models
 
         [Display(Name = "DESCRIPCIÓN")]
         public string DESCRIPCION { get; set; }
-        public Nullable<int> IDCIUDADOPERACION { get; set; }
+
+        [Display(Name = "PAÍS")]
+        public string CODIGOPAIS { get; set; }
 
         [Required]
         [Display(Name = "CIUDAD DE OPERACION")]
-        public int IDCIUDAD { get; set; }
+        public Nullable<int> IDCIUDADOPERACION { get; set; }
 
         public virtual CITY CITY { get; set; }
         public virtual ICollection<USUARIOCENTROCONSULTA> USUARIOCENTROCONSULTAs { get; set; }
         public virtual IEnumerable<CITY> CITIES { get; set; }
+        public virtual IEnumerable<COUNTRY> COUNTRIES { get; set; }
 
     } 
     #endregion

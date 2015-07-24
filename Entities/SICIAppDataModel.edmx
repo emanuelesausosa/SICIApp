@@ -3065,7 +3065,6 @@
                 <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoEvaluacionMedica">
                   <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
                   <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" />
-                  <ResultBinding Name="ID" ColumnName="ID" />
                 </InsertFunction>
                 <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoEvaluacionMedica">
                   <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />

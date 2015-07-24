@@ -96,7 +96,6 @@ namespace SICIApp.Controllers
                 ID = _centroTerapeutico.ID,
                 NOMBRE = _centroTerapeutico.NOMBRE,
                 DESCRIPCION = _centroTerapeutico.DESCRIPCION,
-                CITY = _context.CITies.Find(_centroTerapeutico.IDCIUDADOPERACION),
                 IDCIUDADOPERACION = _centroTerapeutico.IDCIUDADOPERACION
 
             };
@@ -111,6 +110,9 @@ namespace SICIApp.Controllers
             var _model = new CENTROTERAPEUTICOMODEL();
             _model.CITIES = _context.CITies;
 
+            // vista de filtro para paises y ciudades
+            //ViewBag.CODIGOPAIS = new SelectList(_context.COUNTRies, "CODE", "NAME");
+            _model.COUNTRIES = _context.COUNTRies;
             return View(_model);
         }
 
@@ -122,11 +124,13 @@ namespace SICIApp.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 var _newCT = new CENTROTERAPEUTICO
                 {
                     ID = _model.ID,
                     NOMBRE = _model.NOMBRE,
                     DESCRIPCION = _model.DESCRIPCION,
+                    IDCIUDADOPERACION = _model.IDCIUDADOPERACION
                 };
 
                 // si existe la clave en el contexto
@@ -151,14 +155,15 @@ namespace SICIApp.Controllers
                     _context.CENTROTERAPEUTICOes.Add(_newCT);
                     await _context.SaveChangesAsync();
 
-                    return RedirectToAction("Index", "Configuraciones");
+                    return RedirectToAction("CentrosTerapeuticos", "Configuraciones");
 
                 }
 
                 
             }
             // se redirige a la misma página, con el detalle de sus errores
-            _model.CITIES = _context.CITies;
+            
+            _model.COUNTRIES = _context.COUNTRies;
             return View(_model);
         }
  
@@ -185,12 +190,15 @@ namespace SICIApp.Controllers
             var _model = new CENTROTERAPEUTICOMODEL { 
                 ID = _centroTerapeutico.ID,
                 NOMBRE = _centroTerapeutico.NOMBRE,
-                DESCRIPCION = _centroTerapeutico.DESCRIPCION,
-                CITY = _context.CITies.Find(_centroTerapeutico.IDCIUDADOPERACION),
-                IDCIUDADOPERACION = _centroTerapeutico.IDCIUDADOPERACION
+                DESCRIPCION = _centroTerapeutico.DESCRIPCION,                
+                IDCIUDADOPERACION = _centroTerapeutico.IDCIUDADOPERACION,
+                CODIGOPAIS = _context.CITies.Find(_centroTerapeutico.IDCIUDADOPERACION).COUNTRYCODE
             };
+                                              
 
-            _model.CITIES = _context.CITies;
+
+            ViewBag.CODIGOPAIS = new SelectList(_context.COUNTRies, "CODE", "NAME", _model.CODIGOPAIS);
+            _model.COUNTRIES = _context.COUNTRies;
             return View(_model);
         }
 
@@ -206,17 +214,21 @@ namespace SICIApp.Controllers
             
                 if (ModelState.IsValid)
             {
-                var _updateCT = new CENTROTERAPEUTICO
-                {
-                    ID = _model.ID,
-                    NOMBRE = _model.NOMBRE,
-                    DESCRIPCION = _model.DESCRIPCION,
-                };
+                var _updateCT = new CENTROTERAPEUTICO();
+                _updateCT = await _context.CENTROTERAPEUTICOes.FindAsync(_model.ID);
+
+
+                _updateCT.NOMBRE = _model.NOMBRE;
+                _updateCT.DESCRIPCION = _model.DESCRIPCION;
+                _updateCT.IDCIUDADOPERACION = _model.IDCIUDADOPERACION;
+
+                                    
+                ;
 
                 // si existe la clave en el contexto
                 
                 // si el nombre está repetido
-                if (_context.CENTROTERAPEUTICOes.FirstOrDefault(c => c.NOMBRE == _model.NOMBRE) != null)
+                if (_context.CENTROTERAPEUTICOes.FirstOrDefault(c => c.NOMBRE == _model.NOMBRE &&  c.ID != _model.ID) != null)
                 {
 
                     ModelState.AddModelError(string.Empty, "El nombre de este CT ya existe para otro registro");
@@ -270,7 +282,7 @@ namespace SICIApp.Controllers
             }
 
             // se redirige a la misma página, con el detalle de sus errores
-            _model.CITIES = _context.CITies;
+            _model.COUNTRIES = _context.COUNTRies;
             return View(_model);
         }
 
@@ -338,11 +350,11 @@ namespace SICIApp.Controllers
 
             // seteamos el  modelo
 
-            var _model = new TIPOEVALUACIONMEDICA { 
+            var _model = new TIPOEVALUACIONMEDICAMODEL { 
                  ID = _tipoem.ID,
                  CATEGORIA = _tipoem.CATEGORIA,
                  DESCRIPCION = _tipoem.DESCRIPCION,
-                 EVALUACIONMEDICADETALLE = _tipoem.EVALUACIONMEDICADETALLE
+                 
             };
 
             // model to View
@@ -367,7 +379,7 @@ namespace SICIApp.Controllers
             if(ModelState.IsValid)
             {
                 //si el nombre ya existe
-                if (_context.TIPOEVALUACIONMEDICA.Select(t => t.CATEGORIA == _model.CATEGORIA) != null)
+                if (_context.TIPOEVALUACIONMEDICA.Where(t => t.CATEGORIA == _model.CATEGORIA).Count() >= 1)
                 {
                     ModelState.AddModelError(string.Empty, "Este nombre de categoría ya está asignado, por favor elija otro!");
                     return View(_model);
@@ -410,7 +422,7 @@ namespace SICIApp.Controllers
 
             // seteamos el  modelo
 
-            var _model = new TIPOEVALUACIONMEDICA
+           var _model = new TIPOEVALUACIONMEDICAMODEL
             {
                 ID = _tipoem.ID,
                 CATEGORIA = _tipoem.CATEGORIA,
@@ -425,14 +437,14 @@ namespace SICIApp.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> EditarTipoEvaluacionMedica(TIPOEVALUACIONMEDICA _model)
+        public async Task<ActionResult> EditarTipoEvaluacionMedica(TIPOEVALUACIONMEDICAMODEL _model)
         {
             try { 
 
                 if(ModelState.IsValid)
                 {
                     //si el nombre ya existe
-                    if (_context.TIPOEVALUACIONMEDICA.Select(t => t.CATEGORIA == _model.CATEGORIA && t.ID != _model.ID) != null)
+                    if (_context.TIPOEVALUACIONMEDICA.SingleOrDefault(t => t.CATEGORIA == _model.CATEGORIA && t.ID != _model.ID) != null)
                     {
                         ModelState.AddModelError(string.Empty, "Este nombre de categoría ya está asignado, por favor elija otro!");
                         return View(_model);
@@ -440,12 +452,12 @@ namespace SICIApp.Controllers
                     else
                     {
                         // trasladomos el modelo a entity
-                        var _tipoem = new TIPOEVALUACIONMEDICA
-                        {
-                            ID = _model.ID,
-                            CATEGORIA = _model.CATEGORIA,
-                            DESCRIPCION = _model.DESCRIPCION
-                        };
+                        var _tipoem = new TIPOEVALUACIONMEDICA();
+                        _tipoem = await _context.TIPOEVALUACIONMEDICA.FindAsync(_model.ID);
+                            
+                            _tipoem.CATEGORIA = _model.CATEGORIA;
+                            _tipoem.DESCRIPCION = _model.DESCRIPCION;
+                        
 
                         // se actualiza el registro de forma asíncrona
                         _context.Entry(_tipoem).State = EntityState.Modified;
@@ -515,7 +527,7 @@ namespace SICIApp.Controllers
                     ID = _aparatoSistema.ID,
                     NOMBRE = _aparatoSistema.NOMBRE,
                     DESCRIPCION = _aparatoSistema.DESCRIPCION,
-                    APARATOSSISTEMAS = _aparatoSistema.APARATOSSISTEMAS
+                    
             };
 
             // model to view
@@ -542,7 +554,7 @@ namespace SICIApp.Controllers
             if(ModelState.IsValid)
             {
                 // si existe un nombre igual
-                if(_context.APARATOSSISTEMAS_SISTEMAS.Select(a=>a.NOMBRE == _model.NOMBRE) != null)
+                if(_context.APARATOSSISTEMAS_SISTEMAS.SingleOrDefault(a=>a.NOMBRE == _model.NOMBRE) != null)
                 {
                     ModelState.AddModelError(string.Empty, "Ya existe un registro con este mismo nombre, por favor elija uno diferente");
                     return View(_model);
@@ -601,19 +613,20 @@ namespace SICIApp.Controllers
             if (ModelState.IsValid)
             {
                 // si existe un nombre igual
-                if (_context.APARATOSSISTEMAS_SISTEMAS.Select(a => a.NOMBRE == _model.NOMBRE && a.ID != _model.ID) != null)
+                if (_context.APARATOSSISTEMAS_SISTEMAS.SingleOrDefault(a => a.NOMBRE == _model.NOMBRE && a.ID != _model.ID) != null)
                 {
                     ModelState.AddModelError(string.Empty, "Ya existe un registro con este mismo nombre, por favor elija uno diferente");
                     return View(_model);
                 }
 
                 // from model to entity
-                var _aparatosistema = new APARATOSSISTEMAS_SISTEMAS
-                {
-                    ID = _model.ID,
-                    NOMBRE = _model.NOMBRE,
-                    DESCRIPCION = _model.DESCRIPCION
-                };
+
+                var _aparatosistema = new APARATOSSISTEMAS_SISTEMAS();
+                _aparatosistema = await _context.APARATOSSISTEMAS_SISTEMAS.FindAsync(_model.ID);
+                    _aparatosistema.ID = _model.ID;
+                    _aparatosistema.NOMBRE = _model.NOMBRE;
+                    _aparatosistema.DESCRIPCION = _model.DESCRIPCION;
+                
                 // guardar el registro
                 _context.Entry(_aparatosistema).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
@@ -625,7 +638,558 @@ namespace SICIApp.Controllers
         }
         #endregion
 
+        // seccion de mantenimiento  de tipo documento
+        #region Acciones Mant, tipos Documentos
+        
+        // todos los tipos de documentos
+        public async Task<ActionResult> TiposDocumentos()
+        {
+            // get entity 
+            var _entity = await _context.TIPOSDOCUMENTO.ToListAsync();
+
+            // get list model
+            List<TIPOSDOCUMENTOMODEL> _model = new List<TIPOSDOCUMENTOMODEL>();
+
+            //set model 
+            foreach(TIPOSDOCUMENTO documentos in _entity)
+           {
+               _model.Add(new TIPOSDOCUMENTOMODEL { 
+                    ID = documentos.ID,
+                    NOMBRETIPO = documentos.NOMBRETIPO,
+                    DESCRIPCION = documentos.DESCRIPCION
+               });
+            }
+
+            // to view
+            return View(_model);
+
+        }
 
 
+        // detalle documento
+        public async Task<ActionResult> DetalleTipoDocumento(int? ID)
+        {
+            if(ID ==  null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //set _entity
+            var _enitity = await _context.TIPOSDOCUMENTO.FindAsync(ID);
+
+
+            // si es nulo
+            if(_enitity == null)
+            {
+                return HttpNotFound();
+            }
+
+           // set model
+            var _model = new TIPOSDOCUMENTOMODEL { 
+                ID = _enitity.ID,
+                NOMBRETIPO = _enitity.NOMBRETIPO,
+                DESCRIPCION = _enitity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // nuevo tipo documento
+        // GET
+        public ActionResult NuevoTipoDucumento()
+        {
+            // set model
+            var _model = new TIPOSDOCUMENTOMODEL();
+            return View(_model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoTipoDucumento(TIPOSDOCUMENTOMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // veriifcar el nombre no se repita
+                if(_context.TIPOSDOCUMENTO.SingleOrDefault(d=>d.NOMBRETIPO == _model.NOMBRETIPO) !=  null)
+                {
+                    ModelState.AddModelError("", "El nombre de este tipo de documento ya existe, por facvor elija otro ");
+                    return View(_model);
+                }else
+                {
+                    try{
+
+                        // get entity
+                        var _entity = new TIPOSDOCUMENTO{
+                            NOMBRETIPO = _model.NOMBRETIPO,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+                        // guardar el registro
+                        _context.TIPOSDOCUMENTO.Add(_entity);
+                        await _context.SaveChangesAsync();
+                        
+                        // redireccionar al índice
+                        return RedirectToAction("TiposDocumentos","Configuraciones");
+
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+
+            }
+            return View(_model);
+        }
+
+        // Edicíón de tipos documento
+        // GET
+        public async Task<ActionResult> EditarTipoDocumento(int? ID)
+        {
+
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //set _entity
+            var _enitity = await _context.TIPOSDOCUMENTO.FindAsync(ID);
+            
+
+            // si es nulo
+            if (_enitity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TIPOSDOCUMENTOMODEL
+            {
+                ID = _enitity.ID,
+                NOMBRETIPO = _enitity.NOMBRETIPO,
+                DESCRIPCION = _enitity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarTipoDocumento(TIPOSDOCUMENTOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // veriifcar el nombre no se repita
+                if (_context.TIPOSDOCUMENTO.SingleOrDefault(d => d.NOMBRETIPO == _model.NOMBRETIPO && d.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "El nombre de este tipo de documento ya existe, por favor elija otro ");
+                    return View(_model);
+                }
+                else
+                {
+                    try
+                    {
+
+                        // get entity
+                        var _entity = new TIPOSDOCUMENTO();
+                        _entity = await _context.TIPOSDOCUMENTO.FindAsync(_model.ID);                        
+                            _entity.NOMBRETIPO = _model.NOMBRETIPO;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                        
+                        // guardar el registro
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                        // redireccionar al índice
+                        return RedirectToAction("TiposDocumentos", "Configuraciones");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+
+            }
+            return View(_model);
+        }
+
+        #endregion
+
+        // seccion de mantenimiento de causas egreso
+        #region Acciones de mant. Causas egreso
+        // todas las tipos causas egreso
+        public async  Task<ActionResult> CausasEgreso()
+        {
+            //get entity
+            var _entity = await _context.CAUSASEGRESO.ToListAsync();
+
+            // get _model
+            List<CAUSASEGRESOMODEL> _model = new List<CAUSASEGRESOMODEL>();
+
+            // set model
+            foreach(CAUSASEGRESO causas in _entity)            
+            {
+                _model.Add(new CAUSASEGRESOMODEL { 
+                    ID = causas.ID,
+                    NOMBRE = causas.NOMBRE,
+                    DESCRIPCION = causas.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalles causas egresos
+        public async Task<ActionResult> DetalleCausaEgreso(int? ID)
+        {
+            // bad request
+            if(ID == null)            
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.CAUSASEGRESO.FindAsync(ID);
+
+            // set model
+            var _model = new CAUSASEGRESOMODEL {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // Nueva causa egreso
+        // GET
+        public ActionResult NuevaCausaEgreso()
+        {
+            // get model 
+            var _model = new CAUSASEGRESOMODEL();
+
+            // toV view
+            return View(_model);
+        }
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaCausaEgreso(CAUSASEGRESOMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // comprobar el nombre
+                if(_context.CAUSASEGRESO.FirstOrDefault(c=>c.NOMBRE == _model.NOMBRE) != null)
+                {
+                    ModelState.AddModelError("","Este nombre de Causa ya está asignado a otro registro, por favir elija otro");
+                    return View(_model);
+                }else{
+
+                try{
+
+                    // get entity
+                    var _entity = new CAUSASEGRESO { 
+                        NOMBRE = _model.NOMBRE,
+                        DESCRIPCION = _model.DESCRIPCION
+                    };
+
+                    // guardar el registro
+                    _context.CAUSASEGRESO.Add(_entity);
+                    await _context.SaveChangesAsync();
+
+                    //redireccionar
+
+                    return RedirectToAction("CausasEgreso","Configuraciones");
+
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
+                }
+            }
+            return View(_model);
+        }
+
+
+
+        // Edición de Causas egreso
+        //GET
+
+        public async Task<ActionResult> EditarCausaEgreso(int? ID)
+        {
+            // bad request
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.CAUSASEGRESO.FindAsync(ID);
+
+            // set model
+            var _model = new CAUSASEGRESOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCausaEgreso(CAUSASEGRESOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar el nombre
+                if (_context.CAUSASEGRESO.FirstOrDefault(c => c.NOMBRE == _model.NOMBRE && c.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "Este nombre de Causa ya está asignado a otro registro, por favir elija otro");
+                    return View(_model);
+                }
+                else
+                {
+
+                    try
+                    {
+
+                        // get entity
+                        var _entity = new CAUSASEGRESO();
+                        _entity = await _context.CAUSASEGRESO.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        
+
+                        // actualizar el registro
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        //redireccionar
+
+                        return RedirectToAction("CausasEgreso", "Configuraciones");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+            return View(_model);
+        }
+
+        #endregion
+
+        //mantenimiento datos problemas drogas
+        #region Acciones tipos drogas
+        // Todos los tipos drogas
+
+        public async Task<ActionResult> TiposDrogas()
+        {
+            //get entity 
+            var _entity = await _context.DATOSPROBLEMADROGAS_DROGAS.ToListAsync();
+
+            // get model
+            List<DATOSPROBLEMADROGAS_DROGASMODEL> _model = new List<DATOSPROBLEMADROGAS_DROGASMODEL>();
+
+            // set model
+            foreach (DATOSPROBLEMADROGAS_DROGAS drogas in _entity)
+            {
+                _model.Add(new DATOSPROBLEMADROGAS_DROGASMODEL
+                {
+                    ID = drogas.ID,
+                    NOMBRECIENTIFICO = drogas.NOMBRECIENTIFICO,
+                    NOMBRECOMUN = drogas.NOMBRECOMUN,
+                    DESCRIPCION = drogas.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+
+        // detalles tipos de drogas
+        public async Task<ActionResult> DetallesTiposDrogas(int? ID)
+        {
+            // Bad request
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.DATOSPROBLEMADROGAS_DROGAS.FindAsync(ID);
+
+            //si no existe
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new DATOSPROBLEMADROGAS_DROGASMODEL
+            {
+                ID = _entity.ID,
+                NOMBRECIENTIFICO = _entity.NOMBRECIENTIFICO,
+                NOMBRECOMUN = _entity.NOMBRECOMUN,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+
+        // nuevo tipo droga
+        //GET
+        public ActionResult NuevoTipoDroga()
+        {
+            // get model
+            var _model = new DATOSPROBLEMADROGAS_DROGASMODEL();
+
+            // to view
+            return View(_model);
+        }
+
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoTipoDroga(DATOSPROBLEMADROGAS_DROGASMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar que el nombre científico y el común
+                if (_context.DATOSPROBLEMADROGAS_DROGAS.FirstOrDefault(d => d.NOMBRECIENTIFICO == _model.NOMBRECIENTIFICO || d.NOMBRECOMUN == _model.NOMBRECOMUN) != null)
+                {
+                    ModelState.AddModelError("", "El nombre científico o el común ya está asignado a otro registro, por favor elija otros");
+                    return View(_model);
+                }
+                else
+                {
+                    try
+                    {
+
+                        // set entity
+                        var _entity = new DATOSPROBLEMADROGAS_DROGAS
+                        {
+                            NOMBRECIENTIFICO = _model.NOMBRECIENTIFICO,
+                            NOMBRECOMUN = _model.NOMBRECOMUN,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        //guardar el registro
+                        _context.DATOSPROBLEMADROGAS_DROGAS.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // redireccionar
+                        return RedirectToAction("TiposDrogas", "Configuraciones");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+
+            }
+            return View(_model);
+        }
+
+        // edición de tipos drogas
+        // GET
+        public async Task<ActionResult> EdicionTiposDrogas(int? ID)
+        {
+            // Bad request
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.DATOSPROBLEMADROGAS_DROGAS.FindAsync(ID);
+
+            //si no existe
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new DATOSPROBLEMADROGAS_DROGASMODEL
+            {
+                ID = _entity.ID,
+                NOMBRECIENTIFICO = _entity.NOMBRECIENTIFICO,
+                NOMBRECOMUN = _entity.NOMBRECOMUN,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EdicionTipoDroga(DATOSPROBLEMADROGAS_DROGASMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar que el nombre científico y el común
+                if (_context.DATOSPROBLEMADROGAS_DROGAS.FirstOrDefault(d => d.NOMBRECIENTIFICO == _model.NOMBRECIENTIFICO || d.NOMBRECOMUN == _model.NOMBRECOMUN && d.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "El nombre científico o el común ya está asignado a otro registro, por favor elija otros");
+                    return View(_model);
+                }
+                else
+                {
+                    try
+                    {
+
+                        // set entity
+                        var _entity = new DATOSPROBLEMADROGAS_DROGAS();
+                        _entity = await _context.DATOSPROBLEMADROGAS_DROGAS.FindAsync(_model.ID);
+
+                        _entity.NOMBRECIENTIFICO = _model.NOMBRECIENTIFICO;
+                        _entity.NOMBRECOMUN = _model.NOMBRECOMUN;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        //actualizar el registro
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // redireccionar
+                        return RedirectToAction("TiposDrogas", "Configuraciones");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+
+            }
+            return View(_model);
+        } 
+        #endregion
     }
 }

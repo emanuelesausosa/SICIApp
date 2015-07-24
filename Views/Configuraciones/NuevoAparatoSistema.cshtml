@@ -1,7 +1,7 @@
 ﻿@model SICIApp.Models.APARATOSSISTEMAS_SISTEMASMODEL
 
 @{
-    ViewBag.Title = "NuevoAparatoSistema";
+    ViewBag.Title = "Nuevo Aparato Sistema";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,16 +10,16 @@
         <h2>NuevoAparatoSistema</h2>
         <ol class="breadcrumb">
             <li>
-                @Html.ActionLink("List", "Index")
+                @Html.ActionLink("Todos", "AparatosSistemas")
             </li>
             <li class="active">
-                <strong>NuevoAparatoSistema</strong>
+                <strong>Nuevo Aparato Sistema</strong>
             </li>
         </ol>
     </div>
     <div class="col-sm-8">
         <div class="title-action">
-			@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary"})
+			@Html.ActionLink("Todos", "AparatosSistemas", null, new { @class = "btn btn-primary"})
         </div>
     </div>
 </div>
@@ -31,7 +31,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>NuevoAparatoSistema APARATOSSISTEMAS_SISTEMASMODEL</h5>
+                    <h5>Nuevo Aparato Sistema </h5>
                 </div>
                 <div class="ibox-content">
 
@@ -60,8 +60,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-				@Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-white"})
+                <input type="submit" value="Crear" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "AparatosSistemas", null, new { @class = "btn btn-white"})
             </div>
         </div>
     </div>
