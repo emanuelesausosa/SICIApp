@@ -1191,5 +1191,190 @@ namespace SICIApp.Controllers
             return View(_model);
         } 
         #endregion
+
+        // manteniniento de exámenes psicimpetricos
+        #region Acciones mant. de Exámenes psicimétricos
+
+        // todos los exámenes
+        public async Task<ActionResult> TiposExamenesPSmetricos()
+        {
+            // get entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMEN.ToListAsync();
+
+            // get _model
+            List<EXAMENPSICOMETRICO_EXAMENMODEL> _model = new List<EXAMENPSICOMETRICO_EXAMENMODEL>();
+
+            // set model
+            foreach(EXAMENPSICOMETRICO_EXAMEN examen in _entity)
+            {
+                _model.Add(new EXAMENPSICOMETRICO_EXAMENMODEL { 
+                    IDEXAMEN = examen.IDEXAMEN,
+                    TITULO = examen.TITULO,
+                    DESCRIPCION = examen.DESCRIPCION,
+                    ARCHIVOFISOCO = examen.ARCHIVOFISOCO
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalles Examen psicometrico - Examen
+        public async Task<ActionResult> DetalleExamenPsmetrico(int? ID)
+        {
+            if(ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMEN.FindAsync(ID);
+
+            // validación entity/
+            if(_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            //set model
+            var _model = new EXAMENPSICOMETRICO_EXAMENMODEL { 
+                IDEXAMEN = _entity.IDEXAMEN,
+                TITULO = _entity.TITULO,
+                DESCRIPCION = _entity.DESCRIPCION,
+                ARCHIVOFISOCO = _entity.ARCHIVOFISOCO
+            };
+
+            // to view
+            return View(_model);
+
+        }
+
+        // nuevo examen ps- métrico
+        // GET
+        public ActionResult NuevoExamenPSmetrico()
+        {
+            // get model
+            var _model = new EXAMENPSICOMETRICO_EXAMENMODEL();
+            return View(_model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoExamenPSmetrico(EXAMENPSICOMETRICO_EXAMENMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // comprobar el título
+                if (_context.EXAMENPSICOMETRICO_EXAMEN.FirstOrDefault(e => e.TITULO == _model.TITULO) != null)
+                {
+                    ModelState.AddModelError("", "Este título ya está asignado, por favor elija otro");
+                    return View();
+                }
+                else
+                {
+                    try { 
+
+                        // set entity
+                        var _entity = new EXAMENPSICOMETRICO_EXAMEN { 
+                            TITULO = _model.TITULO,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            ARCHIVOFISOCO = _model.ARCHIVOFISOCO
+                        };
+
+                        // guardar registro
+                        _context.EXAMENPSICOMETRICO_EXAMEN.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // redireccionar
+                        return RedirectToAction("TiposExamenesPSmetricos", "Configuraciones");
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+            return View(_model);
+        }
+
+        // edición de Exámenes PS
+        // GET
+        public async Task<ActionResult> EditarExamenPsmetrico(int? ID)
+        {
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMEN.FindAsync(ID);
+
+            // validación entity/
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            //set model
+            var _model = new EXAMENPSICOMETRICO_EXAMENMODEL
+            {
+                IDEXAMEN = _entity.IDEXAMEN,
+                TITULO = _entity.TITULO,
+                DESCRIPCION = _entity.DESCRIPCION,
+                ARCHIVOFISOCO = _entity.ARCHIVOFISOCO
+            };
+
+            // to view
+            return View(_model);
+
+        }        
+
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarExamenPSmetrico(EXAMENPSICOMETRICO_EXAMENMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar el título
+                if (_context.EXAMENPSICOMETRICO_EXAMEN.FirstOrDefault(e => e.TITULO == _model.TITULO && e.IDEXAMEN != _model.IDEXAMEN) != null)
+                {
+                    ModelState.AddModelError("", "Este título ya está asignado, por favor elija otro");
+                    return View();
+                }
+                else
+                {
+                    try
+                    {
+
+                        // set entity
+                        var _entity = new EXAMENPSICOMETRICO_EXAMEN();
+                        _entity = await _context.EXAMENPSICOMETRICO_EXAMEN.FindAsync(_model.IDEXAMEN);
+                            _entity.TITULO = _model.TITULO;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                            _entity.ARCHIVOFISOCO = _model.ARCHIVOFISOCO;
+                        
+
+                        // actualizar registro
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                        // redireccionar
+                        return RedirectToAction("TiposExamenesPSmetricos", "Configuraciones");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+            return View(_model);
+        }
+        #endregion
     }
 }
