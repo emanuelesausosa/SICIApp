@@ -300,7 +300,7 @@ namespace SICIApp.Controllers
 
             return Json(vCiudades, JsonRequestBehavior.AllowGet);
         }
-        #endregion
+        #endregion 
 
         #region Acciones para mantenimiento y configuración de tipo evaluación médica
 
@@ -638,7 +638,7 @@ namespace SICIApp.Controllers
         }
         #endregion
 
-        // seccion de mantenimiento  de tipo documento
+        // seccion de mantenimiento  de tipo documento -- YA
         #region Acciones Mant, tipos Documentos
         
         // todos los tipos de documentos
@@ -819,7 +819,7 @@ namespace SICIApp.Controllers
 
         #endregion
 
-        // seccion de mantenimiento de causas egreso
+        // seccion de mantenimiento de causas egreso -- YA
         #region Acciones de mant. Causas egreso
         // todas las tipos causas egreso
         public async  Task<ActionResult> CausasEgreso()
@@ -996,7 +996,7 @@ namespace SICIApp.Controllers
 
         #endregion
 
-        //mantenimiento datos problemas drogas
+        //mantenimiento datos problemas drogas -- ya
         #region Acciones tipos drogas
         // Todos los tipos drogas
 
@@ -1192,7 +1192,7 @@ namespace SICIApp.Controllers
         } 
         #endregion
 
-        // manteniniento de exámenes psicimpetricos
+        // manteniniento de exámenes psicimpetricos -- YA
         #region Acciones mant. de Exámenes psicimétricos
 
         // todos los exámenes
@@ -1366,6 +1366,732 @@ namespace SICIApp.Controllers
 
                         // redireccionar
                         return RedirectToAction("TiposExamenesPSmetricos", "Configuraciones");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+            return View(_model);
+        }
+        #endregion
+
+        // acciones de mantenimiento de examen ps metrico - contenido --YA
+        #region Acciones de Mant. De Exámenes ps-métricos - contenido
+        // todos los contenidos
+        public async Task<ActionResult> ContenidosExamenes()
+        {
+            // get _entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.ToListAsync();
+
+            // get model
+            List<EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL> _model = new List<EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL>();
+
+            // set _model
+
+            foreach(EXAMENPSICOMETRICO_EXAMENCONTENIDO contenido in _entity)
+            {
+                _model.Add(new EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL { 
+                    IDEXAMEN = contenido.IDEXAMEN,
+                    IDPREGUNTA = contenido.IDPREGUNTA,
+                    DESCRIPCION = contenido.DESCRIPCION,
+                    DETALLE = contenido.DETALLE,
+                    VALORACION = contenido.VALORACION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle de contenidio
+        public async Task<ActionResult> DetalleContenidoExamen(int? ID)
+        {
+           // BAD REQUEST
+            if(ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.FindAsync(ID);
+
+            // si entity no existe
+            if(_entity  == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL {
+                IDEXAMEN = _entity.IDEXAMEN,
+                IDPREGUNTA = _entity.IDPREGUNTA,
+                DESCRIPCION = _entity.DESCRIPCION,
+                DETALLE = _entity.DETALLE,
+                VALORACION = _entity.VALORACION
+            };
+
+            //model to view
+            return View(_model);
+        }
+
+
+        // Nuevo Contenido examen
+        public ActionResult NuevoContenidoExamen()
+        {
+            // get model
+            var _model = new EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL();
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO");
+            return View(_model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoContenidoExamen(EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                try {
+
+                    // get entity
+                    var _entity = new EXAMENPSICOMETRICO_EXAMENCONTENIDO {
+                        IDEXAMEN = _model.IDEXAMEN,                        
+                        DESCRIPCION = _model.DESCRIPCION,
+                        DETALLE = _model.DETALLE,
+                        VALORACION = _model.VALORACION
+                    };
+
+                    // guardar cambioes
+                    _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.Add(_entity);
+                    await _context.SaveChangesAsync();
+
+                    // redirecconar
+                    return RedirectToAction("ContenidosExamenes", "Configuraciones");
+                }catch(Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
+            return View(_model);
+        }
+
+        // edición de contenidos 
+        // GET
+        public async Task<ActionResult> EditarContenidoExamen(int? ID)
+        {
+            // BAD REQUEST
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.FindAsync(ID);
+
+            // si entity no existe
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL
+            {
+                IDEXAMEN = _entity.IDEXAMEN,
+                IDPREGUNTA = _entity.IDPREGUNTA,
+                DESCRIPCION = _entity.DESCRIPCION,
+                DETALLE = _entity.DETALLE,
+                VALORACION = _entity.VALORACION
+            };
+
+            //model to view
+            return View(_model);
+        }
+
+
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarContenidoExamen(EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    // get entity
+                    var _entity = new EXAMENPSICOMETRICO_EXAMENCONTENIDO();
+                    _entity = await _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.FindAsync(_model.IDPREGUNTA);
+                        _entity.IDEXAMEN = _model.IDEXAMEN;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.DETALLE = _model.DETALLE;
+                        _entity.VALORACION = _model.VALORACION;
+
+                    // actualizar cambios
+                    _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.Add(_entity);
+                    await _context.SaveChangesAsync();
+
+                    // redireccionar
+                    return RedirectToAction("ContenidosExamenes", "Configuraciones");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
+            return View(_model);
+        }
+        #endregion
+
+        // acciones para mantenimeiento de enfermendades -- YA
+        #region Acciones mant. de enfermades
+        // Todas las enfermedades
+        public async Task<ActionResult> Enfermedades()
+        {
+            // get entity
+            var _entity = await _context.CONDICIONFISICA_ENFERMEDADES.ToListAsync();
+
+            // get model
+            List<CONDICIONFISICA_ENFERMEDADESMODEL> _model = new List<CONDICIONFISICA_ENFERMEDADESMODEL>();
+
+            // set model
+            foreach(CONDICIONFISICA_ENFERMEDADES enfermedades in _entity )
+            {
+                _model.Add(new CONDICIONFISICA_ENFERMEDADESMODEL { 
+                    ID = enfermedades.ID,
+                    NOMBRECIENTIFICO = enfermedades.NOMBRECIENTIFICO,
+                    NOMBRESINOMIMO = enfermedades.NOMBRESINOMIMO,
+                    DESCRIPCION = enfermedades.DESCRIPCION
+
+                });
+            }
+
+            // TO VIEW
+            return View(_model);        
+        }
+
+        // Detalle enfermedad
+        public async Task<ActionResult> DetalleEnfermedad(int? ID)
+        {
+            // BAD REQUEST
+            if(ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.CONDICIONFISICA_ENFERMEDADES.FindAsync(ID);
+
+            // si entity no existe
+            if(_entity  == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            // get model
+            var _model = new CONDICIONFISICA_ENFERMEDADESMODEL {
+                ID = _entity.ID,
+                NOMBRECIENTIFICO = _entity.NOMBRECIENTIFICO,
+                NOMBRESINOMIMO = _entity.NOMBRESINOMIMO,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+            return View(_model);
+        }
+
+
+        //Nueva enfermedad
+        // GET
+        public ActionResult NuevaEnfermedad()
+        {
+           // get model
+            var _model = new CONDICIONFISICA_ENFERMEDADESMODEL();
+            return View(_model);
+        }
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaEnfermedad(CONDICIONFISICA_ENFERMEDADESMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // valdición de nombres repetidos
+                if (_context.CONDICIONFISICA_ENFERMEDADES.FirstOrDefault(e => e.NOMBRECIENTIFICO == _model.NOMBRECIENTIFICO || e.NOMBRESINOMIMO == _model.NOMBRESINOMIMO) != null)
+                {
+                    ModelState.AddModelError("", "El nombre científico o el sinónimo ya existen para otro registro, por favor elija otro");
+                    return View(_model);
+                }
+                else
+                { 
+                    // get entity
+                    var _entity = new CONDICIONFISICA_ENFERMEDADES {
+                        NOMBRECIENTIFICO = _model.NOMBRECIENTIFICO,
+                        NOMBRESINOMIMO = _model.NOMBRESINOMIMO,
+                        DESCRIPCION = _model.DESCRIPCION
+                    };
+
+                    // guardar registro
+                    _context.CONDICIONFISICA_ENFERMEDADES.Add(_entity);
+                    await _context.SaveChangesAsync();
+
+                    // redireccionar al índice
+                    return RedirectToAction("Enfermedades", "Configuraciones");
+
+                }
+            }            
+            // to view
+            return View(_model);
+        }
+
+        // editar enfermedad
+        public async Task<ActionResult> EditarEnfermedad(int? ID)
+        {
+            // BAD REQUEST
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            // get entity
+            var _entity = await _context.CONDICIONFISICA_ENFERMEDADES.FindAsync(ID);
+
+            // si entity no existe
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            // get model
+            var _model = new CONDICIONFISICA_ENFERMEDADESMODEL
+            {
+                ID = _entity.ID,
+                NOMBRECIENTIFICO = _entity.NOMBRECIENTIFICO,
+                NOMBRESINOMIMO = _entity.NOMBRESINOMIMO,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+            return View(_model);
+        }
+
+        
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarEnfermedad(CONDICIONFISICA_ENFERMEDADESMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // valdición de nombres repetidos
+                if (_context.CONDICIONFISICA_ENFERMEDADES.FirstOrDefault(e => e.NOMBRECIENTIFICO == _model.NOMBRECIENTIFICO || e.NOMBRESINOMIMO == _model.NOMBRESINOMIMO && e.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "El nombre científico o el sinónimo ya existen para otro registro, por favor elija otro");
+                    return View(_model);
+                }
+                else
+                {
+                    // get entity
+                    var _entity = new CONDICIONFISICA_ENFERMEDADES();
+                    _entity = await _context.CONDICIONFISICA_ENFERMEDADES.FindAsync(_model.ID);
+                    
+                        _entity.NOMBRECIENTIFICO = _model.NOMBRECIENTIFICO;
+                        _entity.NOMBRESINOMIMO = _model.NOMBRESINOMIMO;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                    
+
+                    // actualizar registro
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                    // redireccionar al índice
+                    return RedirectToAction("Enfermedades", "Configuraciones");
+
+                }
+            }
+            // to view
+            return View(_model);
+        }
+        #endregion
+
+        // acciones para manteniemnto de escolaridad  --YA
+        #region Acciones de mant. para Escolaridades
+        // todoad las escolaridades
+        public async Task<ActionResult> Escolaridades()
+        {
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.ToListAsync();
+
+            // get Model
+            List<INFORMACIONACADEMICA_ESCOLARIDADMODEL> _model = new List<INFORMACIONACADEMICA_ESCOLARIDADMODEL>();
+
+            // set model
+            foreach (INFORMACIONACADEMICA_ESCOLARIDAD entity in _entity)
+            {
+                _model.Add(new INFORMACIONACADEMICA_ESCOLARIDADMODEL
+                {
+                    ID = entity.ID,
+                    DESCRIPCIONESCOLARIDAD = entity.DESCRIPCIONESCOLARIDAD,
+                    NOMBREESCOLARIDAD = entity.NOMBREESCOLARIDAD
+
+                });
+
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle escolaridad
+        public async Task<ActionResult> DetalleEscolaridad(int? ID)
+        {
+            // bad request si el parámetro pasado es nulo
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.FindAsync(ID);
+
+            // si no existe el objeto a consultar
+            // entonces no encontrado
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // get model and set model
+            var _model = new INFORMACIONACADEMICA_ESCOLARIDAD
+            {
+                ID = _entity.ID,
+                DESCRIPCIONESCOLARIDAD = _entity.DESCRIPCIONESCOLARIDAD,
+                NOMBREESCOLARIDAD = _entity.NOMBREESCOLARIDAD
+            };
+
+            // to view
+            return View(_model);
+        }
+
+
+        // Nueva escolaridad
+        //GET
+        public ActionResult NuevaEscolaridad()
+        {
+            // get model
+            var _model = new INFORMACIONACADEMICA_ESCOLARIDADMODEL();
+
+            // model to view
+            return View(_model);
+        }
+
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaEscolaridad(INFORMACIONACADEMICA_ESCOLARIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar que el nombre de la escolaridad no existe
+                if (_context.INFORMACIONACADEMICA_ESCOLARIDAD.FirstOrDefault(e => e.NOMBREESCOLARIDAD == _model.NOMBREESCOLARIDAD) != null)
+                {
+                    ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro e intente de nuevo");
+                    return View(_model);
+                }
+                else
+                {
+
+                    try
+                    {
+
+                        // set entity
+                        var _entity = new INFORMACIONACADEMICA_ESCOLARIDAD
+                        {
+                            NOMBREESCOLARIDAD = _model.NOMBREESCOLARIDAD,
+                            DESCRIPCIONESCOLARIDAD = _model.DESCRIPCIONESCOLARIDAD
+                        };
+
+
+                        //guardar el registro
+                        _context.INFORMACIONACADEMICA_ESCOLARIDAD.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // redireccionar 
+                        return RedirectToAction("Escolaridades", "Configuraciones");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+
+            return View(_model);
+        }
+
+        // edición de Escolaridad
+        // GET
+        public async Task<ActionResult> EditarEscolaridad(int? ID)
+        {
+            // bad request si el parámetro pasado es nulo
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.FindAsync(ID);
+
+            // si no existe el objeto a consultar
+            // entonces no encontrado
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // get model and set model
+            var _model = new INFORMACIONACADEMICA_ESCOLARIDAD
+            {
+                ID = _entity.ID,
+                DESCRIPCIONESCOLARIDAD = _entity.DESCRIPCIONESCOLARIDAD,
+                NOMBREESCOLARIDAD = _entity.NOMBREESCOLARIDAD
+            };
+
+            // to view
+            return View(_model);
+        }
+
+
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarEscolaridad(INFORMACIONACADEMICA_ESCOLARIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // comprobar que el nombre de la escolaridad no existe
+                if (_context.INFORMACIONACADEMICA_ESCOLARIDAD.FirstOrDefault(e => e.NOMBREESCOLARIDAD == _model.NOMBREESCOLARIDAD && e.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro e intente de nuevo");
+                    return View(_model);
+                }
+                else
+                {
+
+                    try
+                    {
+
+                        // set entity
+                        var _entity = new INFORMACIONACADEMICA_ESCOLARIDAD();
+                        _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.FindAsync(_model);
+
+                        _entity.NOMBREESCOLARIDAD = _model.NOMBREESCOLARIDAD;
+                        _entity.DESCRIPCIONESCOLARIDAD = _model.DESCRIPCIONESCOLARIDAD;
+
+                        //actualizar el registro
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // redireccionar 
+                        return RedirectToAction("Escolaridades", "Configuraciones");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+
+            return View(_model);
+        } 
+        #endregion
+
+        //aaciones para mant,  de oficios --YA
+        #region Acciones para mant. de Oficios
+
+        // todos los oficios 
+        public async Task<ActionResult> Oficios()
+        {
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_OFICIOS.ToListAsync();
+            
+            //get model
+            List<INFORMACIONACADEMICA_OFICIOSMODEL> _model = new List<INFORMACIONACADEMICA_OFICIOSMODEL>();
+
+            // set model
+            foreach(INFORMACIONACADEMICA_OFICIOS entity in _entity)
+            {
+                _model.Add(new INFORMACIONACADEMICA_OFICIOSMODEL { 
+                    ID = entity.ID,
+                    NOMBREOFICIO = entity.NOMBREOFICIO,
+                    DESCRIPCIONOFICIO = entity.DESCRIPCIONOFICIO
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle oficio
+        public async Task<ActionResult> DetalleOficio(int? ID)
+        {
+            // bad request, por parámetro 0 o null
+            if(ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_OFICIOS.FindAsync(ID);
+
+            //comprobar la existencia de la petición por restulato no null
+            if(_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // SET model
+            var _model = new INFORMACIONACADEMICA_OFICIOSMODEL { 
+                ID = _entity.ID,
+                NOMBREOFICIO = _entity.NOMBREOFICIO,
+                DESCRIPCIONOFICIO = _entity.DESCRIPCIONOFICIO
+
+            };
+
+            //to view
+            return View(_model);
+        }
+
+        // nuevo Oficio
+        // GET
+        public ActionResult Action()
+        {
+            // get model
+            var _model = new INFORMACIONACADEMICA_OFICIOSMODEL();
+
+            //to view
+            return View(_model);
+        }
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]        
+        public async Task<ActionResult> NuevoOficio(INFORMACIONACADEMICA_OFICIOSMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+                // validar que ni existe el nombre
+                if(_context.INFORMACIONACADEMICA_OFICIOS.FirstOrDefault(o=>o.NOMBREOFICIO == _model.NOMBREOFICIO)!= null)
+                {
+                    ModelState.AddModelError("","Este nombre ya ha sido asignado a otro registro, por favor ingreso otro y vuelva a intentar");
+                    return View(_model);
+                }else{
+                    try { 
+                        // set entity
+                        var _entity = new INFORMACIONACADEMICA_OFICIOS { 
+                            NOMBREOFICIO = _model.NOMBREOFICIO,
+                            DESCRIPCIONOFICIO = _model.DESCRIPCIONOFICIO
+
+                        };
+
+                        // se guarda el registro
+                        _context.INFORMACIONACADEMICA_OFICIOS.Add(_entity);
+                       await _context.SaveChangesAsync();
+
+                        // se reedirecciona
+                        return RedirectToAction("Oficios", "Configuraciones");
+                    }catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.StackTrace);
+                    }
+                }
+            }
+            return View(_model);
+        }
+
+        // edición de oficio
+        // GET
+        public async Task<ActionResult> EditarOficio(int? ID)
+        {
+            // bad request, por parámetro 0 o null
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // get entity
+            var _entity = await _context.INFORMACIONACADEMICA_OFICIOS.FindAsync(ID);
+
+            //comprobar la existencia de la petición por restulato no null
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // SET model
+            var _model = new INFORMACIONACADEMICA_OFICIOSMODEL
+            {
+                ID = _entity.ID,
+                NOMBREOFICIO = _entity.NOMBREOFICIO,
+                DESCRIPCIONOFICIO = _entity.DESCRIPCIONOFICIO
+
+            };
+
+            //to view
+            return View(_model);
+        }
+
+        
+
+        // POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarOficio(INFORMACIONACADEMICA_OFICIOSMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+                // validar que ni existe el nombre
+                if (_context.INFORMACIONACADEMICA_OFICIOS.FirstOrDefault(o => o.NOMBREOFICIO == _model.NOMBREOFICIO && o.ID != _model.ID) != null)
+                {
+                    ModelState.AddModelError("", "Este nombre ya ha sido asignado a otro registro, por favor ingreso otro y vuelva a intentar");
+                    return View(_model);
+                }
+                else
+                {
+                    try
+                    {
+                        // set entity
+                        var _entity = new INFORMACIONACADEMICA_OFICIOS();
+                        _entity = await _context.INFORMACIONACADEMICA_OFICIOS.FindAsync(_model.ID);
+
+                            _entity.NOMBREOFICIO = _model.NOMBREOFICIO;
+                            _entity.DESCRIPCIONOFICIO = _model.DESCRIPCIONOFICIO;
+
+                       
+
+                        // se actualiza el registro
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // se reedirecciona
+                        return RedirectToAction("Oficios", "Configuraciones");
                     }
                     catch (Exception ex)
                     {
