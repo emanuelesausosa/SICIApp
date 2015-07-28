@@ -185,6 +185,7 @@
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SolicitudIngresoController.cs" />
     <Compile Include="Dominio\EmailSender.cs" />
     <Compile Include="Entities\APARATOSSISTEMAS.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
@@ -1135,6 +1136,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\SolicitudIngreso\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
