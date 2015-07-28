@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SICIApp.Models.TIPOSDOCUMENTOMODEL>
+
+@{
+    ViewBag.Title = "Tipos Documentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Tipos Documentos</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Configuraciones","Index")
+            </li>
+            <li class="active">
+                <strong>TIPOS DOCUMENTO</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista de TIPOS DOCUMENTO</h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Crear Nuevo", "NuevoTipoDucumento", null, new { @class = "btn btn-primary btn-xs" })
+					</div>
+                </div>
+                <div class="ibox-content">
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRETIPO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRETIPO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION)
+        </td>
+        <td>
+			@Html.ActionLink("Detalles", "DetalleTipoDocumento", new { ID=item.ID }, new { @class = "btn btn-primary btn-sm"})
+            @Html.ActionLink("Editar", "EditarTipoDocumento", new { ID=item.ID }, new { @class = "btn btn-white btn-sm"})            
+        </td>
+    </tr>
+}
+
+</table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+

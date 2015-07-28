@@ -1,0 +1,96 @@
+﻿@model SICIApp.Models.EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL
+
+@{
+    ViewBag.Title = "Nuevo Contenido Examen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Nuevo Contenido Examen</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "ContenidosExamenes")
+            </li>
+            <li class="active">
+                <strong>Nuevo Contenido Examen</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Lista", "ContenidosExamenes", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Nuevo Contenido Examen</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DETALLE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DETALLE)
+                @Html.ValidationMessageFor(model => model.DETALLE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VALORACION, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VALORACION)
+                @Html.ValidationMessageFor(model => model.VALORACION)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DESCRIPCION, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DESCRIPCION)
+                @Html.ValidationMessageFor(model => model.DESCRIPCION)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDEXAMEN, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("IDEXAMEN", null, new  {@class="form-control" })
+                @Html.ValidationMessageFor(model => model.IDEXAMEN)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "ContenidosExamenes", null, new { @class = "btn btn-white" })
+            </div>
+        </div>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ 
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -468,7 +468,7 @@ namespace SICIApp.Controllers
                 }
             }catch(DbUpdateConcurrencyException ex)
             {
-
+                Console.WriteLine(ex.StackTrace);
             }catch(RetryLimitExceededException /*dex*/)
             {
 
@@ -638,7 +638,7 @@ namespace SICIApp.Controllers
         }
         #endregion
 
-        // seccion de mantenimiento  de tipo documento -- YA
+        // seccion de mantenimiento  de tipo documento -- YA --sp map -- view created -- modif y probada
         #region Acciones Mant, tipos Documentos
         
         // todos los tipos de documentos
@@ -819,7 +819,7 @@ namespace SICIApp.Controllers
 
         #endregion
 
-        // seccion de mantenimiento de causas egreso -- YA
+        // seccion de mantenimiento de causas egreso -- YA -- sp map -- view created -- modif y probada
         #region Acciones de mant. Causas egreso
         // todas las tipos causas egreso
         public async  Task<ActionResult> CausasEgreso()
@@ -996,7 +996,7 @@ namespace SICIApp.Controllers
 
         #endregion
 
-        //mantenimiento datos problemas drogas -- ya
+        //mantenimiento datos problemas drogas -- ya -- sp map -- view created -- modif y probada **
         #region Acciones tipos drogas
         // Todos los tipos drogas
 
@@ -1149,7 +1149,7 @@ namespace SICIApp.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EdicionTipoDroga(DATOSPROBLEMADROGAS_DROGASMODEL _model)
+        public async Task<ActionResult> EdicionTiposDrogas(DATOSPROBLEMADROGAS_DROGASMODEL _model)
         {
             if (ModelState.IsValid)
             {
@@ -1192,7 +1192,7 @@ namespace SICIApp.Controllers
         } 
         #endregion
 
-        // manteniniento de exámenes psicimpetricos -- YA
+        // manteniniento de exámenes psicimpetricos -- YA -- sp map --view created -- modif y probada *** subir archivo
         #region Acciones mant. de Exámenes psicimétricos
 
         // todos los exámenes
@@ -1377,7 +1377,7 @@ namespace SICIApp.Controllers
         }
         #endregion
 
-        // acciones de mantenimiento de examen ps metrico - contenido --YA
+        // acciones de mantenimiento de examen ps metrico - contenido --YA -- sp map ---- view created -- modif y probada
         #region Acciones de Mant. De Exámenes ps-métricos - contenido
         // todos los contenidos
         public async Task<ActionResult> ContenidosExamenes()
@@ -1443,7 +1443,7 @@ namespace SICIApp.Controllers
         {
             // get model
             var _model = new EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL();
-            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO");
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMEN, "IDEXAMEN", "TITULO");
             return View(_model);
         }
 
@@ -1476,7 +1476,7 @@ namespace SICIApp.Controllers
                 }
             }
 
-            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMEN, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
             return View(_model);
         }
 
@@ -1511,6 +1511,7 @@ namespace SICIApp.Controllers
             };
 
             //model to view
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMEN, "IDEXAMEN", "TITULO");
             return View(_model);
         }
 
@@ -1536,7 +1537,7 @@ namespace SICIApp.Controllers
                         _entity.VALORACION = _model.VALORACION;
 
                     // actualizar cambios
-                    _context.EXAMENPSICOMETRICO_EXAMENCONTENIDO.Add(_entity);
+                    _context.Entry(_entity).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
 
                     // redireccionar
@@ -1548,12 +1549,12 @@ namespace SICIApp.Controllers
                 }
             }
 
-            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMENCONTENIDO, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
+            ViewBag.IDEXAMEN = new SelectList(_context.EXAMENPSICOMETRICO_EXAMEN, "IDEXAMEN", "TITULO", _model.IDEXAMEN);
             return View(_model);
         }
         #endregion
 
-        // acciones para mantenimeiento de enfermendades -- YA
+        // acciones para mantenimeiento de enfermendades -- YA -- sp map -- view created -- modif y probada *** subir archivo
         #region Acciones mant. de enfermades
         // Todas las enfermedades
         public async Task<ActionResult> Enfermedades()
@@ -1727,7 +1728,7 @@ namespace SICIApp.Controllers
         }
         #endregion
 
-        // acciones para manteniemnto de escolaridad  --YA
+        // acciones para manteniemnto de escolaridad  --YA -- sp map -- view created -- modif y probada
         #region Acciones de mant. para Escolaridades
         // todoad las escolaridades
         public async Task<ActionResult> Escolaridades()
@@ -1775,7 +1776,7 @@ namespace SICIApp.Controllers
             }
 
             // get model and set model
-            var _model = new INFORMACIONACADEMICA_ESCOLARIDAD
+            var _model = new INFORMACIONACADEMICA_ESCOLARIDADMODEL
             {
                 ID = _entity.ID,
                 DESCRIPCIONESCOLARIDAD = _entity.DESCRIPCIONESCOLARIDAD,
@@ -1864,7 +1865,7 @@ namespace SICIApp.Controllers
             }
 
             // get model and set model
-            var _model = new INFORMACIONACADEMICA_ESCOLARIDAD
+            var _model = new INFORMACIONACADEMICA_ESCOLARIDADMODEL
             {
                 ID = _entity.ID,
                 DESCRIPCIONESCOLARIDAD = _entity.DESCRIPCIONESCOLARIDAD,
@@ -1898,7 +1899,7 @@ namespace SICIApp.Controllers
 
                         // set entity
                         var _entity = new INFORMACIONACADEMICA_ESCOLARIDAD();
-                        _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.FindAsync(_model);
+                        _entity = await _context.INFORMACIONACADEMICA_ESCOLARIDAD.FindAsync(_model.ID);
 
                         _entity.NOMBREESCOLARIDAD = _model.NOMBREESCOLARIDAD;
                         _entity.DESCRIPCIONESCOLARIDAD = _model.DESCRIPCIONESCOLARIDAD;
@@ -1921,7 +1922,7 @@ namespace SICIApp.Controllers
         } 
         #endregion
 
-        //aaciones para mant,  de oficios --YA
+        //aciones para mant,  de oficios --YA -- sp map ---- view created -- modif y probada
         #region Acciones para mant. de Oficios
 
         // todos los oficios 
@@ -1979,7 +1980,7 @@ namespace SICIApp.Controllers
 
         // nuevo Oficio
         // GET
-        public ActionResult Action()
+        public ActionResult NuevoOficio()
         {
             // get model
             var _model = new INFORMACIONACADEMICA_OFICIOSMODEL();
@@ -2102,5 +2103,16 @@ namespace SICIApp.Controllers
             return View(_model);
         }
         #endregion
+
+
+        // dispose data base context
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing)
+            {
+                _context.Dispose(); 
+            }
+            base.Dispose(disposing);
+        }
     }
 }

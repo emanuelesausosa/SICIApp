@@ -353,6 +353,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Configuraciones.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IngresoModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Logger.cs" />
@@ -1099,6 +1100,38 @@
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Configuraciones\TiposDocumentos.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleTipoDocumento.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoTipoDucumento.cshtml" />
+    <Content Include="Views\Configuraciones\EditarTipoDocumento.cshtml" />
+    <Content Include="Views\Configuraciones\CausasEgreso.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCausaEgreso.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaCausaEgreso.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCausaEgreso.cshtml" />
+    <Content Include="Views\Configuraciones\TiposDrogas.cshtml" />
+    <Content Include="Views\Configuraciones\DetallesTiposDrogas.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoTipoDroga.cshtml" />
+    <Content Include="Views\Configuraciones\EdicionTiposDrogas.cshtml" />
+    <Content Include="Views\Configuraciones\TiposExamenesPSmetricos.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleExamenPsmetrico.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoExamenPSmetrico.cshtml" />
+    <Content Include="Views\Configuraciones\EditarExamenPsmetrico.cshtml" />
+    <Content Include="Views\Configuraciones\ContenidosExamenes.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleContenidoExamen.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoContenidoExamen.cshtml" />
+    <Content Include="Views\Configuraciones\EditarContenidoExamen.cshtml" />
+    <Content Include="Views\Configuraciones\Enfermedades.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleEnfermedad.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaEnfermedad.cshtml" />
+    <Content Include="Views\Configuraciones\EditarEnfermedad.cshtml" />
+    <Content Include="Views\Configuraciones\Escolaridades.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleEscolaridad.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaEscolaridad.cshtml" />
+    <Content Include="Views\Configuraciones\EditarEscolaridad.cshtml" />
+    <Content Include="Views\Configuraciones\Oficios.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleOficio.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoOficio.cshtml" />
+    <Content Include="Views\Configuraciones\EditarOficio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

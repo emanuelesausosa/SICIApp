@@ -1,0 +1,91 @@
+﻿@model SICIApp.Models.EXAMENPSICOMETRICO_EXAMENCONTENIDOMODEL
+
+@{
+    ViewBag.Title = "Detalle Contenido Examen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Detalle Contenido Examen</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "ContenidosExamenes")
+            </li>
+            <li class="active">
+                <strong>Detalle Contenido Examen</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalle Contenido Examen</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VALORACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALORACION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDEXAMEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDEXAMEN)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "EditarContenidoExamen", new { ID = Model.IDPREGUNTA }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Todos", "ContenidosExamenes", null, new { @class = "btn btn-white" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

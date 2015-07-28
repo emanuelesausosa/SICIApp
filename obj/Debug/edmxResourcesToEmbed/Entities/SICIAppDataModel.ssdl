@@ -1098,11 +1098,24 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
   <Function Name="spInsertNewCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="nvarchar" Mode="In" />
     <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
     <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCondicionFisicaEnfermedad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+    <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
   <Function Name="spInsertNewDatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1123,6 +1136,17 @@
     <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
     <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
   </Function>
+  <Function Name="spInsertNewExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DETALLE" Type="varchar" Mode="In" />
+    <Parameter Name="VALORACION" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewExamenPsicometrico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TITULO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="ARCHIVOFISOCO" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="spInsertNewFichaPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NUMEROIDENTIDAD" Type="varchar" Mode="In" />
     <Parameter Name="NUMEROPASAPORTE" Type="varchar" Mode="In" />
@@ -1132,8 +1156,41 @@
     <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
     <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="spInsertNewInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
   <Function Name="spInsertNewTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertTiposDrogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+    <Parameter Name="NOMBRECOMUN" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpadteExamenPsicometrico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
+    <Parameter Name="TITULO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="ARCHIVOFISOCO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spUpdateAparatoSistema_Sistemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
   <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1141,6 +1198,19 @@
     <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
     <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCondicionFisicaEnfermedad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+    <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDPREGUNTA" Type="int" Mode="In" />
+    <Parameter Name="DETALLE" Type="varchar" Mode="In" />
+    <Parameter Name="VALORACION" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+    <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
   </Function>
   <Function Name="spUpdateFicha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -1151,6 +1221,16 @@
     <Parameter Name="PRIMERAPELLIDO" Type="varchar" Mode="In" />
     <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
     <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="spUpdateInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
   </Function>
   <Function Name="spUpdateSICIPERSONADatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1171,9 +1251,20 @@
     <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
     <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
   </Function>
+  <Function Name="spUpdateTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
   <Function Name="spUpdateTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTiposDrogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+    <Parameter Name="NOMBRECOMUN" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
   <EntityContainer Name="SICIBD2ModelStoreContainer">

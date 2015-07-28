@@ -1103,11 +1103,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
         <Function Name="spInsertNewCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="nvarchar" Mode="In" />
           <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
           <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewCondicionFisicaEnfermedad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+          <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
         </Function>
         <Function Name="spInsertNewDatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1128,6 +1141,17 @@
           <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
           <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
         </Function>
+        <Function Name="spInsertNewExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DETALLE" Type="varchar" Mode="In" />
+          <Parameter Name="VALORACION" Type="int" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+          <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewExamenPsicometrico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TITULO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+          <Parameter Name="ARCHIVOFISOCO" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spInsertNewFichaPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NUMEROIDENTIDAD" Type="varchar" Mode="In" />
           <Parameter Name="NUMEROPASAPORTE" Type="varchar" Mode="In" />
@@ -1137,8 +1161,41 @@
           <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
           <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="spInsertNewInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
         <Function Name="spInsertNewTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spInsertTiposDrogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+          <Parameter Name="NOMBRECOMUN" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spUpadteExamenPsicometrico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
+          <Parameter Name="TITULO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+          <Parameter Name="ARCHIVOFISOCO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateAparatoSistema_Sistemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spUpdateCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
         </Function>
         <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1146,6 +1203,19 @@
           <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
           <Parameter Name="IDCIUDADOPERACION" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spUpdateCondicionFisicaEnfermedad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+          <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spUpdateExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDPREGUNTA" Type="int" Mode="In" />
+          <Parameter Name="DETALLE" Type="varchar" Mode="In" />
+          <Parameter Name="VALORACION" Type="int" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+          <Parameter Name="IDEXAMEN" Type="int" Mode="In" />
         </Function>
         <Function Name="spUpdateFicha" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -1156,6 +1226,16 @@
           <Parameter Name="PRIMERAPELLIDO" Type="varchar" Mode="In" />
           <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
           <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spUpdateInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spUpdateOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
         </Function>
         <Function Name="spUpdateSICIPERSONADatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1176,9 +1256,20 @@
           <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
           <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
         </Function>
+        <Function Name="spUpdateTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
         <Function Name="spUpdateTipoEvaluacionMedica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="CATEGORIA" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spUpdateTiposDrogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
+          <Parameter Name="NOMBRECOMUN" Type="varchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
         </Function>
         <EntityContainer Name="SICIBD2ModelStoreContainer">
@@ -3112,6 +3203,21 @@
                 <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewExamenPsicometrico">
+                  <ScalarProperty Name="ARCHIVOFISOCO" ParameterName="ARCHIVOFISOCO" />
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="TITULO" ParameterName="TITULO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpadteExamenPsicometrico">
+                  <ScalarProperty Name="ARCHIVOFISOCO" ParameterName="ARCHIVOFISOCO" Version="Current" />
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="TITULO" ParameterName="TITULO" Version="Current" />
+                  <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
             <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO">
@@ -3122,6 +3228,23 @@
                 <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
                 <ScalarProperty Name="IDPREGUNTA" ColumnName="IDPREGUNTA" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewExamenContenido">
+                  <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" />
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="VALORACION" ParameterName="VALORACION" />
+                  <ScalarProperty Name="DETALLE" ParameterName="DETALLE" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateExamenContenido">
+                  <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" Version="Current" />
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="VALORACION" ParameterName="VALORACION" Version="Current" />
+                  <ScalarProperty Name="DETALLE" ParameterName="DETALLE" Version="Current" />
+                  <ScalarProperty Name="IDPREGUNTA" ParameterName="IDPREGUNTA" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
@@ -3178,6 +3301,19 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESO">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCausasEgreso">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCausasEgreso">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CAUSASEGRESOINTERNO">
             <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESOINTERNO">
@@ -3197,6 +3333,21 @@
                 <ScalarProperty Name="NOMBRECIENTIFICO" ColumnName="NOMBRECIENTIFICO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCondicionFisicaEnfermedad">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="NOMBRESINOMIMO" ParameterName="NOMBRESINOMIMO" />
+                  <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCondicionFisicaEnfermedad">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="NOMBRESINOMIMO" ParameterName="NOMBRESINOMIMO" Version="Current" />
+                  <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CONDICIONFISICA_INGRESO">
@@ -3267,6 +3418,21 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertTiposDrogas">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="NOMBRECOMUN" ParameterName="NOMBRECOMUN" />
+                  <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTiposDrogas">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="NOMBRECOMUN" ParameterName="NOMBRECOMUN" Version="Current" />
+                  <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INFORMACIONACADEMICA_ESCOLARIDAD">
             <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD">
@@ -3275,6 +3441,19 @@
                 <ScalarProperty Name="NOMBREESCOLARIDAD" ColumnName="NOMBREESCOLARIDAD" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewInfoAcadmEsacolaridad">
+                  <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ParameterName="DESCRIPCIONESCOLARIDAD" />
+                  <ScalarProperty Name="NOMBREESCOLARIDAD" ParameterName="NOMBREESCOLARIDAD" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateInfoAcadmEsacolaridad">
+                  <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ParameterName="DESCRIPCIONESCOLARIDAD" Version="Current" />
+                  <ScalarProperty Name="NOMBREESCOLARIDAD" ParameterName="NOMBREESCOLARIDAD" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOS">
@@ -3311,6 +3490,19 @@
                 <ScalarProperty Name="NOMBREOFICIO" ColumnName="NOMBREOFICIO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewOficio">
+                  <ScalarProperty Name="DESCRIPCIONOFICIO" ParameterName="DESCRIPCIONOFICIO" />
+                  <ScalarProperty Name="NOMBREOFICIO" ParameterName="NOMBREOFICIO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateOficio">
+                  <ScalarProperty Name="DESCRIPCIONOFICIO" ParameterName="DESCRIPCIONOFICIO" Version="Current" />
+                  <ScalarProperty Name="NOMBREOFICIO" ParameterName="NOMBREOFICIO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INGRESO">
@@ -3398,6 +3590,19 @@
                 <ScalarProperty Name="NOMBRETIPO" ColumnName="NOMBRETIPO" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SICIBD2Model.TIPOSDOCUMENTO">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoDocumento">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+                  <ScalarProperty Name="NOMBRETIPO" ParameterName="NOMBRETIPO" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoDocumento">
+                  <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+                  <ScalarProperty Name="NOMBRETIPO" ParameterName="NOMBRETIPO" Version="Current" />
+                  <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CENTRODESARROLLOINGRESO">

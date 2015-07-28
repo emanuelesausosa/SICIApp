@@ -44,6 +44,7 @@ namespace SICIApp.Dominio
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 return EnviarEmailCreateStatus.ErrorGeneral;
             }
         }
