@@ -1,0 +1,243 @@
+﻿
+@{
+    ViewBag.Title = "Nueva Solicitud";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Nueva Solicitud</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "SolicitudIngreso")">Solicitudes de Ingreso</a>
+            </li>
+            <li class="active">
+                <strong>Nueva Solicitud</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" >
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Nueva Solicitud de Ingreso</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="#">Config option 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <h2>Solicitud de Nuevo Ingreso</h2>
+                    <p>Ingrese aquí los datos iniciales a el proceso de solicitud de ingreso a pacientes</p>
+                    <form id="form" action="#" class="wizard-big">
+                        <h1>Ficha</h1>
+                        <fieldset>
+                           <div class="row">
+                               <div class="col-lg-6">
+                                   <div class="form-group">
+                                       <label>Número de Identidad</label>
+                                       <input id="NUMEROIDENTIDAD" name="NUMEROIDENTIDAD" type="text" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Numero de Pasaporte</label>
+                                       <input id="f-pass" name="numPasaporte" type="text" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Primer nombre</label>
+                                       <input id="f-pnombre" name="primerNombre" type="text" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Segundo Nombre</label>
+                                       <input id="f-snombre" name="segundoNombre" type="text" class="form-control" />
+                                   </div>
+                               </div>
+                               <div class="col-lg-6">
+                                   <div class="form-group">
+                                       <label>Primer Apellido</label>
+                                       <input id="f-papellido" name="primerApellido" type="text" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Segundo Apellido</label>
+                                       <input id="f-sapellido" name="segundoApellido" type="text" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label>Nacionalidad</label>
+                                       <input id="f-nac" name="nacionalidad" type="text" class="form-control" />
+                                   </div>
+                               </div>
+                           </div>
+                        </fieldset>
+                        <h1>Datos Personales</h1>
+                        <fieldset>
+                            
+                        </fieldset>
+
+                        <h1>Información Ingreso </h1>
+                        <fieldset>
+                            
+                        </fieldset>
+
+                        <h1>Documentos</h1>
+                        <fieldset>
+                            
+                        </fieldset>
+                        <h1>Centro Desarrollo Terapia</h1>
+                        <fieldset></fieldset>
+                    </form>
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/wizardStepsStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/wizardSteps")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/toastr")
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#wizard").steps();
+            $("#form").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    // post de ficha
+                    if(newIndex === 1)
+                    {
+                        //ajax
+                        var status = false;
+                            // data a guardar
+                            var _model = {
+                                numeroidentidad:$('#NUMEROIDENTIDAD').val(),
+                                numeropasaporte:$('#f-pass').val().trim(),
+                                primernombre:$('#f-pnombre').val().trim(),
+                                segundonombre:$('#f-snombre').val().trim(),
+                                primerapellido:$('#f-papellido').val().trim(),
+                                segundoapellido:$('#f-sapellido').val().trim(),
+                                nacionalidad:$('#f-nac').val()
+                            }
+
+                        // procesando...
+                            toastr.info('Procesando','se ha procesado la solicitud');
+                            $.ajax({
+                                url: '/SolicitudIngreso/NuevaFicha',
+                                type: 'post',                                
+                                contentType: 'application/json; charset=utf-8',
+                                datatype: 'json',
+                                data: JSON.stringify(_model),
+                                success: function (data)
+                                {
+                                    //toastr.success('Éxito', 'Se ha guardado el registro con éxito');
+                                    if (data.success == true)
+                                    {
+                                        status = true;
+                                        toastr.success('Éxito', 'Se ha guardado el registro con éxito');
+                                        return true;
+                                    }
+                                    else{
+                                        toastr.error('Error', 'no se ha guardado el registro');
+                                        return false;
+                                    }
+                                },
+                                async: true,
+                                processData: false
+                                
+                            });
+
+                        //return status;
+                    }
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18) {
+                        return false;
+                    }
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3) {
+                        $(this).steps("previous");
+                    }
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+
+        });
+    </script>
+}

@@ -48,15 +48,47 @@ namespace SICIApp.Controllers
 
         //Acciones de Solicitudes -- flow 1
         #region Acciones de Solicitudes, Flow 1 - primer paso
-        public async Task<ActionResult> Solicitudes()
-        {
-            return View();
-        } 
+        //public async Task<ActionResult> Solicitudes()
+        //{
+        //    return View();
+        //} 
 
         // Nueva Solicitud
         public ActionResult NuevaSolicitud()
         {
             return View();
+        }
+
+        //ajax actions
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> NuevaFicha(FICHAMODEL _model)
+        {
+            //simulación conexión lenta
+            Thread.Sleep(2000);
+
+            string error = "";
+            if(_context.FICHA.FirstOrDefault(f=>f.NUMEROIDENTIDAD == _model.NUMEROIDENTIDAD) != null)
+            {
+                // set entity
+                var _entity = new FICHA { 
+                     NUMEROIDENTIDAD = _model.NUMEROIDENTIDAD,
+                     NUMEROPASAPORTE = _model.NUMEROPASAPORTE,
+                     PRIMERNOMBRE = _model.PRIMERAPELLIDO,
+                     SEGUNDONOMBRE = _model.SEGUNDONOMBRE,
+                     PRIMERAPELLIDO = _model.PRIMERAPELLIDO,
+                     SEGUNDOAPELLIDO = _model.SEGUNDOAPELLIDO,
+                     NACIONALIDAD = _model.NACIONALIDAD
+                };
+
+                // guardar el registro
+                _context.FICHA.Add(_entity);
+                await _context.SaveChangesAsync();
+
+                return Json("'Success':'true'", JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(String.Format("'Success':'false', 'Error':'{0}'"),error,  JsonRequestBehavior.AllowGet);
         }
         #endregion
 

@@ -1133,10 +1133,11 @@
     <Content Include="Views\Configuraciones\DetalleOficio.cshtml" />
     <Content Include="Views\Configuraciones\NuevoOficio.cshtml" />
     <Content Include="Views\Configuraciones\EditarOficio.cshtml" />
+    <Content Include="Views\SolicitudIngreso\NuevaSolicitud.cshtml" />
+    <Content Include="Views\SolicitudIngreso\_NuevaFicha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\SolicitudIngreso\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
