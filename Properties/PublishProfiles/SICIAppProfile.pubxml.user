@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOLne36d4BkySwIKqsl1W4AAAAAACAAAAAAADZgAAwAAAABAAAAByCxcCrU5oJ9e7fH2gdWKzAAAAAASAAACgAAAAEAAAAOFyaj/Xe7Mz1e2KNCPyUh8gAAAAdeYtaz3LomPtN2AV5JdY9SsSmYwWBtu0Vjn9m84xeYcUAAAAE3pjQgsVpaigdTs1SrnhiPsWjwM=</EncryptedPassword>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAdFJDOwF8IkGeWZgR+qxBHAAAAAACAAAAAAAQZgAAAAEAACAAAAAY4XQPVAG1c3PLsso30uh6+NJxepZZ+iA0HYbU6Ke4HgAAAAAOgAAAAAIAACAAAADDaqAZr1B567nvpylPV01Zhg/24gTH3J9L+aGTsO1FoyAAAABmq5ELclIgNJlzGs5OBaMbluv8ZysmJVQ3h8b83PyY9kAAAACMjD79L06pFYBWGITzEi20KnIdFh//42+wRobgZ73nJLlvsqCcnS0xCooRZ7abfSgUy1XCNOkvQDYL+jJYo3dn</EncryptedPassword>
     <_PublishTargetUrl>ftp://ftp.Smarterasp.net/root\home\emanuelsosa-001\www\site1</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>

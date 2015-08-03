@@ -582,6 +582,38 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewIngreso">
+            <ScalarProperty Name="STATUSFLOW" ParameterName="STATUSFLOW" />
+            <ScalarProperty Name="ACEPTADO" ParameterName="ACEPTADO" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" />
+            <ScalarProperty Name="CONTRATO" ParameterName="CONTRATO" />
+            <ScalarProperty Name="OBSERVACIONES" ParameterName="OBSERVACIONES" />
+            <ScalarProperty Name="FECHAINGRESOSISTEMA" ParameterName="FECHAINGRESOSISTEMA" />
+            <ScalarProperty Name="FECHAEGRESOPV" ParameterName="FECHAEGRESOPV" />
+            <ScalarProperty Name="FECHAREALINGRESOPV" ParameterName="FECHAREALINGRESOPV" />
+            <ScalarProperty Name="FECHAFIRMAACUERDO" ParameterName="FECHAFIRMAACUERDO" />
+            <ScalarProperty Name="FECHAUTORIZACION" ParameterName="FECHAUTORIZACION" />
+            <ScalarProperty Name="NUMEXPEDIENTE" ParameterName="NUMEXPEDIENTE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateIngreso">
+            <ScalarProperty Name="STATUSFLOW" ParameterName="STATUSFLOW" Version="Current" />
+            <ScalarProperty Name="ACEPTADO" ParameterName="ACEPTADO" Version="Current" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" Version="Current" />
+            <ScalarProperty Name="CONTRATO" ParameterName="CONTRATO" Version="Current" />
+            <ScalarProperty Name="OBSERVACIONES" ParameterName="OBSERVACIONES" Version="Current" />
+            <ScalarProperty Name="FECHAINGRESOSISTEMA" ParameterName="FECHAINGRESOSISTEMA" Version="Current" />
+            <ScalarProperty Name="FECHAEGRESOPV" ParameterName="FECHAEGRESOPV" Version="Current" />
+            <ScalarProperty Name="FECHAREALINGRESOPV" ParameterName="FECHAREALINGRESOPV" Version="Current" />
+            <ScalarProperty Name="FECHAFIRMAACUERDO" ParameterName="FECHAFIRMAACUERDO" Version="Current" />
+            <ScalarProperty Name="FECHAUTORIZACION" ParameterName="FECHAUTORIZACION" Version="Current" />
+            <ScalarProperty Name="NUMEXPEDIENTE" ParameterName="NUMEXPEDIENTE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MOTIVOSINGRESO">
       <EntityTypeMapping TypeName="SICIBD2Model.MOTIVOSINGRESO">
@@ -616,6 +648,48 @@
           <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALES1">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewDatosPersonales">
+            <ScalarProperty Name="IDPAISNACIONALIDAD" ParameterName="IDPAISNACIONALIDAD" />
+            <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ParameterName="IDCIUDADRESIDENCIAACTUAL" />
+            <ScalarProperty Name="IDCIUDADNATAL" ParameterName="IDCIUDADNATAL" />
+            <ScalarProperty Name="NUMEROHERMANOS" ParameterName="NUMEROHERMANOS" />
+            <ScalarProperty Name="CONQUIENVIVE" ParameterName="CONQUIENVIVE" />
+            <ScalarProperty Name="VIVECONPADRE" ParameterName="VIVECONPADRE" />
+            <ScalarProperty Name="NOMBREPADRE" ParameterName="NOMBREPADRE" />
+            <ScalarProperty Name="VIVECONMADRE" ParameterName="VIVECONMADRE" />
+            <ScalarProperty Name="NOMBREMADRE" ParameterName="NOMBREMADRE" />
+            <ScalarProperty Name="NUMERODEHIJOS" ParameterName="NUMERODEHIJOS" />
+            <ScalarProperty Name="ESTADOCIVIL" ParameterName="ESTADOCIVIL" />
+            <ScalarProperty Name="FECHANACIMIENTO" ParameterName="FECHANACIMIENTO" />
+            <ScalarProperty Name="LUGARNACIMIENTO" ParameterName="LUGARNACIMIENTO" />
+            <ScalarProperty Name="TELEFONOMOVIL" ParameterName="TELEFONOMOVIL" />
+            <ScalarProperty Name="TELEFONOFIJO" ParameterName="TELEFONOFIJO" />
+            <ScalarProperty Name="DIRECCIONDOMICILIO" ParameterName="DIRECCIONDOMICILIO" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateSICIPERSONADatosPersonales">
+            <ScalarProperty Name="IDPAISNACIONALIDAD" ParameterName="IDPAISNACIONALIDAD" Version="Current" />
+            <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ParameterName="IDCIUDADRESIDENCIAACTUAL" Version="Current" />
+            <ScalarProperty Name="IDCIUDADNATAL" ParameterName="IDCIUDADNATAL" Version="Current" />
+            <ScalarProperty Name="NUMEROHERMANOS" ParameterName="NUMEROHERMANOS" Version="Current" />
+            <ScalarProperty Name="CONQUIENVIVE" ParameterName="CONQUIENVIVE" Version="Current" />
+            <ScalarProperty Name="VIVECONPADRE" ParameterName="VIVECONPADRE" Version="Current" />
+            <ScalarProperty Name="NOMBREPADRE" ParameterName="NOMBREPADRE" Version="Current" />
+            <ScalarProperty Name="VIVECONMADRE" ParameterName="VIVECONMADRE" Version="Current" />
+            <ScalarProperty Name="NOMBREMADRE" ParameterName="NOMBREMADRE" Version="Current" />
+            <ScalarProperty Name="NUMERODEHIJOS" ParameterName="NUMERODEHIJOS" Version="Current" />
+            <ScalarProperty Name="ESTADOCIVIL" ParameterName="ESTADOCIVIL" Version="Current" />
+            <ScalarProperty Name="FECHANACIMIENTO" ParameterName="FECHANACIMIENTO" Version="Current" />
+            <ScalarProperty Name="LUGARNACIMIENTO" ParameterName="LUGARNACIMIENTO" Version="Current" />
+            <ScalarProperty Name="TELEFONOMOVIL" ParameterName="TELEFONOMOVIL" Version="Current" />
+            <ScalarProperty Name="TELEFONOFIJO" ParameterName="TELEFONOFIJO" Version="Current" />
+            <ScalarProperty Name="DIRECCIONDOMICILIO" ParameterName="DIRECCIONDOMICILIO" Version="Current" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FICHA">
       <EntityTypeMapping TypeName="SICIBD2Model.FICHA">
@@ -630,6 +704,30 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.FICHA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewFichaPersona">
+            <ScalarProperty Name="NACIONALIDAD" ParameterName="NACIONALIDAD" />
+            <ScalarProperty Name="SEGUNDOAPELLIDO" ParameterName="SEGUNDOAPELLIDO" />
+            <ScalarProperty Name="PRIMERAPELLIDO" ParameterName="PRIMERAPELLIDO" />
+            <ScalarProperty Name="SEGUNDONOMBRE" ParameterName="SEGUNDONOMBRE" />
+            <ScalarProperty Name="PRIMERNOMBRE" ParameterName="PRIMERNOMBRE" />
+            <ScalarProperty Name="NUMEROPASAPORTE" ParameterName="NUMEROPASAPORTE" />
+            <ScalarProperty Name="NUMEROIDENTIDAD" ParameterName="NUMEROIDENTIDAD" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateFicha">
+            <ScalarProperty Name="NACIONALIDAD" ParameterName="NACIONALIDAD" Version="Current" />
+            <ScalarProperty Name="SEGUNDOAPELLIDO" ParameterName="SEGUNDOAPELLIDO" Version="Current" />
+            <ScalarProperty Name="PRIMERAPELLIDO" ParameterName="PRIMERAPELLIDO" Version="Current" />
+            <ScalarProperty Name="SEGUNDONOMBRE" ParameterName="SEGUNDONOMBRE" Version="Current" />
+            <ScalarProperty Name="PRIMERNOMBRE" ParameterName="PRIMERNOMBRE" Version="Current" />
+            <ScalarProperty Name="NUMEROPASAPORTE" ParameterName="NUMEROPASAPORTE" Version="Current" />
+            <ScalarProperty Name="NUMEROIDENTIDAD" ParameterName="NUMEROIDENTIDAD" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DOCUMENTOSINGRESO">
       <EntityTypeMapping TypeName="SICIBD2Model.DOCUMENTOSINGRESO">
@@ -641,6 +739,25 @@
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DOCUMENTOSINGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewDocumentoIngreso">
+            <ScalarProperty Name="IDTIPODOCUMENTO" ParameterName="IDTIPODOCUMENTO" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+            <ScalarProperty Name="FECHACARGADO" ParameterName="FECHACARGADO" />
+            <ScalarProperty Name="RUTA" ParameterName="RUTA" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateDocumentosIngreso">
+            <ScalarProperty Name="IDTIPODOCUMENTO" ParameterName="IDTIPODOCUMENTO" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+            <ScalarProperty Name="FECHACARGADO" ParameterName="FECHACARGADO" Version="Current" />
+            <ScalarProperty Name="RUTA" ParameterName="RUTA" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TIPOSDOCUMENTO">
@@ -675,6 +792,25 @@
           <ScalarProperty Name="FECHATRASLADO" ColumnName="FECHATRASLADO" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTRODESARROLLOINGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCentroDIngreso">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+            <ScalarProperty Name="IDCENTROTERAPEUTICO" ParameterName="IDCENTROTERAPEUTICO" />
+            <ScalarProperty Name="FECHAREGISTRO" ParameterName="FECHAREGISTRO" />
+            <ScalarProperty Name="ACTIVO" ParameterName="ACTIVO" />
+            <ScalarProperty Name="FECHATRASLADO" ParameterName="FECHATRASLADO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCentroDIngreso">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+            <ScalarProperty Name="IDCENTROTERAPEUTICO" ParameterName="IDCENTROTERAPEUTICO" Version="Current" />
+            <ScalarProperty Name="FECHAREGISTRO" ParameterName="FECHAREGISTRO" Version="Current" />
+            <ScalarProperty Name="ACTIVO" ParameterName="ACTIVO" Version="Current" />
+            <ScalarProperty Name="FECHATRASLADO" ParameterName="FECHATRASLADO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
   </EntityContainerMapping>

@@ -4,6 +4,38 @@
     ViewBag.Title = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SICI | 500 Error</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>500</h1>
+        <h3 class="font-bold">Internal Server Error</h3>
+
+        <div class="error-desc">
+            El servidor encontró algo inesperado que no deje que complete la solicitud. Nos disculpamos.<br />
+            Puedes volver a la página principal: <br /><a href="@Url.Action("Index", "Home")" class="btn btn-primary m-t">Dashboard</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
 

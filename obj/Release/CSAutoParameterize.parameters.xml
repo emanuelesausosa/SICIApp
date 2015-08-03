@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IdentityContextDB-Web.config Connection String" description="IdentityContextDB Connection String used in web.config by the application to access the database." defaultValue="Data Source=EMANUEL-PC;Initial Catalog=SICIBD2;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='IdentityContextDB']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\SICI\\SICIAPP\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='IdentityContextDB']/@connectionString" />
   </parameter>
-  <parameter name="SICIBD2Entities-Web.config Connection String" description="SICIBD2Entities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DAL.SICIApp.csdl|res://*/DAL.SICIApp.ssdl|res://*/DAL.SICIApp.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EMANUEL-PC;initial catalog=SICIBD2;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\SICIAPP\\SICIApp\\SICIApp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SICIBD2Entities']/@connectionString" />
+  <parameter name="SICIBD2Entities1-Web.config Connection String" description="SICIBD2Entities1 Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Entities.SICIAppDataModel.csdl|res://*/Entities.SICIAppDataModel.ssdl|res://*/Entities.SICIAppDataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EMANUEL-PC;Initial Catalog=SICIBD2;Integrated Security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\SICI\\SICIAPP\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='SICIBD2Entities1']/@connectionString" />
   </parameter>
 </parameters>

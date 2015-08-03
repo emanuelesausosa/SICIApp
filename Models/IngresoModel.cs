@@ -25,7 +25,7 @@ namespace SICIApp.Models
 
             //[Required]
             [Display(Name="NÚMERO DE IDENTIDAD")]
-            [StringLength(11)]
+            [StringLength(15)]
             public string NUMEROIDENTIDAD { get; set; }
 
             //[Required]
@@ -76,6 +76,7 @@ namespace SICIApp.Models
             [Display(Name = "TELEFONO MÓVIL")]
             public string TELEFONOMOVIL { get; set; }
 
+            [Required]
             [Display(Name = "FECHA NACIMIENTO")]
             [DataType(DataType.Date)]
             public Nullable<System.DateTime> FECHANACIMIENTO { get; set; }
@@ -97,7 +98,7 @@ namespace SICIApp.Models
             public string NOMBREPADRE { get; set; }
 
             [Display(Name = "VIVE PADRE?")]
-            public Nullable<bool> VIVECONPADRE { get; set; }
+            public bool VIVECONPADRE { get; set; }
 
             [Display(Name = "CON QUIÉN VIVE?")]
             [StringLength(50)]
@@ -124,6 +125,9 @@ namespace SICIApp.Models
             public virtual CITY CITY1 { get; set; }
             public virtual COUNTRY COUNTRY { get; set; }
             public virtual FICHA FICHA { get; set; }
+
+            // SET DE PAÍSES
+            public virtual IEnumerable<COUNTRY> PAISES { get; set; }
         }
 
 
@@ -167,7 +171,7 @@ namespace SICIApp.Models
             public Nullable<System.DateTime> FECHAEGRESOPV { get; set; }
 
             // FECHA SISTEMA
-            //public Nullable<System.DateTime> FECHAINGRESOSISTEMA { get; set; }
+            public Nullable<System.DateTime> FECHAINGRESOSISTEMA { get; set; }
             [Display(Name = "OBSERVACIONES")]
             public string OBSERVACIONES { get; set; }
 
@@ -182,6 +186,10 @@ namespace SICIApp.Models
 
             [HiddenInput(DisplayValue = false)]
             public Nullable<int> STATUSFLOW { get; set; }
+
+            [Required]
+            [Display(Name="CENTRO TERAPEUTICO")]
+            public string IDCRENTROTERAPEUTICO { get; set; }
 
             public virtual ICollection<APARATOSSISTEMAS> APARATOSSISTEMAS { get; set; }
             public virtual ICollection<EVALUACIONMEDICADETALLE> EVALUACIONMEDICADETALLE { get; set; }
@@ -210,7 +218,8 @@ namespace SICIApp.Models
         //4. INGRESOINTERNO.DOCUMENTOS, esta enity, se encarga de relacionar los documentos que se presentan al momento de solicitar el ingreso
         public partial class DOCUMENTOSINGRESOVIEWMODEL
         {
-            public virtual IEnumerable<DOCUMENTOSINGRESO> DOCUMENTOSINGRESOVIEWM { get; set; }
+            public virtual INGRESO INGRESO { get; set; }
+            public virtual IEnumerable<TIPOSDOCUMENTO> TIPOSDOCUMENTOSINGRESOVIEWM { get; set; }
         }
 
         //5. INGRESOINTSERNO.CENTRODESAROLLOINGRESO, esta entity se relaciona al centro de desarrollo de la terapia de rehabilitación

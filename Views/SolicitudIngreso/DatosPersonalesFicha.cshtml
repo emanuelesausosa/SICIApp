@@ -1,0 +1,274 @@
+﻿@model SICIApp.Models.DATOSPERSONALESFICHAMODEL
+
+@{
+    ViewBag.Title = "Datos Personales Ficha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Datos Personales </h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "Index")
+            </li>
+            <li class="active">
+                <strong>Datos Personales Ficha</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Todas", "Solicitudes", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Datos Personales Ficha</h5>
+                </div>
+                <div class="ibox-content">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model=>model.FICHA.NUMEROIDENTIDAD)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FICHA.NUMEROIDENTIDAD)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model=>model.FICHA.NUMEROPASAPORTE)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FICHA.NUMEROPASAPORTE)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model=>model.FICHA.PRIMERNOMBRE)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FICHA.PRIMERNOMBRE)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model=>model.FICHA.PRIMERAPELLIDO)
+                        </dt>
+                        <dd>
+                            @Html.DisplayNameFor(model => model.FICHA.PRIMERAPELLIDO)
+                        </dd>
+                    </dl>
+                    <hr />
+				@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model=>model.FICHA.ID)
+        <div class="form-group">
+            @Html.LabelFor(model => model.DIRECCIONDOMICILIO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DIRECCIONDOMICILIO)
+                @Html.ValidationMessageFor(model => model.DIRECCIONDOMICILIO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TELEFONOFIJO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TELEFONOFIJO)
+                @Html.ValidationMessageFor(model => model.TELEFONOFIJO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TELEFONOMOVIL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TELEFONOMOVIL)
+                @Html.ValidationMessageFor(model => model.TELEFONOMOVIL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHANACIMIENTO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHANACIMIENTO)
+                @Html.ValidationMessageFor(model => model.FECHANACIMIENTO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ESTADOCIVIL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("ESTADOCIVIL", null, htmlAttributes: new { @class="control-form"})
+                @Html.ValidationMessageFor(model => model.ESTADOCIVIL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NUMERODEHIJOS, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NUMERODEHIJOS)
+                @Html.ValidationMessageFor(model => model.NUMERODEHIJOS)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NOMBREMADRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NOMBREMADRE)
+                @Html.ValidationMessageFor(model => model.NOMBREMADRE)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VIVECONMADRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VIVECONMADRE)
+                @Html.ValidationMessageFor(model => model.VIVECONMADRE)
+            </div>
+        </div>     
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NOMBREPADRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NOMBREPADRE)
+                @Html.ValidationMessageFor(model => model.NOMBREPADRE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VIVECONPADRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VIVECONPADRE)
+                @Html.ValidationMessageFor(model => model.VIVECONPADRE)
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CONQUIENVIVE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CONQUIENVIVE)
+                @Html.ValidationMessageFor(model => model.CONQUIENVIVE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NUMEROHERMANOS, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NUMEROHERMANOS)
+                @Html.ValidationMessageFor(model => model.NUMEROHERMANOS)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDPAISNACIONALIDAD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDPAISNACIONALIDAD, new SelectList(Model.PAISES, "CODE", "NAME"), "--SELECCIONE UNO--", htmlAttributes: new { @class="form-control chosen-select", style="width:350px;"})
+                @Html.ValidationMessageFor(model => model.IDPAISNACIONALIDAD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCIUDADNATAL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDCIUDADNATAL, Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class="form-control", style="width:350px;"})
+                @Html.ValidationMessageFor(model => model.IDCIUDADNATAL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDPAISRESIDENCIAACTUAL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDPAISRESIDENCIAACTUAL, new SelectList(Model.PAISES, "CODE", "NAME"), "--SELECCIONE UNO--", htmlAttributes: new { @class = "form-control chosen-select", style = "width:350px;" })
+                @Html.ValidationMessageFor(model => model.IDPAISRESIDENCIAACTUAL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IDCIUDADRESIDENCIAACTUAL, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.IDCIUDADRESIDENCIAACTUAL, Enumerable.Empty<SelectListItem>(), htmlAttributes: new { @class = "form-control", style = "width:350px;" })
+                @Html.ValidationMessageFor(model => model.IDCIUDADRESIDENCIAACTUAL)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar y siguiente" class="btn btn-primary" />
+				@*@Html.ActionLink("Cancelar", "", null, new { @class = "btn btn-white"})*@
+            </div>
+        </div>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ @section Styles {
+    @Styles.Render("~/plugins/awesomeCheckboxStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/chosen")
+
+    <script type="text/javascript">
+        $(function () {
+            $('#IDPAISNACIONALIDAD').change(function () {
+                var selecionDeptoId = $(this).val();
+                $.getJSON('@Url.Action("SeleccionCiudad")', { CODE: selecionDeptoId }, function (vCiudades) {
+                    var munisSeleccion = $('#IDCIUDADNATAL');
+                    munisSeleccion.empty();
+                    $.each(vCiudades, function (index, municipio) {
+                        munisSeleccion.append(
+                            $('<option/>')
+                                .attr('value', municipio.ID)
+                                .text(municipio.NAME)
+                        );
+                    });
+                });
+            });
+        });
+
+        $(function () {
+            $('#IDPAISRESIDENCIAACTUAL').change(function () {
+                var selecionDeptoId = $(this).val();
+                $.getJSON('@Url.Action("SeleccionCiudad")', { CODE: selecionDeptoId }, function (vCiudades) {
+                    var munisSeleccion = $('#IDCIUDADRESIDENCIAACTUAL');
+                    munisSeleccion.empty();
+                    $.each(vCiudades, function (index, municipio) {
+                        munisSeleccion.append(
+                            $('<option/>')
+                                .attr('value', municipio.ID)
+                                .text(municipio.NAME)
+                        );
+                    });
+                });
+            });
+        });
+
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    </script>
+}

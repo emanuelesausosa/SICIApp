@@ -1106,6 +1106,13 @@
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
+  <Function Name="spInsertNewCentroDIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FECHATRASLADO" Type="datetime" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="FECHAREGISTRO" Type="datetime" Mode="In" />
+    <Parameter Name="IDCENTROTERAPEUTICO" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+  </Function>
   <Function Name="spInsertNewCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="nvarchar" Mode="In" />
     <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
@@ -1136,6 +1143,13 @@
     <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
     <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
   </Function>
+  <Function Name="spInsertNewDocumentoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="RUTA" Type="varchar" Mode="In" />
+    <Parameter Name="FECHACARGADO" Type="datetime" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="IDTIPODOCUMENTO" Type="int" Mode="In" />
+  </Function>
   <Function Name="spInsertNewExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DETALLE" Type="varchar" Mode="In" />
     <Parameter Name="VALORACION" Type="int" Mode="In" />
@@ -1159,6 +1173,19 @@
   <Function Name="spInsertNewInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NUMEXPEDIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="FECHAUTORIZACION" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAFIRMAACUERDO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAREALINGRESOPV" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAEGRESOPV" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAINGRESOSISTEMA" Type="datetime" Mode="In" />
+    <Parameter Name="OBSERVACIONES" Type="text" Mode="In" />
+    <Parameter Name="CONTRATO" Type="varchar" Mode="In" />
+    <Parameter Name="IDPERSONA" Type="int" Mode="In" />
+    <Parameter Name="ACEPTADO" Type="bit" Mode="In" />
+    <Parameter Name="STATUSFLOW" Type="int" Mode="In" />
   </Function>
   <Function Name="spInsertNewOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
@@ -1193,6 +1220,14 @@
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
+  <Function Name="spUpdateCentroDIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="FECHATRASLADO" Type="datetime" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="FECHAREGISTRO" Type="datetime" Mode="In" />
+    <Parameter Name="IDCENTROTERAPEUTICO" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+  </Function>
   <Function Name="spUpdateCentroTerapeutico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="nvarchar" Mode="In" />
     <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
@@ -1204,6 +1239,14 @@
     <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateDocumentosIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="RUTA" Type="varchar" Mode="In" />
+    <Parameter Name="FECHACARGADO" Type="datetime" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="IDTIPODOCUMENTO" Type="int" Mode="In" />
   </Function>
   <Function Name="spUpdateExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPREGUNTA" Type="int" Mode="In" />
@@ -1226,6 +1269,20 @@
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NUMEXPEDIENTE" Type="varchar" Mode="In" />
+    <Parameter Name="FECHAUTORIZACION" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAFIRMAACUERDO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAREALINGRESOPV" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAEGRESOPV" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAINGRESOSISTEMA" Type="datetime" Mode="In" />
+    <Parameter Name="OBSERVACIONES" Type="text" Mode="In" />
+    <Parameter Name="CONTRATO" Type="varchar" Mode="In" />
+    <Parameter Name="IDPERSONA" Type="int" Mode="In" />
+    <Parameter Name="ACEPTADO" Type="bit" Mode="In" />
+    <Parameter Name="STATUSFLOW" Type="int" Mode="In" />
   </Function>
   <Function Name="spUpdateOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
