@@ -12,6 +12,8 @@ namespace SICIApp.Entities
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SICIBD2Entities1 : DbContext
     {
@@ -72,5 +74,18 @@ namespace SICIApp.Entities
         public virtual DbSet<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
         public virtual DbSet<TIPOSDOCUMENTO> TIPOSDOCUMENTO { get; set; }
         public virtual DbSet<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> spCrearProcesamientoIngreso(Nullable<int> iDINGRESO, Nullable<System.DateTime> fECHADIAGNOSTICO)
+        {
+            var iDINGRESOParameter = iDINGRESO.HasValue ?
+                new ObjectParameter("IDINGRESO", iDINGRESO) :
+                new ObjectParameter("IDINGRESO", typeof(int));
+    
+            var fECHADIAGNOSTICOParameter = fECHADIAGNOSTICO.HasValue ?
+                new ObjectParameter("FECHADIAGNOSTICO", fECHADIAGNOSTICO) :
+                new ObjectParameter("FECHADIAGNOSTICO", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCrearProcesamientoIngreso", iDINGRESOParameter, fECHADIAGNOSTICOParameter);
+        }
     }
 }

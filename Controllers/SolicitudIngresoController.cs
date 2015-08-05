@@ -439,6 +439,20 @@ namespace SICIApp.Controllers
                     _context.INGRESO.Add(_entity);
                     await _context.SaveChangesAsync();
 
+                    // establecer el centroterapéutico de desarrollo
+                    var _entityCTD = new CENTRODESARROLLOINGRESO
+                    {
+
+                        IDINGRESO = _entity.ID,
+                        IDCENTROTERAPEUTICO = _model.IDCRENTROTERAPEUTICO,
+                        FECHAREGISTRO = DateTime.Now,
+
+                    };
+
+                    // guardar el registro
+                    _context.CENTRODESARROLLOINGRESO.Add(_entityCTD);
+                    await _context.SaveChangesAsync();
+
                     // crear carpeta de documentos por ingreso
                     // crear capeta de interno
                     // crear carpeta de documentos
@@ -632,6 +646,128 @@ namespace SICIApp.Controllers
             return Json(vCiudades, JsonRequestBehavior.AllowGet);
         } 
         #endregion
+
+        // luego que la solicitud es creada, se debe de procesar
+        // el procesamiento es, subir de nivel en el flujo de trabajo
+        // a bajo nivel, el procesamiento incluye
+        // las entradas para edición de cada  uno de los aspectos a evaluar, aspectos y 
+        // todas sus dependencias
+        
+        // prueba de procesamiento
+
+        #region Procesamiento
+        [Authorize]
+       // [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProcesarSolicitud(int? IDINGRESO)
+        {
+            //sim tiempo
+            Thread.Sleep(2000);
+
+            // retorno de mensaje de error
+            string error = "";
+
+            // validaciones del ingreso
+            if (IDINGRESO == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // validar la existencia del ingreso
+            // get entity
+            var _entity = await _context.INGRESO.FindAsync(IDINGRESO);
+
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            //validar que este ingreso no se haya procesado antes
+            var _pruebaProcesamiento = await _context.DATOSSOCIOECONOMICOS.FindAsync(IDINGRESO);
+
+            if (_pruebaProcesamiento != null)
+            {
+                //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 1 });
+                //error al procesar
+                error = "error al procesar, ya existe un proceso solicitado!";
+                return Json(new { success = false, message = "error al procesar, ya existe un proceso solicitado!" }, JsonRequestBehavior.AllowGet);
+            }
+
+            try
+            {
+                // BUSCAR PROCEDIMIENTO
+                _context.spCrearProcesamientoIngreso(IDINGRESO, DateTime.Now);
+
+
+                //// procesar la creación de:
+                //// 1. Evaluación Psicológica
+                ////  1.1 Datos - Socio-económicos --- conocido en el negocio como condición familiar, situación social
+                //var _entityPSsocioe = new DATOSSOCIOECONOMICOS
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.DATOSSOCIOECONOMICOS.Add(_entityPSsocioe);
+
+                //// 1.2 observación preliminar --- problemas que presenta
+                //var _entityPSobservPre = new OBERVACIONPRELIMINAR
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.OBERVACIONPRELIMINAR.Add(_entityPSobservPre);
+
+                ////1.3 Historia Personal Familiar
+                //var _entityPShistoriaPerfam = new HISTORIALPERSONALFAMILIAR
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.HISTORIALPERSONALFAMILIAR.Add(_entityPShistoriaPerfam);
+
+                ////1.4 Estado mental
+                //var _entityPSestadoM = new ESTADOMENTAL
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.ESTADOMENTAL.Add(_entityPSestadoM);
+
+                ////1.5 Impresión Diagnóstica
+                //var _entityPSimprDiag = new IMPRESIONDIAGNOSTICA
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.IMPRESIONDIAGNOSTICA.Add(_entityPSimprDiag);
+
+                //// 1.6 Recomendaciones
+                //var _entityPSRecomendaciones = new RECOMENDACIONES
+                //{
+                //    IDINGRESO = _entity.ID,
+                //    FECHADIAGNOSTICO = DateTime.Now
+                //};
+                //_context.RECOMENDACIONES.Add(_entityPSRecomendaciones);
+
+                ////salvar todo el contexto
+                //await _context.SaveChangesAsync();
+
+               // return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 3 });
+                //return Json("'Success':'true'", JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, message = "Solicitud Procesada correctamente!"}, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 2 });
+                return Json(new { success = false, message = "No se ha podido procesar la solocitud" }, JsonRequestBehavior.AllowGet);
+            }
+
+
+        } 
+        #endregion
+
 
 
     }

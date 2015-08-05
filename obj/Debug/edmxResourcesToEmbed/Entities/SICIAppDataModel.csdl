@@ -337,6 +337,10 @@
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
     </AssociationSet>
+    <FunctionImport Name="spCrearProcesamientoIngreso" ReturnType="Collection(Int32)">
+      <Parameter Name="IDINGRESO" Mode="In" Type="Int32" />
+      <Parameter Name="FECHADIAGNOSTICO" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CITY">
     <Key>

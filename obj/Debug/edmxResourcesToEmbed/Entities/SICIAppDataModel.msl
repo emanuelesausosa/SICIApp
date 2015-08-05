@@ -813,5 +813,6 @@
         </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spCrearProcesamientoIngreso" FunctionName="SICIBD2Model.Store.spCrearProcesamientoIngreso" />
   </EntityContainerMapping>
 </Mapping>

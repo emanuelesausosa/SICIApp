@@ -1103,6 +1103,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spCrearProcesamientoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+          <Parameter Name="FECHADIAGNOSTICO" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
@@ -1920,6 +1924,10 @@
             <End Role="INGRESO" EntitySet="INGRESO" />
             <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
           </AssociationSet>
+          <FunctionImport Name="spCrearProcesamientoIngreso" ReturnType="Collection(Int32)">
+            <Parameter Name="IDINGRESO" Mode="In" Type="Int32" />
+            <Parameter Name="FECHADIAGNOSTICO" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="CITY">
           <Key>
@@ -3810,6 +3818,7 @@
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spCrearProcesamientoIngreso" FunctionName="SICIBD2Model.Store.spCrearProcesamientoIngreso" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

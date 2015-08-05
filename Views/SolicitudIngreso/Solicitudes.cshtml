@@ -27,7 +27,7 @@
                 <div class="ibox-title">
                     <h5>Bandeja de Solicitudes de Ingreso</h5>
 					<div class="ibox-tools">
-						@Html.ActionLink("Nueva Solicitud", "NuevaSolicitud", null, new { @class = "btn btn-primary btn-xs"})
+						@Html.ActionLink("Nueva Solicitud", "NuevaFicha", null, new { @class = "btn btn-primary btn-xs"})
 					</div>
                 </div>
                 <div class="ibox-content">
@@ -66,9 +66,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.FICHA.PRIMERAPELLIDO)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDOAPELLIDO)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem=>item.IDCRENTROTERAPEUTICO)
-        </td>
+      
             @if(item.STATUSFLOW == 1)
             {
               <td>
@@ -115,6 +113,9 @@
                                     <p><span class="badge badge-warning">DESCONOCIDO</span></p>
                                 </td>
                             }
+        <td>
+            @Html.DisplayFor(modelItem => item.IDCRENTROTERAPEUTICO)
+        </td>
         @if (item.ACEPTADO == null)
         {
             <td>
@@ -137,7 +138,8 @@
 
         <td>
 			@Html.ActionLink("Detalles", "Detalles", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
-            @Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })            
+            @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
+            <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>
         </td>
     </tr>
 }
@@ -150,5 +152,49 @@
     </div>
  </div>
 
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/wizardStepsStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+}
 
+@section Scripts {
+@Scripts.Render("~/plugins/wizardSteps")
+@Scripts.Render("~/plugins/iCheck")
+@Scripts.Render("~/plugins/validate")
+@Scripts.Render("~/plugins/toastr")
+
+    <script type="text/javascript">
+        $(function () {
+            $('.btn-update').click(function () {
+                var element = this;
+                // mensaje de procesando solocitud
+                toastr.info('Procesando', 'se ha procesado la solicitud');
+
+                $.ajax({
+                    url: '/SolicitudIngreso/ProcesarSolicitud',
+                    type: 'GET',
+                    //contentType: 'application/json; charset=utf-8',
+                    datatype: 'json',
+                    data: { 'IDINGRESO': $(this).attr('data-id') },
+                    success: function (data) {
+                        if(data.success)
+                        {
+                            toastr.success(data.message, 'Éxito');
+                        }
+                        else
+                        {
+                            toastr.error(data.message,'Error');
+                        }
+                        
+                    },
+                    error: function (req, status, err) {
+                        alert('error desconocido! ' + err);                        
+                    }
+                    
+                });
+            });
+        });
+    </script>
+    }
 

@@ -1098,6 +1098,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="spCrearProcesamientoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="FECHADIAGNOSTICO" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
