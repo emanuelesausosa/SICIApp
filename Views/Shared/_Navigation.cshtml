@@ -1,0 +1,127 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">@User.Identity.Name</strong>
+                            </span> <span class="text-muted text-xs block">Example menu <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    SICI
+                </div>
+            </li>
+            <li class="@Html.IsSelected(action: "Index")">
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-laptop"></i> <span class="nav-label">Inicio</span> </a>
+            </li>
+            <li class="@Html.IsSelected(controller: "Configuraciones")">
+                <a href="#"><i class="fa fa-gears"></i> <span class="nav-label">Configuraciones</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Ingreso<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li class="@Html.IsSelected(action:"CentrosTerapeuticos")">
+                                <a href="@Url.Action("CentrosTerapeuticos","Configuraciones")">Centros Terapéuticos</a>
+                            </li>
+                            <li class="@Html.IsSelected(action:"TiposEvaluacionesMedicas")">
+                                <a href="@Url.Action("TiposEvaluacionesMedicas", "Configuraciones")">Tipos Evaluaciones Médicas</a>
+                            </li>
+                            <li class="@Html.IsSelected(action:"AparatosSistemas")">
+                                <a href="@Url.Action("AparatosSistemas", "Configuraciones")">Aparatos Sistemas</a>
+                            </li>
+                            <li class="@Html.IsSelected(action:"TiposDocumentos")">
+                                <a href="@Url.Action("TiposDocumentos", "Configuraciones")">Tipos Documentos</a>
+                            </li>
+                            <li class="@Html.IsSelected(action:"CausasEgreso")">
+                                <a href="@Url.Action("CausasEgreso", "Configuraciones")">Causas Egreso</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "TiposDrogas")">
+                                <a href="@Url.Action("TiposDrogas", "Configuraciones")">Tipos Drogas</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "TiposExamenesPSmetricos")">
+                                <a href="@Url.Action("TiposExamenesPSmetricos", "Configuraciones")">Tipos Exámenes Psicométricos</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "ContenidosExamenes")">
+                                <a href="@Url.Action("ContenidosExamenes", "Configuraciones")">Contenidos Examenes</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Enfermedades")">
+                                <a href="@Url.Action("Enfermedades", "Configuraciones")">Enfermedades</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Escolaridades")">
+                                <a href="@Url.Action("Escolaridades", "Configuraciones")">Escolaridades</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Oficios")">
+                                <a href="@Url.Action("Oficios", "Configuraciones")">Oficios</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Rehabilitación<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li class="@Html.IsSelected(action: "Fases")">
+                                <a href="@Url.Action("Fases", "Configuraciones")">Fases</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Niveles")">
+                                <a href="@Url.Action("Niveles", "Configuraciones")">Niveles</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Criterios")">
+                                <a href="@Url.Action("Criterios", "Configuraciones")">Criterios</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "CategoriasFaltas")">
+                                <a href="@Url.Action("CategoriasFaltas", "Configuraciones")">Categorias-Faltas</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "CategoriasPersonalidad")">
+                                <a href="@Url.Action("CategoriasPersonalidad", "Configuraciones")">Categorias-Personalidad</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "AspectosPersonalidad")">
+                                <a href="@Url.Action("AspectosPersonalidad", "Configuraciones")">Aspectos-Personalidad</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "CategoriasAspectoCaracter")">
+                                <a href="@Url.Action("CategoriasAspectoCaracter", "Configuraciones")">Categorias-Aspecto-Caracter</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Actitudes")">
+                                <a href="@Url.Action("Actitudes", "Configuraciones")">Actitudes</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Instructores")">
+                                <a href="@Url.Action("Instructores", "Configuraciones")">Instructores</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "Cursos")">
+                                <a href="@Url.Action("Cursos", "Configuraciones")">Cursos</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller:"SolicitudIngreso")">
+                <a href="#"><i class="fa fa-paper-plane"></i> <span class="nav-label">Solicitudes</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(action:"Solicitudes")">
+                        <a href="@Url.Action("Solicitudes", "SolicitudIngreso")"><i class="fa fa-paper-plane"></i> <span class="nav-label">Solicitudes</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"NuevaFicha")">
+                        <a href="@Url.Action("NuevaFicha","SolicitudIngreso")"><i class="fa fa-file-text"></i> <span class="nav-label">Nueva Solicitud</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Medicina")">
+                        <a href="@Url.Action("Medicina", "SolicitudIngreso")"><i class="fa fa-user-md"></i> <span class="nav-label">Medicina</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Psiquiatria")">
+                        <a href="@Url.Action("Psiquiatria", "SolicitudIngreso")"><i class="fa fa-stethoscope"></i> <span class="nav-label">Psiquiatría</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"Psicologia")">
+                        <a href="@Url.Action("Psicologia", "SolicitudIngreso")"><i class="fa fa-vk"></i> <span class="nav-label">Psicología</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action:"TrabajoSocial")">
+                        <a href="@Url.Action("TrabajoSocial", "SolicitudIngreso")"><i class="fa fa-users"></i> <span class="nav-label">Trabajo Social</span></a>
+                    </li>
+                </ul>
+            </li>            
+        </ul>
+    </div>
+</nav>

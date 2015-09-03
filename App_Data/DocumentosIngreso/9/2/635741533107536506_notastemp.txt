@@ -1,0 +1,96 @@
+http://mvc4beginner.com/Sample-Code/ImportExportExcelData/MVC4-Export-Data-to-Excel.html
+
+---
+http://www.codeproject.com/Tips/750246/Export-Data-from-Database-Table-to-Excel-File-in-A
+----
+http://stackoverflow.com/questions/16346227/export-data-to-excel-file-with-asp-net-mvc-4-c-sharp-is-rendering-into-view
+
+http://www.matematicasparatodos.com.iris.arvixe.com/
+
+php_setting	opcache.enable	PHP setting should be changed.
+PHP opcode caching improves performance and lowers memory requirements, OPcache extension is recommended and fully supported.
+
+Check
+
+
+Thank you for your purchase!
+
+Download URL (expires after 5 downloads):
+https://wrapbootstrap.com/download/WB0T41TX4/d62f33bfd34883e9d4c796e3673d40b0
+
+Order#: WB013CH9D
+Total: $21.00 USD
+Timestamp: 2015-04-02 00:49:50
+
+Item: Light Blue - Responsive Admin Web App (Single Application License)
+Item#: WB0T41TX4
+License: Single Application License
+License ID: c569a700-f4ed-40e2-8517-de872002e04f
+
+Please contact us if you have any questions.
+
+
+WrapBootstrap Support
+https://wrapbootstrap.com/support
+
+
+1- página Escuela de Matemáticas
+
+2- Base dew datos MPT
+
+3- Instalación moodle en Esceula de Matemáticas
+-----
+moodle-user and password too:
+matemb
+mb1491625* --- 
+moodle password Mb1491625*
+
+matembemso07PRO$$77mb1491625*
+-----
+Domain Name Server 1: ns1.iris.arvixe.com
+Domain Name Server 2: ns2.iris.arvixe.com
+Domain Name Server 1 IP: 23.91.122.74
+Domain Name Server 2 IP: 23.91.122.74
+FTP server: 23.91.123.168
+-----
+http://matematicasmb.com.iris.arvixe.com/matematicasmbPrincipal/
+
+http://matematicasmb.com.iris.arvixe.com/
+
+--- base de datos MPT
+--> Falta:  
+
+----
+emso07PRO$$77
+22963
+----
+
+
+id	name	username	email	password	usertype	block	sendEmail	registerDate	lastvisitDate	activation	params
+42	Super User	PlaceHolderForAdminUser	sosa_emanuel@outlook.com	20b4794e38ec93ba6edb587125fd88b7	deprecated	0	1	2015-02-20 21:00:51.637	2015-02-20 21:00:51.637		
+
+Your Hash: md5: 91f41a38a03b37f099c879f28dd31567
+Your String: emso07PRO$$77
+sha-1: 979d227533c3ac2c9ae498f59aa75abbeed16385
+-------------
+
+F1MP3iQ/QNuD7k6cAOBmUjY8NqaTXoU8IY6nFgvrH1E=
+-------
+
+
+http://matematicasmb.com.iris.arvixe.com/images/banners/Header3%20copy.jpg
+
+ URL(../images/personal/personal2.png)
+------
+connection sTring local:
+<connectionStrings><add name="MPTBD4Entities" connectionString="metadata=res://*/Entities.ModelsBD.csdl|res://*/Entities.ModelsBD.ssdl|res://*/Entities.ModelsBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EMANUEL-PC;initial catalog=MPTBD4;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /><add name="MPTBD4Entities1" connectionString="metadata=res://*/Entities.ModelsBD.csdl|res://*/Entities.ModelsBD.ssdl|res://*/Entities.ModelsBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=EMANUEL-PC;initial catalog=MPTBD4;integrated security=True;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
+-------------------------
+Connection string foránea:
+<connectionStrings><add name="MPTBD4Entities" connectionString="metadata=res://*/Entities.ModelsBD.csdl|res://*/Entities.ModelsBD.ssdl|res://*/Entities.ModelsBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=23.91.122.74;Database=mptbd5;User Id=esosa2; Password=emso07PRO$$77;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" /><add name="MPTBD4Entities1" connectionString="metadata=res://*/Entities.ModelsBD.csdl|res://*/Entities.ModelsBD.ssdl|res://*/Entities.ModelsBD.msl;provider=System.Data.SqlClient;provider connection string=&quot;Server=23.91.122.74;Database=mptbd4;User Id=esosa2; Password=emso07PRO$$77;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" /></connectionStrings>
+----
+sabermb_db
+esosa
+-----
+mapa sitio Escuela de matemátias MB
+<iframe src="https://www.google.com/maps/d/embed?mid=z2mH40YzlGtY.kRwlRBZmnwvQ" width="640" height="480"></iframe>
+

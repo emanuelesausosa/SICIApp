@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SICIApp.Models.INFORMACIONACADEMICA_ESCOLARIDADMODEL>
+
+@{
+    ViewBag.Title = "Escolaridades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Escolaridades</h2>
+        <ol class="breadcrumb">
+			<li>
+				@Html.ActionLink("Configuraciones","Index")
+			</li>
+            <li class="active">
+                <strong>ESCOLARIDADES</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista de ESCOLARIDADES</h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Crear Nuevo", "NuevaEscolaridad", null, new { @class = "btn btn-primary btn-xs" })
+					</div>
+                </div>
+                <div class="ibox-content">
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBREESCOLARIDAD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCIONESCOLARIDAD)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBREESCOLARIDAD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCIONESCOLARIDAD)
+        </td>
+        <td>
+			@Html.ActionLink("Detalles", "DetalleEscolaridad", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Editar", "EditarEscolaridad", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
+            
+        </td>
+    </tr>
+}
+
+</table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+

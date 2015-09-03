@@ -1,0 +1,83 @@
+﻿@model SICIApp.Models.DATOSPROBLEMADROGAS_DROGASMODEL
+
+@{
+    ViewBag.Title = "Detalles Tipos Drogas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Detalles Tipos Drogas</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "TiposDrogas")
+            </li>
+            <li class="active">
+                <strong>Detalles Tipos Drogas</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalles Tipos Drogas</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRECIENTIFICO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRECIENTIFICO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRECOMUN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRECOMUN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "EdicionTiposDrogas", new { ID = Model.ID }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Todas", "TiposDrogas", null, new { @class = "btn btn-white" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

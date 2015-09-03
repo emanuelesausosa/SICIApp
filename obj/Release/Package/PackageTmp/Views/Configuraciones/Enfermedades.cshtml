@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SICIApp.Models.CONDICIONFISICA_ENFERMEDADESMODEL>
+
+@{
+    ViewBag.Title = "Enfermedades";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Enfermedades</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Configuraciones","Index")
+            </li>
+            <li class="active">
+                <strong>ENFERMEDADES</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista de ENFERMEDADES</h5>
+                    <div class="ibox-tools">
+                        <button type="button" id="new-insert" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                            Crear Nueva (Modal-Form)
+                        </button>
+                        <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog" id="new-insert-container">
+                                <div class="modal-content animated flipInY" id="new-insert-diag">
+                                    </div>
+                                </div>
+                            </div>
+                                    @Html.ActionLink("Crear", "NuevaEnfermedad", null, new { @class = "btn btn-primary btn-xs" })
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar..." />
+                                <table class="footable table table-stripped" data-page-size="20" data-filter="#filter" id="table-elements">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.NOMBRECIENTIFICO)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.NOMBRESINOMIMO)
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => model.DESCRIPCION)
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NOMBRECIENTIFICO)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.NOMBRESINOMIMO)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.DESCRIPCION)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Detalles", "DetalleEnfermedad", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                                                    @Html.ActionLink("Editar", "EditarEnfermedad", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5">
+                                                <ul class="pagination pull-right"></ul>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+    </div>
+ </div>
+
+@section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+
+            $('#new-insert').click(function () {
+                var url = "/Configuraciones/NuevaEnfermedad";
+                $.get(url, function (data) {
+                    $('#new-insert-diag').html(data);
+                    $('#myModal2').modal('show');
+                });
+            });
+
+        });
+
+        
+    </script>
+}
+

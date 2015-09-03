@@ -1,0 +1,75 @@
+﻿@model SICIApp.Models.INFORMACIONACADEMICA_ESCOLARIDADMODEL
+
+@{
+    ViewBag.Title = "Detalle Escolaridad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Detalle Escolaridad</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "Escolaridades")
+            </li>
+            <li class="active">
+                <strong>Detalle Escolaridad</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalle Escolaridad</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBREESCOLARIDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBREESCOLARIDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCIONESCOLARIDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCIONESCOLARIDAD)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "EditarEscolaridad", new { ID = Model.ID }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Todos", "Escolaridades", null, new { @class = "btn btn-white" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

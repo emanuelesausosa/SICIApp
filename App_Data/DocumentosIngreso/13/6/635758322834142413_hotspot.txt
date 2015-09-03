@@ -1,0 +1,31 @@
+Microsoft Windows [Versión 6.1.7601]
+Copyright (c) 2009 Microsoft Corporation. Reservados todos los derechos.
+
+C:\Windows\system32>netsh wlan set hostednetwork mode=allow ssid=emso key=505414
+88/*
+El modo de red hospedada se estableció en permitir.
+Se cambió correctamente el SSID de la red hospedada.
+Se cambió correctamente la frase de contraseña de clave de usuario de la red hos
+pedada.
+
+
+C:\Windows\system32>start hostednetwork
+El sistema no puede encontrar el archivo hostednetwork.
+
+C:\Windows\system32>netsh wlan start hostednetwork
+Se inició la red hospedada.
+
+
+C:\Windows\system32>netsh wlan start hostednetwork
+Se inició la red hospedada.
+
+
+C:\Windows\system32>netsh wlan start hostednetwork
+Se inició la red hospedada.
+
+
+C:\Windows\system32>netsh wlan start hostednetwork
+Se inició la red hospedada.
+
+
+C:\Windows\system32>

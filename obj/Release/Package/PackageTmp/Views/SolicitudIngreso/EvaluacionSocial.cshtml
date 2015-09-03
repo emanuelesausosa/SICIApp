@@ -1,0 +1,836 @@
+﻿@model SICIApp.Entities.INGRESO
+
+@{
+    ViewBag.Title = "Evaluación Social";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Project detail</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li class="active">
+                <strong>Project detail</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="m-b-md">
+                            <a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>
+                            <h2>Contract with Zender Company</h2>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>Status:</dt>
+                            @if (Model.ACEPTADO == true)
+                            {
+                                <dd><span class="label label-primary">Aceptado</span></dd>
+                            }
+                            else
+                            {
+                                <dd><span class="label label-warning">En proceso</span></dd>
+                            }
+
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <dl class="dl-horizontal">
+
+                        <dt>Nombre del paciente:</dt>
+                        <dd>@Model.FICHA.PRIMERNOMBRE @Model.FICHA.SEGUNDONOMBRE @Model.FICHA.PRIMERAPELLIDO @Model.FICHA.SEGUNDOAPELLIDO</dd>
+                        <dt>Cógigo ingreso:</dt>
+                        <dd id="@Model.ID">@Model.ID</dd>
+                        <dt>Client:</dt>
+                        <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
+                        <dt>Version:</dt>
+                        <dd> 	v1.4.2 </dd>
+                    </dl>
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal">
+
+                            <dt>Last Updated:</dt>
+                            <dd>16.08.2014 12:15:57</dd>
+                            <dt>Created:</dt>
+                            <dd> 	10.07.2014 23:36:57 </dd>
+                            <dt>Participants:</dt>
+                            <dd class="project-people">
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a3.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a1.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a2.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a4.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a5.jpg"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="dl-horizontal">
+                            <dt>Completed:</dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                                <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Evaluación Social<small class="m-l-sm">Evaluación Socio-económica</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1">DATOS SOBRE ESTUDIOS</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2">DATOS PROBLEMAS DROGAS</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-3">DATOS DELICTIVOS</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-4">DATOS CONDICIÓN FÍSICA</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-5">MOTIVOS INGRESO</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <h3>DATOS SOBRE ESTUDIOS</h3>
+                                                    <!--formulario para INFORMACIÓN ACADÉMICA-->
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Sabe leer y escribir?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-ia1" name="evso-ia1" type="checkbox" value="@Model.INFORMACIONACADEMICA_ESTUDIOS.SABELEERYESCRIBIR"> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Grado académico</label>
+                                                            <div class="col-md-10">
+                                                                <select id="escolaridades" name="escolaridades" data-placeholder="Elija una escolaridad" class="form-control" style="width:350px;" tabindex="1"></select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Explique el detalle</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-ia2" name="evso-ia2" class="form-control" value="@Model.INFORMACIONACADEMICA_ESTUDIOS.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD.SingleOrDefault(i=>i.IDESTUDIOS==Model.ID)" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿en qué oficios sabe trabajar?</label>
+                                                            <div class="row">
+                                                                <div class="col-xs-6 col-sm-4">                                                                 
+                                                                  <div class="input-group">
+                                                                      <select id="oficios" data-placeholder="Elija un oficio..." class="chzn-select" multiple style="width:350px;" tabindex="1"></select>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-ia" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--Formulario CONSUMO DE DROHAS HISTORIA-->
+                                                    <h3>DATOS PROBLEMAS DROGAS - HISTORIA CONSUMO</h3>
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Aqué edad comenzó a usar drogas?</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd1" name="evso-pd1" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.EDADCOMIENZO" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Trató de dejarlas alguna vez?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-pd2" name="evso-pd2" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">                                                           
+                                                            <label class="control-label col-md-2">¿Cuánto tiempo duró sin consumir?</label>                                                            
+                                                                <div class="col-md-10">
+                                                                    <input id="evso-pd3" name="evso-pd3" placeholder="Días" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIADIAS" />
+                                                                </div>
+                                                                                                                                                                                   
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2"></label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd4" name="evso-pd4" placeholder="Semanas" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIASEMANAS" />
+                                                            </div>                                                              
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2"></label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd5" name="evso-pd5" placeholder="Meses" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIAMESES" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿La falta de droga le ha producido problemas?</label>
+                                                        </div>
+                                                        <div class="form-group">  
+                                                                <label class="control-label col-md-2">¿Problemas físicos?</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="checkbox i-checks"><label> <input id="evso-pd6" name="evso-pd6" type="checkbox" value=""> <i></i></label></div>
+                                                                </div>
+                                                                <label class="control-label col-md-2">¿Problemas mentales?</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="checkbox i-checks"><label> <input id="evso-pd7" name="evso-pd7" type="checkbox" value=""> <i></i></label></div>
+                                                                </div>                                                                                                                            
+                                                        </div>  
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Explique qué problemas</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd8" name="evso-pd8" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.EXPLIQUEPROBLEMAS" />
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Qué drogas ha usado?</label>
+                                                            <div class="row">
+                                                                <div class="col-xs-6 col-sm-4">
+                                                                    <div class="input-group">
+                                                                        <select id="drogas" data-placeholder="Elija entre estas drogas..." class="" multiple style="width:350px;" tabindex="1"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha estado en tratamiento médico por problemas de drogas?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-pd9" name="evso-pd9" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>                                                            
+                                                        </div> 
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Detalle el lugar</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd10" name="evso-pd10" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.LUGARTRATAMIENTO" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Año de tratamiento</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-pd11" name="evso-pd11" class="form-control" value="@Model.DATOSPROBLEMADROGAS_CONSUMO.ANIOTRATAMIENTO" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-pd" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-3" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--Formulario DATOS DELICTIVOS-->
+                                                    <h3>Datos delictivos</h3>
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha cometido actos delictivos?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-dd1" name="evso-dd1" type="checkbox" value="@Model.DATOSDELICTIVOS.JUICIOPENDIENTE"> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Explique sus actos</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" id="evso-dd2" name="evso-dd2" class="form-control" value="@Model.DATOSDELICTIVOS.DESTALLESRECLUSION" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha estado preso?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-dd3" name="evso-dd3" type="checkbox" value="@Model.DATOSDELICTIVOS.HAESTADOPRESO"> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">detalle reclusión</label>
+                                                            <div class="col-md-10">
+                                                                <input type="text" id="evso-dd4" name="evso-dd4" class="form-control"  value="@Model.DATOSDELICTIVOS.DESTALLESRECLUSION"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Tiene juicio pendiente?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-dd5" name="evso-dd5" type="checkbox" value="@Model.DATOSDELICTIVOS.JUICIOPENDIENTE"> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-dd" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-4" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--Formulario DATOS CONDICIÓN FÍSICA-->
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Padece de alguna enfermedad?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf1" name="evso-cf1" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Explique</label>
+                                                            <div class="col-md-10">
+                                                                <input id="evso-cf2" name="evso-cf2" class="form-control" value="@Model.CONDICIONFISICA_INGRESO.DETALLE" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha padecido de alguna de estas enfermedades?</label>
+                                                            <div class="row">
+                                                                <div class="col-xs-6 col-sm-4">
+                                                                    <div class="input-group">
+                                                                        <select id="enfermedades" data-placeholder="Elija entre estas enfermedades..." class="" multiple style="width:350px;" tabindex="1"></select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha recibido tratamiento?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf3" name="evso-cf3" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Tiene impedimentos?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf4" name="evso-cf4" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Duerme bien?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf5" name="evso-cf5" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Padece de los nervios?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf6" name="evso-cf6" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ha sido operado?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-cf7" name="evso-cf7" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Observaciones generales</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evso-cf8" name="evso-cf8" class="summernote">@Model.CONDICIONFISICA_INGRESO.ONSERVACIONESGENERALES</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-cf" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-5" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--Formulario Motivos Ingreso-->
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Ingresa voluntariamente?</label>
+                                                            <div class="col-md-10">
+                                                                 <div class="checkbox i-checks"><label> <input id="evso-mi1" name="evso-mi1" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Motivos por los que desea ingresar al Proyecto Victoria</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evso-mi2" name="evso-mi2" class="summernote">@Model.MOTIVOSINGRESO.DESCRIPCION</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">¿Está dispuesto a sujetarse a las reglas del P.V.?</label>
+                                                            <div class="col-md-10">
+                                                                <div class="checkbox i-checks"><label> <input id="evso-mi3" name="evso-mi1" type="checkbox" value=""> <i></i></label></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" id="data_1">
+                                                            <label class="control-label col-md-2">Fecha de firma de acuerdo</label>
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="evso-mi4" type="text" class="form-control" value="09/25/2015" style="width:350px;">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-mi" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            The righ side of the footer
+                        </span>
+                        This is simple footer example
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/summernote")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/plugins/dataPicker")
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+       
+
+        $('#data_1 .input-group.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true
+        });
+
+        $.getJSON('@Url.Action("GetEscolaridades")', function (_escolaridades) {
+            var opciones = $("#escolaridades");
+            $.each(_escolaridades, function () {
+                opciones.append(
+                    $("<option/>")
+                        .val(this.ID)
+                        .text(this.NOMBREESCOLARIDAD));
+            });
+
+        });
+
+       
+        $.getJSON('@Url.Action("GetTiposOficios")', function (_oficios) {
+            var opciones = $("#oficios");
+            opciones.html('');           
+            $.each(_oficios, function (key, val) {
+                opciones.append(
+                    $('<option value="' + val.ID + '">' + val.NOMBREOFICIO + '</option>'));                
+            });
+          //  $('.chzn-select').chosen();
+        });
+
+
+        $.getJSON('@Url.Action("GetTiposDrogas")', function (_drogas) {
+            var op1 = $("#drogas");
+            op1.html('');
+            $.each(_drogas, function (key, val) {
+                //$("#drogas").append($("<label>").text(this.NOMBRECIENTIFICO).prepend(
+                //    $("<input>").attr('type', 'checkbox').val(this.ID).prop('checked', false)
+                op1.append(
+                $('<option value="' + val.ID + '">' + val.NOMBRECIENTIFICO + '</option>'));                    
+            });
+            //$('.chzn-select').chosen();
+        });
+
+        $.getJSON('@Url.Action("GetEnfermedades")', function (_enfermedades) {
+            var op2 = $("#enfermedades");
+            op2.html('');
+            $.each(_enfermedades, function (key, val) {
+                //$("#enfermedades").append($("<label>").text(this.NOMBRECIENTIFICO).prepend(
+                //    $("<input>").attr('type', 'checkbox').val(this.ID).prop('checked', false)
+                op2.append(
+                $('<option value="' + val.ID + '">' + val.NOMBRECIENTIFICO + '</option>'));
+            });
+            $('.chzn-select').chosen();
+        });
+
+        $('.summernote').summernote();
+
+    });
+
+        
+
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+        
+
+
+    $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+            // guardar información-académica
+    $('#save-ia').click(function () {
+        var element = this;
+
+        var _sabeleerx = false
+
+        if ($('#evso-ia1').is(":checked")) {
+            _sabeleerx = true;
+        }
+
+        var _modelx = {
+            idestudios: $(this).attr('data-id'),
+            idescolaridad: $('#escolaridades').val(),
+            descripcion: $('#evso-ia2').val()
+        }
+
+        var oficiosSeleccionadosx = [];
+        $('#oficios option:selected').each(function (i) {
+            oficiosSeleccionadosx[i] = $(this).val();
+        });
+
+        var _data = {
+            _model: _modelx,
+            _sabeleer: _sabeleerx,
+            oficiosSeleccionados: oficiosSeleccionadosx
+        }
+        toastr.info('Procesando', 'se ha procesado la solicitud');
+
+        $.ajax({
+            url: '/SolicitudIngreso/GuardarEstudiosEscolaridad',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            processData: false,
+            datatype: 'json',
+            data: JSON.stringify(_data),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Éxito');
+        }
+        else {
+                    toastr.warning(data.message, 'Alerta');
+        }
+
+        },
+            error: function (req, status, err) {
+                toastr.error(data.message, 'Error');
+        },
+            async: true,
+            processData: false
+
+        });
+        });
+
+            // guardar la información problemas drogas
+    $('#save-pd').click(function () {
+        var element = this;
+
+        var _p1 = false;
+        var _p2 = false;
+        var _p3 = false;
+        var _p4 = false;
+
+        if ($('#evso-pd2').is(":checked")) {
+            _p1 = true;
+        }
+
+        if ($('#evso-pd6').is(":checked")) {
+            _p2 = true;
+        }
+
+        if ($('#evso-pd7').is(":checked")) {
+            _p3 = true;
+        }
+        if ($('#evso-pd9').is(":checked")) {
+            _p4 = true;
+        }
+
+        var _model = {
+            idngreso: $(this).attr('data-id'),
+            aniotratamiento: $('#evso-pd11').val(),
+            edadcomienzo: $('#evso-pd1').val(),
+            expliqueproblemas: $('#evso-pd8').val(),
+            intentodejarlas: _p1,
+            lugartratamiento: $('#evso-pd10').val(),
+            problemafisico: _p2,
+            problemamental: _p3,
+            tratamientomedico: _p4,
+            abstinenciadias: $('#evso-pd3').val(),
+            abstinenciameses: $('#evso-pd5').val(),
+            abstinenciasemanas: $('#evso-pd4').val()
+
+        }
+
+        var drogasSelectX = [];
+        $('#drogas option:selected').each(function (i) {
+            drogasSelectX[i] = $(this).val();
+        });
+
+        var _data = {
+            _model: _model,
+            drogasSelect: drogasSelectX
+        }
+
+        $.ajax({
+            url: '/SolicitudIngreso/GuardarDatosProblematicaDrogasConsumo',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            processData: false,
+            datatype: 'json',
+            data: JSON.stringify(_data),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Éxito');
+        }
+        else {
+                    toastr.warning(data.message, 'Alerta');
+        }
+
+        },
+            error: function (req, status, err) {
+                toastr.error(data.message, 'Error');
+        },
+            async: true,
+            processData: false
+
+        });
+        });
+
+    //guradar datos delictivos
+    $('#save-dd').click(function () {
+        var element = this;
+
+        var _p1 = false;
+        var _p2 = false;
+        var _p3 = false;
+
+        if ($('#evso-dd1').is(":checked")) {
+            _p1 = true;
+        }
+
+        if ($('#evso-dd3').is(":checked")) {
+            _p2 = true;
+        }
+
+        if ($('#evso-dd5').is(":checked")) {
+            _p3 = true;
+        }
+
+        var _model = {
+            idingreso: $(this).attr('data-id'),
+            destallesreclusion: $('#evso-dd4').val(),
+            detallesactos: $('#evso-dd2').val(),
+            hacometido: _p1,
+            haestadopreso: _p2,
+            juiciopendiente: _p3
+
+        }
+
+        $.ajax({
+            url: '/SolicitudIngreso/GuardarDatosDelictivos',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            processData: false,
+            datatype: 'json',
+            data: JSON.stringify(_model),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Éxito');
+                }
+                else {
+                    toastr.warning(data.message, 'Alerta');
+                }
+
+            },
+            error: function (req, status, err) {
+                toastr.error(data.message, 'Error');
+            },
+            async: true,
+            processData: false
+
+        });
+    });
+
+    // guardar datos condición física
+    $('#save-cf').click(function () {
+        var element = this;
+
+        var _p1 = false;
+        var _p2 = false;
+        var _p3 = false;
+        var _p4 = false;
+        var _p5 = false;
+        var _p6 = false;
+
+
+        if ($('#evso-cf1').is(":checked")) {
+            _p1 = true;
+        }
+
+        if ($('#evso-cf3').is(":checked")) {
+            _p2 = true;
+        }
+
+        if ($('#evso-cf4').is(":checked")) {
+            _p3 = true;
+        }
+        if ($('#evso-cf5').is(":checked")) {
+            _p4 = true;
+        }
+
+        if ($('#evso-cf6').is(":checked")) {
+            _p5 = true;
+        }
+        if ($('#evso-cf7').is(":checked")) {
+            _p6 = true;
+        }
+
+
+        var _model = {
+            detalle: $('#evso-cf2').val(),
+            duermebien: _p4,
+            hasidooperado: _p6,
+            onservacionesgenerales: $('#evso-cf8').code(),
+            padece: _p1,
+            padecenervios: _p5,
+            recibiotratamiento: _p2,
+            tieneimpedimentos: _p3
+        }
+
+        var enfSelecX = [];
+        $('#enfermedades option:selected').each(function (i) {
+            enfSelecX[i] = $(this).val();
+        });
+
+        var _data = {
+            _model: _model,
+            enfSelec: enfSelecX
+        }
+
+        $.ajax({
+            url: '/SolicitudIngreso/GuardarDatosCondicionFisica',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            processData: false,
+            datatype: 'json',
+            data: JSON.stringify(_data),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Éxito');
+                }
+                else {
+                    toastr.warning(data.message, 'Alerta');
+                }
+
+            },
+            error: function (req, status, err) {
+                toastr.error(data.message, 'Error');
+            },
+            async: true,
+            processData: false
+
+        });
+
+    });
+
+    // guardar mpotivos ingreso
+    $('#save-mi').click(function () {
+        var element = this;
+
+        var _p1 = false;
+        var _p2 = false;
+        if ($('#evso-mi1').is("checked")) {
+            _p1 = true;
+        }
+
+        if ($('#evso-mi3').is("checked")) {
+            _p2 = true;
+        }
+        var _model = {
+            fechafirmaacuerdo: $('#evso-mi4').val(),
+            descripcion: $('#evso-m2').code(),
+            dispuestoasujetarsepv: _p2,
+            voluntariamente: _p1
+        }
+
+        $.ajax({
+            url: '/SolicitudIngreso/GuardarMotivosIngreso',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            processData: false,
+            datatype: 'json',
+            data: JSON.stringify(_model),
+            success: function (data) {
+                if (data.success) {
+                    toastr.success(data.message, 'Éxito');
+                }
+                else {
+                    toastr.warning(data.message, 'Alerta');
+                }
+
+            },
+            error: function (req, status, err) {
+                toastr.error(data.message, 'Error');
+            },
+            async: true,
+            processData: false
+
+        });
+    });
+    </script>
+}
