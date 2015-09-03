@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudIngresoController.cs" />
+    <Compile Include="Dominio\DBFactory.cs" />
     <Compile Include="Dominio\EmailSender.cs" />
     <Compile Include="Entities\APARATOSSISTEMAS.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
@@ -313,6 +314,36 @@
     <Compile Include="Entities\OBERVACIONPRELIMINAR.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PRO_CRITERIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_FASE.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_NIVEL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_NIVELCRITERIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_PROMOCIONNIVEL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_DETALLEENFERMEDADES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_EXAMENPSICOPATOLOGICO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_HISTORIALINGRESOSPV.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_OBSERVACIONFINAL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_SINTOMASPRINCIPALES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\RECOMENDACIONES.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -335,6 +366,60 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StatusCodes.cs" />
+    <Compile Include="Entities\TER_ACTITUD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_AREACRITERIOCALIF.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_ASPECTOEXAMENPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_ASPECTOPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CALIFAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAASPECTOCARCTER.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAFALTA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CRITERIOCALIFICACION.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CURSO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_EVALUACIONCARACTER.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_EXAMENPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_FALTA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_INCIDENCIAAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_INSTRUCTOR.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_MATRICULA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_RESUMENEVOLUCION.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\TIPOEVALUACIONMEDICA.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -349,6 +434,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Interfaces\IDBFactory.cs" />
     <Compile Include="Interfaces\IEmailSender.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1026,6 +1112,7 @@
     <Content Include="Scripts\plugins\preetyTextDiff\jquery.pretty-text-diff.min.js" />
     <Content Include="Scripts\plugins\rickshaw\rickshaw.min.js" />
     <Content Include="Scripts\plugins\rickshaw\vendor\d3.v3.js" />
+    <Content Include="Scripts\plugins\select2\select2.full.min.js" />
     <Content Include="Scripts\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\plugins\sparkline\jquery.sparkline.min.js" />
     <Content Include="Scripts\plugins\staps\jquery.steps.min.js" />
@@ -1140,6 +1227,56 @@
     <Content Include="Views\SolicitudIngreso\DatosPersonalesFicha.cshtml" />
     <Content Include="Views\SolicitudIngreso\InfoNuevoIngreso.cshtml" />
     <Content Include="Views\SolicitudIngreso\EntregaDocumentosIngreso.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionPsicologica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Medicina.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Psiquiatria.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Psicologia.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionMedica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionPsiquiatrica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\DataJson.cshtml" />
+    <Content Include="Views\SolicitudIngreso\TrabajoSocial.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionSocial.cshtml" />
+    <Content Include="Views\Configuraciones\_NuevaEnfermedad.cshtml" />
+    <Content Include="Views\Configuraciones\Fases.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleFase.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaFase.cshtml" />
+    <Content Include="Views\Configuraciones\EditarFase.cshtml" />
+    <Content Include="Views\Configuraciones\Niveles.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleNivel.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoNivel.cshtml" />
+    <Content Include="Views\Configuraciones\EditarNivel.cshtml" />
+    <Content Include="Views\Configuraciones\Criterios.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCriterio.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoCriterio.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCriterio.cshtml" />
+    <Content Include="Views\Configuraciones\CategoriasFaltas.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCategoriaFalta.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaCategoriaFalta.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCategoriaFalta.cshtml" />
+    <Content Include="Views\Configuraciones\CategoriasPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCategoriaPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaCategoriaPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCategoriaPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\AspectosPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleAspectoPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoAspectoPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\EditarAspectoPersonalidad.cshtml" />
+    <Content Include="Views\Configuraciones\CategoriasAspectoCaracter.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCategoriaAspectoCaracter.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaCategoriaAspectoCaracter.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCategoriaAspectoCaracter.cshtml" />
+    <Content Include="Views\Configuraciones\Actitudes.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleActitud.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaActitud.cshtml" />
+    <Content Include="Views\Configuraciones\EditarActitud.cshtml" />
+    <Content Include="Views\Configuraciones\Instructores.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleInstructor.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoInstructor.cshtml" />
+    <Content Include="Views\Configuraciones\EditarInstructor.cshtml" />
+    <Content Include="Views\Configuraciones\Cursos.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCurso.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoCurso.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCurso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />

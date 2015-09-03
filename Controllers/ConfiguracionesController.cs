@@ -1618,7 +1618,9 @@ namespace SICIApp.Controllers
         {
            // get model
             var _model = new CONDICIONFISICA_ENFERMEDADESMODEL();
-            return View(_model);
+            ///return View(_model);
+            ///
+            return PartialView("_NuevaEnfermedad", _model);
         }
 
         // POST
@@ -2104,6 +2106,2260 @@ namespace SICIApp.Controllers
         }
         #endregion
 
+        //******************************************************************************************************************
+        ///---------------****************SSECCIÓN DE MANTENIMIENTO DE REHABILITACIÓN ***************-----------------------
+        ///*****************************************************************************************************************
+        ///
+        #region mantenimiento de sección PROMOCIÓN REHABILITACIÓN
+
+        #region Fases
+        // lista de fases
+        public async Task<ActionResult> Fases()
+        {
+            //get entity 
+            var _entity = await _context.PRO_FASE.ToListAsync();
+
+            // set model
+            List<PRO_FASEMODEL> _model = new List<PRO_FASEMODEL>();
+
+            //model set
+            foreach (PRO_FASE entity in _entity)
+            {
+                _model.Add(new PRO_FASEMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle fase
+
+        public async Task<ActionResult> DetalleFase(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_FASE.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_FASEMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear fase
+
+        //get 
+        public ActionResult NuevaFase()
+        {
+            // get model 
+            var _model = new PRO_FASEMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaFase(PRO_FASEMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.PRO_FASE.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_FASE
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.PRO_FASE.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Fases", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar fase 
+        // get
+        public async Task<ActionResult> EditarFase(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_FASE.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_FASEMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarFase(PRO_FASEMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.PRO_FASE.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new PRO_FASE();
+                            _entity = await _context.PRO_FASE.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Fases", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_FASE();
+                        _entity = await _context.PRO_FASE.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Fases", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        } 
+        #endregion
+
+        #region Niveles
+        // lista de criterios
+        public async Task<ActionResult> Niveles()
+        {
+            //get entity 
+            var _entity = await _context.PRO_NIVEL.ToListAsync();
+
+            // set model
+            List<PRO_NIVELMODEL> _model = new List<PRO_NIVELMODEL>();
+
+            //model set
+            foreach (PRO_NIVEL entity in _entity)
+            {
+                _model.Add(new PRO_NIVELMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION,
+                    DIASESTIMADOS = entity.DIASESTIMADOS,
+                    IDFASE = entity.IDFASE
+
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle criterios
+
+        public async Task<ActionResult> DetalleNivel(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_NIVEL.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_NIVELMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                DIASESTIMADOS = _entity.DIASESTIMADOS,
+                IDFASE = _entity.IDFASE
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear criterio
+
+        //get 
+        public ActionResult NuevoNivel()
+        {
+            // get model 
+            var _model = new PRO_NIVELMODEL();
+
+            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoNivel(PRO_NIVELMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.PRO_NIVEL.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_NIVEL
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            DIASESTIMADOS = _model.DIASESTIMADOS,
+                            IDFASE = _model.IDFASE
+                        };
+
+                        // guardar en el context
+                        _context.PRO_NIVEL.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Niveles", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+            return View(_model);
+        }
+
+        //editar criterio
+        // get
+        public async Task<ActionResult> EditarNivel(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_NIVEL.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_NIVELMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                DIASESTIMADOS = _entity.DIASESTIMADOS,
+                IDFASE = _entity.IDFASE
+            };
+
+            // carga de elemntos dinámico
+            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarNivel(PRO_NIVELMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.PRO_NIVEL.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new PRO_NIVEL();
+                            _entity = await _context.PRO_NIVEL.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                            _entity.DIASESTIMADOS = _model.DIASESTIMADOS;
+                            _entity.IDFASE = _model.IDFASE;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Niveles", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_NIVEL();
+                        _entity = await _context.PRO_NIVEL.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.DIASESTIMADOS = _model.DIASESTIMADOS;
+                        _entity.IDFASE = _model.IDFASE;
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Niveles", "Configuraciones");
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+            return View(_model);
+        }
+        #endregion
+
+        #region Criterios
+        // lista de criterios
+        public async Task<ActionResult> Criterios()
+        {
+            //get entity 
+            var _entity = await _context.PRO_CRITERIO.ToListAsync();
+
+            // set model
+            List<PRO_CRITERIOMODEL> _model = new List<PRO_CRITERIOMODEL>();
+
+            //model set
+            foreach (PRO_CRITERIO entity in _entity)
+            {
+                _model.Add(new PRO_CRITERIOMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION                    
+
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle criterios
+
+        public async Task<ActionResult> DetalleCriterio(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_CRITERIO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_CRITERIOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear criterio
+
+        //get 
+        public ActionResult NuevoCriterio()
+        {
+            // get model 
+            var _model = new PRO_CRITERIOMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoCriterio(PRO_CRITERIOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.PRO_CRITERIO.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_CRITERIO
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.PRO_CRITERIO.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Criterios", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar criterio
+        // get
+        public async Task<ActionResult> EditarCriterio(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_CRITERIO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_CRITERIOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCriterio(PRO_CRITERIOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.PRO_CRITERIO.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new PRO_CRITERIO();
+                            _entity = await _context.PRO_CRITERIO.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Criterio", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_CRITERIO();
+                        _entity = await _context.PRO_CRITERIO.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Criterio", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        #region Categoria- falta
+        // lista de categorías -falta
+        public async Task<ActionResult> CategoriasFaltas()
+        {
+            //get entity 
+            var _entity = await _context.TER_CATEGORIAFALTA.ToListAsync();
+
+            // set model
+            List<TER_CATEGORIAFALTAMODEL> _model = new List<TER_CATEGORIAFALTAMODEL>();
+
+            //model set
+            foreach (TER_CATEGORIAFALTA entity in _entity)
+            {
+                _model.Add(new TER_CATEGORIAFALTAMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle categorías -falta
+
+        public async Task<ActionResult> DetalleCategoriaFalta(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAFALTA.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAFALTAMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear categorías -falta
+
+        //get 
+        public ActionResult NuevaCategoriaFalta()
+        {
+            // get model 
+            var _model = new TER_CATEGORIAFALTAMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaCategoriaFalta(TER_CATEGORIAFALTAMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_CATEGORIAFALTA.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAFALTA
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.TER_CATEGORIAFALTA.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasFaltas", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar categorías -falta 
+        // get
+        public async Task<ActionResult> EditarCategoriaFalta(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAFALTA.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAFALTAMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCategoriaFalta(TER_CATEGORIAFALTAMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_CATEGORIAFALTA.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_CATEGORIAFALTA();
+                            _entity = await _context.TER_CATEGORIAFALTA.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("CategoriasFaltas", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAFALTA();
+                        _entity = await _context.TER_CATEGORIAFALTA.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasFaltas", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        #region Categorías - Personalidad
+        // lista de Categorías - Personalidad
+        public async Task<ActionResult> CategoriasPersonalidad()
+        {
+            //get entity 
+            var _entity = await _context.TER_CATEGORIAPERSONALIDAD.ToListAsync();
+
+            // set model
+            List<TER_CATEGORIAPERSONALIDADMODEL> _model = new List<TER_CATEGORIAPERSONALIDADMODEL>();
+
+            //model set
+            foreach (TER_CATEGORIAPERSONALIDAD entity in _entity)
+            {
+                _model.Add(new TER_CATEGORIAPERSONALIDADMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Categorías - Personalidad
+
+        public async Task<ActionResult> DetalleCategoriaPersonalidad(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAPERSONALIDAD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAPERSONALIDADMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Categorías - Personalidad
+
+        //get 
+        public ActionResult NuevaCategoriaPersonalidad()
+        {
+            // get model 
+            var _model = new TER_CATEGORIAPERSONALIDADMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaCategoriaPersonalidad(TER_CATEGORIAPERSONALIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_CATEGORIAPERSONALIDAD.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAPERSONALIDAD
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.TER_CATEGORIAPERSONALIDAD.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasPersonalidad", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar Categorías - Personalidad
+        // get
+        public async Task<ActionResult> EditarCategoriaPersonalidad(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAPERSONALIDAD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAPERSONALIDADMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCategoriaPersonalidad(TER_CATEGORIAPERSONALIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_CATEGORIAPERSONALIDAD.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_CATEGORIAPERSONALIDAD();
+                            _entity = await _context.TER_CATEGORIAPERSONALIDAD.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("CategoriasPersonalidad", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAPERSONALIDAD();
+                        _entity = await _context.TER_CATEGORIAPERSONALIDAD.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasPersonalidad", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        #region Aspecto - personalidad
+        // lista de Aspecto - personalidad
+        public async Task<ActionResult> AspectosPersonalidad()
+        {
+            //get entity 
+            var _entity = await _context.TER_ASPECTOPERSONALIDAD.ToListAsync();
+
+            // set model
+            List<TER_ASPECTOPERSONALIDADMODEL> _model = new List<TER_ASPECTOPERSONALIDADMODEL>();
+
+            //model set
+            foreach (TER_ASPECTOPERSONALIDAD entity in _entity)
+            {
+                _model.Add(new TER_ASPECTOPERSONALIDADMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION,
+                    CALIFICACIONESPERADA = entity.CALIFICACIONESPERADA,
+                    IDCATEGORIAPERSONALIDAD = entity.IDCATEGORIAPERSONALIDAD
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Aspecto - personalidad
+
+        public async Task<ActionResult> DetalleAspectoPersonalidad(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_ASPECTOPERSONALIDAD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_ASPECTOPERSONALIDADMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CALIFICACIONESPERADA = _entity.CALIFICACIONESPERADA,
+                IDCATEGORIAPERSONALIDAD = _entity.IDCATEGORIAPERSONALIDAD
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Aspecto - personalidad
+
+        //get 
+        public ActionResult NuevoAspectoPersonalidad()
+        {
+            // get model 
+            var _model = new TER_ASPECTOPERSONALIDADMODEL();
+
+            // carga dinámica de elemetos
+            ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE");
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoAspectoPersonalidad(TER_ASPECTOPERSONALIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_ASPECTOPERSONALIDAD.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_ASPECTOPERSONALIDAD
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            CALIFICACIONESPERADA = _model.CALIFICACIONESPERADA,
+                            IDCATEGORIAPERSONALIDAD = _model.IDCATEGORIAPERSONALIDAD
+                        };
+
+                        // guardar en el context
+                        _context.TER_ASPECTOPERSONALIDAD.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("AspectosPersonalidad", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE", _model.IDCATEGORIAPERSONALIDAD);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE", _model.IDCATEGORIAPERSONALIDAD);
+            return View(_model);
+        }
+
+        //editar Aspecto - personalidad
+        // get
+        public async Task<ActionResult> EditarAspectoPersonalidad(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_ASPECTOPERSONALIDAD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_ASPECTOPERSONALIDADMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CALIFICACIONESPERADA = _entity.CALIFICACIONESPERADA,
+                IDCATEGORIAPERSONALIDAD = _entity.IDCATEGORIAPERSONALIDAD
+            };
+
+            // to view
+            ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE");
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarAspectoPersonalidad(TER_ASPECTOPERSONALIDADMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_ASPECTOPERSONALIDAD.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE", _model.IDCATEGORIAPERSONALIDAD);
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_ASPECTOPERSONALIDAD();
+                            _entity = await _context.TER_ASPECTOPERSONALIDAD.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("AspectosPersonalidad", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_ASPECTOPERSONALIDAD();
+                        _entity = await _context.TER_ASPECTOPERSONALIDAD.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.CALIFICACIONESPERADA = _model.CALIFICACIONESPERADA;
+                        _entity.IDCATEGORIAPERSONALIDAD = _model.IDCATEGORIAPERSONALIDAD;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("AspectosPersonalidad", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE", _model.IDCATEGORIAPERSONALIDAD);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDCATEGORIAPERSONALIDAD = new SelectList(_context.TER_CATEGORIAPERSONALIDAD, "ID", "NOMBRE", _model.IDCATEGORIAPERSONALIDAD);
+            return View(_model);
+        }
+        #endregion
+
+        #region Categoria - Aspecto - Carácter
+        // lista de Aspecto - Carácter
+        public async Task<ActionResult> CategoriasAspectoCaracter()
+        {
+            //get entity 
+            var _entity = await _context.TER_CATEGORIAASPECTOCARCTER.ToListAsync();
+
+            // set model
+            List<TER_CATEGORIAASPECTOCARCTERMODEL> _model = new List<TER_CATEGORIAASPECTOCARCTERMODEL>();
+
+            //model set
+            foreach (TER_CATEGORIAASPECTOCARCTER entity in _entity)
+            {
+                _model.Add(new TER_CATEGORIAASPECTOCARCTERMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Aspecto - Carácter
+
+        public async Task<ActionResult> DetalleCategoriaAspectoCaracter(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAASPECTOCARCTER.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAASPECTOCARCTERMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Aspecto - Carácter
+
+        //get 
+        public ActionResult NuevaCategoriaAspectoCaracter()
+        {
+            // get model 
+            var _model = new TER_CATEGORIAASPECTOCARCTERMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaCategoriaAspectoCaracter(TER_CATEGORIAASPECTOCARCTERMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_CATEGORIAASPECTOCARCTER.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAASPECTOCARCTER
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.TER_CATEGORIAASPECTOCARCTER.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasAspectoCaracter", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar Aspecto - Carácter
+        // get
+        public async Task<ActionResult> EditarCategoriaAspectoCaracter(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CATEGORIAASPECTOCARCTER.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CATEGORIAASPECTOCARCTERMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCategoriaAspectoCaracter(TER_CATEGORIAASPECTOCARCTERMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_CATEGORIAASPECTOCARCTER.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_CATEGORIAASPECTOCARCTER();
+                            _entity = await _context.TER_CATEGORIAASPECTOCARCTER.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("CategoriasAspectoCaracter", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CATEGORIAASPECTOCARCTER();
+                        _entity = await _context.TER_CATEGORIAASPECTOCARCTER.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("CategoriasAspectoCaracter", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        #region Actitud
+        // lista de Actitud
+        public async Task<ActionResult> Actitudes()
+        {
+            //get entity 
+            var _entity = await _context.TER_ACTITUD.ToListAsync();
+
+            // set model
+            List<TER_ACTITUDMODEL> _model = new List<TER_ACTITUDMODEL>();
+
+            //model set
+            foreach (TER_ACTITUD entity in _entity)
+            {
+                _model.Add(new TER_ACTITUDMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION,
+                    CALIFICACIONESTIMADA = entity.CALIFICACIONESTIMADA,
+                    IDCATEGORIAASPECTO = entity.IDCATEGORIAASPECTO
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Actitud
+
+        public async Task<ActionResult> DetalleActitud(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_ACTITUD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_ACTITUDMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CALIFICACIONESTIMADA = _entity.CALIFICACIONESTIMADA,
+                IDCATEGORIAASPECTO = _entity.IDCATEGORIAASPECTO
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Actitud
+
+        //get 
+        public ActionResult NuevaActitud()
+        {
+            // get model 
+            var _model = new TER_ACTITUDMODEL();
+
+            // carga de elementos dinámicos
+            ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE");
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaActitud(TER_ACTITUDMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_ACTITUD.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_ACTITUD
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            CALIFICACIONESTIMADA = _model.CALIFICACIONESTIMADA,
+                            IDCATEGORIAASPECTO = _model.IDCATEGORIAASPECTO
+                        };
+
+                        // guardar en el context
+                        _context.TER_ACTITUD.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Actitudes", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+            return View(_model);
+        }
+
+        //editar Actitud
+        // get
+        public async Task<ActionResult> EditarActitud(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_ACTITUD.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_ACTITUDMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CALIFICACIONESTIMADA = _entity.CALIFICACIONESTIMADA,
+                IDCATEGORIAASPECTO = _entity.IDCATEGORIAASPECTO
+            };
+
+            // elementos dinámicos
+            ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE");
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarActitud(TER_ACTITUDMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_ACTITUD.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_ACTITUD();
+                            _entity = await _context.TER_ACTITUD.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                            _entity.CALIFICACIONESTIMADA = _model.CALIFICACIONESTIMADA;
+                            _entity.IDCATEGORIAASPECTO = _model.IDCATEGORIAASPECTO;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Actitudes", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_ACTITUD();
+                        _entity = await _context.TER_ACTITUD.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.CALIFICACIONESTIMADA = _model.CALIFICACIONESTIMADA;
+                        _entity.IDCATEGORIAASPECTO = _model.IDCATEGORIAASPECTO;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Actitudes", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+                    return View(_model);
+                }
+            }
+            ViewBag.IDCATEGORIAASPECTO = new SelectList(_context.TER_CATEGORIAASPECTOCARCTER, "ID", "NOMBRE", _model.IDCATEGORIAASPECTO);
+            return View(_model);
+        }
+        #endregion
+
+        #region Instructor
+        // lista de Instructores
+        public async Task<ActionResult> Instructores()
+        {
+            //get entity 
+            var _entity = await _context.TER_INSTRUCTOR.ToListAsync();
+
+            // set model
+            List<TER_INSTRUCTORMODEL> _model = new List<TER_INSTRUCTORMODEL>();
+
+            //model set
+            foreach (TER_INSTRUCTOR entity in _entity)
+            {
+                _model.Add(new TER_INSTRUCTORMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    INSTITUCION = entity.INSTITUCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Instructor
+
+        public async Task<ActionResult> DetalleInstructor(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_INSTRUCTOR.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_INSTRUCTORMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                INSTITUCION = _entity.INSTITUCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Instructor
+
+        //get 
+        public ActionResult NuevoInstructor()
+        {
+            // get model 
+            var _model = new TER_INSTRUCTORMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoInstructor(TER_INSTRUCTORMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_INSTRUCTOR.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_INSTRUCTOR
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            INSTITUCION = _model.INSTITUCION
+                        };
+
+                        // guardar en el context
+                        _context.TER_INSTRUCTOR.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Instructores", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar Instructor 
+        // get
+        public async Task<ActionResult> EditarInstructor(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_INSTRUCTOR.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_INSTRUCTORMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                INSTITUCION = _entity.INSTITUCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarInstructor(TER_INSTRUCTORMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_INSTRUCTOR.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_INSTRUCTOR();
+                            _entity = await _context.TER_INSTRUCTOR.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.INSTITUCION = _model.INSTITUCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Instructores", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_INSTRUCTOR();
+                        _entity = await _context.TER_INSTRUCTOR.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.INSTITUCION = _model.INSTITUCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Instructores", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        #region Cursos
+        // lista de Cursos
+        public async Task<ActionResult> Cursos()
+        {
+            //get entity 
+            var _entity = await _context.TER_CURSO.ToListAsync();
+
+            // set model
+            List<TER_CURSOMODEL> _model = new List<TER_CURSOMODEL>();
+
+            //model set
+            foreach (TER_CURSO entity in _entity)
+            {
+                _model.Add(new TER_CURSOMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Curso
+
+        public async Task<ActionResult> DetalleCurso(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CURSO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CURSOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Curso
+
+        //get 
+        public ActionResult NuevoCurso()
+        {
+            // get model 
+            var _model = new TER_CURSOMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoCurso(TER_CURSOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.TER_CURSO.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CURSO
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.TER_CURSO.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Cursos", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar Curso
+        // get
+        public async Task<ActionResult> EditarCurso(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.TER_CURSO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new TER_CURSOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCurso(TER_CURSOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.TER_CURSO.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new TER_CURSO();
+                            _entity = await _context.TER_CURSO.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Cursos", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new TER_CURSO();
+                        _entity = await _context.TER_CURSO.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Cursos", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        #endregion
+
+        // get data JSon para cargar dropDown list, configuraciones
+        public ActionResult GetFases()
+        {
+            var _fases = from f in _context.PRO_FASE
+                        select new { f.ID, f.NOMBRE };
+
+            return Json(_fases, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
 
         // dispose data base context
         protected override void Dispose(bool disposing)

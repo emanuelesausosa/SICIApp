@@ -74,6 +74,34 @@ namespace SICIApp.Entities
         public virtual DbSet<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
         public virtual DbSet<TIPOSDOCUMENTO> TIPOSDOCUMENTO { get; set; }
         public virtual DbSet<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
+        public virtual DbSet<PSQ_DETALLEENFERMEDADES> PSQ_DETALLEENFERMEDADES { get; set; }
+        public virtual DbSet<PSQ_EXAMENPSICOPATOLOGICO> PSQ_EXAMENPSICOPATOLOGICO { get; set; }
+        public virtual DbSet<PSQ_HISTORIALINGRESOSPV> PSQ_HISTORIALINGRESOSPV { get; set; }
+        public virtual DbSet<PSQ_OBSERVACIONFINAL> PSQ_OBSERVACIONFINAL { get; set; }
+        public virtual DbSet<PSQ_SINTOMASPRINCIPALES> PSQ_SINTOMASPRINCIPALES { get; set; }
+        public virtual DbSet<PRO_CRITERIO> PRO_CRITERIO { get; set; }
+        public virtual DbSet<PRO_FASE> PRO_FASE { get; set; }
+        public virtual DbSet<PRO_NIVEL> PRO_NIVEL { get; set; }
+        public virtual DbSet<PRO_NIVELCRITERIO> PRO_NIVELCRITERIO { get; set; }
+        public virtual DbSet<PRO_PROMOCIONNIVEL> PRO_PROMOCIONNIVEL { get; set; }
+        public virtual DbSet<TER_ACTITUD> TER_ACTITUD { get; set; }
+        public virtual DbSet<TER_AREACRITERIOCALIF> TER_AREACRITERIOCALIF { get; set; }
+        public virtual DbSet<TER_ASPECTOEXAMENPERSONALIDAD> TER_ASPECTOEXAMENPERSONALIDAD { get; set; }
+        public virtual DbSet<TER_ASPECTOPERSONALIDAD> TER_ASPECTOPERSONALIDAD { get; set; }
+        public virtual DbSet<TER_CALIFAREA> TER_CALIFAREA { get; set; }
+        public virtual DbSet<TER_CATEGORIAAREA> TER_CATEGORIAAREA { get; set; }
+        public virtual DbSet<TER_CATEGORIAASPECTOCARCTER> TER_CATEGORIAASPECTOCARCTER { get; set; }
+        public virtual DbSet<TER_CATEGORIAFALTA> TER_CATEGORIAFALTA { get; set; }
+        public virtual DbSet<TER_CATEGORIAPERSONALIDAD> TER_CATEGORIAPERSONALIDAD { get; set; }
+        public virtual DbSet<TER_CRITERIOCALIFICACION> TER_CRITERIOCALIFICACION { get; set; }
+        public virtual DbSet<TER_CURSO> TER_CURSO { get; set; }
+        public virtual DbSet<TER_EVALUACIONCARACTER> TER_EVALUACIONCARACTER { get; set; }
+        public virtual DbSet<TER_EXAMENPERSONALIDAD> TER_EXAMENPERSONALIDAD { get; set; }
+        public virtual DbSet<TER_FALTA> TER_FALTA { get; set; }
+        public virtual DbSet<TER_INCIDENCIAAREA> TER_INCIDENCIAAREA { get; set; }
+        public virtual DbSet<TER_INSTRUCTOR> TER_INSTRUCTOR { get; set; }
+        public virtual DbSet<TER_MATRICULA> TER_MATRICULA { get; set; }
+        public virtual DbSet<TER_RESUMENEVOLUCION> TER_RESUMENEVOLUCION { get; set; }
     
         public virtual ObjectResult<Nullable<int>> spCrearProcesamientoIngreso(Nullable<int> iDINGRESO, Nullable<System.DateTime> fECHADIAGNOSTICO)
         {

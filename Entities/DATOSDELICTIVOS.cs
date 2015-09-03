@@ -20,6 +20,7 @@ namespace SICIApp.Entities
         public Nullable<bool> HAESTADOPRESO { get; set; }
         public string DESTALLESRECLUSION { get; set; }
         public Nullable<System.DateTime> FECHADIAGNOSTICO { get; set; }
+        public Nullable<bool> JUICIOPENDIENTE { get; set; }
     
         public virtual INGRESO INGRESO { get; set; }
     }

@@ -11,7 +11,7 @@ using SICIApp.Entities;
 namespace SICIApp.Models
 {
     // sección de solicitudes de ingreso
-    #region Models de solicitu de ingreso
+    #region Models de solicitud de ingreso
         // 1. PERSONA.FICHA, esta entity (to model) es el punto de partida para una solicitud de ingreso
         public partial class FICHAMODEL
         {
@@ -144,6 +144,11 @@ namespace SICIApp.Models
                 this.DATOSPROBLEMADROGAS_CONSUMODROGAS = new HashSet<DATOSPROBLEMADROGAS_CONSUMODROGAS>();
                 this.DOCUMENTOSINGRESO = new HashSet<DOCUMENTOSINGRESO>();
                 this.CENTRODESARROLLOINGRESO = new HashSet<CENTRODESARROLLOINGRESO>();
+                this.FICHA = new FICHA();
+
+                this.DROGAS = new HashSet<DATOSPROBLEMADROGAS_DROGAS>();
+                this.ESCOLARIDADES = new HashSet<INFORMACIONACADEMICA_ESCOLARIDAD>();
+                this.OFICIOS = new HashSet<INFORMACIONACADEMICA_OFICIOS>();
             }
 
             [Key]
@@ -213,6 +218,18 @@ namespace SICIApp.Models
             public virtual MOTIVOSINGRESO MOTIVOSINGRESO { get; set; }
             public virtual ICollection<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
             public virtual ICollection<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
+
+            // model para drogas
+            public int IDDROGA { get; set; }
+            public virtual ICollection<DATOSPROBLEMADROGAS_DROGAS> DROGAS { get; set; }
+
+            // model para estudios
+            public int IDESCOLARIDAD { get; set; }
+            public virtual ICollection<INFORMACIONACADEMICA_ESCOLARIDAD> ESCOLARIDADES { get; set; }
+
+            // MODEL PARA OFICIOS
+            public int IDOFICIO { get; set; }
+            public virtual ICollection<INFORMACIONACADEMICA_OFICIOS> OFICIOS { get; set; }
         }
         
         //4. INGRESOINTERNO.DOCUMENTOS, esta enity, se encarga de relacionar los documentos que se presentan al momento de solicitar el ingreso
@@ -251,7 +268,6 @@ namespace SICIApp.Models
         }
 
         // X. ViewModels --> es la co-relación entre los modelos declarados arriba-- 
-
         public partial class INGRESOSVIEWMODELS
         {
             public virtual IEnumerable<FICHAMODEL> FICHASVIEWMODELS { get; set; }
@@ -260,4 +276,17 @@ namespace SICIApp.Models
             public virtual IEnumerable<CENTRODESARROLLOINGRESOMODEL> CENTRODESARROLLOINGRESOVIEWMODEL { get; set; }
         }
     #endregion
+
+    //  sección de evaluación médica
+        #region Evaluación médica models
+
+        public partial class EvaluacionMedicaViewModel
+        {
+            public INGRESO Ingreso { get; set; }
+            public virtual IEnumerable<TIPOEVALUACIONMEDICA> TiposEvMedica { get; set; }
+            public virtual IEnumerable<APARATOSSISTEMAS_SISTEMAS> AparatosSistemas { get; set; }
+        }
+
+        #endregion
+
 }

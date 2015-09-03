@@ -30,6 +30,8 @@ namespace SICIApp
             // jQueryUI 
             bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
 
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
@@ -331,6 +333,14 @@ namespace SICIApp
             // Footable alert
             bundles.Add(new ScriptBundle("~/plugins/footable").Include(
                       "~/Scripts/plugins/footable/footable.all.min.js"));
+
+            // Select2 Styless
+            bundles.Add(new StyleBundle("~/plugins/select2Styles").Include(
+                      "~/Content/plugins/select2/select2.min.css"));
+
+            // Select2
+            bundles.Add(new ScriptBundle("~/plugins/select2").Include(
+                      "~/Scripts/plugins/select2/select2.full.min.js"));
 
         }
     }

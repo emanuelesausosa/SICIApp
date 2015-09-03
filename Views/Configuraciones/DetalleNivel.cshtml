@@ -1,0 +1,91 @@
+﻿@model SICIApp.Models.PRO_NIVELMODEL
+
+@{
+    ViewBag.Title = "Detalle Nivel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Detalle Nivel</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "Niveles")
+            </li>
+            <li class="active">
+                <strong>Detalle Nivel</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalle Nivel</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DIASESTIMADOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIASESTIMADOS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDFASE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDFASE)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "EditarNivel", new { ID = Model.ID }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Todos", "Niveles", null, new { @class = "btn btn-white"})
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

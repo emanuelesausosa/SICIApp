@@ -21,6 +21,12 @@ namespace SICIApp.Entities
         public Nullable<bool> PROBLEMAMENTAL { get; set; }
         public Nullable<bool> TRATAMIENTOMEDICO { get; set; }
         public Nullable<System.DateTime> FECHADIAGNOSTICO { get; set; }
+        public string EXPLIQUEPROBLEMAS { get; set; }
+        public string LUGARTRATAMIENTO { get; set; }
+        public Nullable<int> ANIOTRATAMIENTO { get; set; }
+        public Nullable<int> ABSTINENCIADIAS { get; set; }
+        public Nullable<int> ABSTINENCIASEMANAS { get; set; }
+        public Nullable<int> ABSTINENCIAMESES { get; set; }
     
         public virtual INGRESO INGRESO { get; set; }
     }

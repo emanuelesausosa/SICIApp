@@ -194,6 +194,60 @@
     <Property Name="DESCRIPCION" Type="text" />
     <Property Name="FECHADIAGNOSTICO" Type="datetime" />
   </EntityType>
+  <EntityType Name="PSQ_DETALLEENFERMEDADES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PSQ_EXAMENPSICOPATOLOGICO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="COOPERA" Type="bit" />
+    <Property Name="DETALLECOOPERA" Type="text" />
+    <Property Name="TEP" Type="varchar" MaxLength="250" />
+    <Property Name="LENGUAJE" Type="varchar" MaxLength="250" />
+    <Property Name="DESORDENPENSAMIENTO" Type="varchar" MaxLength="250" />
+    <Property Name="INTELECTO" Type="varchar" MaxLength="250" />
+    <Property Name="AFECTO" Type="varchar" MaxLength="250" />
+    <Property Name="AUTOCOMPRENSION" Type="varchar" MaxLength="250" />
+    <Property Name="NIVELDROGADICCION" Type="varchar" MaxLength="250" />
+    <Property Name="OTROS" Type="varchar" MaxLength="250" />
+    <Property Name="NEUROLOGICOS" Type="varchar" MaxLength="250" />
+    <Property Name="DIAGNOSTICO" Type="varchar" MaxLength="250" />
+    <Property Name="RECOMENDACIONES" Type="text" />
+    <Property Name="TRATAMIENTO" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PSQ_HISTORIALINGRESOSPV">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="HAINGRESADOANTES" Type="bit" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PSQ_OBSERVACIONFINAL">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PSQ_SINTOMASPRINCIPALES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="text" />
+    <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+  </EntityType>
   <EntityType Name="CENTROTERAPEUTICO">
     <Key>
       <PropertyRef Name="ID" />
@@ -339,6 +393,7 @@
     <Property Name="HAESTADOPRESO" Type="bit" />
     <Property Name="DESTALLESRECLUSION" Type="text" />
     <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+    <Property Name="JUICIOPENDIENTE" Type="bit" />
   </EntityType>
   <EntityType Name="DATOSPROBLEMADROGAS_CONSUMO">
     <Key>
@@ -351,6 +406,12 @@
     <Property Name="PROBLEMAMENTAL" Type="bit" />
     <Property Name="TRATAMIENTOMEDICO" Type="bit" />
     <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+    <Property Name="EXPLIQUEPROBLEMAS" Type="nvarchar(max)" />
+    <Property Name="LUGARTRATAMIENTO" Type="varchar" MaxLength="50" />
+    <Property Name="ANIOTRATAMIENTO" Type="int" />
+    <Property Name="ABSTINENCIADIAS" Type="int" />
+    <Property Name="ABSTINENCIASEMANAS" Type="int" />
+    <Property Name="ABSTINENCIAMESES" Type="int" />
   </EntityType>
   <EntityType Name="DATOSPROBLEMADROGAS_CONSUMODROGAS">
     <Key>
@@ -403,6 +464,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDESTUDIOS" Type="int" />
     <Property Name="IDESCOLARIDAD" Type="int" />
+    <Property Name="DESCRIPCION" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
     <Key>
@@ -411,6 +473,7 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDESTUDIOS" Type="int" />
     <Property Name="IDOFICIOS" Type="int" />
+    <Property Name="DESCRIPCION" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="INFORMACIONACADEMICA_OFICIOS">
     <Key>
@@ -446,6 +509,7 @@
     <Property Name="DISPUESTOASUJETARSEPV" Type="bit" />
     <Property Name="FECHAFIRMAACUERDO" Type="datetime" />
     <Property Name="FECHADIAGNOSTICO" Type="datetime" />
+    <Property Name="DESCRIPCION" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="TIPOSDOCUMENTO">
     <Key>
@@ -489,6 +553,251 @@
     <Property Name="PRIMERAPELLIDO" Type="varchar" MaxLength="25" />
     <Property Name="SEGUNDOAPELLIDO" Type="varchar" MaxLength="25" />
     <Property Name="NACIONALIDAD" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="PRO_CRITERIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="PRO_FASE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="PRO_NIVEL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="DIASESTIMADOS" Type="int" />
+    <Property Name="IDFASE" Type="int" />
+  </EntityType>
+  <EntityType Name="PRO_NIVELCRITERIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCRITERIO" Type="int" />
+    <Property Name="IDNIVEL" Type="int" />
+  </EntityType>
+  <EntityType Name="PRO_PROMOCIONNIVEL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDNIVEL" Type="int" />
+    <Property Name="FECHAPROMOCION" Type="datetime" />
+    <Property Name="FECHACLAUSURA" Type="datetime" />
+    <Property Name="URLDIPLOMA" Type="varchar" MaxLength="255" />
+    <Property Name="OBSERVACIONES" Type="varchar(max)" />
+    <Property Name="FECHAREGISTRO" Type="datetime" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+    <Property Name="MONITORRESPONSABLE" Type="varchar" MaxLength="50" />
+    <Property Name="CALIFICACION" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="ESTADO" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="TER_ACTITUD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="CALIFICACIONESTIMADA" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="IDCATEGORIAASPECTO" Type="int" />
+  </EntityType>
+  <EntityType Name="TER_AREACRITERIOCALIF">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDAREA" Type="int" />
+    <Property Name="IDCALIFAREA" Type="int" />
+    <Property Name="CALIFICACION" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="TER_ASPECTOEXAMENPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDASPECTO" Type="int" />
+    <Property Name="IDEXAMEN" Type="int" />
+    <Property Name="CALIFICACION" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="FECHA" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TER_ASPECTOPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="CALIFICACIONESPERADA" Type="int" />
+    <Property Name="IDCATEGORIAPERSONALIDAD" Type="int" />
+  </EntityType>
+  <EntityType Name="TER_CALIFAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="OBSERVACIONES" Type="varchar(max)" />
+    <Property Name="CALIFICACIONTOTAL" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="IDINGRESO" Type="int" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAASPECTOCARCTER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAFALTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TER_CRITERIOCALIFICACION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="IDCATEGORIAAREA" Type="int" />
+  </EntityType>
+  <EntityType Name="TER_CURSO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TER_EVALUACIONCARACTER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDACTITUD" Type="int" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="CALIFICACION" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="TER_EXAMENPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="CALIFICAIONTOTAL" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="OBSERVACIONES" Type="varchar(max)" />
+    <Property Name="PERSONALIADDOMINANTE" Type="varchar" MaxLength="50" />
+    <Property Name="PERSONALIDADSEGUNDA" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TER_FALTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCATEGORIAFALTA" Type="int" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="FECHAAPLICADA" Type="datetime" />
+    <Property Name="MONITOR" Type="varchar" MaxLength="50" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TER_INCIDENCIAAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDCATEGORIAAREA" Type="int" />
+    <Property Name="FECHADUAGNOSTICO" Type="datetime" />
+    <Property Name="MONITOR" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MOTIVOVISITA" Type="varchar" MaxLength="100" />
+    <Property Name="DETALLEGENRAL" Type="varchar(max)" />
+    <Property Name="ACTITUDESMOSTRADAS" Type="varchar(max)" />
+    <Property Name="RECOMENDACIONES" Type="varchar(max)" />
+    <Property Name="EXPLICACIONCONDUCTA" Type="varchar(max)" />
+    <Property Name="PSICOTERAPIA" Type="varchar(max)" />
+    <Property Name="PRONOSTICO" Type="varchar(max)" />
+    <Property Name="ACTITUD" Type="bit" />
+    <Property Name="ACCIONREALIZADA" Type="varchar(max)" />
+    <Property Name="OBSERVACIONEXTRA" Type="varchar(max)" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="50" />
+    <Property Name="FECHAREGISTRO" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TER_INSTRUCTOR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="INSTITUCION" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TER_MATRICULA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCURSO" Type="int" />
+    <Property Name="IDINSTRUCTOR" Type="int" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="CALIFICACIONTOTAL" Type="int" />
+    <Property Name="OBSERVACIONES" Type="varchar(max)" />
+    <Property Name="NOMBREMATRICULA" Type="varchar" MaxLength="50" />
+    <Property Name="FECHAINICIO" Type="datetime" />
+    <Property Name="FECHACLAUSURA" Type="datetime" />
+    <Property Name="DIAS" Type="varchar" MaxLength="100" />
+    <Property Name="HORAINICIO" Type="time" Precision="7" />
+    <Property Name="HORAFIN" Type="time" Precision="7" />
+    <Property Name="URLCERTIFICADO" Type="varchar" MaxLength="255" />
+    <Property Name="ESTADO" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="TER_RESUMENEVOLUCION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDINGRESO" Type="int" />
+    <Property Name="IDCATEGORIAAREA" Type="int" />
+    <Property Name="FECHAULTIMAACTUALIZACION" Type="datetime" />
+    <Property Name="FECHAREGISTRO" Type="datetime" />
+    <Property Name="INICIOPROCESO" Type="varchar(max)" />
+    <Property Name="DURANTEPROCESO" Type="varchar(max)" />
+    <Property Name="FINPROCESO" Type="varchar(max)" />
+    <Property Name="PXSISTFAMILIAR" Type="varchar(max)" />
+    <Property Name="USUARIO" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
     <End Role="APARATOSSISTEMAS_SISTEMAS" Type="Self.APARATOSSISTEMAS_SISTEMAS" Multiplicity="0..1" />
@@ -1050,6 +1359,126 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PRO_NIVEL_PRO_FASE">
+    <End Role="PRO_FASE" Type="Self.PRO_FASE" Multiplicity="0..1" />
+    <End Role="PRO_NIVEL" Type="Self.PRO_NIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_FASE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVEL">
+        <PropertyRef Name="IDFASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_NIVELCRITERIO_PRO_CRITERIO">
+    <End Role="PRO_CRITERIO" Type="Self.PRO_CRITERIO" Multiplicity="0..1" />
+    <End Role="PRO_NIVELCRITERIO" Type="Self.PRO_NIVELCRITERIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_CRITERIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVELCRITERIO">
+        <PropertyRef Name="IDCRITERIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_NIVELCRITERIO_PRO_NIVEL">
+    <End Role="PRO_NIVEL" Type="Self.PRO_NIVEL" Multiplicity="0..1" />
+    <End Role="PRO_NIVELCRITERIO" Type="Self.PRO_NIVELCRITERIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVELCRITERIO">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_PROMOCIONNIVEL_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="PRO_PROMOCIONNIVEL" Type="Self.PRO_PROMOCIONNIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_PROMOCIONNIVEL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_PROMOCIONNIVEL_PRO_NIVEL">
+    <End Role="PRO_NIVEL" Type="Self.PRO_NIVEL" Multiplicity="0..1" />
+    <End Role="PRO_PROMOCIONNIVEL" Type="Self.PRO_PROMOCIONNIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_PROMOCIONNIVEL">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_DETALLEENFERMEDADES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="PSQ_DETALLEENFERMEDADES" Type="Self.PSQ_DETALLEENFERMEDADES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_DETALLEENFERMEDADES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="PSQ_EXAMENPSICOPATOLOGICO" Type="Self.PSQ_EXAMENPSICOPATOLOGICO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_EXAMENPSICOPATOLOGICO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_HISTORIALINGRESOSPV_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="PSQ_HISTORIALINGRESOSPV" Type="Self.PSQ_HISTORIALINGRESOSPV" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_HISTORIALINGRESOSPV">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_OBSERVACIONFINAL_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="PSQ_OBSERVACIONFINAL" Type="Self.PSQ_OBSERVACIONFINAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_OBSERVACIONFINAL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_SINTOMASPRINCIPALES_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
+    <End Role="PSQ_SINTOMASPRINCIPALES" Type="Self.PSQ_SINTOMASPRINCIPALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_SINTOMASPRINCIPALES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_RECOMENDACIONES_INGRESO">
     <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="1" />
     <End Role="RECOMENDACIONES" Type="Self.RECOMENDACIONES" Multiplicity="0..1" />
@@ -1071,6 +1500,246 @@
       </Principal>
       <Dependent Role="SIGNOSVITALES">
         <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER">
+    <End Role="TER_CATEGORIAASPECTOCARCTER" Type="Self.TER_CATEGORIAASPECTOCARCTER" Multiplicity="0..1" />
+    <End Role="TER_ACTITUD" Type="Self.TER_ACTITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAASPECTOCARCTER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ACTITUD">
+        <PropertyRef Name="IDCATEGORIAASPECTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_AREACRITERIOCALIF_TER_CALIFAREA">
+    <End Role="TER_CALIFAREA" Type="Self.TER_CALIFAREA" Multiplicity="0..1" />
+    <End Role="TER_AREACRITERIOCALIF" Type="Self.TER_AREACRITERIOCALIF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CALIFAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_AREACRITERIOCALIF">
+        <PropertyRef Name="IDCALIFAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION">
+    <End Role="TER_CRITERIOCALIFICACION" Type="Self.TER_CRITERIOCALIFICACION" Multiplicity="0..1" />
+    <End Role="TER_AREACRITERIOCALIF" Type="Self.TER_AREACRITERIOCALIF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CRITERIOCALIFICACION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_AREACRITERIOCALIF">
+        <PropertyRef Name="IDAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD">
+    <End Role="TER_ASPECTOPERSONALIDAD" Type="Self.TER_ASPECTOPERSONALIDAD" Multiplicity="0..1" />
+    <End Role="TER_ASPECTOEXAMENPERSONALIDAD" Type="Self.TER_ASPECTOEXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_ASPECTOPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOEXAMENPERSONALIDAD">
+        <PropertyRef Name="IDASPECTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD">
+    <End Role="TER_EXAMENPERSONALIDAD" Type="Self.TER_EXAMENPERSONALIDAD" Multiplicity="0..1" />
+    <End Role="TER_ASPECTOEXAMENPERSONALIDAD" Type="Self.TER_ASPECTOEXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_EXAMENPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOEXAMENPERSONALIDAD">
+        <PropertyRef Name="IDEXAMEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD">
+    <End Role="TER_CATEGORIAPERSONALIDAD" Type="Self.TER_CATEGORIAPERSONALIDAD" Multiplicity="0..1" />
+    <End Role="TER_ASPECTOPERSONALIDAD" Type="Self.TER_ASPECTOPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOPERSONALIDAD">
+        <PropertyRef Name="IDCATEGORIAPERSONALIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_CALIFAREA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_CALIFAREA" Type="Self.TER_CALIFAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_CALIFAREA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA">
+    <End Role="TER_CATEGORIAAREA" Type="Self.TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Role="TER_CRITERIOCALIFICACION" Type="Self.TER_CRITERIOCALIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_CRITERIOCALIFICACION">
+        <PropertyRef Name="IDCATEGORIAAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EVALUACIONCARACTER_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_EVALUACIONCARACTER" Type="Self.TER_EVALUACIONCARACTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EVALUACIONCARACTER">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EVALUACIONCARACTER_TER_ACTITUD">
+    <End Role="TER_ACTITUD" Type="Self.TER_ACTITUD" Multiplicity="0..1" />
+    <End Role="TER_EVALUACIONCARACTER" Type="Self.TER_EVALUACIONCARACTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_ACTITUD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EVALUACIONCARACTER">
+        <PropertyRef Name="IDACTITUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EXAMENPERSONALIDAD_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_EXAMENPERSONALIDAD" Type="Self.TER_EXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EXAMENPERSONALIDAD">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_FALTA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_FALTA_TER_CATEGORIAFALTA">
+    <End Role="TER_CATEGORIAFALTA" Type="Self.TER_CATEGORIAFALTA" Multiplicity="0..1" />
+    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAFALTA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDCATEGORIAFALTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_INCIDENCIAAREA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_INCIDENCIAAREA" Type="Self.TER_INCIDENCIAAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_INCIDENCIAAREA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA">
+    <End Role="TER_CATEGORIAAREA" Type="Self.TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Role="TER_INCIDENCIAAREA" Type="Self.TER_INCIDENCIAAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_INCIDENCIAAREA">
+        <PropertyRef Name="IDCATEGORIAAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_MATRICULA" Type="Self.TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_TER_CURSO">
+    <End Role="TER_CURSO" Type="Self.TER_CURSO" Multiplicity="0..1" />
+    <End Role="TER_MATRICULA" Type="Self.TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CURSO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDCURSO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_TER_INSTRUCTOR">
+    <End Role="TER_INSTRUCTOR" Type="Self.TER_INSTRUCTOR" Multiplicity="0..1" />
+    <End Role="TER_MATRICULA" Type="Self.TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_INSTRUCTOR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDINSTRUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_RESUMENEVOLUCION_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_RESUMENEVOLUCION" Type="Self.TER_RESUMENEVOLUCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_RESUMENEVOLUCION">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA">
+    <End Role="TER_CATEGORIAAREA" Type="Self.TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Role="TER_RESUMENEVOLUCION" Type="Self.TER_RESUMENEVOLUCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_RESUMENEVOLUCION">
+        <PropertyRef Name="IDCATEGORIAAREA" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1178,6 +1847,24 @@
     <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
   </Function>
+  <Function Name="spInsertNewINGConsumoDrogas_drogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="IDDROGA" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewINGEstudiosEscolaridades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDESTUDIOS" Type="int" Mode="In" />
+    <Parameter Name="IDESCOLARIDAD" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewINGEstudiosOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDESTUDIOS" Type="int" Mode="In" />
+    <Parameter Name="IDOFICIOS" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewINGIngresoCondicionFisica_InternoEnfermedades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="IDENFERMEDAD" Type="int" Mode="In" />
+  </Function>
   <Function Name="spInsertNewIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NUMEXPEDIENTE" Type="varchar" Mode="In" />
     <Parameter Name="FECHAUTORIZACION" Type="datetime" Mode="In" />
@@ -1194,6 +1881,58 @@
   <Function Name="spInsertNewOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPROFase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPRONivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DIASESTIMADOS" Type="int" Mode="In" />
+    <Parameter Name="IDFASE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERActitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESTIMADA" Type="decimal" Mode="In" />
+    <Parameter Name="IDCATEGORIAASPECTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERAspectoCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERAspectoPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaAspectoCaracter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaFalta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaPesonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="INSTITUCION" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spInsertNewTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
@@ -1244,6 +1983,11 @@
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
+  <Function Name="spUpdateDatosSocioEconomicosIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="CONDICIONFAMILIAR" Type="text" Mode="In" />
+    <Parameter Name="SITUACIONSOCIAL" Type="text" Mode="In" />
+  </Function>
   <Function Name="spUpdateDocumentosIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -1251,6 +1995,26 @@
     <Parameter Name="FECHACARGADO" Type="datetime" Mode="In" />
     <Parameter Name="IDINGRESO" Type="int" Mode="In" />
     <Parameter Name="IDTIPODOCUMENTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateEstadoMental" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateEvaluacionMedicaDetalle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="OBSERVACIONES" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateEvMedAparatosSistemas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="DIAGNOSTICO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateEvMedSignosVitales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="PESO" Type="decimal" Mode="In" />
+    <Parameter Name="FRECUENCIACARDIACA" Type="decimal" Mode="In" />
+    <Parameter Name="PRESIONARTERIAL" Type="decimal" Mode="In" />
+    <Parameter Name="FECHADIAGNOSTICO" Type="datetime" Mode="In" />
+    <Parameter Name="MEDICORESPONSABLE" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spUpdateExamenContenido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPREGUNTA" Type="int" Mode="In" />
@@ -1269,10 +2033,62 @@
     <Parameter Name="SEGUNDOAPELLIDO" Type="varchar" Mode="In" />
     <Parameter Name="NACIONALIDAD" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="spUpdateHistorialPersonalFamiliar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateImpresionDiagnostica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
   <Function Name="spUpdateInfoAcadmEsacolaridad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBREESCOLARIDAD" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONESCOLARIDAD" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateINGConsumoDrogas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="EDADCOMIENZO" Type="int" Mode="In" />
+    <Parameter Name="INTENTODEJARLAS" Type="bit" Mode="In" />
+    <Parameter Name="PROBLEMAFISICO" Type="bit" Mode="In" />
+    <Parameter Name="PROBLEMAMENTAL" Type="bit" Mode="In" />
+    <Parameter Name="TRATAMIENTOMEDICO" Type="bit" Mode="In" />
+    <Parameter Name="EXPLIQUEPROBLEMAS" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="LUGARTRATAMIENTO" Type="varchar" Mode="In" />
+    <Parameter Name="ANIOTRATAMIENTO" Type="int" Mode="In" />
+    <Parameter Name="ABSTINENCIADIAS" Type="int" Mode="In" />
+    <Parameter Name="ABSTINENCIASEMANAS" Type="int" Mode="In" />
+    <Parameter Name="ABSTINENCIAMESES" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateINGDatosDelictivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="HACOMETIDO" Type="bit" Mode="In" />
+    <Parameter Name="DETALLESACTOS" Type="text" Mode="In" />
+    <Parameter Name="HAESTADOPRESO" Type="bit" Mode="In" />
+    <Parameter Name="DESTALLESRECLUSION" Type="text" Mode="In" />
+    <Parameter Name="JUICIOPENDIENTE" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="spUpdateINGIngresoCondicionFisica_Ingreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="PADECE" Type="bit" Mode="In" />
+    <Parameter Name="DETALLE" Type="text" Mode="In" />
+    <Parameter Name="RECIBIOTRATAMIENTO" Type="bit" Mode="In" />
+    <Parameter Name="TIENEIMPEDIMENTOS" Type="bit" Mode="In" />
+    <Parameter Name="DUERMEBIEN" Type="bit" Mode="In" />
+    <Parameter Name="PADECENERVIOS" Type="bit" Mode="In" />
+    <Parameter Name="HASIDOOPERADO" Type="bit" Mode="In" />
+    <Parameter Name="ONSERVACIONESGENERALES" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateINGIngresoEstudios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="SABELEERYESCRIBIR" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="spUpdateINGMotivosIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="VOLUNTARIAMENTE" Type="bit" Mode="In" />
+    <Parameter Name="DISPUESTOASUJETARSEPV" Type="bit" Mode="In" />
+    <Parameter Name="FECHAFIRMAACUERDO" Type="datetime" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
   </Function>
   <Function Name="spUpdateIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -1288,10 +2104,69 @@
     <Parameter Name="ACEPTADO" Type="bit" Mode="In" />
     <Parameter Name="STATUSFLOW" Type="int" Mode="In" />
   </Function>
+  <Function Name="spUpdateObservacionPreliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="PROBLEMAS" Type="text" Mode="In" />
+  </Function>
   <Function Name="spUpdateOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePROFase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePRONivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DIASESTIMADOS" Type="int" Mode="In" />
+    <Parameter Name="IDFASE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePSQDetallesEnfermedades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePSQExamenPsicopatologico" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="COOPERA" Type="bit" Mode="In" />
+    <Parameter Name="DETALLECOOPERA" Type="text" Mode="In" />
+    <Parameter Name="TEP" Type="varchar" Mode="In" />
+    <Parameter Name="LENGUAJE" Type="varchar" Mode="In" />
+    <Parameter Name="DESORDENPENSAMIENTO" Type="varchar" Mode="In" />
+    <Parameter Name="INTELECTO" Type="varchar" Mode="In" />
+    <Parameter Name="AFECTO" Type="varchar" Mode="In" />
+    <Parameter Name="AUTOCOMPRENSION" Type="varchar" Mode="In" />
+    <Parameter Name="NIVELDROGADICCION" Type="varchar" Mode="In" />
+    <Parameter Name="OTROS" Type="varchar" Mode="In" />
+    <Parameter Name="NEUROLOGICOS" Type="varchar" Mode="In" />
+    <Parameter Name="DIAGNOSTICO" Type="varchar" Mode="In" />
+    <Parameter Name="RECOMENDACIONES" Type="text" Mode="In" />
+    <Parameter Name="TRATAMIENTO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePSQHistorialIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="HAINGRESADOANTES" Type="bit" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePSQObservacionFinal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePSQSintomasPrincipales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateRecomendaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
   <Function Name="spUpdateSICIPERSONADatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1311,6 +2186,52 @@
     <Parameter Name="IDCIUDADNATAL" Type="int" Mode="In" />
     <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
     <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERActitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESTIMADA" Type="decimal" Mode="In" />
+    <Parameter Name="IDCATEGORIAASPECTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERAspectoCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERAspectoPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaAspectoCaracter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaFalta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="INSTITUCION" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spUpdateTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -1350,6 +2271,11 @@
     <EntitySet Name="IMPRESIONDIAGNOSTICA" EntityType="Self.IMPRESIONDIAGNOSTICA" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
     <EntitySet Name="OBERVACIONPRELIMINAR" EntityType="Self.OBERVACIONPRELIMINAR" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
     <EntitySet Name="RECOMENDACIONES" EntityType="Self.RECOMENDACIONES" Schema="SICI_EVALUACIONPSICOLOGICA" store:Type="Tables" />
+    <EntitySet Name="PSQ_DETALLEENFERMEDADES" EntityType="Self.PSQ_DETALLEENFERMEDADES" Schema="SICI_EVALUACIONPSIQUIATRICA" store:Type="Tables" />
+    <EntitySet Name="PSQ_EXAMENPSICOPATOLOGICO" EntityType="Self.PSQ_EXAMENPSICOPATOLOGICO" Schema="SICI_EVALUACIONPSIQUIATRICA" store:Type="Tables" />
+    <EntitySet Name="PSQ_HISTORIALINGRESOSPV" EntityType="Self.PSQ_HISTORIALINGRESOSPV" Schema="SICI_EVALUACIONPSIQUIATRICA" store:Type="Tables" />
+    <EntitySet Name="PSQ_OBSERVACIONFINAL" EntityType="Self.PSQ_OBSERVACIONFINAL" Schema="SICI_EVALUACIONPSIQUIATRICA" store:Type="Tables" />
+    <EntitySet Name="PSQ_SINTOMASPRINCIPALES" EntityType="Self.PSQ_SINTOMASPRINCIPALES" Schema="SICI_EVALUACIONPSIQUIATRICA" store:Type="Tables" />
     <EntitySet Name="CENTROTERAPEUTICO" EntityType="Self.CENTROTERAPEUTICO" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="CITY" EntityType="Self.CITY" Schema="SICI_GENERALES" store:Type="Tables" />
     <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="SICI_GENERALES" store:Type="Tables" />
@@ -1377,6 +2303,29 @@
     <EntitySet Name="TIPOSDOCUMENTO" EntityType="Self.TIPOSDOCUMENTO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="DATOSPERSONALES1" EntityType="Self.DATOSPERSONALES1" Schema="SICI_PERSONA" Table="DATOSPERSONALES" store:Type="Tables" />
     <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="SICI_PERSONA" store:Type="Tables" />
+    <EntitySet Name="PRO_CRITERIO" EntityType="Self.PRO_CRITERIO" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="PRO_FASE" EntityType="Self.PRO_FASE" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="PRO_NIVEL" EntityType="Self.PRO_NIVEL" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="PRO_NIVELCRITERIO" EntityType="Self.PRO_NIVELCRITERIO" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="PRO_PROMOCIONNIVEL" EntityType="Self.PRO_PROMOCIONNIVEL" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="TER_ACTITUD" EntityType="Self.TER_ACTITUD" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_AREACRITERIOCALIF" EntityType="Self.TER_AREACRITERIOCALIF" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_ASPECTOEXAMENPERSONALIDAD" EntityType="Self.TER_ASPECTOEXAMENPERSONALIDAD" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_ASPECTOPERSONALIDAD" EntityType="Self.TER_ASPECTOPERSONALIDAD" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CALIFAREA" EntityType="Self.TER_CALIFAREA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CATEGORIAAREA" EntityType="Self.TER_CATEGORIAAREA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CATEGORIAASPECTOCARCTER" EntityType="Self.TER_CATEGORIAASPECTOCARCTER" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CATEGORIAFALTA" EntityType="Self.TER_CATEGORIAFALTA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CATEGORIAPERSONALIDAD" EntityType="Self.TER_CATEGORIAPERSONALIDAD" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CRITERIOCALIFICACION" EntityType="Self.TER_CRITERIOCALIFICACION" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_CURSO" EntityType="Self.TER_CURSO" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_EVALUACIONCARACTER" EntityType="Self.TER_EVALUACIONCARACTER" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_EXAMENPERSONALIDAD" EntityType="Self.TER_EXAMENPERSONALIDAD" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_FALTA" EntityType="Self.TER_FALTA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_INCIDENCIAAREA" EntityType="Self.TER_INCIDENCIAAREA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_INSTRUCTOR" EntityType="Self.TER_INSTRUCTOR" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_MATRICULA" EntityType="Self.TER_MATRICULA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_RESUMENEVOLUCION" EntityType="Self.TER_RESUMENEVOLUCION" Schema="SICI_TERAPIA" store:Type="Tables" />
     <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="Self.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
       <End Role="APARATOSSISTEMAS_SISTEMAS" EntitySet="APARATOSSISTEMAS_SISTEMAS" />
       <End Role="APARATOSSISTEMAS" EntitySet="APARATOSSISTEMAS" />
@@ -1561,6 +2510,46 @@
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="OBERVACIONPRELIMINAR" EntitySet="OBERVACIONPRELIMINAR" />
     </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVEL_PRO_FASE" Association="Self.FK_PRO_NIVEL_PRO_FASE">
+      <End Role="PRO_FASE" EntitySet="PRO_FASE" />
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVELCRITERIO_PRO_CRITERIO" Association="Self.FK_PRO_NIVELCRITERIO_PRO_CRITERIO">
+      <End Role="PRO_CRITERIO" EntitySet="PRO_CRITERIO" />
+      <End Role="PRO_NIVELCRITERIO" EntitySet="PRO_NIVELCRITERIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVELCRITERIO_PRO_NIVEL" Association="Self.FK_PRO_NIVELCRITERIO_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_NIVELCRITERIO" EntitySet="PRO_NIVELCRITERIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_PROMOCIONNIVEL_INGRESO" Association="Self.FK_PRO_PROMOCIONNIVEL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PRO_PROMOCIONNIVEL" EntitySet="PRO_PROMOCIONNIVEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" Association="Self.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_PROMOCIONNIVEL" EntitySet="PRO_PROMOCIONNIVEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_DETALLEENFERMEDADES_INGRESO" Association="Self.FK_PSQ_DETALLEENFERMEDADES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_DETALLEENFERMEDADES" EntitySet="PSQ_DETALLEENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO" Association="Self.FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_EXAMENPSICOPATOLOGICO" EntitySet="PSQ_EXAMENPSICOPATOLOGICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_HISTORIALINGRESOSPV_INGRESO" Association="Self.FK_PSQ_HISTORIALINGRESOSPV_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_HISTORIALINGRESOSPV" EntitySet="PSQ_HISTORIALINGRESOSPV" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_OBSERVACIONFINAL_INGRESO" Association="Self.FK_PSQ_OBSERVACIONFINAL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_OBSERVACIONFINAL" EntitySet="PSQ_OBSERVACIONFINAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_SINTOMASPRINCIPALES_INGRESO" Association="Self.FK_PSQ_SINTOMASPRINCIPALES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_SINTOMASPRINCIPALES" EntitySet="PSQ_SINTOMASPRINCIPALES" />
+    </AssociationSet>
     <AssociationSet Name="FK_RECOMENDACIONES_INGRESO" Association="Self.FK_RECOMENDACIONES_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="RECOMENDACIONES" EntitySet="RECOMENDACIONES" />
@@ -1568,6 +2557,86 @@
     <AssociationSet Name="FK_SIGNOSVITALES_INGRESO" Association="Self.FK_SIGNOSVITALES_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="SIGNOSVITALES" EntitySet="SIGNOSVITALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER" Association="Self.FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER">
+      <End Role="TER_CATEGORIAASPECTOCARCTER" EntitySet="TER_CATEGORIAASPECTOCARCTER" />
+      <End Role="TER_ACTITUD" EntitySet="TER_ACTITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_AREACRITERIOCALIF_TER_CALIFAREA" Association="Self.FK_TER_AREACRITERIOCALIF_TER_CALIFAREA">
+      <End Role="TER_CALIFAREA" EntitySet="TER_CALIFAREA" />
+      <End Role="TER_AREACRITERIOCALIF" EntitySet="TER_AREACRITERIOCALIF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION" Association="Self.FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION">
+      <End Role="TER_CRITERIOCALIFICACION" EntitySet="TER_CRITERIOCALIFICACION" />
+      <End Role="TER_AREACRITERIOCALIF" EntitySet="TER_AREACRITERIOCALIF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD" Association="Self.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD">
+      <End Role="TER_ASPECTOPERSONALIDAD" EntitySet="TER_ASPECTOPERSONALIDAD" />
+      <End Role="TER_ASPECTOEXAMENPERSONALIDAD" EntitySet="TER_ASPECTOEXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD" Association="Self.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD">
+      <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
+      <End Role="TER_ASPECTOEXAMENPERSONALIDAD" EntitySet="TER_ASPECTOEXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD" Association="Self.FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD">
+      <End Role="TER_CATEGORIAPERSONALIDAD" EntitySet="TER_CATEGORIAPERSONALIDAD" />
+      <End Role="TER_ASPECTOPERSONALIDAD" EntitySet="TER_ASPECTOPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_CALIFAREA_INGRESO" Association="Self.FK_TER_CALIFAREA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_CALIFAREA" EntitySet="TER_CALIFAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA" Association="Self.FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_CRITERIOCALIFICACION" EntitySet="TER_CRITERIOCALIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EVALUACIONCARACTER_INGRESO" Association="Self.FK_TER_EVALUACIONCARACTER_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_EVALUACIONCARACTER" EntitySet="TER_EVALUACIONCARACTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EVALUACIONCARACTER_TER_ACTITUD" Association="Self.FK_TER_EVALUACIONCARACTER_TER_ACTITUD">
+      <End Role="TER_ACTITUD" EntitySet="TER_ACTITUD" />
+      <End Role="TER_EVALUACIONCARACTER" EntitySet="TER_EVALUACIONCARACTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EXAMENPERSONALIDAD_INGRESO" Association="Self.FK_TER_EXAMENPERSONALIDAD_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_INGRESO" Association="Self.FK_TER_FALTA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_TER_CATEGORIAFALTA" Association="Self.FK_TER_FALTA_TER_CATEGORIAFALTA">
+      <End Role="TER_CATEGORIAFALTA" EntitySet="TER_CATEGORIAFALTA" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_INCIDENCIAAREA_INGRESO" Association="Self.FK_TER_INCIDENCIAAREA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA" Association="Self.FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_INGRESO" Association="Self.FK_TER_MATRICULA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_TER_CURSO" Association="Self.FK_TER_MATRICULA_TER_CURSO">
+      <End Role="TER_CURSO" EntitySet="TER_CURSO" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_TER_INSTRUCTOR" Association="Self.FK_TER_MATRICULA_TER_INSTRUCTOR">
+      <End Role="TER_INSTRUCTOR" EntitySet="TER_INSTRUCTOR" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_RESUMENEVOLUCION_INGRESO" Association="Self.FK_TER_RESUMENEVOLUCION_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_RESUMENEVOLUCION" EntitySet="TER_RESUMENEVOLUCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA" Association="Self.FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_RESUMENEVOLUCION" EntitySet="TER_RESUMENEVOLUCION" />
     </AssociationSet>
     <AssociationSet Name="FK_USUARIOCENTROCONSULTA_AspNetUsers" Association="Self.FK_USUARIOCENTROCONSULTA_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

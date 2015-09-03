@@ -40,6 +40,7 @@ namespace SICIApp.Infrastructure
         private void AddBindings()
         {
             ninjectKernel.Bind<ILogger>().To<Logger>();
+            ninjectKernel.Bind<IDBFactory>().To<DBFactory>();
             
         }
     }
