@@ -137,15 +137,24 @@
 
 
         <td>
-			@Html.ActionLink("Detalles", "Detalles", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
+			@Html.ActionLink("Detalles", "Detalles", new { ID = item.ID }, new { @class = "btn btn-warning btn-sm" })
             @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
-            <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>
+          @* <!-- <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>-->*@
+            <button type="button" id="new-insert" data-id="@item.ID" class="btn-update" data-toggle="modal" data-target="#myModal2">
+                Procesar
+            </button>
+            
         </td>
     </tr>
 }
 
 </table>
-
+                    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" id="new-insert-container">
+                            <div class="modal-content animated flipInY" id="new-insert-diag">
+                            </div>
+                        </div>
+                    </div>             
                 </div>
             </div>
         </div>
@@ -156,6 +165,7 @@
     @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
     @Styles.Render("~/plugins/wizardStepsStyles")
     @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/plugins/footableStyles")
 }
 
 @section Scripts {
@@ -163,37 +173,55 @@
 @Scripts.Render("~/plugins/iCheck")
 @Scripts.Render("~/plugins/validate")
 @Scripts.Render("~/plugins/toastr")
+@Scripts.Render("~/plugins/footable")
 
     <script type="text/javascript">
-        $(function () {
-            $('.btn-update').click(function () {
-                var element = this;
-                // mensaje de procesando solocitud
-                toastr.info('Procesando', 'se ha procesado la solicitud');
+        $(document).ready(function () {
 
-                $.ajax({
-                    url: '/SolicitudIngreso/ProcesarSolicitud',
-                    type: 'GET',
-                    //contentType: 'application/json; charset=utf-8',
-                    datatype: 'json',
-                    data: { 'IDINGRESO': $(this).attr('data-id') },
-                    success: function (data) {
-                        if(data.success)
-                        {
-                            toastr.success(data.message, 'Éxito');
-                        }
-                        else
-                        {
-                            toastr.error(data.message,'Error');
-                        }
-                        
-                    },
-                    error: function (req, status, err) {
-                        alert('error desconocido! ' + err);                        
-                    }
-                    
+            $('.footable').footable();
+            $('.footable2').footable();
+
+
+            $('.btn-update').click(function () {
+                var url = "/SolicitudIngreso/ProcesarSolicitudAlterna";
+                var ID = $(this).attr('data-id');
+                $.get(url + '/' +  ID, function (data) {
+                    $('#new-insert-diag').html(data);
+                    $('#myModal2').modal('show');
                 });
             });
+
         });
+
+        //$(function () {
+        //    $('.btn-update').click(function () {
+        //        var element = this;
+        //        // mensaje de procesando solocitud
+        //        toastr.info('Procesando', 'se ha procesado la solicitud');
+
+        //        $.ajax({
+        //            url: '/SolicitudIngreso/ProcesarSolicitud',
+        //            type: 'GET',
+        //            //contentType: 'application/json; charset=utf-8',
+        //            datatype: 'json',
+        //            data: { 'IDINGRESO': $(this).attr('data-id') },
+        //            success: function (data) {
+        //                if(data.success)
+        //                {
+        //                    toastr.success(data.message, 'Éxito');
+        //                }
+        //                else
+        //                {
+        //                    toastr.error(data.message,'Error');
+        //                }
+                        
+        //            },
+        //            error: function (req, status, err) {
+        //                alert('error desconocido! ' + err);                        
+        //            }
+                    
+        //        });
+        //    });
+        //});
     </script>
     }

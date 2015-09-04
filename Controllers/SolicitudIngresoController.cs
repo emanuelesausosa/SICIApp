@@ -725,7 +725,160 @@ namespace SICIApp.Controllers
             }
 
 
-        } 
+        }
+
+        // get
+        public async Task<ActionResult> ProcesarSolicitudAlterna(int? ID)
+        {
+            try {
+
+                // validaciones del ingreso
+                if (ID == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                // validar la existencia del ingreso
+                // get entity
+                var _entity = await _context.INGRESO.FindAsync(ID);
+
+
+                if (_entity == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var _model = new INGRESOMODEL { 
+                    ID = _entity.ID,
+                    STATUSFLOW = _entity.STATUSFLOW,
+                    FICHA = _entity.FICHA,
+                    OBSERVACIONES = _entity.OBSERVACIONES,
+                    FECHAINGRESOSISTEMA = _entity.FECHAINGRESOSISTEMA
+                    
+                    
+                };
+
+                // luego se comprueba algunos detalles
+                //si ese ingreso está activo
+                //solicitud de ficha por ingreso
+                //_entity.FICHA = await _context.FICHA.FindAsync(_entity.IDPERSONA);
+
+                //
+                _model.actionName = actionNameFunc((int)_model.STATUSFLOW);
+                //return View(_entity);
+                return PartialView("_ProcesarSolicitudAlterna", _model);
+
+            }catch(Exception ex)
+            {
+                return RedirectToAction("DetalleErrorProcesamiento", "SolicitudIngreso", new { detalle = ex.Message });
+            }
+        }
+
+        private string actionNameFunc(int flowId)
+        {
+            //procesamiento
+                /* STATUSFLOW
+                 * SOL -- 1
+                 * MED -- 2
+                 * PSQ -- 3
+                 * PS  -- 4
+                 * TS  -- 5
+                 * CONF -- 6
+                 * DENG -- 7
+                 * ING -- 8
+                 * EGRE -- 9
+                 * */
+
+            string actionName = "";
+
+            switch(flowId)
+            {
+                case 1: actionName = "Solicitudes";
+                    return actionName;
+                case 2: actionName = "Medicina";
+                    return actionName;
+                case 3: actionName = "Psiquiatria";
+                    return actionName;
+                case 4: actionName = "Psicologia";
+                    return actionName;
+                case 5: actionName = "TrabajoSocial";
+                    return actionName;
+                default: return actionName = "Solicitudes";
+            }
+        }
+
+        // post de procesamieto alterno 
+        //
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProcesarSolicitudAlterna(INGRESOMODEL _model)
+        {
+            //sim tiempo
+            Thread.Sleep(2000);
+
+            // retorno de mensaje de error
+            string error = "";
+
+            // validaciones del ingreso
+            if (_model.ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // validar la existencia del ingreso
+            // get entity
+            var _entity = await _context.INGRESO.FindAsync(_model.ID);
+
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            //validar que este ingreso no se haya procesado antes
+            // var _pruebaProcesamiento = await _context.DATOSSOCIOECONOMICOS.FindAsync(IDINGRESO);
+            //var _pruebaProcesamiento = _entity.STATUSFLOW;
+
+            //if (_pruebaProcesamiento > 1)
+            //{
+            //    //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 1 });
+            //    //error al procesar
+            //    error = "error al procesar, ya existe un proceso solicitado!";
+            //    return Json(new { success = false, message = "error al procesar, ya existe un proceso solicitado!" }, JsonRequestBehavior.AllowGet);
+            //}
+
+            try
+            {
+                //procesamiento
+                /* STATUSFLOW
+                 * SOL -- 1
+                 * MED -- 2
+                 * PSQ -- 3
+                 * PS  -- 4
+                 * TS  -- 5
+                 * CONF -- 6
+                 * DENG -- 7
+                 * ING -- 8
+                 * EGRE -- 9
+                 * */
+
+                // BUSCAR PROCEDIMIENTO
+
+                _context.spCrearProcesamientoIngreso(_model.ID, DateTime.Now);
+
+                //return Json(new { success = true, message = "Solicitud Procesada correctamente!" }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction(_model.actionName, "SolicitudIngreso");
+
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 2 });
+               // return Json(new { success = false, message = "No se ha podido procesar la solocitud" }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("DetalleErrorProcesamiento", "SolicitudIngreso", new { detalle = ex.Message });
+            }
+        }
+        
         #endregion
 
         //Acciones de Solicitudes -- flow 2

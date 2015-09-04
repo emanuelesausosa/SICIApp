@@ -1277,6 +1277,7 @@
     <Content Include="Views\Configuraciones\DetalleCurso.cshtml" />
     <Content Include="Views\Configuraciones\NuevoCurso.cshtml" />
     <Content Include="Views\Configuraciones\EditarCurso.cshtml" />
+    <Content Include="Views\SolicitudIngreso\_ProcesarSolicitudAlterna.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />

@@ -196,6 +196,8 @@ namespace SICIApp.Models
             [Display(Name="CENTRO TERAPEUTICO")]
             public string IDCRENTROTERAPEUTICO { get; set; }
 
+            public string actionName {get; set; }
+
             public virtual ICollection<APARATOSSISTEMAS> APARATOSSISTEMAS { get; set; }
             public virtual ICollection<EVALUACIONMEDICADETALLE> EVALUACIONMEDICADETALLE { get; set; }
             public virtual SIGNOSVITALES SIGNOSVITALES { get; set; }
