@@ -567,7 +567,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="VARCHAR" Type="varchar" MaxLength="50" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
     <Property Name="DESCRIPCION" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="PRO_NIVEL">
@@ -1882,6 +1882,58 @@
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
   </Function>
+  <Function Name="spInsertNewPROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPROFase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPRONivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DIASESTIMADOS" Type="int" Mode="In" />
+    <Parameter Name="IDFASE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERActitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESTIMADA" Type="decimal" Mode="In" />
+    <Parameter Name="IDCATEGORIAASPECTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERAspectoCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERAspectoPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaAspectoCaracter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaFalta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCategoriaPesonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewTERInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="INSTITUCION" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="spInsertNewTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRETIPO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
@@ -2061,6 +2113,23 @@
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
   </Function>
+  <Function Name="spUpdatePROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePROFase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePRONivel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="DIASESTIMADOS" Type="int" Mode="In" />
+    <Parameter Name="IDFASE" Type="int" Mode="In" />
+  </Function>
   <Function Name="spUpdatePSQDetallesEnfermedades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDINGRESO" Type="int" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
@@ -2117,6 +2186,52 @@
     <Parameter Name="IDCIUDADNATAL" Type="int" Mode="In" />
     <Parameter Name="IDCIUDADRESIDENCIAACTUAL" Type="int" Mode="In" />
     <Parameter Name="IDPAISNACIONALIDAD" Type="char" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERActitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESTIMADA" Type="decimal" Mode="In" />
+    <Parameter Name="IDCATEGORIAASPECTO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERAspectoCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERAspectoPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CALIFICACIONESPERADA" Type="int" Mode="In" />
+    <Parameter Name="IDCATEGORIAPERSONALIDAD" Type="int" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaAspectoCaracter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaFalta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCategoriaPersonalidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERCurso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateTERInstructor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="INSTITUCION" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spUpdateTipoDocumento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />

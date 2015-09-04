@@ -38,6 +38,59 @@
             </div>
         </div>
     </div> 
+    <div class="form-group">
+        <label class="control-label col-md-2">Validar Entrada nula</label>
+        <div class="col-md-10">
+            <input type="text" id="txt-val1" class="form-control" placeholder="introducir un valor" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Validar Entrada nula</label>
+        <div class="col-md-10">
+            <input type="text" id="txt-val2" class="form-control" placeholder="introducir un valor" required />
+        </div>
+    </div>
+    <div class="form-group">        
+        <div class="col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h3>Validation</h3>
+                </div>
+                <div class="ibox-content">
+                    <h2>
+                        Validación
+                    </h2>
+                    <p>
+                        esto s una prueba de validación
+                    </p>
+                    <p class="font-bold">
+                        ejemplo de validación
+                    </p>
+                    <form role="form" id="form"> 
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="escriba un email" class="form-control" required />
+                        </div>
+                        <div class="form-group"><label>Password</label> <input type="password" placeholder="Password" class="form-control" name="password"></div>
+                        <div class="form-group"><label>Url</label> <input type="text" placeholder="Enter URL" class="form-control" name="url"></div>
+                        <div class="form-group"><label>Number</label> <input type="text" placeholder="Enter Number" class="form-control" name="number"></div>
+                        <div class="form-group"><label>MinLength</label> <input type="text" placeholder="Enter text" class="form-control" name="min"></div>
+                        <div class="form-group"><label>MaxLength</label> <input type="text" placeholder="Enter text" class="form-control" name="max"></div>
+                        <div>
+                            <button class="btn btn-sm btn-primary m-t-n-xs" type="submit"><strong>Submit</strong></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -53,6 +106,7 @@
     @Scripts.Render("~/plugins/iCheck")
     @Scripts.Render("~/plugins/chosen")
     @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/plugins/validate")
     
     <script type="text/javascript">
         $(document).ready(function () {
@@ -89,6 +143,34 @@
                     $('<option value="' + val.ID + '">' + val.NOMBRECIENTIFICO + '</option>'));
                 });
                 $('.chzn-select').chosen();
+            });
+
+            $("#form").validate({
+                rules: {
+                    password: {
+                        required: true,
+                        minlength: 3
+                    },
+                    url: {
+                        required: true,
+                        url: true
+                    },
+                    number: {
+                        required: true,
+                        number: true
+                    },
+                    min: {
+                        required: true,
+                        minlength: 6
+                    },
+                    max: {
+                        required: true,
+                        maxlength: 4
+                    }
+                }
+
+
+
             });
         });
        

@@ -1717,9 +1717,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="VARCHAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="PRO_NIVEL" Relationship="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE" FromRole="PRO_FASE" ToRole="PRO_NIVEL" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="PRO_NIVEL">
     <Key>

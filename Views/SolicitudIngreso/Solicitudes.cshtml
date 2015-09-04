@@ -140,12 +140,20 @@
 			@Html.ActionLink("Detalles", "Detalles", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
             @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
             <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>
+            <button type="button" id="new-insert" data-id="@item.ID" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
+                Crear Nueva (Modal-Form)
+            </button>
         </td>
     </tr>
 }
 
 </table>
-
+                    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" id="new-insert-container">
+                            <div class="modal-content animated flipInY" id="new-insert-diag">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -725,7 +725,116 @@ namespace SICIApp.Controllers
             }
 
 
-        } 
+        }
+
+        // get
+        public async Task<ActionResult> ProcesarSolicitudAlterna(int? IDINGRESO)
+        {
+            try {
+
+                // validaciones del ingreso
+                if (IDINGRESO == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                // validar la existencia del ingreso
+                // get entity
+                var _entity = await _context.INGRESO.FindAsync(IDINGRESO);
+
+
+                if (_entity == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // luego se comprueba algunos detalles
+                //si ese ingreso está activo
+                //solicitud de ficha por ingreso
+                _entity.FICHA = await _context.FICHA.FindAsync(_entity.IDPERSONA);
+
+                //
+                //return View(_entity);
+                return PartialView("_ProcesarSolicitudAlterna");
+
+            }catch(Exception ex)
+            {
+                return RedirectToAction("DetalleErrorProcesamiento", "SolicitudIngreso", new { detalle = ex.Message });
+            }
+        }
+
+        // post de procesamieto alterno 
+        //
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProcesarSolicitudAlterna(int? ID, string actionName)
+        {
+            //sim tiempo
+            Thread.Sleep(2000);
+
+            // retorno de mensaje de error
+            string error = "";
+
+            // validaciones del ingreso
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // validar la existencia del ingreso
+            // get entity
+            var _entity = await _context.INGRESO.FindAsync(ID);
+
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            //validar que este ingreso no se haya procesado antes
+            // var _pruebaProcesamiento = await _context.DATOSSOCIOECONOMICOS.FindAsync(IDINGRESO);
+            //var _pruebaProcesamiento = _entity.STATUSFLOW;
+
+            //if (_pruebaProcesamiento > 1)
+            //{
+            //    //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 1 });
+            //    //error al procesar
+            //    error = "error al procesar, ya existe un proceso solicitado!";
+            //    return Json(new { success = false, message = "error al procesar, ya existe un proceso solicitado!" }, JsonRequestBehavior.AllowGet);
+            //}
+
+            try
+            {
+                //procesamiento
+                /* STATUSFLOW
+                 * SOL -- 1
+                 * MED -- 2
+                 * PSQ -- 3
+                 * PS  -- 4
+                 * TS  -- 5
+                 * CONF -- 6
+                 * DENG -- 7
+                 * ING -- 8
+                 * EGRE -- 9
+                 * */
+
+                // BUSCAR PROCEDIMIENTO
+
+                _context.spCrearProcesamientoIngreso(ID, DateTime.Now);
+
+                //return Json(new { success = true, message = "Solicitud Procesada correctamente!" }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction(actionName, "SolicitudIngreso");
+
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+                //return RedirectToAction("ResultadoProcesamiento", "SolicitudIngreso", new { IDRESUMEN = 2 });
+               // return Json(new { success = false, message = "No se ha podido procesar la solocitud" }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("DetalleErrorProcesamiento", "SolicitudIngreso", new { detalle = ex.Message });
+            }
+        }
+        
         #endregion
 
         //Acciones de Solicitudes -- flow 2
@@ -1884,6 +1993,29 @@ namespace SICIApp.Controllers
         public ActionResult DataJson()
         {
             return View();
+        }
+
+        // validar registro
+        public async Task<ActionResult> ValidarCampo(string _model)
+        {
+            Thread.Sleep(1000);
+            try {
+                    
+                // si encuentra el registro
+                //get entity
+                var _entity = await _context.CONDICIONFISICA_ENFERMEDADES.FirstOrDefaultAsync(i=>i.NOMBRECIENTIFICO == _model);
+
+                if(_entity != null)
+                {
+                    return Json(new { success = false, message = "Ya existe un registro con este nombre" }, JsonRequestBehavior.AllowGet);
+                }else{
+                    return Json(new { success = true, message = "Go a head!" }, JsonRequestBehavior.AllowGet);
+                }
+                    
+            }catch(Exception ex)
+            {
+                return Json(new {success=false, message=ex.Message}, JsonRequestBehavior.AllowGet);
+            }
         }
 
         //post data save

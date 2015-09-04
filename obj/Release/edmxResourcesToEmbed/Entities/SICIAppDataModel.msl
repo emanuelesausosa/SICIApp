@@ -1111,14 +1111,42 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_CRITERIO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewPROCriterio">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePROCriterio">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRO_FASE">
       <EntityTypeMapping TypeName="SICIBD2Model.PRO_FASE">
         <MappingFragment StoreEntitySet="PRO_FASE">
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="VARCHAR" ColumnName="VARCHAR" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_FASE">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewPROFase">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePROFase">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRO_NIVEL">
@@ -1130,6 +1158,24 @@
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_NIVEL">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewPRONivel">
+            <ScalarProperty Name="IDFASE" ParameterName="IDFASE" />
+            <ScalarProperty Name="DIASESTIMADOS" ParameterName="DIASESTIMADOS" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePRONivel">
+            <ScalarProperty Name="IDFASE" ParameterName="IDFASE" Version="Current" />
+            <ScalarProperty Name="DIASESTIMADOS" ParameterName="DIASESTIMADOS" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PRO_NIVELCRITERIO">
@@ -1169,6 +1215,24 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_ACTITUD">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERActitud">
+            <ScalarProperty Name="IDCATEGORIAASPECTO" ParameterName="IDCATEGORIAASPECTO" />
+            <ScalarProperty Name="CALIFICACIONESTIMADA" ParameterName="CALIFICACIONESTIMADA" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERActitud">
+            <ScalarProperty Name="IDCATEGORIAASPECTO" ParameterName="IDCATEGORIAASPECTO" Version="Current" />
+            <ScalarProperty Name="CALIFICACIONESTIMADA" ParameterName="CALIFICACIONESTIMADA" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_AREACRITERIOCALIF">
       <EntityTypeMapping TypeName="SICIBD2Model.TER_AREACRITERIOCALIF">
@@ -1201,6 +1265,24 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_ASPECTOPERSONALIDAD">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERAspectoPersonalidad">
+            <ScalarProperty Name="IDCATEGORIAPERSONALIDAD" ParameterName="IDCATEGORIAPERSONALIDAD" />
+            <ScalarProperty Name="CALIFICACIONESPERADA" ParameterName="CALIFICACIONESPERADA" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERAspectoPersonalidad">
+            <ScalarProperty Name="IDCATEGORIAPERSONALIDAD" ParameterName="IDCATEGORIAPERSONALIDAD" Version="Current" />
+            <ScalarProperty Name="CALIFICACIONESPERADA" ParameterName="CALIFICACIONESPERADA" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_CALIFAREA">
       <EntityTypeMapping TypeName="SICIBD2Model.TER_CALIFAREA">
@@ -1230,6 +1312,20 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERCategoriaAspectoCaracter">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERCategoriaAspectoCaracter">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_CATEGORIAFALTA">
       <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAFALTA">
@@ -1239,6 +1335,20 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAFALTA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERCategoriaFalta">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERCategoriaFalta">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_CATEGORIAPERSONALIDAD">
       <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAPERSONALIDAD">
@@ -1247,6 +1357,20 @@
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAPERSONALIDAD">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERCategoriaPesonalidad">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERCategoriaPersonalidad">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_CRITERIOCALIFICACION">
@@ -1266,6 +1390,20 @@
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CURSO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERCurso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERCurso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_EVALUACIONCARACTER">
@@ -1333,6 +1471,20 @@
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_INSTRUCTOR">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTERInstructor">
+            <ScalarProperty Name="INSTITUCION" ParameterName="INSTITUCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTERInstructor">
+            <ScalarProperty Name="INSTITUCION" ParameterName="INSTITUCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TER_MATRICULA">

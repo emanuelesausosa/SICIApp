@@ -1,0 +1,98 @@
+﻿@model IEnumerable<SICIApp.Models.TER_CATEGORIAASPECTOCARCTERMODEL>
+
+@{
+    ViewBag.Title = "Categorias Aspecto Caracter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Categorias Aspecto Caracter</h2>
+        <ol class="breadcrumb">
+			<li>
+				@Html.ActionLink("Configuraciones","Index")
+			</li>
+            <li class="active">
+                <strong>CATEGORIA-ASPECTO-CARCTER</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Listar de CATEGORIA ASPECTO CARCTER</h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Crear Nuevo", "NuevaCategoriaAspectoCaracter", null, new { @class = "btn btn-primary btn-xs" })
+					</div>
+                </div>
+                <div class="ibox-content">
+				<input type="text"  class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar..."/>
+<table class="footable table table-stripped" data-page-size="20" data-filter="#filter">
+    <thead>
+		<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th></th>
+    </tr>
+	</thead>
+
+<tbody>
+	@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION)
+        </td>
+        <td>
+			@Html.ActionLink("Detalles", "DetalleCategoriaAspectoCaracter", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Editar", "EditarCategoriaAspectoCaracter", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
+            
+        </td>
+    </tr>
+}
+</tbody>
+<tfoot>
+        <tr>
+            <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+            </td>
+        </tr>
+    </tfoot>
+
+</table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ @section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+
+        });
+    </script>
+}
+

@@ -68,9 +68,10 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 					</div>
                 </div>
                 <div class="ibox-content">
-
-<table class="table table-striped">
-    <tr>
+				<input type="text"  class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar..."/>
+<table class="footable table table-stripped" data-page-size="20" data-filter="#filter">
+    <thead>
+		<tr>
 <#
 IEnumerable<PropertyMetadata> properties = ModelMetadata.Properties;
 foreach (PropertyMetadata property in properties) {
@@ -91,8 +92,10 @@ foreach (PropertyMetadata property in properties) {
 #>
         <th></th>
     </tr>
+	</thead>
 
-@foreach (var item in Model) {
+<tbody>
+	@foreach (var item in Model) {
     <tr>
 <#
 foreach (PropertyMetadata property in properties) {
@@ -132,6 +135,14 @@ if (pkName != null) {
 #>
     </tr>
 }
+</tbody>
+<tfoot>
+        <tr>
+            <td colspan="5">
+                <ul class="pagination pull-right"></ul>
+            </td>
+        </tr>
+    </tfoot>
 
 </table>
 
@@ -141,7 +152,23 @@ if (pkName != null) {
     </div>
  </div>
 
+ @section Styles {
+    @Styles.Render("~/plugins/footableStyles")
+}
 
+@section Scripts {
+    @Scripts.Render("~/plugins/footable")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.footable').footable();
+            $('.footable2').footable();
+
+
+        });
+    </script>
+}
 
 <#
 // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
