@@ -1,0 +1,1375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SICIBD2ModelStoreContainer" CdmEntityContainer="SICIBD2Entities1">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="SICIBD2Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="SICIBD2Model.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="SICIBD2Model.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="SICIBD2Model.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="SICIBD2Model.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="SICIBD2Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="CITies">
+      <EntityTypeMapping TypeName="SICIBD2Model.CITY">
+        <MappingFragment StoreEntitySet="CITY">
+          <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+          <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+          <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COUNTRies">
+      <EntityTypeMapping TypeName="SICIBD2Model.COUNTRY">
+        <MappingFragment StoreEntitySet="COUNTRY">
+          <ScalarProperty Name="CODE2" ColumnName="CODE2" />
+          <ScalarProperty Name="CAPITAL" ColumnName="CAPITAL" />
+          <ScalarProperty Name="HEADOFSTATE" ColumnName="HEADOFSTATE" />
+          <ScalarProperty Name="GOVERNMENTFORM" ColumnName="GOVERNMENTFORM" />
+          <ScalarProperty Name="LOCALNAME" ColumnName="LOCALNAME" />
+          <ScalarProperty Name="GNPOLD" ColumnName="GNPOLD" />
+          <ScalarProperty Name="GNP" ColumnName="GNP" />
+          <ScalarProperty Name="LIFEEXPECTANCY" ColumnName="LIFEEXPECTANCY" />
+          <ScalarProperty Name="POPULATION" ColumnName="POPULATION" />
+          <ScalarProperty Name="INDEPYEAR" ColumnName="INDEPYEAR" />
+          <ScalarProperty Name="SURFACEAREA" ColumnName="SURFACEAREA" />
+          <ScalarProperty Name="REGION" ColumnName="REGION" />
+          <ScalarProperty Name="CONTINENT" ColumnName="CONTINENT" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="CODE" ColumnName="CODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="COUNTRYLANGUAGEs">
+      <EntityTypeMapping TypeName="SICIBD2Model.COUNTRYLANGUAGE">
+        <MappingFragment StoreEntitySet="COUNTRYLANGUAGE">
+          <ScalarProperty Name="PERCENTAGE" ColumnName="PERCENTAGE" />
+          <ScalarProperty Name="ISOFFICIAL" ColumnName="ISOFFICIAL" />
+          <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+          <ScalarProperty Name="COUNTRYCODE" ColumnName="COUNTRYCODE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPERSONALES">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALE">
+        <MappingFragment StoreEntitySet="DATOSPERSONALES">
+          <ScalarProperty Name="IDCIUDADORIGEN" ColumnName="IDCIUDADORIGEN" />
+          <ScalarProperty Name="FOTOGRAFIA" ColumnName="FOTOGRAFIA" />
+          <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
+          <ScalarProperty Name="EXTRANJERO" ColumnName="EXTRANJERO" />
+          <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+          <ScalarProperty Name="PROFESION" ColumnName="PROFESION" />
+          <ScalarProperty Name="SEGUNDOAPELLIDO" ColumnName="SEGUNDOAPELLIDO" />
+          <ScalarProperty Name="PRIMERAPELLIDO" ColumnName="PRIMERAPELLIDO" />
+          <ScalarProperty Name="SEGUNDONOMBRE" ColumnName="SEGUNDONOMBRE" />
+          <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CENTROTERAPEUTICOes">
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTROTERAPEUTICO">
+        <MappingFragment StoreEntitySet="CENTROTERAPEUTICO">
+          <ScalarProperty Name="IDCIUDADOPERACION" ColumnName="IDCIUDADOPERACION" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTROTERAPEUTICO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCentroTerapeutico">
+            <ScalarProperty Name="IDCIUDADOPERACION" ParameterName="IDCIUDADOPERACION" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+            <ScalarProperty Name="ID" ParameterName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCentroTerapeutico">
+            <ScalarProperty Name="IDCIUDADOPERACION" ParameterName="IDCIUDADOPERACION" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIOCENTROCONSULTAs">
+      <EntityTypeMapping TypeName="SICIBD2Model.USUARIOCENTROCONSULTA">
+        <MappingFragment StoreEntitySet="USUARIOCENTROCONSULTA">
+          <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+          <ScalarProperty Name="FECHACREACION" ColumnName="FECHACREACION" />
+          <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+          <ScalarProperty Name="IDCT" ColumnName="IDCT" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APARATOSSISTEMAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.APARATOSSISTEMAS">
+        <MappingFragment StoreEntitySet="APARATOSSISTEMAS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DIAGNOSTICO" ColumnName="DIAGNOSTICO" />
+          <ScalarProperty Name="IDAPARATOSISTEMA" ColumnName="IDAPARATOSISTEMA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.APARATOSSISTEMAS">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateEvMedAparatosSistemas">
+            <ScalarProperty Name="DIAGNOSTICO" ParameterName="DIAGNOSTICO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="APARATOSSISTEMAS_SISTEMAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS">
+        <MappingFragment StoreEntitySet="APARATOSSISTEMAS_SISTEMAS">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EVALUACIONMEDICADETALLE">
+      <EntityTypeMapping TypeName="SICIBD2Model.EVALUACIONMEDICADETALLE">
+        <MappingFragment StoreEntitySet="EVALUACIONMEDICADETALLE">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="IDTIPOEVALUACIONMEDICA" ColumnName="IDTIPOEVALUACIONMEDICA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.EVALUACIONMEDICADETALLE">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateEvaluacionMedicaDetalle">
+            <ScalarProperty Name="OBSERVACIONES" ParameterName="OBSERVACIONES" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SIGNOSVITALES">
+      <EntityTypeMapping TypeName="SICIBD2Model.SIGNOSVITALES">
+        <MappingFragment StoreEntitySet="SIGNOSVITALES">
+          <ScalarProperty Name="MEDICORESPONSABLE" ColumnName="MEDICORESPONSABLE" />
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="PRESIONARTERIAL" ColumnName="PRESIONARTERIAL" />
+          <ScalarProperty Name="FRECUENCIACARDIACA" ColumnName="FRECUENCIACARDIACA" />
+          <ScalarProperty Name="PESO" ColumnName="PESO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.SIGNOSVITALES">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateEvMedSignosVitales">
+            <ScalarProperty Name="MEDICORESPONSABLE" ParameterName="MEDICORESPONSABLE" Version="Current" />
+            <ScalarProperty Name="FECHADIAGNOSTICO" ParameterName="FECHADIAGNOSTICO" Version="Current" />
+            <ScalarProperty Name="PRESIONARTERIAL" ParameterName="PRESIONARTERIAL" Version="Current" />
+            <ScalarProperty Name="FRECUENCIACARDIACA" ParameterName="FRECUENCIACARDIACA" Version="Current" />
+            <ScalarProperty Name="PESO" ParameterName="PESO" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOEVALUACIONMEDICA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOEVALUACIONMEDICA">
+        <MappingFragment StoreEntitySet="TIPOEVALUACIONMEDICA">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="CATEGORIA" ColumnName="CATEGORIA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOEVALUACIONMEDICA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoEvaluacionMedica">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoEvaluacionMedica">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="CATEGORIA" ParameterName="CATEGORIA" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSSOCIOECONOMICOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSSOCIOECONOMICOS">
+        <MappingFragment StoreEntitySet="DATOSSOCIOECONOMICOS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="SITUACIONSOACIAL" ColumnName="SITUACIONSOACIAL" />
+          <ScalarProperty Name="CONDICIONFAMILIAR" ColumnName="CONDICIONFAMILIAR" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSSOCIOECONOMICOS">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateDatosSocioEconomicosIngreso">
+            <ScalarProperty Name="SITUACIONSOACIAL" ParameterName="SITUACIONSOCIAL" Version="Current" />
+            <ScalarProperty Name="CONDICIONFAMILIAR" ParameterName="CONDICIONFAMILIAR" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADOMENTAL">
+      <EntityTypeMapping TypeName="SICIBD2Model.ESTADOMENTAL">
+        <MappingFragment StoreEntitySet="ESTADOMENTAL">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.ESTADOMENTAL">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateEstadoMental">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO">
+          <ScalarProperty Name="PROFESIONALRESPONDABLE" ColumnName="PROFESIONALRESPONDABLE" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="CALIFICACIONFINAL" ColumnName="CALIFICACIONFINAL" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_EXAMEN">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_EXAMEN">
+          <ScalarProperty Name="ARCHIVOFISOCO" ColumnName="ARCHIVOFISOCO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="TITULO" ColumnName="TITULO" />
+          <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewExamenPsicometrico">
+            <ScalarProperty Name="ARCHIVOFISOCO" ParameterName="ARCHIVOFISOCO" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="TITULO" ParameterName="TITULO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpadteExamenPsicometrico">
+            <ScalarProperty Name="ARCHIVOFISOCO" ParameterName="ARCHIVOFISOCO" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="TITULO" ParameterName="TITULO" Version="Current" />
+            <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+          <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="VALORACION" ColumnName="VALORACION" />
+          <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+          <ScalarProperty Name="IDPREGUNTA" ColumnName="IDPREGUNTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewExamenContenido">
+            <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="VALORACION" ParameterName="VALORACION" />
+            <ScalarProperty Name="DETALLE" ParameterName="DETALLE" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateExamenContenido">
+            <ScalarProperty Name="IDEXAMEN" ParameterName="IDEXAMEN" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="VALORACION" ParameterName="VALORACION" Version="Current" />
+            <ScalarProperty Name="DETALLE" ParameterName="DETALLE" Version="Current" />
+            <ScalarProperty Name="IDPREGUNTA" ParameterName="IDPREGUNTA" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+      <EntityTypeMapping TypeName="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <MappingFragment StoreEntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+          <ScalarProperty Name="CALIFICACIONOBTENIDA" ColumnName="CALIFICACIONOBTENIDA" />
+          <ScalarProperty Name="IDPREGUNTA" ColumnName="IDPREGUNTA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HISTORIALPERSONALFAMILIAR">
+      <EntityTypeMapping TypeName="SICIBD2Model.HISTORIALPERSONALFAMILIAR">
+        <MappingFragment StoreEntitySet="HISTORIALPERSONALFAMILIAR">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.HISTORIALPERSONALFAMILIAR">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateHistorialPersonalFamiliar">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IMPRESIONDIAGNOSTICA">
+      <EntityTypeMapping TypeName="SICIBD2Model.IMPRESIONDIAGNOSTICA">
+        <MappingFragment StoreEntitySet="IMPRESIONDIAGNOSTICA">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.IMPRESIONDIAGNOSTICA">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateImpresionDiagnostica">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OBERVACIONPRELIMINAR">
+      <EntityTypeMapping TypeName="SICIBD2Model.OBERVACIONPRELIMINAR">
+        <MappingFragment StoreEntitySet="OBERVACIONPRELIMINAR">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="PROBLEMAS" ColumnName="PROBLEMAS" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.OBERVACIONPRELIMINAR">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateObservacionPreliminar">
+            <ScalarProperty Name="PROBLEMAS" ParameterName="PROBLEMAS" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RECOMENDACIONES">
+      <EntityTypeMapping TypeName="SICIBD2Model.RECOMENDACIONES">
+        <MappingFragment StoreEntitySet="RECOMENDACIONES">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.RECOMENDACIONES">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateRecomendaciones">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAUSASEGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESO">
+        <MappingFragment StoreEntitySet="CAUSASEGRESO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCausasEgreso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCausasEgreso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CAUSASEGRESOINTERNO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CAUSASEGRESOINTERNO">
+        <MappingFragment StoreEntitySet="CAUSASEGRESOINTERNO">
+          <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+          <ScalarProperty Name="IDCAUSAEGRESO" ColumnName="IDCAUSAEGRESO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_ENFERMEDADES">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_ENFERMEDADES">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRESINOMIMO" ColumnName="NOMBRESINOMIMO" />
+          <ScalarProperty Name="NOMBRECIENTIFICO" ColumnName="NOMBRECIENTIFICO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCondicionFisicaEnfermedad">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRESINOMIMO" ParameterName="NOMBRESINOMIMO" />
+            <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCondicionFisicaEnfermedad">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRESINOMIMO" ParameterName="NOMBRESINOMIMO" Version="Current" />
+            <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_INGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INGRESO">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_INGRESO">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="ONSERVACIONESGENERALES" ColumnName="ONSERVACIONESGENERALES" />
+          <ScalarProperty Name="HASIDOOPERADO" ColumnName="HASIDOOPERADO" />
+          <ScalarProperty Name="PADECENERVIOS" ColumnName="PADECENERVIOS" />
+          <ScalarProperty Name="DUERMEBIEN" ColumnName="DUERMEBIEN" />
+          <ScalarProperty Name="TIENEIMPEDIMENTOS" ColumnName="TIENEIMPEDIMENTOS" />
+          <ScalarProperty Name="RECIBIOTRATAMIENTO" ColumnName="RECIBIOTRATAMIENTO" />
+          <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+          <ScalarProperty Name="PADECE" ColumnName="PADECE" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INGRESO">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateINGIngresoCondicionFisica_Ingreso">
+            <ScalarProperty Name="ONSERVACIONESGENERALES" ParameterName="ONSERVACIONESGENERALES" Version="Current" />
+            <ScalarProperty Name="HASIDOOPERADO" ParameterName="HASIDOOPERADO" Version="Current" />
+            <ScalarProperty Name="PADECENERVIOS" ParameterName="PADECENERVIOS" Version="Current" />
+            <ScalarProperty Name="DUERMEBIEN" ParameterName="DUERMEBIEN" Version="Current" />
+            <ScalarProperty Name="TIENEIMPEDIMENTOS" ParameterName="TIENEIMPEDIMENTOS" Version="Current" />
+            <ScalarProperty Name="RECIBIOTRATAMIENTO" ParameterName="RECIBIOTRATAMIENTO" Version="Current" />
+            <ScalarProperty Name="DETALLE" ParameterName="DETALLE" Version="Current" />
+            <ScalarProperty Name="PADECE" ParameterName="PADECE" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CONDICIONFISICA_INTERNOENFERMEDADES">
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES">
+        <MappingFragment StoreEntitySet="CONDICIONFISICA_INTERNOENFERMEDADES">
+          <ScalarProperty Name="IDENFERMEDAD" ColumnName="IDENFERMEDAD" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewINGIngresoCondicionFisica_InternoEnfermedades">
+            <ScalarProperty Name="IDENFERMEDAD" ParameterName="IDENFERMEDAD" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSDELICTIVOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSDELICTIVOS">
+        <MappingFragment StoreEntitySet="DATOSDELICTIVOS">
+          <ScalarProperty Name="JUICIOPENDIENTE" ColumnName="JUICIOPENDIENTE" />
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESTALLESRECLUSION" ColumnName="DESTALLESRECLUSION" />
+          <ScalarProperty Name="HAESTADOPRESO" ColumnName="HAESTADOPRESO" />
+          <ScalarProperty Name="DETALLESACTOS" ColumnName="DETALLESACTOS" />
+          <ScalarProperty Name="HACOMETIDO" ColumnName="HACOMETIDO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSDELICTIVOS">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateINGDatosDelictivos">
+            <ScalarProperty Name="JUICIOPENDIENTE" ParameterName="JUICIOPENDIENTE" Version="Current" />
+            <ScalarProperty Name="DESTALLESRECLUSION" ParameterName="DESTALLESRECLUSION" Version="Current" />
+            <ScalarProperty Name="HAESTADOPRESO" ParameterName="HAESTADOPRESO" Version="Current" />
+            <ScalarProperty Name="DETALLESACTOS" ParameterName="DETALLESACTOS" Version="Current" />
+            <ScalarProperty Name="HACOMETIDO" ParameterName="HACOMETIDO" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_CONSUMO">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_CONSUMO">
+          <ScalarProperty Name="ABSTINENCIAMESES" ColumnName="ABSTINENCIAMESES" />
+          <ScalarProperty Name="ABSTINENCIASEMANAS" ColumnName="ABSTINENCIASEMANAS" />
+          <ScalarProperty Name="ABSTINENCIADIAS" ColumnName="ABSTINENCIADIAS" />
+          <ScalarProperty Name="ANIOTRATAMIENTO" ColumnName="ANIOTRATAMIENTO" />
+          <ScalarProperty Name="LUGARTRATAMIENTO" ColumnName="LUGARTRATAMIENTO" />
+          <ScalarProperty Name="EXPLIQUEPROBLEMAS" ColumnName="EXPLIQUEPROBLEMAS" />
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="TRATAMIENTOMEDICO" ColumnName="TRATAMIENTOMEDICO" />
+          <ScalarProperty Name="PROBLEMAMENTAL" ColumnName="PROBLEMAMENTAL" />
+          <ScalarProperty Name="PROBLEMAFISICO" ColumnName="PROBLEMAFISICO" />
+          <ScalarProperty Name="INTENTODEJARLAS" ColumnName="INTENTODEJARLAS" />
+          <ScalarProperty Name="EDADCOMIENZO" ColumnName="EDADCOMIENZO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateINGConsumoDrogas">
+            <ScalarProperty Name="ABSTINENCIAMESES" ParameterName="ABSTINENCIAMESES" Version="Current" />
+            <ScalarProperty Name="ABSTINENCIASEMANAS" ParameterName="ABSTINENCIASEMANAS" Version="Current" />
+            <ScalarProperty Name="ABSTINENCIADIAS" ParameterName="ABSTINENCIADIAS" Version="Current" />
+            <ScalarProperty Name="ANIOTRATAMIENTO" ParameterName="ANIOTRATAMIENTO" Version="Current" />
+            <ScalarProperty Name="LUGARTRATAMIENTO" ParameterName="LUGARTRATAMIENTO" Version="Current" />
+            <ScalarProperty Name="EXPLIQUEPROBLEMAS" ParameterName="EXPLIQUEPROBLEMAS" Version="Current" />
+            <ScalarProperty Name="TRATAMIENTOMEDICO" ParameterName="TRATAMIENTOMEDICO" Version="Current" />
+            <ScalarProperty Name="PROBLEMAMENTAL" ParameterName="PROBLEMAMENTAL" Version="Current" />
+            <ScalarProperty Name="PROBLEMAFISICO" ParameterName="PROBLEMAFISICO" Version="Current" />
+            <ScalarProperty Name="INTENTODEJARLAS" ParameterName="INTENTODEJARLAS" Version="Current" />
+            <ScalarProperty Name="EDADCOMIENZO" ParameterName="EDADCOMIENZO" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+          <ScalarProperty Name="IDDROGA" ColumnName="IDDROGA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewINGConsumoDrogas_drogas">
+            <ScalarProperty Name="IDDROGA" ParameterName="IDDROGA" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPROBLEMADROGAS_DROGAS">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS">
+        <MappingFragment StoreEntitySet="DATOSPROBLEMADROGAS_DROGAS">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRECOMUN" ColumnName="NOMBRECOMUN" />
+          <ScalarProperty Name="NOMBRECIENTIFICO" ColumnName="NOMBRECIENTIFICO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertTiposDrogas">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRECOMUN" ParameterName="NOMBRECOMUN" />
+            <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTiposDrogas">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRECOMUN" ParameterName="NOMBRECOMUN" Version="Current" />
+            <ScalarProperty Name="NOMBRECIENTIFICO" ParameterName="NOMBRECIENTIFICO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESCOLARIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESCOLARIDAD">
+          <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ColumnName="DESCRIPCIONESCOLARIDAD" />
+          <ScalarProperty Name="NOMBREESCOLARIDAD" ColumnName="NOMBREESCOLARIDAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewInfoAcadmEsacolaridad">
+            <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ParameterName="DESCRIPCIONESCOLARIDAD" />
+            <ScalarProperty Name="NOMBREESCOLARIDAD" ParameterName="NOMBREESCOLARIDAD" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateInfoAcadmEsacolaridad">
+            <ScalarProperty Name="DESCRIPCIONESCOLARIDAD" ParameterName="DESCRIPCIONESCOLARIDAD" Version="Current" />
+            <ScalarProperty Name="NOMBREESCOLARIDAD" ParameterName="NOMBREESCOLARIDAD" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOS">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="SABELEERYESCRIBIR" ColumnName="SABELEERYESCRIBIR" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateINGIngresoEstudios">
+            <ScalarProperty Name="SABELEERYESCRIBIR" ParameterName="SABELEERYESCRIBIR" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDESCOLARIDAD" ColumnName="IDESCOLARIDAD" />
+          <ScalarProperty Name="IDESTUDIOS" ColumnName="IDESTUDIOS" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewINGEstudiosEscolaridades">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="IDESCOLARIDAD" ParameterName="IDESCOLARIDAD" />
+            <ScalarProperty Name="IDESTUDIOS" ParameterName="IDESTUDIOS" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDOFICIOS" ColumnName="IDOFICIOS" />
+          <ScalarProperty Name="IDESTUDIOS" ColumnName="IDESTUDIOS" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INFORMACIONACADEMICA_OFICIOS">
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS">
+        <MappingFragment StoreEntitySet="INFORMACIONACADEMICA_OFICIOS">
+          <ScalarProperty Name="DESCRIPCIONOFICIO" ColumnName="DESCRIPCIONOFICIO" />
+          <ScalarProperty Name="NOMBREOFICIO" ColumnName="NOMBREOFICIO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewOficio">
+            <ScalarProperty Name="DESCRIPCIONOFICIO" ParameterName="DESCRIPCIONOFICIO" />
+            <ScalarProperty Name="NOMBREOFICIO" ParameterName="NOMBREOFICIO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateOficio">
+            <ScalarProperty Name="DESCRIPCIONOFICIO" ParameterName="DESCRIPCIONOFICIO" Version="Current" />
+            <ScalarProperty Name="NOMBREOFICIO" ParameterName="NOMBREOFICIO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.INGRESO">
+        <MappingFragment StoreEntitySet="INGRESO">
+          <ScalarProperty Name="STATUSFLOW" ColumnName="STATUSFLOW" />
+          <ScalarProperty Name="ACEPTADO" ColumnName="ACEPTADO" />
+          <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
+          <ScalarProperty Name="CONTRATO" ColumnName="CONTRATO" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="FECHAINGRESOSISTEMA" ColumnName="FECHAINGRESOSISTEMA" />
+          <ScalarProperty Name="FECHAEGRESOPV" ColumnName="FECHAEGRESOPV" />
+          <ScalarProperty Name="FECHAREALINGRESOPV" ColumnName="FECHAREALINGRESOPV" />
+          <ScalarProperty Name="FECHAFIRMAACUERDO" ColumnName="FECHAFIRMAACUERDO" />
+          <ScalarProperty Name="FECHAUTORIZACION" ColumnName="FECHAUTORIZACION" />
+          <ScalarProperty Name="NUMEXPEDIENTE" ColumnName="NUMEXPEDIENTE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.INGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewIngreso">
+            <ScalarProperty Name="STATUSFLOW" ParameterName="STATUSFLOW" />
+            <ScalarProperty Name="ACEPTADO" ParameterName="ACEPTADO" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" />
+            <ScalarProperty Name="CONTRATO" ParameterName="CONTRATO" />
+            <ScalarProperty Name="OBSERVACIONES" ParameterName="OBSERVACIONES" />
+            <ScalarProperty Name="FECHAINGRESOSISTEMA" ParameterName="FECHAINGRESOSISTEMA" />
+            <ScalarProperty Name="FECHAEGRESOPV" ParameterName="FECHAEGRESOPV" />
+            <ScalarProperty Name="FECHAREALINGRESOPV" ParameterName="FECHAREALINGRESOPV" />
+            <ScalarProperty Name="FECHAFIRMAACUERDO" ParameterName="FECHAFIRMAACUERDO" />
+            <ScalarProperty Name="FECHAUTORIZACION" ParameterName="FECHAUTORIZACION" />
+            <ScalarProperty Name="NUMEXPEDIENTE" ParameterName="NUMEXPEDIENTE" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateIngreso">
+            <ScalarProperty Name="STATUSFLOW" ParameterName="STATUSFLOW" Version="Current" />
+            <ScalarProperty Name="ACEPTADO" ParameterName="ACEPTADO" Version="Current" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" Version="Current" />
+            <ScalarProperty Name="CONTRATO" ParameterName="CONTRATO" Version="Current" />
+            <ScalarProperty Name="OBSERVACIONES" ParameterName="OBSERVACIONES" Version="Current" />
+            <ScalarProperty Name="FECHAINGRESOSISTEMA" ParameterName="FECHAINGRESOSISTEMA" Version="Current" />
+            <ScalarProperty Name="FECHAEGRESOPV" ParameterName="FECHAEGRESOPV" Version="Current" />
+            <ScalarProperty Name="FECHAREALINGRESOPV" ParameterName="FECHAREALINGRESOPV" Version="Current" />
+            <ScalarProperty Name="FECHAFIRMAACUERDO" ParameterName="FECHAFIRMAACUERDO" Version="Current" />
+            <ScalarProperty Name="FECHAUTORIZACION" ParameterName="FECHAUTORIZACION" Version="Current" />
+            <ScalarProperty Name="NUMEXPEDIENTE" ParameterName="NUMEXPEDIENTE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MOTIVOSINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.MOTIVOSINGRESO">
+        <MappingFragment StoreEntitySet="MOTIVOSINGRESO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="FECHAFIRMAACUERDO" ColumnName="FECHAFIRMAACUERDO" />
+          <ScalarProperty Name="DISPUESTOASUJETARSEPV" ColumnName="DISPUESTOASUJETARSEPV" />
+          <ScalarProperty Name="VOLUNTARIAMENTE" ColumnName="VOLUNTARIAMENTE" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.MOTIVOSINGRESO">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateINGMotivosIngreso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="FECHAFIRMAACUERDO" ParameterName="FECHAFIRMAACUERDO" Version="Current" />
+            <ScalarProperty Name="DISPUESTOASUJETARSEPV" ParameterName="DISPUESTOASUJETARSEPV" Version="Current" />
+            <ScalarProperty Name="VOLUNTARIAMENTE" ParameterName="VOLUNTARIAMENTE" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DATOSPERSONALES1">
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALES1">
+        <MappingFragment StoreEntitySet="DATOSPERSONALES1">
+          <ScalarProperty Name="IDPAISNACIONALIDAD" ColumnName="IDPAISNACIONALIDAD" />
+          <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ColumnName="IDCIUDADRESIDENCIAACTUAL" />
+          <ScalarProperty Name="IDCIUDADNATAL" ColumnName="IDCIUDADNATAL" />
+          <ScalarProperty Name="NUMEROHERMANOS" ColumnName="NUMEROHERMANOS" />
+          <ScalarProperty Name="CONQUIENVIVE" ColumnName="CONQUIENVIVE" />
+          <ScalarProperty Name="VIVECONPADRE" ColumnName="VIVECONPADRE" />
+          <ScalarProperty Name="NOMBREPADRE" ColumnName="NOMBREPADRE" />
+          <ScalarProperty Name="VIVECONMADRE" ColumnName="VIVECONMADRE" />
+          <ScalarProperty Name="NOMBREMADRE" ColumnName="NOMBREMADRE" />
+          <ScalarProperty Name="NUMERODEHIJOS" ColumnName="NUMERODEHIJOS" />
+          <ScalarProperty Name="ESTADOCIVIL" ColumnName="ESTADOCIVIL" />
+          <ScalarProperty Name="FECHANACIMIENTO" ColumnName="FECHANACIMIENTO" />
+          <ScalarProperty Name="LUGARNACIMIENTO" ColumnName="LUGARNACIMIENTO" />
+          <ScalarProperty Name="TELEFONOMOVIL" ColumnName="TELEFONOMOVIL" />
+          <ScalarProperty Name="TELEFONOFIJO" ColumnName="TELEFONOFIJO" />
+          <ScalarProperty Name="DIRECCIONDOMICILIO" ColumnName="DIRECCIONDOMICILIO" />
+          <ScalarProperty Name="IDPERSONA" ColumnName="IDPERSONA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DATOSPERSONALES1">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewDatosPersonales">
+            <ScalarProperty Name="IDPAISNACIONALIDAD" ParameterName="IDPAISNACIONALIDAD" />
+            <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ParameterName="IDCIUDADRESIDENCIAACTUAL" />
+            <ScalarProperty Name="IDCIUDADNATAL" ParameterName="IDCIUDADNATAL" />
+            <ScalarProperty Name="NUMEROHERMANOS" ParameterName="NUMEROHERMANOS" />
+            <ScalarProperty Name="CONQUIENVIVE" ParameterName="CONQUIENVIVE" />
+            <ScalarProperty Name="VIVECONPADRE" ParameterName="VIVECONPADRE" />
+            <ScalarProperty Name="NOMBREPADRE" ParameterName="NOMBREPADRE" />
+            <ScalarProperty Name="VIVECONMADRE" ParameterName="VIVECONMADRE" />
+            <ScalarProperty Name="NOMBREMADRE" ParameterName="NOMBREMADRE" />
+            <ScalarProperty Name="NUMERODEHIJOS" ParameterName="NUMERODEHIJOS" />
+            <ScalarProperty Name="ESTADOCIVIL" ParameterName="ESTADOCIVIL" />
+            <ScalarProperty Name="FECHANACIMIENTO" ParameterName="FECHANACIMIENTO" />
+            <ScalarProperty Name="LUGARNACIMIENTO" ParameterName="LUGARNACIMIENTO" />
+            <ScalarProperty Name="TELEFONOMOVIL" ParameterName="TELEFONOMOVIL" />
+            <ScalarProperty Name="TELEFONOFIJO" ParameterName="TELEFONOFIJO" />
+            <ScalarProperty Name="DIRECCIONDOMICILIO" ParameterName="DIRECCIONDOMICILIO" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateSICIPERSONADatosPersonales">
+            <ScalarProperty Name="IDPAISNACIONALIDAD" ParameterName="IDPAISNACIONALIDAD" Version="Current" />
+            <ScalarProperty Name="IDCIUDADRESIDENCIAACTUAL" ParameterName="IDCIUDADRESIDENCIAACTUAL" Version="Current" />
+            <ScalarProperty Name="IDCIUDADNATAL" ParameterName="IDCIUDADNATAL" Version="Current" />
+            <ScalarProperty Name="NUMEROHERMANOS" ParameterName="NUMEROHERMANOS" Version="Current" />
+            <ScalarProperty Name="CONQUIENVIVE" ParameterName="CONQUIENVIVE" Version="Current" />
+            <ScalarProperty Name="VIVECONPADRE" ParameterName="VIVECONPADRE" Version="Current" />
+            <ScalarProperty Name="NOMBREPADRE" ParameterName="NOMBREPADRE" Version="Current" />
+            <ScalarProperty Name="VIVECONMADRE" ParameterName="VIVECONMADRE" Version="Current" />
+            <ScalarProperty Name="NOMBREMADRE" ParameterName="NOMBREMADRE" Version="Current" />
+            <ScalarProperty Name="NUMERODEHIJOS" ParameterName="NUMERODEHIJOS" Version="Current" />
+            <ScalarProperty Name="ESTADOCIVIL" ParameterName="ESTADOCIVIL" Version="Current" />
+            <ScalarProperty Name="FECHANACIMIENTO" ParameterName="FECHANACIMIENTO" Version="Current" />
+            <ScalarProperty Name="LUGARNACIMIENTO" ParameterName="LUGARNACIMIENTO" Version="Current" />
+            <ScalarProperty Name="TELEFONOMOVIL" ParameterName="TELEFONOMOVIL" Version="Current" />
+            <ScalarProperty Name="TELEFONOFIJO" ParameterName="TELEFONOFIJO" Version="Current" />
+            <ScalarProperty Name="DIRECCIONDOMICILIO" ParameterName="DIRECCIONDOMICILIO" Version="Current" />
+            <ScalarProperty Name="IDPERSONA" ParameterName="IDPERSONA" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FICHA">
+      <EntityTypeMapping TypeName="SICIBD2Model.FICHA">
+        <MappingFragment StoreEntitySet="FICHA">
+          <ScalarProperty Name="NACIONALIDAD" ColumnName="NACIONALIDAD" />
+          <ScalarProperty Name="SEGUNDOAPELLIDO" ColumnName="SEGUNDOAPELLIDO" />
+          <ScalarProperty Name="PRIMERAPELLIDO" ColumnName="PRIMERAPELLIDO" />
+          <ScalarProperty Name="SEGUNDONOMBRE" ColumnName="SEGUNDONOMBRE" />
+          <ScalarProperty Name="PRIMERNOMBRE" ColumnName="PRIMERNOMBRE" />
+          <ScalarProperty Name="NUMEROPASAPORTE" ColumnName="NUMEROPASAPORTE" />
+          <ScalarProperty Name="NUMEROIDENTIDAD" ColumnName="NUMEROIDENTIDAD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.FICHA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewFichaPersona">
+            <ScalarProperty Name="NACIONALIDAD" ParameterName="NACIONALIDAD" />
+            <ScalarProperty Name="SEGUNDOAPELLIDO" ParameterName="SEGUNDOAPELLIDO" />
+            <ScalarProperty Name="PRIMERAPELLIDO" ParameterName="PRIMERAPELLIDO" />
+            <ScalarProperty Name="SEGUNDONOMBRE" ParameterName="SEGUNDONOMBRE" />
+            <ScalarProperty Name="PRIMERNOMBRE" ParameterName="PRIMERNOMBRE" />
+            <ScalarProperty Name="NUMEROPASAPORTE" ParameterName="NUMEROPASAPORTE" />
+            <ScalarProperty Name="NUMEROIDENTIDAD" ParameterName="NUMEROIDENTIDAD" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateFicha">
+            <ScalarProperty Name="NACIONALIDAD" ParameterName="NACIONALIDAD" Version="Current" />
+            <ScalarProperty Name="SEGUNDOAPELLIDO" ParameterName="SEGUNDOAPELLIDO" Version="Current" />
+            <ScalarProperty Name="PRIMERAPELLIDO" ParameterName="PRIMERAPELLIDO" Version="Current" />
+            <ScalarProperty Name="SEGUNDONOMBRE" ParameterName="SEGUNDONOMBRE" Version="Current" />
+            <ScalarProperty Name="PRIMERNOMBRE" ParameterName="PRIMERNOMBRE" Version="Current" />
+            <ScalarProperty Name="NUMEROPASAPORTE" ParameterName="NUMEROPASAPORTE" Version="Current" />
+            <ScalarProperty Name="NUMEROIDENTIDAD" ParameterName="NUMEROIDENTIDAD" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCUMENTOSINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.DOCUMENTOSINGRESO">
+        <MappingFragment StoreEntitySet="DOCUMENTOSINGRESO">
+          <ScalarProperty Name="IDTIPODOCUMENTO" ColumnName="IDTIPODOCUMENTO" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="FECHACARGADO" ColumnName="FECHACARGADO" />
+          <ScalarProperty Name="RUTA" ColumnName="RUTA" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.DOCUMENTOSINGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewDocumentoIngreso">
+            <ScalarProperty Name="IDTIPODOCUMENTO" ParameterName="IDTIPODOCUMENTO" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+            <ScalarProperty Name="FECHACARGADO" ParameterName="FECHACARGADO" />
+            <ScalarProperty Name="RUTA" ParameterName="RUTA" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateDocumentosIngreso">
+            <ScalarProperty Name="IDTIPODOCUMENTO" ParameterName="IDTIPODOCUMENTO" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+            <ScalarProperty Name="FECHACARGADO" ParameterName="FECHACARGADO" Version="Current" />
+            <ScalarProperty Name="RUTA" ParameterName="RUTA" Version="Current" />
+            <ScalarProperty Name="NOMBRE" ParameterName="NOMBRE" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPOSDOCUMENTO">
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOSDOCUMENTO">
+        <MappingFragment StoreEntitySet="TIPOSDOCUMENTO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRETIPO" ColumnName="NOMBRETIPO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.TIPOSDOCUMENTO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewTipoDocumento">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="NOMBRETIPO" ParameterName="NOMBRETIPO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateTipoDocumento">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="NOMBRETIPO" ParameterName="NOMBRETIPO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CENTRODESARROLLOINGRESO">
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTRODESARROLLOINGRESO">
+        <MappingFragment StoreEntitySet="CENTRODESARROLLOINGRESO">
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="IDCENTROTERAPEUTICO" ColumnName="IDCENTROTERAPEUTICO" />
+          <ScalarProperty Name="FECHAREGISTRO" ColumnName="FECHAREGISTRO" />
+          <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+          <ScalarProperty Name="FECHATRASLADO" ColumnName="FECHATRASLADO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CENTRODESARROLLOINGRESO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCentroDIngreso">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+            <ScalarProperty Name="IDCENTROTERAPEUTICO" ParameterName="IDCENTROTERAPEUTICO" />
+            <ScalarProperty Name="FECHAREGISTRO" ParameterName="FECHAREGISTRO" />
+            <ScalarProperty Name="ACTIVO" ParameterName="ACTIVO" />
+            <ScalarProperty Name="FECHATRASLADO" ParameterName="FECHATRASLADO" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCentroDIngreso">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+            <ScalarProperty Name="IDCENTROTERAPEUTICO" ParameterName="IDCENTROTERAPEUTICO" Version="Current" />
+            <ScalarProperty Name="FECHAREGISTRO" ParameterName="FECHAREGISTRO" Version="Current" />
+            <ScalarProperty Name="ACTIVO" ParameterName="ACTIVO" Version="Current" />
+            <ScalarProperty Name="FECHATRASLADO" ParameterName="FECHATRASLADO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spCrearProcesamientoIngreso" FunctionName="SICIBD2Model.Store.spCrearProcesamientoIngreso" />
+    <EntitySetMapping Name="PSQ_DETALLEENFERMEDADES">
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_DETALLEENFERMEDADES">
+        <MappingFragment StoreEntitySet="PSQ_DETALLEENFERMEDADES">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_DETALLEENFERMEDADES">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePSQDetallesEnfermedades">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PSQ_EXAMENPSICOPATOLOGICO">
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO">
+        <MappingFragment StoreEntitySet="PSQ_EXAMENPSICOPATOLOGICO">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="TRATAMIENTO" ColumnName="TRATAMIENTO" />
+          <ScalarProperty Name="RECOMENDACIONES" ColumnName="RECOMENDACIONES" />
+          <ScalarProperty Name="DIAGNOSTICO" ColumnName="DIAGNOSTICO" />
+          <ScalarProperty Name="NEUROLOGICOS" ColumnName="NEUROLOGICOS" />
+          <ScalarProperty Name="OTROS" ColumnName="OTROS" />
+          <ScalarProperty Name="NIVELDROGADICCION" ColumnName="NIVELDROGADICCION" />
+          <ScalarProperty Name="AUTOCOMPRENSION" ColumnName="AUTOCOMPRENSION" />
+          <ScalarProperty Name="AFECTO" ColumnName="AFECTO" />
+          <ScalarProperty Name="INTELECTO" ColumnName="INTELECTO" />
+          <ScalarProperty Name="DESORDENPENSAMIENTO" ColumnName="DESORDENPENSAMIENTO" />
+          <ScalarProperty Name="LENGUAJE" ColumnName="LENGUAJE" />
+          <ScalarProperty Name="TEP" ColumnName="TEP" />
+          <ScalarProperty Name="DETALLECOOPERA" ColumnName="DETALLECOOPERA" />
+          <ScalarProperty Name="COOPERA" ColumnName="COOPERA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePSQExamenPsicopatologico">
+            <ScalarProperty Name="TRATAMIENTO" ParameterName="TRATAMIENTO" Version="Current" />
+            <ScalarProperty Name="RECOMENDACIONES" ParameterName="RECOMENDACIONES" Version="Current" />
+            <ScalarProperty Name="DIAGNOSTICO" ParameterName="DIAGNOSTICO" Version="Current" />
+            <ScalarProperty Name="NEUROLOGICOS" ParameterName="NEUROLOGICOS" Version="Current" />
+            <ScalarProperty Name="OTROS" ParameterName="OTROS" Version="Current" />
+            <ScalarProperty Name="NIVELDROGADICCION" ParameterName="NIVELDROGADICCION" Version="Current" />
+            <ScalarProperty Name="AUTOCOMPRENSION" ParameterName="AUTOCOMPRENSION" Version="Current" />
+            <ScalarProperty Name="AFECTO" ParameterName="AFECTO" Version="Current" />
+            <ScalarProperty Name="INTELECTO" ParameterName="INTELECTO" Version="Current" />
+            <ScalarProperty Name="DESORDENPENSAMIENTO" ParameterName="DESORDENPENSAMIENTO" Version="Current" />
+            <ScalarProperty Name="LENGUAJE" ParameterName="LENGUAJE" Version="Current" />
+            <ScalarProperty Name="TEP" ParameterName="TEP" Version="Current" />
+            <ScalarProperty Name="DETALLECOOPERA" ParameterName="DETALLECOOPERA" Version="Current" />
+            <ScalarProperty Name="COOPERA" ParameterName="COOPERA" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PSQ_HISTORIALINGRESOSPV">
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_HISTORIALINGRESOSPV">
+        <MappingFragment StoreEntitySet="PSQ_HISTORIALINGRESOSPV">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="HAINGRESADOANTES" ColumnName="HAINGRESADOANTES" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_HISTORIALINGRESOSPV">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePSQHistorialIngreso">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="HAINGRESADOANTES" ParameterName="HAINGRESADOANTES" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PSQ_OBSERVACIONFINAL">
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_OBSERVACIONFINAL">
+        <MappingFragment StoreEntitySet="PSQ_OBSERVACIONFINAL">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_OBSERVACIONFINAL">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePSQObservacionFinal">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PSQ_SINTOMASPRINCIPALES">
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_SINTOMASPRINCIPALES">
+        <MappingFragment StoreEntitySet="PSQ_SINTOMASPRINCIPALES">
+          <ScalarProperty Name="FECHADIAGNOSTICO" ColumnName="FECHADIAGNOSTICO" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.PSQ_SINTOMASPRINCIPALES">
+        <ModificationFunctionMapping>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdatePSQSintomasPrincipales">
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRO_CRITERIO">
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_CRITERIO">
+        <MappingFragment StoreEntitySet="PRO_CRITERIO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRO_FASE">
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_FASE">
+        <MappingFragment StoreEntitySet="PRO_FASE">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="VARCHAR" ColumnName="VARCHAR" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRO_NIVEL">
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_NIVEL">
+        <MappingFragment StoreEntitySet="PRO_NIVEL">
+          <ScalarProperty Name="IDFASE" ColumnName="IDFASE" />
+          <ScalarProperty Name="DIASESTIMADOS" ColumnName="DIASESTIMADOS" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRO_NIVELCRITERIO">
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_NIVELCRITERIO">
+        <MappingFragment StoreEntitySet="PRO_NIVELCRITERIO">
+          <ScalarProperty Name="IDNIVEL" ColumnName="IDNIVEL" />
+          <ScalarProperty Name="IDCRITERIO" ColumnName="IDCRITERIO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRO_PROMOCIONNIVEL">
+      <EntityTypeMapping TypeName="SICIBD2Model.PRO_PROMOCIONNIVEL">
+        <MappingFragment StoreEntitySet="PRO_PROMOCIONNIVEL">
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="CALIFICACION" ColumnName="CALIFICACION" />
+          <ScalarProperty Name="MONITORRESPONSABLE" ColumnName="MONITORRESPONSABLE" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="FECHAREGISTRO" ColumnName="FECHAREGISTRO" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="URLDIPLOMA" ColumnName="URLDIPLOMA" />
+          <ScalarProperty Name="FECHACLAUSURA" ColumnName="FECHACLAUSURA" />
+          <ScalarProperty Name="FECHAPROMOCION" ColumnName="FECHAPROMOCION" />
+          <ScalarProperty Name="IDNIVEL" ColumnName="IDNIVEL" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_ACTITUD">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_ACTITUD">
+        <MappingFragment StoreEntitySet="TER_ACTITUD">
+          <ScalarProperty Name="IDCATEGORIAASPECTO" ColumnName="IDCATEGORIAASPECTO" />
+          <ScalarProperty Name="CALIFICACIONESTIMADA" ColumnName="CALIFICACIONESTIMADA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_AREACRITERIOCALIF">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_AREACRITERIOCALIF">
+        <MappingFragment StoreEntitySet="TER_AREACRITERIOCALIF">
+          <ScalarProperty Name="CALIFICACION" ColumnName="CALIFICACION" />
+          <ScalarProperty Name="IDCALIFAREA" ColumnName="IDCALIFAREA" />
+          <ScalarProperty Name="IDAREA" ColumnName="IDAREA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_ASPECTOEXAMENPERSONALIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD">
+        <MappingFragment StoreEntitySet="TER_ASPECTOEXAMENPERSONALIDAD">
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="CALIFICACION" ColumnName="CALIFICACION" />
+          <ScalarProperty Name="IDEXAMEN" ColumnName="IDEXAMEN" />
+          <ScalarProperty Name="IDASPECTO" ColumnName="IDASPECTO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_ASPECTOPERSONALIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_ASPECTOPERSONALIDAD">
+        <MappingFragment StoreEntitySet="TER_ASPECTOPERSONALIDAD">
+          <ScalarProperty Name="IDCATEGORIAPERSONALIDAD" ColumnName="IDCATEGORIAPERSONALIDAD" />
+          <ScalarProperty Name="CALIFICACIONESPERADA" ColumnName="CALIFICACIONESPERADA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CALIFAREA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CALIFAREA">
+        <MappingFragment StoreEntitySet="TER_CALIFAREA">
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="CALIFICACIONTOTAL" ColumnName="CALIFICACIONTOTAL" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CATEGORIAAREA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAAREA">
+        <MappingFragment StoreEntitySet="TER_CATEGORIAAREA">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CATEGORIAASPECTOCARCTER">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER">
+        <MappingFragment StoreEntitySet="TER_CATEGORIAASPECTOCARCTER">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CATEGORIAFALTA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAFALTA">
+        <MappingFragment StoreEntitySet="TER_CATEGORIAFALTA">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CATEGORIAPERSONALIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CATEGORIAPERSONALIDAD">
+        <MappingFragment StoreEntitySet="TER_CATEGORIAPERSONALIDAD">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CRITERIOCALIFICACION">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CRITERIOCALIFICACION">
+        <MappingFragment StoreEntitySet="TER_CRITERIOCALIFICACION">
+          <ScalarProperty Name="IDCATEGORIAAREA" ColumnName="IDCATEGORIAAREA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_CURSO">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_CURSO">
+        <MappingFragment StoreEntitySet="TER_CURSO">
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_EVALUACIONCARACTER">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_EVALUACIONCARACTER">
+        <MappingFragment StoreEntitySet="TER_EVALUACIONCARACTER">
+          <ScalarProperty Name="CALIFICACION" ColumnName="CALIFICACION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="IDACTITUD" ColumnName="IDACTITUD" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_EXAMENPERSONALIDAD">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_EXAMENPERSONALIDAD">
+        <MappingFragment StoreEntitySet="TER_EXAMENPERSONALIDAD">
+          <ScalarProperty Name="PERSONALIDADSEGUNDA" ColumnName="PERSONALIDADSEGUNDA" />
+          <ScalarProperty Name="PERSONALIADDOMINANTE" ColumnName="PERSONALIADDOMINANTE" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="CALIFICAIONTOTAL" ColumnName="CALIFICAIONTOTAL" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_FALTA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_FALTA">
+        <MappingFragment StoreEntitySet="TER_FALTA">
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="MONITOR" ColumnName="MONITOR" />
+          <ScalarProperty Name="FECHAAPLICADA" ColumnName="FECHAAPLICADA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="IDCATEGORIAFALTA" ColumnName="IDCATEGORIAFALTA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_INCIDENCIAAREA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_INCIDENCIAAREA">
+        <MappingFragment StoreEntitySet="TER_INCIDENCIAAREA">
+          <ScalarProperty Name="FECHAREGISTRO" ColumnName="FECHAREGISTRO" />
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="OBSERVACIONEXTRA" ColumnName="OBSERVACIONEXTRA" />
+          <ScalarProperty Name="ACCIONREALIZADA" ColumnName="ACCIONREALIZADA" />
+          <ScalarProperty Name="ACTITUD" ColumnName="ACTITUD" />
+          <ScalarProperty Name="PRONOSTICO" ColumnName="PRONOSTICO" />
+          <ScalarProperty Name="PSICOTERAPIA" ColumnName="PSICOTERAPIA" />
+          <ScalarProperty Name="EXPLICACIONCONDUCTA" ColumnName="EXPLICACIONCONDUCTA" />
+          <ScalarProperty Name="RECOMENDACIONES" ColumnName="RECOMENDACIONES" />
+          <ScalarProperty Name="ACTITUDESMOSTRADAS" ColumnName="ACTITUDESMOSTRADAS" />
+          <ScalarProperty Name="DETALLEGENRAL" ColumnName="DETALLEGENRAL" />
+          <ScalarProperty Name="MOTIVOVISITA" ColumnName="MOTIVOVISITA" />
+          <ScalarProperty Name="MONITOR" ColumnName="MONITOR" />
+          <ScalarProperty Name="FECHADUAGNOSTICO" ColumnName="FECHADUAGNOSTICO" />
+          <ScalarProperty Name="IDCATEGORIAAREA" ColumnName="IDCATEGORIAAREA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_INSTRUCTOR">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_INSTRUCTOR">
+        <MappingFragment StoreEntitySet="TER_INSTRUCTOR">
+          <ScalarProperty Name="INSTITUCION" ColumnName="INSTITUCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_MATRICULA">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_MATRICULA">
+        <MappingFragment StoreEntitySet="TER_MATRICULA">
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="URLCERTIFICADO" ColumnName="URLCERTIFICADO" />
+          <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
+          <ScalarProperty Name="HORAINICIO" ColumnName="HORAINICIO" />
+          <ScalarProperty Name="DIAS" ColumnName="DIAS" />
+          <ScalarProperty Name="FECHACLAUSURA" ColumnName="FECHACLAUSURA" />
+          <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+          <ScalarProperty Name="NOMBREMATRICULA" ColumnName="NOMBREMATRICULA" />
+          <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+          <ScalarProperty Name="CALIFICACIONTOTAL" ColumnName="CALIFICACIONTOTAL" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="IDINSTRUCTOR" ColumnName="IDINSTRUCTOR" />
+          <ScalarProperty Name="IDCURSO" ColumnName="IDCURSO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TER_RESUMENEVOLUCION">
+      <EntityTypeMapping TypeName="SICIBD2Model.TER_RESUMENEVOLUCION">
+        <MappingFragment StoreEntitySet="TER_RESUMENEVOLUCION">
+          <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+          <ScalarProperty Name="PXSISTFAMILIAR" ColumnName="PXSISTFAMILIAR" />
+          <ScalarProperty Name="FINPROCESO" ColumnName="FINPROCESO" />
+          <ScalarProperty Name="DURANTEPROCESO" ColumnName="DURANTEPROCESO" />
+          <ScalarProperty Name="INICIOPROCESO" ColumnName="INICIOPROCESO" />
+          <ScalarProperty Name="FECHAREGISTRO" ColumnName="FECHAREGISTRO" />
+          <ScalarProperty Name="FECHAULTIMAACTUALIZACION" ColumnName="FECHAULTIMAACTUALIZACION" />
+          <ScalarProperty Name="IDCATEGORIAAREA" ColumnName="IDCATEGORIAAREA" />
+          <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

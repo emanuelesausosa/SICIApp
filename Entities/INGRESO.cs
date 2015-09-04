@@ -24,6 +24,14 @@ namespace SICIApp.Entities
             this.DATOSPROBLEMADROGAS_CONSUMODROGAS = new HashSet<DATOSPROBLEMADROGAS_CONSUMODROGAS>();
             this.DOCUMENTOSINGRESO = new HashSet<DOCUMENTOSINGRESO>();
             this.CENTRODESARROLLOINGRESO = new HashSet<CENTRODESARROLLOINGRESO>();
+            this.PRO_PROMOCIONNIVEL = new HashSet<PRO_PROMOCIONNIVEL>();
+            this.TER_CALIFAREA = new HashSet<TER_CALIFAREA>();
+            this.TER_EVALUACIONCARACTER = new HashSet<TER_EVALUACIONCARACTER>();
+            this.TER_EXAMENPERSONALIDAD = new HashSet<TER_EXAMENPERSONALIDAD>();
+            this.TER_FALTA = new HashSet<TER_FALTA>();
+            this.TER_INCIDENCIAAREA = new HashSet<TER_INCIDENCIAAREA>();
+            this.TER_MATRICULA = new HashSet<TER_MATRICULA>();
+            this.TER_RESUMENEVOLUCION = new HashSet<TER_RESUMENEVOLUCION>();
         }
     
         public int ID { get; set; }
@@ -61,5 +69,18 @@ namespace SICIApp.Entities
         public virtual MOTIVOSINGRESO MOTIVOSINGRESO { get; set; }
         public virtual ICollection<DOCUMENTOSINGRESO> DOCUMENTOSINGRESO { get; set; }
         public virtual ICollection<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
+        public virtual PSQ_DETALLEENFERMEDADES PSQ_DETALLEENFERMEDADES { get; set; }
+        public virtual PSQ_EXAMENPSICOPATOLOGICO PSQ_EXAMENPSICOPATOLOGICO { get; set; }
+        public virtual PSQ_HISTORIALINGRESOSPV PSQ_HISTORIALINGRESOSPV { get; set; }
+        public virtual PSQ_OBSERVACIONFINAL PSQ_OBSERVACIONFINAL { get; set; }
+        public virtual PSQ_SINTOMASPRINCIPALES PSQ_SINTOMASPRINCIPALES { get; set; }
+        public virtual ICollection<PRO_PROMOCIONNIVEL> PRO_PROMOCIONNIVEL { get; set; }
+        public virtual ICollection<TER_CALIFAREA> TER_CALIFAREA { get; set; }
+        public virtual ICollection<TER_EVALUACIONCARACTER> TER_EVALUACIONCARACTER { get; set; }
+        public virtual ICollection<TER_EXAMENPERSONALIDAD> TER_EXAMENPERSONALIDAD { get; set; }
+        public virtual ICollection<TER_FALTA> TER_FALTA { get; set; }
+        public virtual ICollection<TER_INCIDENCIAAREA> TER_INCIDENCIAAREA { get; set; }
+        public virtual ICollection<TER_MATRICULA> TER_MATRICULA { get; set; }
+        public virtual ICollection<TER_RESUMENEVOLUCION> TER_RESUMENEVOLUCION { get; set; }
     }
 }

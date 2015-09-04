@@ -1618,7 +1618,9 @@ namespace SICIApp.Controllers
         {
            // get model
             var _model = new CONDICIONFISICA_ENFERMEDADESMODEL();
-            return View(_model);
+            ///return View(_model);
+            ///
+            return PartialView("_NuevaEnfermedad", _model);
         }
 
         // POST
@@ -2104,6 +2106,199 @@ namespace SICIApp.Controllers
         }
         #endregion
 
+        //******************************************************************************************************************
+        ///---------------****************SSECCIÓN DE MANTENIMIENTO DE REHABILITACIÓN ***************-----------------------
+        ///*****************************************************************************************************************
+        ///
+        #region mantenimiento de sección PROMOCIÓN REHABILITACIÓN
+        // lista de fases
+        public async Task<ActionResult> Fases()
+        {
+            //get entity 
+            var _entity = await _context.PRO_FASE.ToListAsync();
+
+            // set model
+            List<PRO_FASEMODEL> _model = new List<PRO_FASEMODEL>();
+
+            //model set
+            foreach(PRO_FASE entity in _entity)
+            {
+                _model.Add(new PRO_FASEMODEL { 
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle fase
+
+        public async Task<ActionResult> DetalleFase(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if(ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+ 
+            //get entity
+            var _entity = await _context.PRO_FASE.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if(_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_FASEMODEL {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+        
+        // crear fase
+        
+        //get 
+        public ActionResult NuevaFase()
+        {
+            // get model 
+            var _model = new PRO_FASEMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        public async Task<ActionResult> NuevaFase(PRO_FASEMODEL _model)
+        {
+            if(ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.PRO_FASE.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else {
+                        // get entity
+                        var _entity = new PRO_FASE
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.PRO_FASE.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Fases","Configuraciones");
+                    }
+
+                    
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar fase 
+        // get
+        public async Task<ActionResult> EditarFase(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_FASE.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_FASEMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        public async Task<ActionResult> EditarFase(PRO_FASEMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    var _test = await _context.PRO_FASE.FirstOrDefaultAsync(i=>i.NOMBRE == _model.NOMBRE);
+                    bool _nombreRepetido = false;
+                    _nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_nombreRepetido)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_FASE();
+                        _entity = await _context.PRO_FASE.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Fases", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+        
+        #endregion
 
         // dispose data base context
         protected override void Dispose(bool disposing)

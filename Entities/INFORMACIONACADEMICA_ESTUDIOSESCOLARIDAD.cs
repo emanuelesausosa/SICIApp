@@ -17,6 +17,7 @@ namespace SICIApp.Entities
         public int ID { get; set; }
         public Nullable<int> IDESTUDIOS { get; set; }
         public Nullable<int> IDESCOLARIDAD { get; set; }
+        public string DESCRIPCION { get; set; }
     
         public virtual INFORMACIONACADEMICA_ESCOLARIDAD INFORMACIONACADEMICA_ESCOLARIDAD { get; set; }
         public virtual INFORMACIONACADEMICA_ESTUDIOS INFORMACIONACADEMICA_ESTUDIOS { get; set; }

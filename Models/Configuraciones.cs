@@ -354,4 +354,281 @@ namespace SICIApp.Models
         public virtual ICollection<INFORMACIONACADEMICA_ESTUDIOSOFICIO> INFORMACIONACADEMICA_ESTUDIOSOFICIO { get; set; }
     }
     #endregion
+
+    // ******************************************
+    //----***MODELOS PARA MANTENIMIENTO DE RHABILITACIÓN***-----
+    //**********************************************
+
+    // FASE MODEL
+    #region FASE MODEL
+    public partial class PRO_FASEMODEL
+    {
+        public PRO_FASEMODEL()
+        {
+            this.PRO_NIVEL = new HashSet<PRO_NIVEL>();
+        }
+
+        [Key]        
+        public int ID { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name="DESCRIPCIÓN")]
+        public string DESCRIPCION { get; set; }
+
+        [Display(Name="NOMBRE")]
+        [Required(ErrorMessage = "Se requiere un nombre para crear una FASE")]
+        [StringLength(50)]
+        public string NOMBRE { get; set; }
+
+        public virtual ICollection<PRO_NIVEL> PRO_NIVEL { get; set; }
+    }
+
+    #endregion
+
+    #region NIVEL MODEL
+     public partial class PRO_NIVELMODEL
+    {
+        public PRO_NIVELMODEL()
+        {
+            this.PRO_NIVELCRITERIO = new HashSet<PRO_NIVELCRITERIO>();
+            this.PRO_PROMOCIONNIVEL = new HashSet<PRO_PROMOCIONNIVEL>();
+        }
+    
+        [Key]
+        public int ID { get; set; }
+        
+        [Display(Name="NOMBRE")]
+        [StringLength(50)]
+        [Required(ErrorMessage="Se requiere un nombre para crear un NIVEL")]
+        public string NOMBRE { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name="DESCRIPCIÓN")]
+        public string DESCRIPCION { get; set; }
+
+        [Display(Name="DÍAS ESTIMADOS")]        
+        [Range(1, 9999, ErrorMessage="Debe elegir un número entre 1 y 9999")]
+        public Nullable<int> DIASESTIMADOS { get; set; }
+
+        [Display(Name="FASE")]
+        public Nullable<int> IDFASE { get; set; }
+    
+        public virtual PRO_FASE PRO_FASE { get; set; }
+        public virtual ICollection<PRO_NIVELCRITERIO> PRO_NIVELCRITERIO { get; set; }
+        public virtual ICollection<PRO_PROMOCIONNIVEL> PRO_PROMOCIONNIVEL { get; set; }
+    }
+    #endregion
+
+    #region CRITERIO MODEL
+      public partial class PRO_CRITERIOMODEL
+    {
+        public PRO_CRITERIOMODEL()
+        {
+            this.PRO_NIVELCRITERIO = new HashSet<PRO_NIVELCRITERIO>();
+        }
+    
+        [Key]
+        public int ID { get; set; }
+
+        [Required(ErrorMessage="Se requiere un nombre para identificar el criterio")]
+        [Display(Name="NOMBRE")]
+        [StringLength(50, ErrorMessage="Debe de escribir un nombre de máximo 50 caracteres")]
+        public string NOMBRE { get; set; }
+
+        [Display(Name="DESCRIPCIÓN")]
+        public string DESCRIPCION { get; set; }
+    
+        public virtual ICollection<PRO_NIVELCRITERIO> PRO_NIVELCRITERIO { get; set; }
+    }
+     #endregion
+
+      #region CATEGORIA FALTA
+
+
+      public partial class TER_CATEGORIAFALTAMODEL
+      {
+          public TER_CATEGORIAFALTAMODEL()
+          {
+              this.TER_FALTA = new HashSet<TER_FALTA>();
+          }
+
+          [Key]
+          public int ID { get; set; }
+
+          [Display(Name="NOMBRE")]
+          [Required(ErrorMessage="Un nombre es requerido para agreagr una CATEGORIA DE FALTA")]
+          [StringLength(50, ErrorMessage="El nombre de CATEGORIA FALTA debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name="DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+
+          public virtual ICollection<TER_FALTA> TER_FALTA { get; set; }
+      }
+        
+      #endregion
+
+      #region CATEGORIA PERSONALIDAD
+      public partial class TER_CATEGORIAPERSONALIDADMODEL
+    {
+        public TER_CATEGORIAPERSONALIDADMODEL()
+        {
+            this.TER_ASPECTOPERSONALIDAD = new HashSet<TER_ASPECTOPERSONALIDAD>();
+        }
+    
+        [Key]
+          public int ID { get; set; }
+
+          [Display(Name="NOMBRE")]
+          [Required(ErrorMessage="Un nombre es requerido para agreagr una CATEGORIA DE PERSONALIDAD")]
+          [StringLength(50, ErrorMessage="El nombre de CATEGORIA PERSONALIDAD debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name="DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+    
+        public virtual ICollection<TER_ASPECTOPERSONALIDAD> TER_ASPECTOPERSONALIDAD { get; set; }
+    }
+      #endregion
+
+      #region ASPECTO PERSONALIDAD
+
+      public partial class TER_ASPECTOPERSONALIDADMODEL
+      {
+          public TER_ASPECTOPERSONALIDADMODEL()
+          {
+              this.TER_ASPECTOEXAMENPERSONALIDAD = new HashSet<TER_ASPECTOEXAMENPERSONALIDAD>();
+          }
+
+          [Key]
+          public int ID { get; set; }
+
+          [Display(Name = "NOMBRE")]
+          [Required(ErrorMessage = "Un nombre es requerido para agreagr un ASPECTO PERSONALIDAD")]
+          [StringLength(50, ErrorMessage = "El nombre de ASPECTO PERSONALIDAD debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name = "DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+                    
+          [Display(Name="CALIFICACIÓN ESPERADA")]
+          [Range(1, 100, ErrorMessage = "Debe elegir un valor entre 1 y 100")]
+          public Nullable<int> CALIFICACIONESPERADA { get; set; }
+
+          [Display(Name="CATEGORIA PERSONALIDAD")]
+          public Nullable<int> IDCATEGORIAPERSONALIDAD { get; set; }
+
+          public virtual ICollection<TER_ASPECTOEXAMENPERSONALIDAD> TER_ASPECTOEXAMENPERSONALIDAD { get; set; }
+          public virtual TER_CATEGORIAPERSONALIDAD TER_CATEGORIAPERSONALIDAD { get; set; }
+      }
+      #endregion
+
+      #region CATEGORIA ASPECTO CARACTER  -- MODEL
+      public partial class TER_CATEGORIAASPECTOCARCTERMODEL
+      {
+          public TER_CATEGORIAASPECTOCARCTERMODEL()
+          {
+              this.TER_ACTITUD = new HashSet<TER_ACTITUD>();
+          }
+
+          [Key]
+          public int ID { get; set; }
+
+          [Display(Name = "NOMBRE")]
+          [Required(ErrorMessage = "Un nombre es requerido para agreagr una CATEGORIA ASPECTO-CARCTER ")]
+          [StringLength(50, ErrorMessage = "El nombre de CATEGORIA ASPECTO-CARCTER debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name = "DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+
+          public virtual ICollection<TER_ACTITUD> TER_ACTITUD { get; set; }
+      }
+      #endregion
+
+      #region ACTIUD MODEL
+      public partial class TER_ACTITUDMODEL
+      {
+          public TER_ACTITUDMODEL()
+          {
+              this.TER_EVALUACIONCARACTER = new HashSet<TER_EVALUACIONCARACTER>();
+          }
+
+          [Key]
+          public int ID { get; set; }
+
+          [Display(Name = "NOMBRE")]
+          [Required(ErrorMessage = "Un nombre es requerido para agreagr una ACTITUD ")]
+          [StringLength(50, ErrorMessage = "El nombre de ACTITUD debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name = "DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+          
+          [Display(Name = "CALIFICACIÓN ESPERADA")]
+          [Range(1, 100, ErrorMessage = "Debe elegir un valor entre 1 y 100")]
+          public Nullable<decimal> CALIFICACIONESTIMADA { get; set; }
+
+          [Display(Name="CATEGORIA ASPECTO")]
+          public Nullable<int> IDCATEGORIAASPECTO { get; set; }
+
+          public virtual TER_CATEGORIAASPECTOCARCTER TER_CATEGORIAASPECTOCARCTER { get; set; }
+          public virtual ICollection<TER_EVALUACIONCARACTER> TER_EVALUACIONCARACTER { get; set; }
+      }
+      #endregion
+
+      #region INSTRUCTOR  MODEL
+      public partial class TER_INSTRUCTORMODEL
+    {
+        public TER_INSTRUCTORMODEL()
+        {
+            this.TER_MATRICULA = new HashSet<TER_MATRICULA>();
+        }
+    
+        [Key]
+        public int ID { get; set; }
+
+        [Display(Name = "NOMBRE")]
+        [Required(ErrorMessage = "Un nombre es requerido para agreagr un INSTRUCTOR ")]
+        [StringLength(50, ErrorMessage = "El nombre de INSTRUCTOR debe de ser de un máximo de 50 caracteres")]
+        public string NOMBRE { get; set; }
+
+        [Display(Name="INSTITUCIÓN")]
+        [Required(ErrorMessage = "Un nombre es requerido para agreagr una INSTITUCIÓN ")]
+        [StringLength(50, ErrorMessage = "El nombre de INSTITUCIÓN debe de ser de un máximo de 50 caracteres")]
+        public string INSTITUCION { get; set; }
+    
+        public virtual ICollection<TER_MATRICULA> TER_MATRICULA { get; set; }
+    }
+      #endregion
+
+      #region CURSO MODEL
+
+      public partial class TER_CURSOMODEL
+      {
+          public TER_CURSOMODEL()
+          {
+              this.TER_MATRICULA = new HashSet<TER_MATRICULA>();
+          }
+
+          [Key]
+          public int ID { get; set; }
+
+          [Display(Name = "NOMBRE")]
+          [Required(ErrorMessage = "Un nombre es requerido para agreagr un CURSO ")]
+          [StringLength(50, ErrorMessage = "El nombre de CURSO debe de ser de un máximo de 50 caracteres")]
+          public string NOMBRE { get; set; }
+
+          [Display(Name = "DESCRIPCIÓN")]
+          [DataType(DataType.MultilineText)]
+          public string DESCRIPCION { get; set; }
+
+          public virtual ICollection<TER_MATRICULA> TER_MATRICULA { get; set; }
+      }
+      #endregion
 }

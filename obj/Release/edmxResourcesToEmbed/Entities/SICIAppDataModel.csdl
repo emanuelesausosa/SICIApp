@@ -1,0 +1,2293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SICIBD2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <NavigationProperty Name="DATOSPERSONALE" Relationship="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" FromRole="AspNetUser" ToRole="DATOSPERSONALE" />
+    <NavigationProperty Name="USUARIOCENTROCONSULTAs" Relationship="SICIBD2Model.FK_USUARIOCENTROCONSULTA_AspNetUsers" FromRole="AspNetUser" ToRole="USUARIOCENTROCONSULTA" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="SICIBD2Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="CITies" EntityType="SICIBD2Model.CITY" />
+    <EntitySet Name="COUNTRies" EntityType="SICIBD2Model.COUNTRY" />
+    <EntitySet Name="COUNTRYLANGUAGEs" EntityType="SICIBD2Model.COUNTRYLANGUAGE" />
+    <EntitySet Name="DATOSPERSONALES" EntityType="SICIBD2Model.DATOSPERSONALE" />
+    <AssociationSet Name="FK_DATOSPERSONALES_AspNetUsers" Association="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="DATOSPERSONALE" EntitySet="DATOSPERSONALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CITY_COUNTRY" Association="SICIBD2Model.FK_CITY_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRies" />
+      <End Role="CITY" EntitySet="CITies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY" Association="SICIBD2Model.FK_DATOSPERSONALES_CITY">
+      <End Role="CITY" EntitySet="CITies" />
+      <End Role="DATOSPERSONALE" EntitySet="DATOSPERSONALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRies" />
+      <End Role="COUNTRYLANGUAGE" EntitySet="COUNTRYLANGUAGEs" />
+    </AssociationSet>
+    <EntitySet Name="CENTROTERAPEUTICOes" EntityType="SICIBD2Model.CENTROTERAPEUTICO" />
+    <EntitySet Name="USUARIOCENTROCONSULTAs" EntityType="SICIBD2Model.USUARIOCENTROCONSULTA" />
+    <AssociationSet Name="FK_USUARIOCENTROCONSULTA_AspNetUsers" Association="SICIBD2Model.FK_USUARIOCENTROCONSULTA_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="USUARIOCENTROCONSULTA" EntitySet="USUARIOCENTROCONSULTAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CENTROTERAPEUTICO_CITY" Association="SICIBD2Model.FK_CENTROTERAPEUTICO_CITY">
+      <End Role="CITY" EntitySet="CITies" />
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" Association="SICIBD2Model.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICOes" />
+      <End Role="USUARIOCENTROCONSULTA" EntitySet="USUARIOCENTROCONSULTAs" />
+    </AssociationSet>
+    <EntitySet Name="APARATOSSISTEMAS" EntityType="SICIBD2Model.APARATOSSISTEMAS" />
+    <EntitySet Name="APARATOSSISTEMAS_SISTEMAS" EntityType="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS" />
+    <EntitySet Name="EVALUACIONMEDICADETALLE" EntityType="SICIBD2Model.EVALUACIONMEDICADETALLE" />
+    <EntitySet Name="SIGNOSVITALES" EntityType="SICIBD2Model.SIGNOSVITALES" />
+    <EntitySet Name="TIPOEVALUACIONMEDICA" EntityType="SICIBD2Model.TIPOEVALUACIONMEDICA" />
+    <EntitySet Name="DATOSSOCIOECONOMICOS" EntityType="SICIBD2Model.DATOSSOCIOECONOMICOS" />
+    <EntitySet Name="ESTADOMENTAL" EntityType="SICIBD2Model.ESTADOMENTAL" />
+    <EntitySet Name="EXAMENPSICOMETRICO" EntityType="SICIBD2Model.EXAMENPSICOMETRICO" />
+    <EntitySet Name="EXAMENPSICOMETRICO_EXAMEN" EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN" />
+    <EntitySet Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+    <EntitySet Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntityType="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    <EntitySet Name="HISTORIALPERSONALFAMILIAR" EntityType="SICIBD2Model.HISTORIALPERSONALFAMILIAR" />
+    <EntitySet Name="IMPRESIONDIAGNOSTICA" EntityType="SICIBD2Model.IMPRESIONDIAGNOSTICA" />
+    <EntitySet Name="OBERVACIONPRELIMINAR" EntityType="SICIBD2Model.OBERVACIONPRELIMINAR" />
+    <EntitySet Name="RECOMENDACIONES" EntityType="SICIBD2Model.RECOMENDACIONES" />
+    <EntitySet Name="CAUSASEGRESO" EntityType="SICIBD2Model.CAUSASEGRESO" />
+    <EntitySet Name="CAUSASEGRESOINTERNO" EntityType="SICIBD2Model.CAUSASEGRESOINTERNO" />
+    <EntitySet Name="CONDICIONFISICA_ENFERMEDADES" EntityType="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES" />
+    <EntitySet Name="CONDICIONFISICA_INGRESO" EntityType="SICIBD2Model.CONDICIONFISICA_INGRESO" />
+    <EntitySet Name="CONDICIONFISICA_INTERNOENFERMEDADES" EntityType="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES" />
+    <EntitySet Name="DATOSDELICTIVOS" EntityType="SICIBD2Model.DATOSDELICTIVOS" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMO" EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    <EntitySet Name="DATOSPROBLEMADROGAS_DROGAS" EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESCOLARIDAD" EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOS" EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    <EntitySet Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+    <EntitySet Name="INFORMACIONACADEMICA_OFICIOS" EntityType="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS" />
+    <EntitySet Name="INGRESO" EntityType="SICIBD2Model.INGRESO" />
+    <EntitySet Name="MOTIVOSINGRESO" EntityType="SICIBD2Model.MOTIVOSINGRESO" />
+    <EntitySet Name="DATOSPERSONALES1" EntityType="SICIBD2Model.DATOSPERSONALES1" />
+    <EntitySet Name="FICHA" EntityType="SICIBD2Model.FICHA" />
+    <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="SICIBD2Model.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
+      <End Role="APARATOSSISTEMAS_SISTEMAS" EntitySet="APARATOSSISTEMAS_SISTEMAS" />
+      <End Role="APARATOSSISTEMAS" EntitySet="APARATOSSISTEMAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_APARATOSSISTEMAS_INGRESO" Association="SICIBD2Model.FK_APARATOSSISTEMAS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="APARATOSSISTEMAS" EntitySet="APARATOSSISTEMAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACIONMEDICADETALLE_INGRESO" Association="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EVALUACIONMEDICADETALLE" EntitySet="EVALUACIONMEDICADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA" Association="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA">
+      <End Role="TIPOEVALUACIONMEDICA" EntitySet="TIPOEVALUACIONMEDICA" />
+      <End Role="EVALUACIONMEDICADETALLE" EntitySet="EVALUACIONMEDICADETALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SIGNOSVITALES_INGRESO" Association="SICIBD2Model.FK_SIGNOSVITALES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="SIGNOSVITALES" EntitySet="SIGNOSVITALES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSSOCIOECONOMICOS_INGRESO" Association="SICIBD2Model.FK_DATOSSOCIOECONOMICOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSSOCIOECONOMICOS" EntitySet="DATOSSOCIOECONOMICOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ESTADOMENTAL_INGRESO" Association="SICIBD2Model.FK_ESTADOMENTAL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="ESTADOMENTAL" EntitySet="ESTADOMENTAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INGRESO" Association="SICIBD2Model.FK_EXAMENPSICOMETRICO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EXAMENPSICOMETRICO" EntitySet="EXAMENPSICOMETRICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN" Association="SICIBD2Model.FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN">
+      <End Role="EXAMENPSICOMETRICO_EXAMEN" EntitySet="EXAMENPSICOMETRICO_EXAMEN" />
+      <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO" Association="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+      <End Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" EntitySet="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+      <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO" Association="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" EntitySet="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HISTORIALPERSONALFAMILIAR_INGRESO" Association="SICIBD2Model.FK_HISTORIALPERSONALFAMILIAR_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="HISTORIALPERSONALFAMILIAR" EntitySet="HISTORIALPERSONALFAMILIAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IMPRESIONDIAGNOSTICA_INGRESO" Association="SICIBD2Model.FK_IMPRESIONDIAGNOSTICA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="IMPRESIONDIAGNOSTICA" EntitySet="IMPRESIONDIAGNOSTICA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OBERVACIONPRELIMINAR_INGRESO" Association="SICIBD2Model.FK_OBERVACIONPRELIMINAR_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="OBERVACIONPRELIMINAR" EntitySet="OBERVACIONPRELIMINAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RECOMENDACIONES_INGRESO" Association="SICIBD2Model.FK_RECOMENDACIONES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="RECOMENDACIONES" EntitySet="RECOMENDACIONES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY1" Association="SICIBD2Model.FK_DATOSPERSONALES_CITY1">
+      <End Role="CITY" EntitySet="CITies" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_CITY11" Association="SICIBD2Model.FK_DATOSPERSONALES_CITY11">
+      <End Role="CITY" EntitySet="CITies" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_COUNTRY" Association="SICIBD2Model.FK_DATOSPERSONALES_COUNTRY">
+      <End Role="COUNTRY" EntitySet="COUNTRies" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAUSASEGRESOINTERNO_CAUSASEGRESO" Association="SICIBD2Model.FK_CAUSASEGRESOINTERNO_CAUSASEGRESO">
+      <End Role="CAUSASEGRESO" EntitySet="CAUSASEGRESO" />
+      <End Role="CAUSASEGRESOINTERNO" EntitySet="CAUSASEGRESOINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CAUSASEGRESOINTERNO_INGRESO" Association="SICIBD2Model.FK_CAUSASEGRESOINTERNO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CAUSASEGRESOINTERNO" EntitySet="CAUSASEGRESOINTERNO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES" Association="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES">
+      <End Role="CONDICIONFISICA_ENFERMEDADES" EntitySet="CONDICIONFISICA_ENFERMEDADES" />
+      <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" EntitySet="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INGRESO_INGRESO" Association="SICIBD2Model.FK_CONDICIONFISICA_INGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONDICIONFISICA_INGRESO" EntitySet="CONDICIONFISICA_INGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO" Association="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" EntitySet="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSDELICTIVOS_INGRESO" Association="SICIBD2Model.FK_DATOSDELICTIVOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSDELICTIVOS" EntitySet="DATOSDELICTIVOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO" Association="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMO" EntitySet="DATOSPROBLEMADROGAS_CONSUMO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS" Association="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS">
+      <End Role="DATOSPROBLEMADROGAS_DROGAS" EntitySet="DATOSPROBLEMADROGAS_DROGAS" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO" Association="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" EntitySet="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD" Association="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD">
+      <End Role="INFORMACIONACADEMICA_ESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESCOLARIDAD" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO" Association="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS" Association="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS">
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" EntitySet="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS" Association="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS">
+      <End Role="INFORMACIONACADEMICA_ESTUDIOS" EntitySet="INFORMACIONACADEMICA_ESTUDIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS" Association="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS">
+      <End Role="INFORMACIONACADEMICA_OFICIOS" EntitySet="INFORMACIONACADEMICA_OFICIOS" />
+      <End Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" EntitySet="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_INGRESO_FICHA" Association="SICIBD2Model.FK_INGRESO_FICHA">
+      <End Role="FICHA" EntitySet="FICHA" />
+      <End Role="INGRESO" EntitySet="INGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MOTIVOSINGRESO_INGRESO" Association="SICIBD2Model.FK_MOTIVOSINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="MOTIVOSINGRESO" EntitySet="MOTIVOSINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DATOSPERSONALES_FICHA" Association="SICIBD2Model.FK_DATOSPERSONALES_FICHA">
+      <End Role="FICHA" EntitySet="FICHA" />
+      <End Role="DATOSPERSONALES1" EntitySet="DATOSPERSONALES1" />
+    </AssociationSet>
+    <EntitySet Name="DOCUMENTOSINGRESO" EntityType="SICIBD2Model.DOCUMENTOSINGRESO" />
+    <EntitySet Name="TIPOSDOCUMENTO" EntityType="SICIBD2Model.TIPOSDOCUMENTO" />
+    <AssociationSet Name="FK_DOCUMENTOSINGRESO_INGRESO" Association="SICIBD2Model.FK_DOCUMENTOSINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="DOCUMENTOSINGRESO" EntitySet="DOCUMENTOSINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO" Association="SICIBD2Model.FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO">
+      <End Role="TIPOSDOCUMENTO" EntitySet="TIPOSDOCUMENTO" />
+      <End Role="DOCUMENTOSINGRESO" EntitySet="DOCUMENTOSINGRESO" />
+    </AssociationSet>
+    <EntitySet Name="CENTRODESARROLLOINGRESO" EntityType="SICIBD2Model.CENTRODESARROLLOINGRESO" />
+    <AssociationSet Name="FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" Association="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICOes" />
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CENTRODESARROLLOINGRESO_INGRESO" Association="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
+    </AssociationSet>
+    <FunctionImport Name="spCrearProcesamientoIngreso" ReturnType="Collection(Int32)">
+      <Parameter Name="IDINGRESO" Mode="In" Type="Int32" />
+      <Parameter Name="FECHADIAGNOSTICO" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="PSQ_DETALLEENFERMEDADES" EntityType="SICIBD2Model.PSQ_DETALLEENFERMEDADES" />
+    <EntitySet Name="PSQ_EXAMENPSICOPATOLOGICO" EntityType="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO" />
+    <EntitySet Name="PSQ_HISTORIALINGRESOSPV" EntityType="SICIBD2Model.PSQ_HISTORIALINGRESOSPV" />
+    <EntitySet Name="PSQ_OBSERVACIONFINAL" EntityType="SICIBD2Model.PSQ_OBSERVACIONFINAL" />
+    <EntitySet Name="PSQ_SINTOMASPRINCIPALES" EntityType="SICIBD2Model.PSQ_SINTOMASPRINCIPALES" />
+    <AssociationSet Name="FK_PSQ_DETALLEENFERMEDADES_INGRESO" Association="SICIBD2Model.FK_PSQ_DETALLEENFERMEDADES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_DETALLEENFERMEDADES" EntitySet="PSQ_DETALLEENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO" Association="SICIBD2Model.FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_EXAMENPSICOPATOLOGICO" EntitySet="PSQ_EXAMENPSICOPATOLOGICO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_HISTORIALINGRESOSPV_INGRESO" Association="SICIBD2Model.FK_PSQ_HISTORIALINGRESOSPV_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_HISTORIALINGRESOSPV" EntitySet="PSQ_HISTORIALINGRESOSPV" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_OBSERVACIONFINAL_INGRESO" Association="SICIBD2Model.FK_PSQ_OBSERVACIONFINAL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_OBSERVACIONFINAL" EntitySet="PSQ_OBSERVACIONFINAL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PSQ_SINTOMASPRINCIPALES_INGRESO" Association="SICIBD2Model.FK_PSQ_SINTOMASPRINCIPALES_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PSQ_SINTOMASPRINCIPALES" EntitySet="PSQ_SINTOMASPRINCIPALES" />
+    </AssociationSet>
+    <EntitySet Name="PRO_CRITERIO" EntityType="SICIBD2Model.PRO_CRITERIO" />
+    <EntitySet Name="PRO_FASE" EntityType="SICIBD2Model.PRO_FASE" />
+    <EntitySet Name="PRO_NIVEL" EntityType="SICIBD2Model.PRO_NIVEL" />
+    <EntitySet Name="PRO_NIVELCRITERIO" EntityType="SICIBD2Model.PRO_NIVELCRITERIO" />
+    <EntitySet Name="PRO_PROMOCIONNIVEL" EntityType="SICIBD2Model.PRO_PROMOCIONNIVEL" />
+    <AssociationSet Name="FK_PRO_PROMOCIONNIVEL_INGRESO" Association="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="PRO_PROMOCIONNIVEL" EntitySet="PRO_PROMOCIONNIVEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVELCRITERIO_PRO_CRITERIO" Association="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_CRITERIO">
+      <End Role="PRO_CRITERIO" EntitySet="PRO_CRITERIO" />
+      <End Role="PRO_NIVELCRITERIO" EntitySet="PRO_NIVELCRITERIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVEL_PRO_FASE" Association="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE">
+      <End Role="PRO_FASE" EntitySet="PRO_FASE" />
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_NIVELCRITERIO_PRO_NIVEL" Association="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_NIVELCRITERIO" EntitySet="PRO_NIVELCRITERIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" Association="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_PROMOCIONNIVEL" EntitySet="PRO_PROMOCIONNIVEL" />
+    </AssociationSet>
+    <EntitySet Name="TER_ACTITUD" EntityType="SICIBD2Model.TER_ACTITUD" />
+    <EntitySet Name="TER_AREACRITERIOCALIF" EntityType="SICIBD2Model.TER_AREACRITERIOCALIF" />
+    <EntitySet Name="TER_ASPECTOEXAMENPERSONALIDAD" EntityType="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD" />
+    <EntitySet Name="TER_ASPECTOPERSONALIDAD" EntityType="SICIBD2Model.TER_ASPECTOPERSONALIDAD" />
+    <EntitySet Name="TER_CALIFAREA" EntityType="SICIBD2Model.TER_CALIFAREA" />
+    <EntitySet Name="TER_CATEGORIAAREA" EntityType="SICIBD2Model.TER_CATEGORIAAREA" />
+    <EntitySet Name="TER_CATEGORIAASPECTOCARCTER" EntityType="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER" />
+    <EntitySet Name="TER_CATEGORIAFALTA" EntityType="SICIBD2Model.TER_CATEGORIAFALTA" />
+    <EntitySet Name="TER_CATEGORIAPERSONALIDAD" EntityType="SICIBD2Model.TER_CATEGORIAPERSONALIDAD" />
+    <EntitySet Name="TER_CRITERIOCALIFICACION" EntityType="SICIBD2Model.TER_CRITERIOCALIFICACION" />
+    <EntitySet Name="TER_CURSO" EntityType="SICIBD2Model.TER_CURSO" />
+    <EntitySet Name="TER_EVALUACIONCARACTER" EntityType="SICIBD2Model.TER_EVALUACIONCARACTER" />
+    <EntitySet Name="TER_EXAMENPERSONALIDAD" EntityType="SICIBD2Model.TER_EXAMENPERSONALIDAD" />
+    <EntitySet Name="TER_FALTA" EntityType="SICIBD2Model.TER_FALTA" />
+    <EntitySet Name="TER_INCIDENCIAAREA" EntityType="SICIBD2Model.TER_INCIDENCIAAREA" />
+    <EntitySet Name="TER_INSTRUCTOR" EntityType="SICIBD2Model.TER_INSTRUCTOR" />
+    <EntitySet Name="TER_MATRICULA" EntityType="SICIBD2Model.TER_MATRICULA" />
+    <EntitySet Name="TER_RESUMENEVOLUCION" EntityType="SICIBD2Model.TER_RESUMENEVOLUCION" />
+    <AssociationSet Name="FK_TER_CALIFAREA_INGRESO" Association="SICIBD2Model.FK_TER_CALIFAREA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_CALIFAREA" EntitySet="TER_CALIFAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EVALUACIONCARACTER_INGRESO" Association="SICIBD2Model.FK_TER_EVALUACIONCARACTER_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_EVALUACIONCARACTER" EntitySet="TER_EVALUACIONCARACTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EXAMENPERSONALIDAD_INGRESO" Association="SICIBD2Model.FK_TER_EXAMENPERSONALIDAD_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_INGRESO" Association="SICIBD2Model.FK_TER_FALTA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_INCIDENCIAAREA_INGRESO" Association="SICIBD2Model.FK_TER_INCIDENCIAAREA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_INGRESO" Association="SICIBD2Model.FK_TER_MATRICULA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_RESUMENEVOLUCION_INGRESO" Association="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_RESUMENEVOLUCION" EntitySet="TER_RESUMENEVOLUCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER" Association="SICIBD2Model.FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER">
+      <End Role="TER_CATEGORIAASPECTOCARCTER" EntitySet="TER_CATEGORIAASPECTOCARCTER" />
+      <End Role="TER_ACTITUD" EntitySet="TER_ACTITUD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_EVALUACIONCARACTER_TER_ACTITUD" Association="SICIBD2Model.FK_TER_EVALUACIONCARACTER_TER_ACTITUD">
+      <End Role="TER_ACTITUD" EntitySet="TER_ACTITUD" />
+      <End Role="TER_EVALUACIONCARACTER" EntitySet="TER_EVALUACIONCARACTER" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_AREACRITERIOCALIF_TER_CALIFAREA" Association="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CALIFAREA">
+      <End Role="TER_CALIFAREA" EntitySet="TER_CALIFAREA" />
+      <End Role="TER_AREACRITERIOCALIF" EntitySet="TER_AREACRITERIOCALIF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION" Association="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION">
+      <End Role="TER_CRITERIOCALIFICACION" EntitySet="TER_CRITERIOCALIFICACION" />
+      <End Role="TER_AREACRITERIOCALIF" EntitySet="TER_AREACRITERIOCALIF" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD" Association="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD">
+      <End Role="TER_ASPECTOPERSONALIDAD" EntitySet="TER_ASPECTOPERSONALIDAD" />
+      <End Role="TER_ASPECTOEXAMENPERSONALIDAD" EntitySet="TER_ASPECTOEXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD" Association="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD">
+      <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
+      <End Role="TER_ASPECTOEXAMENPERSONALIDAD" EntitySet="TER_ASPECTOEXAMENPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD" Association="SICIBD2Model.FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD">
+      <End Role="TER_CATEGORIAPERSONALIDAD" EntitySet="TER_CATEGORIAPERSONALIDAD" />
+      <End Role="TER_ASPECTOPERSONALIDAD" EntitySet="TER_ASPECTOPERSONALIDAD" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA" Association="SICIBD2Model.FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_CRITERIOCALIFICACION" EntitySet="TER_CRITERIOCALIFICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA" Association="SICIBD2Model.FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA" Association="SICIBD2Model.FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA">
+      <End Role="TER_CATEGORIAAREA" EntitySet="TER_CATEGORIAAREA" />
+      <End Role="TER_RESUMENEVOLUCION" EntitySet="TER_RESUMENEVOLUCION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_TER_CATEGORIAFALTA" Association="SICIBD2Model.FK_TER_FALTA_TER_CATEGORIAFALTA">
+      <End Role="TER_CATEGORIAFALTA" EntitySet="TER_CATEGORIAFALTA" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_TER_CURSO" Association="SICIBD2Model.FK_TER_MATRICULA_TER_CURSO">
+      <End Role="TER_CURSO" EntitySet="TER_CURSO" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_MATRICULA_TER_INSTRUCTOR" Association="SICIBD2Model.FK_TER_MATRICULA_TER_INSTRUCTOR">
+      <End Role="TER_INSTRUCTOR" EntitySet="TER_INSTRUCTOR" />
+      <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CITY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="35" FixedLength="true" Unicode="false" />
+    <Property Name="COUNTRYCODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="DISTRICT" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="POPULATION" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="COUNTRY" Relationship="SICIBD2Model.FK_CITY_COUNTRY" FromRole="CITY" ToRole="COUNTRY" />
+    <NavigationProperty Name="DATOSPERSONALES" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY" FromRole="CITY" ToRole="DATOSPERSONALE" />
+    <NavigationProperty Name="CENTROTERAPEUTICOes" Relationship="SICIBD2Model.FK_CENTROTERAPEUTICO_CITY" FromRole="CITY" ToRole="CENTROTERAPEUTICO" />
+    <NavigationProperty Name="DATOSPERSONALES1" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY1" FromRole="CITY" ToRole="DATOSPERSONALES1" />
+    <NavigationProperty Name="DATOSPERSONALES11" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY11" FromRole="CITY" ToRole="DATOSPERSONALES1" />
+  </EntityType>
+  <EntityType Name="COUNTRY">
+    <Key>
+      <PropertyRef Name="CODE" />
+    </Key>
+    <Property Name="CODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="52" FixedLength="true" Unicode="false" />
+    <Property Name="CONTINENT" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="REGION" Type="String" Nullable="false" MaxLength="26" FixedLength="true" Unicode="false" />
+    <Property Name="SURFACEAREA" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="INDEPYEAR" Type="Int16" />
+    <Property Name="POPULATION" Type="Int32" Nullable="false" />
+    <Property Name="LIFEEXPECTANCY" Type="Decimal" Precision="3" Scale="1" />
+    <Property Name="GNP" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="GNPOLD" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="LOCALNAME" Type="String" Nullable="false" MaxLength="45" FixedLength="true" Unicode="false" />
+    <Property Name="GOVERNMENTFORM" Type="String" Nullable="false" MaxLength="45" FixedLength="true" Unicode="false" />
+    <Property Name="HEADOFSTATE" Type="String" MaxLength="60" FixedLength="true" Unicode="false" />
+    <Property Name="CAPITAL" Type="Int32" />
+    <Property Name="CODE2" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="CITies" Relationship="SICIBD2Model.FK_CITY_COUNTRY" FromRole="COUNTRY" ToRole="CITY" />
+    <NavigationProperty Name="COUNTRYLANGUAGEs" Relationship="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" FromRole="COUNTRY" ToRole="COUNTRYLANGUAGE" />
+    <NavigationProperty Name="DATOSPERSONALES1" Relationship="SICIBD2Model.FK_DATOSPERSONALES_COUNTRY" FromRole="COUNTRY" ToRole="DATOSPERSONALES1" />
+  </EntityType>
+  <EntityType Name="COUNTRYLANGUAGE">
+    <Key>
+      <PropertyRef Name="COUNTRYCODE" />
+      <PropertyRef Name="LANGUAGE" />
+    </Key>
+    <Property Name="COUNTRYCODE" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="LANGUAGE" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
+    <Property Name="ISOFFICIAL" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="PERCENTAGE" Type="Decimal" Nullable="false" Precision="4" Scale="1" />
+    <NavigationProperty Name="COUNTRY" Relationship="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" FromRole="COUNTRYLANGUAGE" ToRole="COUNTRY" />
+  </EntityType>
+  <EntityType Name="DATOSPERSONALE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PRIMERNOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SEGUNDONOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PRIMERAPELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SEGUNDOAPELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PROFESION" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="NUMEROIDENTIDAD" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="EXTRANJERO" Type="Boolean" />
+    <Property Name="NUMEROPASAPORTE" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="FOTOGRAFIA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IDCIUDADORIGEN" Type="Int32" />
+    <NavigationProperty Name="AspNetUser" Relationship="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" FromRole="DATOSPERSONALE" ToRole="AspNetUser" />
+    <NavigationProperty Name="CITY" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY" FromRole="DATOSPERSONALE" ToRole="CITY" />
+  </EntityType>
+  <Association Name="FK_DATOSPERSONALES_AspNetUsers">
+    <End Type="SICIBD2Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SICIBD2Model.DATOSPERSONALE" Role="DATOSPERSONALE" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALE">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CITY_COUNTRY">
+    <End Type="SICIBD2Model.COUNTRY" Role="COUNTRY" Multiplicity="1" />
+    <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="CITY">
+        <PropertyRef Name="COUNTRYCODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY">
+    <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPERSONALE" Role="DATOSPERSONALE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALE">
+        <PropertyRef Name="IDCIUDADORIGEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_COUNTRYLANGUAGE_COUNTRY">
+    <End Type="SICIBD2Model.COUNTRY" Role="COUNTRY" Multiplicity="1" />
+    <End Type="SICIBD2Model.COUNTRYLANGUAGE" Role="COUNTRYLANGUAGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="COUNTRYLANGUAGE">
+        <PropertyRef Name="COUNTRYCODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CENTROTERAPEUTICO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IDCIUDADOPERACION" Type="Int32" />
+    <NavigationProperty Name="CITY" Relationship="SICIBD2Model.FK_CENTROTERAPEUTICO_CITY" FromRole="CENTROTERAPEUTICO" ToRole="CITY" />
+    <NavigationProperty Name="USUARIOCENTROCONSULTAs" Relationship="SICIBD2Model.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" FromRole="CENTROTERAPEUTICO" ToRole="USUARIOCENTROCONSULTA" />
+    <NavigationProperty Name="CENTRODESARROLLOINGRESO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" FromRole="CENTROTERAPEUTICO" ToRole="CENTRODESARROLLOINGRESO" />
+  </EntityType>
+  <EntityType Name="USUARIOCENTROCONSULTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCT" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IDUSUARIO" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FECHACREACION" Type="DateTime" Precision="3" />
+    <Property Name="ACTIVO" Type="Boolean" />
+    <NavigationProperty Name="AspNetUser" Relationship="SICIBD2Model.FK_USUARIOCENTROCONSULTA_AspNetUsers" FromRole="USUARIOCENTROCONSULTA" ToRole="AspNetUser" />
+    <NavigationProperty Name="CENTROTERAPEUTICO" Relationship="SICIBD2Model.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" FromRole="USUARIOCENTROCONSULTA" ToRole="CENTROTERAPEUTICO" />
+  </EntityType>
+  <Association Name="FK_USUARIOCENTROCONSULTA_AspNetUsers">
+    <End Type="SICIBD2Model.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SICIBD2Model.USUARIOCENTROCONSULTA" Role="USUARIOCENTROCONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="USUARIOCENTROCONSULTA">
+        <PropertyRef Name="IDUSUARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CENTROTERAPEUTICO_CITY">
+    <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CENTROTERAPEUTICO" Role="CENTROTERAPEUTICO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="IDCIUDADOPERACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO">
+    <End Type="SICIBD2Model.CENTROTERAPEUTICO" Role="CENTROTERAPEUTICO" Multiplicity="1" />
+    <End Type="SICIBD2Model.USUARIOCENTROCONSULTA" Role="USUARIOCENTROCONSULTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USUARIOCENTROCONSULTA">
+        <PropertyRef Name="IDCT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="APARATOSSISTEMAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDAPARATOSISTEMA" Type="Int32" />
+    <Property Name="DIAGNOSTICO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="APARATOSSISTEMAS_SISTEMAS" Relationship="SICIBD2Model.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" FromRole="APARATOSSISTEMAS" ToRole="APARATOSSISTEMAS_SISTEMAS" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_APARATOSSISTEMAS_INGRESO" FromRole="APARATOSSISTEMAS" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="APARATOSSISTEMAS_SISTEMAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="APARATOSSISTEMAS" Relationship="SICIBD2Model.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" FromRole="APARATOSSISTEMAS_SISTEMAS" ToRole="APARATOSSISTEMAS" />
+  </EntityType>
+  <EntityType Name="EVALUACIONMEDICADETALLE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDTIPOEVALUACIONMEDICA" Type="Int32" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_INGRESO" FromRole="EVALUACIONMEDICADETALLE" ToRole="INGRESO" />
+    <NavigationProperty Name="TIPOEVALUACIONMEDICA" Relationship="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA" FromRole="EVALUACIONMEDICADETALLE" ToRole="TIPOEVALUACIONMEDICA" />
+  </EntityType>
+  <EntityType Name="SIGNOSVITALES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="PESO" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FRECUENCIACARDIACA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PRESIONARTERIAL" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <Property Name="MEDICORESPONSABLE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_SIGNOSVITALES_INGRESO" FromRole="SIGNOSVITALES" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="TIPOEVALUACIONMEDICA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EVALUACIONMEDICADETALLE" Relationship="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA" FromRole="TIPOEVALUACIONMEDICA" ToRole="EVALUACIONMEDICADETALLE" />
+  </EntityType>
+  <EntityType Name="DATOSSOCIOECONOMICOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="CONDICIONFAMILIAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="SITUACIONSOACIAL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_DATOSSOCIOECONOMICOS_INGRESO" FromRole="DATOSSOCIOECONOMICOS" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="ESTADOMENTAL">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_ESTADOMENTAL_INGRESO" FromRole="ESTADOMENTAL" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="CALIFICACIONFINAL" Type="Int32" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PROFESIONALRESPONDABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INGRESO" FromRole="EXAMENPSICOMETRICO" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_EXAMEN">
+    <Key>
+      <PropertyRef Name="IDEXAMEN" />
+    </Key>
+    <Property Name="IDEXAMEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TITULO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ARCHIVOFISOCO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN" FromRole="EXAMENPSICOMETRICO_EXAMEN" ToRole="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+    <Key>
+      <PropertyRef Name="IDPREGUNTA" />
+    </Key>
+    <Property Name="IDPREGUNTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DETALLE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="VALORACION" Type="Int32" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IDEXAMEN" Type="Int32" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO_EXAMEN" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN" FromRole="EXAMENPSICOMETRICO_EXAMENCONTENIDO" ToRole="EXAMENPSICOMETRICO_EXAMEN" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO" FromRole="EXAMENPSICOMETRICO_EXAMENCONTENIDO" ToRole="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+  </EntityType>
+  <EntityType Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDPREGUNTA" Type="Int32" />
+    <Property Name="CALIFICACIONOBTENIDA" Type="Int32" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO" FromRole="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" ToRole="EXAMENPSICOMETRICO_EXAMENCONTENIDO" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO" FromRole="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="HISTORIALPERSONALFAMILIAR">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_HISTORIALPERSONALFAMILIAR_INGRESO" FromRole="HISTORIALPERSONALFAMILIAR" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="IMPRESIONDIAGNOSTICA">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_IMPRESIONDIAGNOSTICA_INGRESO" FromRole="IMPRESIONDIAGNOSTICA" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="OBERVACIONPRELIMINAR">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="PROBLEMAS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_OBERVACIONPRELIMINAR_INGRESO" FromRole="OBERVACIONPRELIMINAR" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="RECOMENDACIONES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_RECOMENDACIONES_INGRESO" FromRole="RECOMENDACIONES" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="CAUSASEGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CAUSASEGRESOINTERNO" Relationship="SICIBD2Model.FK_CAUSASEGRESOINTERNO_CAUSASEGRESO" FromRole="CAUSASEGRESO" ToRole="CAUSASEGRESOINTERNO" />
+  </EntityType>
+  <EntityType Name="CAUSASEGRESOINTERNO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDCAUSAEGRESO" Type="Int32" />
+    <Property Name="COMENTARIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CAUSASEGRESO" Relationship="SICIBD2Model.FK_CAUSASEGRESOINTERNO_CAUSASEGRESO" FromRole="CAUSASEGRESOINTERNO" ToRole="CAUSASEGRESO" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CAUSASEGRESOINTERNO_INGRESO" FromRole="CAUSASEGRESOINTERNO" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_ENFERMEDADES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRECIENTIFICO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRESINOMIMO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CONDICIONFISICA_INTERNOENFERMEDADES" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES" FromRole="CONDICIONFISICA_ENFERMEDADES" ToRole="CONDICIONFISICA_INTERNOENFERMEDADES" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_INGRESO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="PADECE" Type="Boolean" />
+    <Property Name="DETALLE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RECIBIOTRATAMIENTO" Type="Boolean" />
+    <Property Name="TIENEIMPEDIMENTOS" Type="Boolean" />
+    <Property Name="DUERMEBIEN" Type="Boolean" />
+    <Property Name="PADECENERVIOS" Type="Boolean" />
+    <Property Name="HASIDOOPERADO" Type="Boolean" />
+    <Property Name="ONSERVACIONESGENERALES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INGRESO_INGRESO" FromRole="CONDICIONFISICA_INGRESO" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="CONDICIONFISICA_INTERNOENFERMEDADES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDENFERMEDAD" Type="Int32" />
+    <NavigationProperty Name="CONDICIONFISICA_ENFERMEDADES" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES" FromRole="CONDICIONFISICA_INTERNOENFERMEDADES" ToRole="CONDICIONFISICA_ENFERMEDADES" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO" FromRole="CONDICIONFISICA_INTERNOENFERMEDADES" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="DATOSDELICTIVOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="HACOMETIDO" Type="Boolean" />
+    <Property Name="DETALLESACTOS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="HAESTADOPRESO" Type="Boolean" />
+    <Property Name="DESTALLESRECLUSION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_DATOSDELICTIVOS_INGRESO" FromRole="DATOSDELICTIVOS" ToRole="INGRESO" />
+    <Property Name="JUICIOPENDIENTE" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_CONSUMO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="EDADCOMIENZO" Type="Int32" />
+    <Property Name="INTENTODEJARLAS" Type="Boolean" />
+    <Property Name="PROBLEMAFISICO" Type="Boolean" />
+    <Property Name="PROBLEMAMENTAL" Type="Boolean" />
+    <Property Name="TRATAMIENTOMEDICO" Type="Boolean" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO" FromRole="DATOSPROBLEMADROGAS_CONSUMO" ToRole="INGRESO" />
+    <Property Name="EXPLIQUEPROBLEMAS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LUGARTRATAMIENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ANIOTRATAMIENTO" Type="Int32" />
+    <Property Name="ABSTINENCIADIAS" Type="Int32" />
+    <Property Name="ABSTINENCIASEMANAS" Type="Int32" />
+    <Property Name="ABSTINENCIAMESES" Type="Int32" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDDROGA" Type="Int32" />
+    <NavigationProperty Name="DATOSPROBLEMADROGAS_DROGAS" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS" FromRole="DATOSPROBLEMADROGAS_CONSUMODROGAS" ToRole="DATOSPROBLEMADROGAS_DROGAS" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO" FromRole="DATOSPROBLEMADROGAS_CONSUMODROGAS" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="DATOSPROBLEMADROGAS_DROGAS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRECIENTIFICO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRECOMUN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DATOSPROBLEMADROGAS_CONSUMODROGAS" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS" FromRole="DATOSPROBLEMADROGAS_DROGAS" ToRole="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESCOLARIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBREESCOLARIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCIONESCOLARIDAD" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD" FromRole="INFORMACIONACADEMICA_ESCOLARIDAD" ToRole="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOS">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="SABELEERYESCRIBIR" Type="Boolean" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO" FromRole="INFORMACIONACADEMICA_ESTUDIOS" ToRole="INGRESO" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS" FromRole="INFORMACIONACADEMICA_ESTUDIOS" ToRole="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS" FromRole="INFORMACIONACADEMICA_ESTUDIOS" ToRole="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDESTUDIOS" Type="Int32" />
+    <Property Name="IDESCOLARIDAD" Type="Int32" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESCOLARIDAD" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD" FromRole="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" ToRole="INFORMACIONACADEMICA_ESCOLARIDAD" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOS" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS" FromRole="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" ToRole="INFORMACIONACADEMICA_ESTUDIOS" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDESTUDIOS" Type="Int32" />
+    <Property Name="IDOFICIOS" Type="Int32" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOS" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS" FromRole="INFORMACIONACADEMICA_ESTUDIOSOFICIO" ToRole="INFORMACIONACADEMICA_ESTUDIOS" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_OFICIOS" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS" FromRole="INFORMACIONACADEMICA_ESTUDIOSOFICIO" ToRole="INFORMACIONACADEMICA_OFICIOS" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="INFORMACIONACADEMICA_OFICIOS">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBREOFICIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCIONOFICIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS" FromRole="INFORMACIONACADEMICA_OFICIOS" ToRole="INFORMACIONACADEMICA_ESTUDIOSOFICIO" />
+  </EntityType>
+  <EntityType Name="INGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NUMEXPEDIENTE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAUTORIZACION" Type="DateTime" Precision="3" />
+    <Property Name="FECHAFIRMAACUERDO" Type="DateTime" Precision="3" />
+    <Property Name="FECHAREALINGRESOPV" Type="DateTime" Precision="3" />
+    <Property Name="FECHAEGRESOPV" Type="DateTime" Precision="3" />
+    <Property Name="FECHAINGRESOSISTEMA" Type="DateTime" Precision="3" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CONTRATO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDPERSONA" Type="Int32" />
+    <NavigationProperty Name="APARATOSSISTEMAS" Relationship="SICIBD2Model.FK_APARATOSSISTEMAS_INGRESO" FromRole="INGRESO" ToRole="APARATOSSISTEMAS" />
+    <NavigationProperty Name="EVALUACIONMEDICADETALLE" Relationship="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_INGRESO" FromRole="INGRESO" ToRole="EVALUACIONMEDICADETALLE" />
+    <NavigationProperty Name="SIGNOSVITALES" Relationship="SICIBD2Model.FK_SIGNOSVITALES_INGRESO" FromRole="INGRESO" ToRole="SIGNOSVITALES" />
+    <NavigationProperty Name="DATOSSOCIOECONOMICOS" Relationship="SICIBD2Model.FK_DATOSSOCIOECONOMICOS_INGRESO" FromRole="INGRESO" ToRole="DATOSSOCIOECONOMICOS" />
+    <NavigationProperty Name="ESTADOMENTAL" Relationship="SICIBD2Model.FK_ESTADOMENTAL_INGRESO" FromRole="INGRESO" ToRole="ESTADOMENTAL" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INGRESO" FromRole="INGRESO" ToRole="EXAMENPSICOMETRICO" />
+    <NavigationProperty Name="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Relationship="SICIBD2Model.FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO" FromRole="INGRESO" ToRole="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" />
+    <NavigationProperty Name="HISTORIALPERSONALFAMILIAR" Relationship="SICIBD2Model.FK_HISTORIALPERSONALFAMILIAR_INGRESO" FromRole="INGRESO" ToRole="HISTORIALPERSONALFAMILIAR" />
+    <NavigationProperty Name="IMPRESIONDIAGNOSTICA" Relationship="SICIBD2Model.FK_IMPRESIONDIAGNOSTICA_INGRESO" FromRole="INGRESO" ToRole="IMPRESIONDIAGNOSTICA" />
+    <NavigationProperty Name="OBERVACIONPRELIMINAR" Relationship="SICIBD2Model.FK_OBERVACIONPRELIMINAR_INGRESO" FromRole="INGRESO" ToRole="OBERVACIONPRELIMINAR" />
+    <NavigationProperty Name="RECOMENDACIONES" Relationship="SICIBD2Model.FK_RECOMENDACIONES_INGRESO" FromRole="INGRESO" ToRole="RECOMENDACIONES" />
+    <NavigationProperty Name="CAUSASEGRESOINTERNO" Relationship="SICIBD2Model.FK_CAUSASEGRESOINTERNO_INGRESO" FromRole="INGRESO" ToRole="CAUSASEGRESOINTERNO" />
+    <NavigationProperty Name="CONDICIONFISICA_INGRESO" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INGRESO_INGRESO" FromRole="INGRESO" ToRole="CONDICIONFISICA_INGRESO" />
+    <NavigationProperty Name="CONDICIONFISICA_INTERNOENFERMEDADES" Relationship="SICIBD2Model.FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO" FromRole="INGRESO" ToRole="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    <NavigationProperty Name="DATOSDELICTIVOS" Relationship="SICIBD2Model.FK_DATOSDELICTIVOS_INGRESO" FromRole="INGRESO" ToRole="DATOSDELICTIVOS" />
+    <NavigationProperty Name="DATOSPROBLEMADROGAS_CONSUMO" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO" FromRole="INGRESO" ToRole="DATOSPROBLEMADROGAS_CONSUMO" />
+    <NavigationProperty Name="DATOSPROBLEMADROGAS_CONSUMODROGAS" Relationship="SICIBD2Model.FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO" FromRole="INGRESO" ToRole="DATOSPROBLEMADROGAS_CONSUMODROGAS" />
+    <NavigationProperty Name="INFORMACIONACADEMICA_ESTUDIOS" Relationship="SICIBD2Model.FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO" FromRole="INGRESO" ToRole="INFORMACIONACADEMICA_ESTUDIOS" />
+    <NavigationProperty Name="FICHA" Relationship="SICIBD2Model.FK_INGRESO_FICHA" FromRole="INGRESO" ToRole="FICHA" />
+    <NavigationProperty Name="MOTIVOSINGRESO" Relationship="SICIBD2Model.FK_MOTIVOSINGRESO_INGRESO" FromRole="INGRESO" ToRole="MOTIVOSINGRESO" />
+    <Property Name="ACEPTADO" Type="Boolean" />
+    <Property Name="STATUSFLOW" Type="Int32" />
+    <NavigationProperty Name="DOCUMENTOSINGRESO" Relationship="SICIBD2Model.FK_DOCUMENTOSINGRESO_INGRESO" FromRole="INGRESO" ToRole="DOCUMENTOSINGRESO" />
+    <NavigationProperty Name="CENTRODESARROLLOINGRESO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_INGRESO" FromRole="INGRESO" ToRole="CENTRODESARROLLOINGRESO" />
+    <NavigationProperty Name="PSQ_DETALLEENFERMEDADES" Relationship="SICIBD2Model.FK_PSQ_DETALLEENFERMEDADES_INGRESO" FromRole="INGRESO" ToRole="PSQ_DETALLEENFERMEDADES" />
+    <NavigationProperty Name="PSQ_EXAMENPSICOPATOLOGICO" Relationship="SICIBD2Model.FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO" FromRole="INGRESO" ToRole="PSQ_EXAMENPSICOPATOLOGICO" />
+    <NavigationProperty Name="PSQ_HISTORIALINGRESOSPV" Relationship="SICIBD2Model.FK_PSQ_HISTORIALINGRESOSPV_INGRESO" FromRole="INGRESO" ToRole="PSQ_HISTORIALINGRESOSPV" />
+    <NavigationProperty Name="PSQ_OBSERVACIONFINAL" Relationship="SICIBD2Model.FK_PSQ_OBSERVACIONFINAL_INGRESO" FromRole="INGRESO" ToRole="PSQ_OBSERVACIONFINAL" />
+    <NavigationProperty Name="PSQ_SINTOMASPRINCIPALES" Relationship="SICIBD2Model.FK_PSQ_SINTOMASPRINCIPALES_INGRESO" FromRole="INGRESO" ToRole="PSQ_SINTOMASPRINCIPALES" />
+    <NavigationProperty Name="PRO_PROMOCIONNIVEL" Relationship="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_INGRESO" FromRole="INGRESO" ToRole="PRO_PROMOCIONNIVEL" />
+    <NavigationProperty Name="TER_CALIFAREA" Relationship="SICIBD2Model.FK_TER_CALIFAREA_INGRESO" FromRole="INGRESO" ToRole="TER_CALIFAREA" />
+    <NavigationProperty Name="TER_EVALUACIONCARACTER" Relationship="SICIBD2Model.FK_TER_EVALUACIONCARACTER_INGRESO" FromRole="INGRESO" ToRole="TER_EVALUACIONCARACTER" />
+    <NavigationProperty Name="TER_EXAMENPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_EXAMENPERSONALIDAD_INGRESO" FromRole="INGRESO" ToRole="TER_EXAMENPERSONALIDAD" />
+    <NavigationProperty Name="TER_FALTA" Relationship="SICIBD2Model.FK_TER_FALTA_INGRESO" FromRole="INGRESO" ToRole="TER_FALTA" />
+    <NavigationProperty Name="TER_INCIDENCIAAREA" Relationship="SICIBD2Model.FK_TER_INCIDENCIAAREA_INGRESO" FromRole="INGRESO" ToRole="TER_INCIDENCIAAREA" />
+    <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_INGRESO" FromRole="INGRESO" ToRole="TER_MATRICULA" />
+    <NavigationProperty Name="TER_RESUMENEVOLUCION" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO" FromRole="INGRESO" ToRole="TER_RESUMENEVOLUCION" />
+  </EntityType>
+  <EntityType Name="MOTIVOSINGRESO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="VOLUNTARIAMENTE" Type="Boolean" />
+    <Property Name="DISPUESTOASUJETARSEPV" Type="Boolean" />
+    <Property Name="FECHAFIRMAACUERDO" Type="DateTime" Precision="3" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_MOTIVOSINGRESO_INGRESO" FromRole="MOTIVOSINGRESO" ToRole="INGRESO" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DATOSPERSONALES1">
+    <Key>
+      <PropertyRef Name="IDPERSONA" />
+    </Key>
+    <Property Name="IDPERSONA" Type="Int32" Nullable="false" />
+    <Property Name="DIRECCIONDOMICILIO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONOFIJO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TELEFONOMOVIL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="LUGARNACIMIENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FECHANACIMIENTO" Type="DateTime" Precision="0" />
+    <Property Name="ESTADOCIVIL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="NUMERODEHIJOS" Type="Int32" />
+    <Property Name="NOMBREMADRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VIVECONMADRE" Type="Boolean" />
+    <Property Name="NOMBREPADRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VIVECONPADRE" Type="Boolean" />
+    <Property Name="CONQUIENVIVE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NUMEROHERMANOS" Type="Int32" />
+    <Property Name="IDCIUDADNATAL" Type="Int32" />
+    <Property Name="IDCIUDADRESIDENCIAACTUAL" Type="Int32" />
+    <Property Name="IDPAISNACIONALIDAD" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="CITY" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY1" FromRole="DATOSPERSONALES1" ToRole="CITY" />
+    <NavigationProperty Name="CITY1" Relationship="SICIBD2Model.FK_DATOSPERSONALES_CITY11" FromRole="DATOSPERSONALES1" ToRole="CITY" />
+    <NavigationProperty Name="COUNTRY" Relationship="SICIBD2Model.FK_DATOSPERSONALES_COUNTRY" FromRole="DATOSPERSONALES1" ToRole="COUNTRY" />
+    <NavigationProperty Name="FICHA" Relationship="SICIBD2Model.FK_DATOSPERSONALES_FICHA" FromRole="DATOSPERSONALES1" ToRole="FICHA" />
+  </EntityType>
+  <EntityType Name="FICHA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NUMEROIDENTIDAD" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="NUMEROPASAPORTE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PRIMERNOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="SEGUNDONOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PRIMERAPELLIDO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="SEGUNDOAPELLIDO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="NACIONALIDAD" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_INGRESO_FICHA" FromRole="FICHA" ToRole="INGRESO" />
+    <NavigationProperty Name="DATOSPERSONALES1" Relationship="SICIBD2Model.FK_DATOSPERSONALES_FICHA" FromRole="FICHA" ToRole="DATOSPERSONALES1" />
+  </EntityType>
+  <Association Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
+    <End Type="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS" Role="APARATOSSISTEMAS_SISTEMAS" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.APARATOSSISTEMAS" Role="APARATOSSISTEMAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="APARATOSSISTEMAS_SISTEMAS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="APARATOSSISTEMAS">
+        <PropertyRef Name="IDAPARATOSISTEMA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_APARATOSSISTEMAS_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.APARATOSSISTEMAS" Role="APARATOSSISTEMAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="APARATOSSISTEMAS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACIONMEDICADETALLE_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.EVALUACIONMEDICADETALLE" Role="EVALUACIONMEDICADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EVALUACIONMEDICADETALLE">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EVALUACIONMEDICADETALLE_TIPOEVALUACIONMEDICA">
+    <End Type="SICIBD2Model.TIPOEVALUACIONMEDICA" Role="TIPOEVALUACIONMEDICA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.EVALUACIONMEDICADETALLE" Role="EVALUACIONMEDICADETALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOEVALUACIONMEDICA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EVALUACIONMEDICADETALLE">
+        <PropertyRef Name="IDTIPOEVALUACIONMEDICA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SIGNOSVITALES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.SIGNOSVITALES" Role="SIGNOSVITALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SIGNOSVITALES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSSOCIOECONOMICOS_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.DATOSSOCIOECONOMICOS" Role="DATOSSOCIOECONOMICOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSSOCIOECONOMICOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ESTADOMENTAL_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.ESTADOMENTAL" Role="ESTADOMENTAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ESTADOMENTAL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO" Role="EXAMENPSICOMETRICO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_EXAMENCONTENIDO_EXAMENPSICOMETRICO_EXAMEN">
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN" Role="EXAMENPSICOMETRICO_EXAMEN" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EXAMENPSICOMETRICO_EXAMEN">
+        <PropertyRef Name="IDEXAMEN" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <PropertyRef Name="IDEXAMEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EXAMENPSICOMETRICO_EXAMENCONTENIDO">
+        <PropertyRef Name="IDPREGUNTA" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <PropertyRef Name="IDPREGUNTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EXAMENPSICOMETRICO_INTERNOCALIFICACIONES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="EXAMENPSICOMETRICO_INTERNOCALIFICACIONES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HISTORIALPERSONALFAMILIAR_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.HISTORIALPERSONALFAMILIAR" Role="HISTORIALPERSONALFAMILIAR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="HISTORIALPERSONALFAMILIAR">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IMPRESIONDIAGNOSTICA_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.IMPRESIONDIAGNOSTICA" Role="IMPRESIONDIAGNOSTICA" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="IMPRESIONDIAGNOSTICA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OBERVACIONPRELIMINAR_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.OBERVACIONPRELIMINAR" Role="OBERVACIONPRELIMINAR" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OBERVACIONPRELIMINAR">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RECOMENDACIONES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.RECOMENDACIONES" Role="RECOMENDACIONES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="RECOMENDACIONES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY1">
+    <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPERSONALES1" Role="DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDCIUDADNATAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_CITY11">
+    <End Type="SICIBD2Model.CITY" Role="CITY" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPERSONALES1" Role="DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CITY">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDCIUDADRESIDENCIAACTUAL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_COUNTRY">
+    <End Type="SICIBD2Model.COUNTRY" Role="COUNTRY" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPERSONALES1" Role="DATOSPERSONALES1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="COUNTRY">
+        <PropertyRef Name="CODE" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDPAISNACIONALIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAUSASEGRESOINTERNO_CAUSASEGRESO">
+    <End Type="SICIBD2Model.CAUSASEGRESO" Role="CAUSASEGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CAUSASEGRESOINTERNO" Role="CAUSASEGRESOINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CAUSASEGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAUSASEGRESOINTERNO">
+        <PropertyRef Name="IDCAUSAEGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CAUSASEGRESOINTERNO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CAUSASEGRESOINTERNO" Role="CAUSASEGRESOINTERNO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CAUSASEGRESOINTERNO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_CONDICIONFISICA_ENFERMEDADES">
+    <End Type="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES" Role="CONDICIONFISICA_ENFERMEDADES" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES" Role="CONDICIONFISICA_INTERNOENFERMEDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONDICIONFISICA_ENFERMEDADES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INTERNOENFERMEDADES">
+        <PropertyRef Name="IDENFERMEDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICIONFISICA_INGRESO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.CONDICIONFISICA_INGRESO" Role="CONDICIONFISICA_INGRESO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES" Role="CONDICIONFISICA_INTERNOENFERMEDADES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONDICIONFISICA_INTERNOENFERMEDADES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSDELICTIVOS_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.DATOSDELICTIVOS" Role="DATOSDELICTIVOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSDELICTIVOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO" Role="DATOSPROBLEMADROGAS_CONSUMO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_DATOSPROBLEMADROGAS_DROGAS">
+    <End Type="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS" Role="DATOSPROBLEMADROGAS_DROGAS" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS" Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DATOSPROBLEMADROGAS_DROGAS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <PropertyRef Name="IDDROGA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPROBLEMADROGAS_CONSUMODROGAS_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS" Role="DATOSPROBLEMADROGAS_CONSUMODROGAS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPROBLEMADROGAS_CONSUMODROGAS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESCOLARIDAD">
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD" Role="INFORMACIONACADEMICA_ESCOLARIDAD" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESCOLARIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <PropertyRef Name="IDESCOLARIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOS_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" Role="INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD_INFORMACIONACADEMICA_ESTUDIOS">
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" Role="INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD">
+        <PropertyRef Name="IDESTUDIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_ESTUDIOS">
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" Role="INFORMACIONACADEMICA_ESTUDIOS" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_ESTUDIOS">
+        <PropertyRef Name="IDINGRESO" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <PropertyRef Name="IDESTUDIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INFORMACIONACADEMICA_ESTUDIOSOFICIO_INFORMACIONACADEMICA_OFICIOS">
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS" Role="INFORMACIONACADEMICA_OFICIOS" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INFORMACIONACADEMICA_OFICIOS">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INFORMACIONACADEMICA_ESTUDIOSOFICIO">
+        <PropertyRef Name="IDOFICIOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_INGRESO_FICHA">
+    <End Type="SICIBD2Model.FICHA" Role="FICHA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FICHA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="INGRESO">
+        <PropertyRef Name="IDPERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MOTIVOSINGRESO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.MOTIVOSINGRESO" Role="MOTIVOSINGRESO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MOTIVOSINGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DATOSPERSONALES_FICHA">
+    <End Type="SICIBD2Model.FICHA" Role="FICHA" Multiplicity="1" />
+    <End Type="SICIBD2Model.DATOSPERSONALES1" Role="DATOSPERSONALES1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="FICHA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DATOSPERSONALES1">
+        <PropertyRef Name="IDPERSONA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DOCUMENTOSINGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RUTA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FECHACARGADO" Type="DateTime" Precision="3" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDTIPODOCUMENTO" Type="Int32" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_DOCUMENTOSINGRESO_INGRESO" FromRole="DOCUMENTOSINGRESO" ToRole="INGRESO" />
+    <NavigationProperty Name="TIPOSDOCUMENTO" Relationship="SICIBD2Model.FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO" FromRole="DOCUMENTOSINGRESO" ToRole="TIPOSDOCUMENTO" />
+  </EntityType>
+  <EntityType Name="TIPOSDOCUMENTO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRETIPO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DOCUMENTOSINGRESO" Relationship="SICIBD2Model.FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO" FromRole="TIPOSDOCUMENTO" ToRole="DOCUMENTOSINGRESO" />
+  </EntityType>
+  <Association Name="FK_DOCUMENTOSINGRESO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DOCUMENTOSINGRESO" Role="DOCUMENTOSINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOSINGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO">
+    <End Type="SICIBD2Model.TIPOSDOCUMENTO" Role="TIPOSDOCUMENTO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.DOCUMENTOSINGRESO" Role="DOCUMENTOSINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPOSDOCUMENTO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DOCUMENTOSINGRESO">
+        <PropertyRef Name="IDTIPODOCUMENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CENTRODESARROLLOINGRESO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHATRASLADO" Type="DateTime" Precision="3" />
+    <Property Name="ACTIVO" Type="Boolean" />
+    <Property Name="FECHAREGISTRO" Type="DateTime" Precision="3" />
+    <Property Name="IDCENTROTERAPEUTICO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <NavigationProperty Name="CENTROTERAPEUTICO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" FromRole="CENTRODESARROLLOINGRESO" ToRole="CENTROTERAPEUTICO" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_INGRESO" FromRole="CENTRODESARROLLOINGRESO" ToRole="INGRESO" />
+  </EntityType>
+  <Association Name="FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO">
+    <End Type="SICIBD2Model.CENTROTERAPEUTICO" Role="CENTROTERAPEUTICO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CENTRODESARROLLOINGRESO" Role="CENTRODESARROLLOINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTRODESARROLLOINGRESO">
+        <PropertyRef Name="IDCENTROTERAPEUTICO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CENTRODESARROLLOINGRESO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CENTRODESARROLLOINGRESO" Role="CENTRODESARROLLOINGRESO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CENTRODESARROLLOINGRESO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PSQ_DETALLEENFERMEDADES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PSQ_DETALLEENFERMEDADES_INGRESO" FromRole="PSQ_DETALLEENFERMEDADES" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="PSQ_EXAMENPSICOPATOLOGICO">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="COOPERA" Type="Boolean" />
+    <Property Name="DETALLECOOPERA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TEP" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="LENGUAJE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DESORDENPENSAMIENTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="INTELECTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AFECTO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="AUTOCOMPRENSION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="NIVELDROGADICCION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="OTROS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="NEUROLOGICOS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DIAGNOSTICO" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="RECOMENDACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="TRATAMIENTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO" FromRole="PSQ_EXAMENPSICOPATOLOGICO" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="PSQ_HISTORIALINGRESOSPV">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="HAINGRESADOANTES" Type="Boolean" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PSQ_HISTORIALINGRESOSPV_INGRESO" FromRole="PSQ_HISTORIALINGRESOSPV" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="PSQ_OBSERVACIONFINAL">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PSQ_OBSERVACIONFINAL_INGRESO" FromRole="PSQ_OBSERVACIONFINAL" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="PSQ_SINTOMASPRINCIPALES">
+    <Key>
+      <PropertyRef Name="IDINGRESO" />
+    </Key>
+    <Property Name="IDINGRESO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHADIAGNOSTICO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PSQ_SINTOMASPRINCIPALES_INGRESO" FromRole="PSQ_SINTOMASPRINCIPALES" ToRole="INGRESO" />
+  </EntityType>
+  <Association Name="FK_PSQ_DETALLEENFERMEDADES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PSQ_DETALLEENFERMEDADES" Role="PSQ_DETALLEENFERMEDADES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_DETALLEENFERMEDADES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO" Role="PSQ_EXAMENPSICOPATOLOGICO" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_EXAMENPSICOPATOLOGICO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_HISTORIALINGRESOSPV_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PSQ_HISTORIALINGRESOSPV" Role="PSQ_HISTORIALINGRESOSPV" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_HISTORIALINGRESOSPV">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_OBSERVACIONFINAL_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PSQ_OBSERVACIONFINAL" Role="PSQ_OBSERVACIONFINAL" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_OBSERVACIONFINAL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PSQ_SINTOMASPRINCIPALES_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PSQ_SINTOMASPRINCIPALES" Role="PSQ_SINTOMASPRINCIPALES" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PSQ_SINTOMASPRINCIPALES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PRO_CRITERIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRO_NIVELCRITERIO" Relationship="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_CRITERIO" FromRole="PRO_CRITERIO" ToRole="PRO_NIVELCRITERIO" />
+  </EntityType>
+  <EntityType Name="PRO_FASE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VARCHAR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRO_NIVEL" Relationship="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE" FromRole="PRO_FASE" ToRole="PRO_NIVEL" />
+  </EntityType>
+  <EntityType Name="PRO_NIVEL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DIASESTIMADOS" Type="Int32" />
+    <Property Name="IDFASE" Type="Int32" />
+    <NavigationProperty Name="PRO_FASE" Relationship="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE" FromRole="PRO_NIVEL" ToRole="PRO_FASE" />
+    <NavigationProperty Name="PRO_NIVELCRITERIO" Relationship="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_NIVEL" FromRole="PRO_NIVEL" ToRole="PRO_NIVELCRITERIO" />
+    <NavigationProperty Name="PRO_PROMOCIONNIVEL" Relationship="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" FromRole="PRO_NIVEL" ToRole="PRO_PROMOCIONNIVEL" />
+  </EntityType>
+  <EntityType Name="PRO_NIVELCRITERIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCRITERIO" Type="Int32" />
+    <Property Name="IDNIVEL" Type="Int32" />
+    <NavigationProperty Name="PRO_CRITERIO" Relationship="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_CRITERIO" FromRole="PRO_NIVELCRITERIO" ToRole="PRO_CRITERIO" />
+    <NavigationProperty Name="PRO_NIVEL" Relationship="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_NIVEL" FromRole="PRO_NIVELCRITERIO" ToRole="PRO_NIVEL" />
+  </EntityType>
+  <EntityType Name="PRO_PROMOCIONNIVEL">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDNIVEL" Type="Int32" />
+    <Property Name="FECHAPROMOCION" Type="DateTime" Precision="3" />
+    <Property Name="FECHACLAUSURA" Type="DateTime" Precision="3" />
+    <Property Name="URLDIPLOMA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAREGISTRO" Type="DateTime" Precision="3" />
+    <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MONITORRESPONSABLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CALIFICACION" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_INGRESO" FromRole="PRO_PROMOCIONNIVEL" ToRole="INGRESO" />
+    <NavigationProperty Name="PRO_NIVEL" Relationship="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" FromRole="PRO_PROMOCIONNIVEL" ToRole="PRO_NIVEL" />
+  </EntityType>
+  <Association Name="FK_PRO_PROMOCIONNIVEL_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_PROMOCIONNIVEL" Role="PRO_PROMOCIONNIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_PROMOCIONNIVEL">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_NIVELCRITERIO_PRO_CRITERIO">
+    <End Type="SICIBD2Model.PRO_CRITERIO" Role="PRO_CRITERIO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_NIVELCRITERIO" Role="PRO_NIVELCRITERIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_CRITERIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVELCRITERIO">
+        <PropertyRef Name="IDCRITERIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_NIVEL_PRO_FASE">
+    <End Type="SICIBD2Model.PRO_FASE" Role="PRO_FASE" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_NIVEL" Role="PRO_NIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_FASE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVEL">
+        <PropertyRef Name="IDFASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_NIVELCRITERIO_PRO_NIVEL">
+    <End Type="SICIBD2Model.PRO_NIVEL" Role="PRO_NIVEL" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_NIVELCRITERIO" Role="PRO_NIVELCRITERIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_NIVELCRITERIO">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_PROMOCIONNIVEL_PRO_NIVEL">
+    <End Type="SICIBD2Model.PRO_NIVEL" Role="PRO_NIVEL" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_PROMOCIONNIVEL" Role="PRO_PROMOCIONNIVEL" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_PROMOCIONNIVEL">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TER_ACTITUD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CALIFICACIONESTIMADA" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="IDCATEGORIAASPECTO" Type="Int32" />
+    <NavigationProperty Name="TER_CATEGORIAASPECTOCARCTER" Relationship="SICIBD2Model.FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER" FromRole="TER_ACTITUD" ToRole="TER_CATEGORIAASPECTOCARCTER" />
+    <NavigationProperty Name="TER_EVALUACIONCARACTER" Relationship="SICIBD2Model.FK_TER_EVALUACIONCARACTER_TER_ACTITUD" FromRole="TER_ACTITUD" ToRole="TER_EVALUACIONCARACTER" />
+  </EntityType>
+  <EntityType Name="TER_AREACRITERIOCALIF">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDAREA" Type="Int32" />
+    <Property Name="IDCALIFAREA" Type="Int32" />
+    <Property Name="CALIFICACION" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="TER_CALIFAREA" Relationship="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CALIFAREA" FromRole="TER_AREACRITERIOCALIF" ToRole="TER_CALIFAREA" />
+    <NavigationProperty Name="TER_CRITERIOCALIFICACION" Relationship="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION" FromRole="TER_AREACRITERIOCALIF" ToRole="TER_CRITERIOCALIFICACION" />
+  </EntityType>
+  <EntityType Name="TER_ASPECTOEXAMENPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDASPECTO" Type="Int32" />
+    <Property Name="IDEXAMEN" Type="Int32" />
+    <Property Name="CALIFICACION" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="FECHA" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TER_ASPECTOPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD" FromRole="TER_ASPECTOEXAMENPERSONALIDAD" ToRole="TER_ASPECTOPERSONALIDAD" />
+    <NavigationProperty Name="TER_EXAMENPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD" FromRole="TER_ASPECTOEXAMENPERSONALIDAD" ToRole="TER_EXAMENPERSONALIDAD" />
+  </EntityType>
+  <EntityType Name="TER_ASPECTOPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CALIFICACIONESPERADA" Type="Int32" />
+    <Property Name="IDCATEGORIAPERSONALIDAD" Type="Int32" />
+    <NavigationProperty Name="TER_ASPECTOEXAMENPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD" FromRole="TER_ASPECTOPERSONALIDAD" ToRole="TER_ASPECTOEXAMENPERSONALIDAD" />
+    <NavigationProperty Name="TER_CATEGORIAPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD" FromRole="TER_ASPECTOPERSONALIDAD" ToRole="TER_CATEGORIAPERSONALIDAD" />
+  </EntityType>
+  <EntityType Name="TER_CALIFAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CALIFICACIONTOTAL" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_CALIFAREA_INGRESO" FromRole="TER_CALIFAREA" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_AREACRITERIOCALIF" Relationship="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CALIFAREA" FromRole="TER_CALIFAREA" ToRole="TER_AREACRITERIOCALIF" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_CRITERIOCALIFICACION" Relationship="SICIBD2Model.FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA" FromRole="TER_CATEGORIAAREA" ToRole="TER_CRITERIOCALIFICACION" />
+    <NavigationProperty Name="TER_INCIDENCIAAREA" Relationship="SICIBD2Model.FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA" FromRole="TER_CATEGORIAAREA" ToRole="TER_INCIDENCIAAREA" />
+    <NavigationProperty Name="TER_RESUMENEVOLUCION" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA" FromRole="TER_CATEGORIAAREA" ToRole="TER_RESUMENEVOLUCION" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAASPECTOCARCTER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_ACTITUD" Relationship="SICIBD2Model.FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER" FromRole="TER_CATEGORIAASPECTOCARCTER" ToRole="TER_ACTITUD" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAFALTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_FALTA" Relationship="SICIBD2Model.FK_TER_FALTA_TER_CATEGORIAFALTA" FromRole="TER_CATEGORIAFALTA" ToRole="TER_FALTA" />
+  </EntityType>
+  <EntityType Name="TER_CATEGORIAPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_ASPECTOPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD" FromRole="TER_CATEGORIAPERSONALIDAD" ToRole="TER_ASPECTOPERSONALIDAD" />
+  </EntityType>
+  <EntityType Name="TER_CRITERIOCALIFICACION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IDCATEGORIAAREA" Type="Int32" />
+    <NavigationProperty Name="TER_AREACRITERIOCALIF" Relationship="SICIBD2Model.FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION" FromRole="TER_CRITERIOCALIFICACION" ToRole="TER_AREACRITERIOCALIF" />
+    <NavigationProperty Name="TER_CATEGORIAAREA" Relationship="SICIBD2Model.FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA" FromRole="TER_CRITERIOCALIFICACION" ToRole="TER_CATEGORIAAREA" />
+  </EntityType>
+  <EntityType Name="TER_CURSO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_TER_CURSO" FromRole="TER_CURSO" ToRole="TER_MATRICULA" />
+  </EntityType>
+  <EntityType Name="TER_EVALUACIONCARACTER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDACTITUD" Type="Int32" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="CALIFICACION" Type="Decimal" Precision="8" Scale="2" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_EVALUACIONCARACTER_INGRESO" FromRole="TER_EVALUACIONCARACTER" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_ACTITUD" Relationship="SICIBD2Model.FK_TER_EVALUACIONCARACTER_TER_ACTITUD" FromRole="TER_EVALUACIONCARACTER" ToRole="TER_ACTITUD" />
+  </EntityType>
+  <EntityType Name="TER_EXAMENPERSONALIDAD">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="CALIFICAIONTOTAL" Type="Decimal" Precision="8" Scale="2" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PERSONALIADDOMINANTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PERSONALIDADSEGUNDA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_EXAMENPERSONALIDAD_INGRESO" FromRole="TER_EXAMENPERSONALIDAD" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_ASPECTOEXAMENPERSONALIDAD" Relationship="SICIBD2Model.FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD" FromRole="TER_EXAMENPERSONALIDAD" ToRole="TER_ASPECTOEXAMENPERSONALIDAD" />
+  </EntityType>
+  <EntityType Name="TER_FALTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCATEGORIAFALTA" Type="Int32" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAAPLICADA" Type="DateTime" Precision="3" />
+    <Property Name="MONITOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_FALTA_INGRESO" FromRole="TER_FALTA" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_CATEGORIAFALTA" Relationship="SICIBD2Model.FK_TER_FALTA_TER_CATEGORIAFALTA" FromRole="TER_FALTA" ToRole="TER_CATEGORIAFALTA" />
+  </EntityType>
+  <EntityType Name="TER_INCIDENCIAAREA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDCATEGORIAAREA" Type="Int32" />
+    <Property Name="FECHADUAGNOSTICO" Type="DateTime" Precision="3" />
+    <Property Name="MONITOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MOTIVOVISITA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DETALLEGENRAL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ACTITUDESMOSTRADAS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="RECOMENDACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="EXPLICACIONCONDUCTA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PSICOTERAPIA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PRONOSTICO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ACTITUD" Type="Boolean" />
+    <Property Name="ACCIONREALIZADA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="OBSERVACIONEXTRA" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAREGISTRO" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_INCIDENCIAAREA_INGRESO" FromRole="TER_INCIDENCIAAREA" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_CATEGORIAAREA" Relationship="SICIBD2Model.FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA" FromRole="TER_INCIDENCIAAREA" ToRole="TER_CATEGORIAAREA" />
+  </EntityType>
+  <EntityType Name="TER_INSTRUCTOR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="INSTITUCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_TER_INSTRUCTOR" FromRole="TER_INSTRUCTOR" ToRole="TER_MATRICULA" />
+  </EntityType>
+  <EntityType Name="TER_MATRICULA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCURSO" Type="Int32" />
+    <Property Name="IDINSTRUCTOR" Type="Int32" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="CALIFICACIONTOTAL" Type="Int32" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBREMATRICULA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAINICIO" Type="DateTime" Precision="3" />
+    <Property Name="FECHACLAUSURA" Type="DateTime" Precision="3" />
+    <Property Name="DIAS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="HORAINICIO" Type="Time" Precision="7" />
+    <Property Name="HORAFIN" Type="Time" Precision="7" />
+    <Property Name="URLCERTIFICADO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_MATRICULA_INGRESO" FromRole="TER_MATRICULA" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_CURSO" Relationship="SICIBD2Model.FK_TER_MATRICULA_TER_CURSO" FromRole="TER_MATRICULA" ToRole="TER_CURSO" />
+    <NavigationProperty Name="TER_INSTRUCTOR" Relationship="SICIBD2Model.FK_TER_MATRICULA_TER_INSTRUCTOR" FromRole="TER_MATRICULA" ToRole="TER_INSTRUCTOR" />
+  </EntityType>
+  <EntityType Name="TER_RESUMENEVOLUCION">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <Property Name="IDCATEGORIAAREA" Type="Int32" />
+    <Property Name="FECHAULTIMAACTUALIZACION" Type="DateTime" Precision="3" />
+    <Property Name="FECHAREGISTRO" Type="DateTime" Precision="3" />
+    <Property Name="INICIOPROCESO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="DURANTEPROCESO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FINPROCESO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="PXSISTFAMILIAR" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO" FromRole="TER_RESUMENEVOLUCION" ToRole="INGRESO" />
+    <NavigationProperty Name="TER_CATEGORIAAREA" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA" FromRole="TER_RESUMENEVOLUCION" ToRole="TER_CATEGORIAAREA" />
+  </EntityType>
+  <Association Name="FK_TER_CALIFAREA_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_CALIFAREA" Role="TER_CALIFAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_CALIFAREA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EVALUACIONCARACTER_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_EVALUACIONCARACTER" Role="TER_EVALUACIONCARACTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EVALUACIONCARACTER">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EXAMENPERSONALIDAD_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_EXAMENPERSONALIDAD" Role="TER_EXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EXAMENPERSONALIDAD">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_FALTA_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_FALTA" Role="TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_INCIDENCIAAREA_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_INCIDENCIAAREA" Role="TER_INCIDENCIAAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_INCIDENCIAAREA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_MATRICULA" Role="TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_RESUMENEVOLUCION_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_RESUMENEVOLUCION" Role="TER_RESUMENEVOLUCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_RESUMENEVOLUCION">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ACTITUD_TER_CATEGORIAASPECTOCARCTER">
+    <End Type="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER" Role="TER_CATEGORIAASPECTOCARCTER" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_ACTITUD" Role="TER_ACTITUD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAASPECTOCARCTER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ACTITUD">
+        <PropertyRef Name="IDCATEGORIAASPECTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_EVALUACIONCARACTER_TER_ACTITUD">
+    <End Type="SICIBD2Model.TER_ACTITUD" Role="TER_ACTITUD" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_EVALUACIONCARACTER" Role="TER_EVALUACIONCARACTER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_ACTITUD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_EVALUACIONCARACTER">
+        <PropertyRef Name="IDACTITUD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_AREACRITERIOCALIF_TER_CALIFAREA">
+    <End Type="SICIBD2Model.TER_CALIFAREA" Role="TER_CALIFAREA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_AREACRITERIOCALIF" Role="TER_AREACRITERIOCALIF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CALIFAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_AREACRITERIOCALIF">
+        <PropertyRef Name="IDCALIFAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_AREACRITERIOCALIF_TER_CRITERIOCALIFICACION">
+    <End Type="SICIBD2Model.TER_CRITERIOCALIFICACION" Role="TER_CRITERIOCALIFICACION" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_AREACRITERIOCALIF" Role="TER_AREACRITERIOCALIF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CRITERIOCALIFICACION">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_AREACRITERIOCALIF">
+        <PropertyRef Name="IDAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_ASPECTOPERSONALIDAD">
+    <End Type="SICIBD2Model.TER_ASPECTOPERSONALIDAD" Role="TER_ASPECTOPERSONALIDAD" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD" Role="TER_ASPECTOEXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_ASPECTOPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOEXAMENPERSONALIDAD">
+        <PropertyRef Name="IDASPECTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOEXAMENPERSONALIDAD_TER_EXAMENPERSONALIDAD">
+    <End Type="SICIBD2Model.TER_EXAMENPERSONALIDAD" Role="TER_EXAMENPERSONALIDAD" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD" Role="TER_ASPECTOEXAMENPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_EXAMENPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOEXAMENPERSONALIDAD">
+        <PropertyRef Name="IDEXAMEN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_ASPECTOPERSONALIDAD_TER_CATEGORIAPERSONALIDAD">
+    <End Type="SICIBD2Model.TER_CATEGORIAPERSONALIDAD" Role="TER_CATEGORIAPERSONALIDAD" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_ASPECTOPERSONALIDAD" Role="TER_ASPECTOPERSONALIDAD" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAPERSONALIDAD">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_ASPECTOPERSONALIDAD">
+        <PropertyRef Name="IDCATEGORIAPERSONALIDAD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_CRITERIOCALIFICACION_TER_CATEGORIAAREA">
+    <End Type="SICIBD2Model.TER_CATEGORIAAREA" Role="TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_CRITERIOCALIFICACION" Role="TER_CRITERIOCALIFICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_CRITERIOCALIFICACION">
+        <PropertyRef Name="IDCATEGORIAAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_INCIDENCIAAREA_TER_CATEGORIAAREA">
+    <End Type="SICIBD2Model.TER_CATEGORIAAREA" Role="TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_INCIDENCIAAREA" Role="TER_INCIDENCIAAREA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_INCIDENCIAAREA">
+        <PropertyRef Name="IDCATEGORIAAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_RESUMENEVOLUCION_TER_CATEGORIAAREA">
+    <End Type="SICIBD2Model.TER_CATEGORIAAREA" Role="TER_CATEGORIAAREA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_RESUMENEVOLUCION" Role="TER_RESUMENEVOLUCION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAAREA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_RESUMENEVOLUCION">
+        <PropertyRef Name="IDCATEGORIAAREA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_FALTA_TER_CATEGORIAFALTA">
+    <End Type="SICIBD2Model.TER_CATEGORIAFALTA" Role="TER_CATEGORIAFALTA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_FALTA" Role="TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAFALTA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDCATEGORIAFALTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_TER_CURSO">
+    <End Type="SICIBD2Model.TER_CURSO" Role="TER_CURSO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_MATRICULA" Role="TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CURSO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDCURSO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_MATRICULA_TER_INSTRUCTOR">
+    <End Type="SICIBD2Model.TER_INSTRUCTOR" Role="TER_INSTRUCTOR" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_MATRICULA" Role="TER_MATRICULA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_INSTRUCTOR">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_MATRICULA">
+        <PropertyRef Name="IDINSTRUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

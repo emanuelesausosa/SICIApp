@@ -186,6 +186,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SolicitudIngresoController.cs" />
+    <Compile Include="Dominio\DBFactory.cs" />
     <Compile Include="Dominio\EmailSender.cs" />
     <Compile Include="Entities\APARATOSSISTEMAS.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
@@ -313,6 +314,36 @@
     <Compile Include="Entities\OBERVACIONPRELIMINAR.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\PRO_CRITERIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_FASE.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_NIVEL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_NIVELCRITERIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_PROMOCIONNIVEL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_DETALLEENFERMEDADES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_EXAMENPSICOPATOLOGICO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_HISTORIALINGRESOSPV.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_OBSERVACIONFINAL.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PSQ_SINTOMASPRINCIPALES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\RECOMENDACIONES.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -335,6 +366,60 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\StatusCodes.cs" />
+    <Compile Include="Entities\TER_ACTITUD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_AREACRITERIOCALIF.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_ASPECTOEXAMENPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_ASPECTOPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CALIFAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAASPECTOCARCTER.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAFALTA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CATEGORIAPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CRITERIOCALIFICACION.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_CURSO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_EVALUACIONCARACTER.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_EXAMENPERSONALIDAD.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_FALTA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_INCIDENCIAAREA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_INSTRUCTOR.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_MATRICULA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\TER_RESUMENEVOLUCION.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\TIPOEVALUACIONMEDICA.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -349,6 +434,7 @@
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
+    <Compile Include="Interfaces\IDBFactory.cs" />
     <Compile Include="Interfaces\IEmailSender.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -1140,6 +1226,16 @@
     <Content Include="Views\SolicitudIngreso\DatosPersonalesFicha.cshtml" />
     <Content Include="Views\SolicitudIngreso\InfoNuevoIngreso.cshtml" />
     <Content Include="Views\SolicitudIngreso\EntregaDocumentosIngreso.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionPsicologica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Medicina.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Psiquiatria.cshtml" />
+    <Content Include="Views\SolicitudIngreso\Psicologia.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionMedica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionPsiquiatrica.cshtml" />
+    <Content Include="Views\SolicitudIngreso\DataJson.cshtml" />
+    <Content Include="Views\SolicitudIngreso\TrabajoSocial.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionSocial.cshtml" />
+    <Content Include="Views\Configuraciones\_NuevaEnfermedad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />

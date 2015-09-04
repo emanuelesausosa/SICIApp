@@ -27,4 +27,17 @@ namespace SICIApp.Entities
 
         
     }
+
+    public enum GuardarInfoAcademicaIngreso
+    {
+        Exito = 0,
+
+        ErorAlGuardarInfoEstudios = 1,
+
+        ErrorAlguardarInfoEstudiosEscolaridad = 2,
+
+        ObjetoNulo = 3,
+
+        ClaveNula = 4,
+    }
 }

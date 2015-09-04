@@ -19,6 +19,7 @@ namespace SICIApp.Entities
         public Nullable<bool> DISPUESTOASUJETARSEPV { get; set; }
         public Nullable<System.DateTime> FECHAFIRMAACUERDO { get; set; }
         public Nullable<System.DateTime> FECHADIAGNOSTICO { get; set; }
+        public string DESCRIPCION { get; set; }
     
         public virtual INGRESO INGRESO { get; set; }
     }

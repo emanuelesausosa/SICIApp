@@ -30,6 +30,8 @@ namespace SICIApp
             // jQueryUI 
             bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+            //            "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
 
             // Bootstrap
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
