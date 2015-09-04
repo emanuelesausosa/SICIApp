@@ -1,0 +1,127 @@
+﻿@model SICIApp.Models.FICHAMODEL
+
+@{
+    ViewBag.Title = "NuevaFicha";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>NuevaFicha</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Solicitudes", "Solicitudes")
+            </li>
+            <li class="active">
+                <strong>Nueva Ficha</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Todas", "Solicitudes", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Nueva Ficha</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NUMEROIDENTIDAD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+               @*@Html.EditorFor(model => model.NUMEROIDENTIDAD)*@ 
+                <input id="NUMEROIDENTIDAD" name="NUMEROIDENTIDAD" type="text" class="form-control" data-mask="9999-9999-99999" placeholder="">
+                <span class="help-block">9999-9999-99999</span>
+                @Html.ValidationMessageFor(model => model.NUMEROIDENTIDAD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NUMEROPASAPORTE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NUMEROPASAPORTE)
+                @Html.ValidationMessageFor(model => model.NUMEROPASAPORTE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PRIMERNOMBRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PRIMERNOMBRE)
+                @Html.ValidationMessageFor(model => model.PRIMERNOMBRE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SEGUNDONOMBRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SEGUNDONOMBRE)
+                @Html.ValidationMessageFor(model => model.SEGUNDONOMBRE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PRIMERAPELLIDO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PRIMERAPELLIDO)
+                @Html.ValidationMessageFor(model => model.PRIMERAPELLIDO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SEGUNDOAPELLIDO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SEGUNDOAPELLIDO)
+                @Html.ValidationMessageFor(model => model.SEGUNDOAPELLIDO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NACIONALIDAD, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NACIONALIDAD)
+                @Html.ValidationMessageFor(model => model.NACIONALIDAD)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Crear y siguiente" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "Solicitudes", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+    </div>
+}
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+ @section Styles {
+    
+    @Styles.Render("~/plugins/jasnyBootstrapStyles")
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/jasnyBootstrap")
+}

@@ -1,0 +1,65 @@
+﻿@model SICIApp.Models.FICHAMODEL
+
+    @Html.AntiForgeryToken()    
+    <div class="row">
+        <div class="col-lg-6">
+            @Html.ValidationSummary(true)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NUMEROIDENTIDAD, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.NUMEROIDENTIDAD)
+                    @Html.ValidationMessageFor(model => model.NUMEROIDENTIDAD)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NUMEROPASAPORTE, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.NUMEROPASAPORTE)
+                    @Html.ValidationMessageFor(model => model.NUMEROPASAPORTE)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PRIMERNOMBRE, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.PRIMERNOMBRE)
+                    @Html.ValidationMessageFor(model => model.PRIMERNOMBRE)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SEGUNDONOMBRE, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.SEGUNDONOMBRE)
+                    @Html.ValidationMessageFor(model => model.SEGUNDONOMBRE)
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PRIMERAPELLIDO, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.PRIMERAPELLIDO)
+                    @Html.ValidationMessageFor(model => model.PRIMERAPELLIDO)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SEGUNDOAPELLIDO, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.SEGUNDOAPELLIDO)
+                    @Html.ValidationMessageFor(model => model.SEGUNDOAPELLIDO)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NACIONALIDAD, new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.NACIONALIDAD)
+                    @Html.ValidationMessageFor(model => model.NACIONALIDAD)
+                </div>
+            </div>
+        </div>
+</div>

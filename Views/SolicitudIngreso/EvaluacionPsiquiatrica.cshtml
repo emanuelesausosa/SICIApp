@@ -1,0 +1,600 @@
+﻿@model SICIApp.Entities.INGRESO
+
+@{
+    ViewBag.Title = "Evaluación Psiquiátrica";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Project detail</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Dashboard_1", "Dashboards")">Home</a>
+            </li>
+            <li class="active">
+                <strong>Project detail</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="m-b-md">
+                            <a href="#" class="btn btn-white btn-xs pull-right">Edit project</a>
+                            <h2>Contract with Zender Company</h2>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>Status:</dt>
+                            @if (Model.ACEPTADO == true)
+                            {
+                                <dd><span class="label label-primary">Aceptado</span></dd>
+                            }
+                            else
+                            {
+                                <dd><span class="label label-warning">En proceso</span></dd>
+                            }
+
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <dl class="dl-horizontal">
+
+                        <dt>Nombre del paciente:</dt>
+                        <dd>@Model.FICHA.PRIMERNOMBRE @Model.FICHA.SEGUNDONOMBRE @Model.FICHA.PRIMERAPELLIDO @Model.FICHA.SEGUNDOAPELLIDO</dd>
+                        <dt>Cógigo ingreso:</dt>
+                        <dd id="@Model.ID">@Model.ID</dd>
+                        <dt>Client:</dt>
+                        <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
+                        <dt>Version:</dt>
+                        <dd> 	v1.4.2 </dd>
+                    </dl>
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal">
+
+                            <dt>Last Updated:</dt>
+                            <dd>16.08.2014 12:15:57</dd>
+                            <dt>Created:</dt>
+                            <dd> 	10.07.2014 23:36:57 </dd>
+                            <dt>Participants:</dt>
+                            <dd class="project-people">
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a3.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a1.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a2.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a4.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a5.jpg"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="dl-horizontal">
+                            <dt>Completed:</dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                                <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Evaluación Psiquiátrica<small class="m-l-sm">Evaluación Psiquiátrica</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1">SÍNTOMAS PRINCIPALES</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-2">ENFERMEDAD ACTUAL Y PASADA</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-3">HISTORIAL INGRESO PV</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-4">EXAMEN PSICOPATOLOGICO</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tab-5">OBSERVACIÓN FINAL</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Descripción - Síntomas Principales</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evpq-sp" name="sintomasprncipales" class="summernote">
+                                                                    @Model.PSQ_SINTOMASPRINCIPALES.DESCRIPCION
+                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-sp" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Descripción - Enfermedad actual y pasada</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evpq-eap" name="enfermedadactual" class="summernote">
+                                                                    @Model.PSQ_DETALLEENFERMEDADES.DESCRIPCION
+                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-en" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-3" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-horizontal">
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">¿Ingresó anteriormente a este centro?</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="checkbox i-checks"><label> <input id="evpq-hipvq" name="evpq-hipvq" type="checkbox" value="@Model.PSQ_HISTORIALINGRESOSPV.HAINGRESADOANTES"> <i></i></label></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Descripción - Historial ingreso PV</label>
+                                                                <div class="col-md-10">
+                                                                    <textarea id="evpq-hipv" name="historial" class="summernote">
+                                                                        @Model.PSQ_HISTORIALINGRESOSPV.DESCRIPCION
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-md-offset-2 col-md-10">
+                                                                    <input id="save-hipv" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-4" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-horizontal">
+                                                        <fieldset>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">¿Coopera?</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="checkbox i-checks"><label> <input id="evpq-ex1" name="evpq-ex1" type="checkbox" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.COOPERA"> <i></i></label></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Explique</label>
+                                                                <div class="col-md-10">
+                                                                    <!--detalle check-->
+                                                                    <textarea id="evpq-ex2" name="evpq-ex2" class="summernote">
+                                                                        @Model.PSQ_EXAMENPSICOPATOLOGICO.DETALLECOOPERA
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <hr />
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">T.E.P</label>
+                                                                <div class="col-md-10">
+                                                                    <!--T.E.P-->
+                                                                    <input type="text" id="evpq-ex3" name="evpq-ex3" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.TEP" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Lenguaje</label>
+                                                                <div class="col-md-10">
+                                                                    <!--lenguaje-->
+                                                                    <input type="text" id="evpq-ex4" name="evpq-ex4" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.LENGUAJE" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Desorden de pesamiento</label>
+                                                                <div class="col-md-10">
+                                                                    <!--des pensa-->
+                                                                    <input type="text" id="evpq-ex5" name="evpq-ex5" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.DESORDENPENSAMIENTO" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Intelecto</label>
+                                                                <div class="col-md-10">
+                                                                    <!--intelecto-->
+                                                                    <input type="text" id="evpq-ex6" name="evpq-ex6" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.INTELECTO" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Afecto</label>
+                                                                <div class="col-md-10">
+                                                                    <!--afecto-->
+                                                                    <input type="text" id="evpq-ex7" name="evpq-ex7" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.AFECTO" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Auto-comprensión</label>
+                                                                <div class="col-md-10">
+                                                                    <!--auto-comprensión-->
+                                                                    <input type="text" id="evpq-ex8" name="evpq-ex8" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.AUTOCOMPRENSION" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Nivel de drogadicción</label>
+                                                                <div class="col-md-10">
+                                                                    <!--nivel drogadiic´pn-->
+                                                                    <input type="text" id="evpq-ex9" name="evpq-ex9" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.NIVELDROGADICCION" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Otros</label>
+                                                                <div class="col-md-10">
+                                                                    <!--otros-->
+                                                                    <input type="text" id="evpq-ex10" name="evpq-ex10" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.OTROS" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Neurológicos</label>
+                                                                <div class="col-md-10">
+                                                                    <!--neurológicos-->
+                                                                    <input type="text" id="evpq-ex11" name="evpq-ex11" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.NEUROLOGICOS" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Diagnóstico</label>
+                                                                <div class="col-md-10">
+                                                                    <!--diagnostico-->
+                                                                    <input type="text" id="evpq-ex12" name="evpq-ex12" class="form-control" value="@Model.PSQ_EXAMENPSICOPATOLOGICO.DIAGNOSTICO" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Recomendaciones</label>
+                                                                <div class="col-md-10">
+                                                                    <!--Recomendaciones texarea-->
+                                                                    <textarea id="evpq-ex13" name="evpq-ex13" class="summernote">
+                                                                        @Model.PSQ_EXAMENPSICOPATOLOGICO.RECOMENDACIONES
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="control-label col-md-2">Tratamiento</label>
+                                                                <div class="col-md-10">
+                                                                    <!--tratamiento textarea-->
+                                                                    <textarea id="evpq-ex14" name="evpq-ex14" class="summernote">
+                                                                        @Model.PSQ_EXAMENPSICOPATOLOGICO.TRATAMIENTO
+                                                                    </textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-md-offset-2 col-md-10">
+                                                                    <input id="save-ex" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-5" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <fieldset>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Descripción - Observaciones Finales</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evpq-of" name="observacionesf" class="summernote">
+                                                                    @Model.PSQ_OBSERVACIONFINAL.DESCRIPCION
+                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-of" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            The righ side of the footer
+                        </span>
+                        This is simple footer example
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+
+</div>
+
+@section Styles {
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/summernote")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/chosen")
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+            $('.summernote').summernote();
+            $("#form").validate({
+                rules: {
+                    password: {
+                        required: true,
+                        minlength: 3
+                    },
+                    url: {
+                        required: true,
+                        url: true
+                    },
+                    numero: {
+                        required: false,
+                        number: true
+                    },
+                    number: {
+                        required: true,
+                        number: true
+                    },
+                    min: {
+                        required: true,
+                        minlength: 6
+                    },
+                    max: {
+                        required: true,
+                        maxlength: 4
+                    }
+                }
+            });
+
+        });
+
+        // método que guarda o actualiza síntomas principales
+        $('#save-sp').click(function () {
+            var element = this;
+
+            var _model = {
+                idingreso: $(this).attr('data-id'),
+                descripcion: $('#evpq-sp').code().trim()
+            }
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/GuardarPsqSintomasPrincipales',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        // método que actualiza o guarda enfermedad actual o pasada
+        $('#save-en').click(function () {
+            var element = this;
+
+            var _model = {
+                idingreso: $(this).attr('data-id'),
+                descripcion: $('#evpq-eap').code().trim()
+            }
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/GuardarPsqDetalleEnfermedades',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        // método que actualiza o guarde historia ingreso a pv
+        $('#save-hipv').click(function () {
+            var element = this;
+            var _check = false;
+            if ($('#evpq-hipvq').is(":checked"))
+            {
+                _check = true;
+            }
+
+            var _model = {
+                idingreso: $(this).attr('data-id'),
+                haingresadoantes: _check,
+                descripcion: $('#evpq-hipv').code().trim()
+            }
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/GuardarPsqHistorialIngresoPV',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        //método que actualiza o guarda síntomas principales
+        $('#save-of').click(function () {
+            var element = this;
+
+            var _model = {
+                idingreso: $(this).attr('data-id'),
+                descripcion: $('#evpq-of').code().trim()
+            }
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/GuardarPsqObservacionPrincipal',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        // método que actualiza o guarda el exámen psico-patológico
+        $('#save-ex').click(function () {
+            var element = this;
+
+            var _check = false;
+            if ($('#evpq-ex1').is(":checked")) {
+                _check = true;
+            }
+
+            var _model = {
+                idingreso: $(this).attr('data-id'),
+                coopera: _check,
+                detallecoopera: $('#evpq-ex2').code().trim(),
+                tep: $('#evpq-ex3').val(),
+                lenguaje: $('#evpq-ex4').val(),
+                desordenpensamiento: $('#evpq-ex5').val(),
+                intelecto: $('#evpq-ex6').val(),
+                afecto: $('#evpq-ex7').val(),
+                autocomprension: $('#evpq-ex8').val(),
+                niveldrogadiccion: $('#evpq-ex9').val(),
+                otros: $('#evpq-ex10').val(),
+                neurologicos: $('#evpq-ex11').val(),
+                diagnostico: $('#evpq-ex12').val(),
+                recomendaciones: $('#evpq-ex13').code().trim(),
+                tratamiento: $('#evpq-ex14').code().trim()
+            }
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/GuardarPsqExamenPsicoPatologico',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+    </script>
+}

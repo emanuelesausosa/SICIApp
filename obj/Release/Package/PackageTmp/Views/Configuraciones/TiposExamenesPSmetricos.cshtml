@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SICIApp.Models.EXAMENPSICOMETRICO_EXAMENMODEL>
+
+@{
+    ViewBag.Title = "Tipos Exámenes Psicométricos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Tipos Exámenes Psicométricos</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Configuraciones","Index")
+            </li>
+            <li class="active">
+                <strong>EXAMEN PSICOMETRICO</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista de EXÁMENES PSICOMÉTRICOS</h5>
+					<div class="ibox-tools">
+						@Html.ActionLink("Crear", "NuevoExamenPSmetrico", null, new { @class = "btn btn-primary btn-xs" })
+					</div>
+                </div>
+                <div class="ibox-content">
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TITULO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ARCHIVOFISOCO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TITULO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPCION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ARCHIVOFISOCO)
+        </td>
+        <td>
+			@Html.ActionLink("Detalle", "DetalleExamenPsmetrico", new { ID = item.IDEXAMEN }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Editar", "EditarExamenPsmetrico", new { id = item.IDEXAMEN }, new { @class = "btn btn-white btn-sm" })            
+        </td>
+    </tr>
+}
+
+</table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+

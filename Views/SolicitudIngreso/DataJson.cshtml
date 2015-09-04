@@ -1,0 +1,143 @@
+﻿
+@{
+    ViewBag.Title = "DataJson";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DataJson</h2>
+
+<div class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-md-2">Elija un estudio</label>
+        <div class="input-group">
+            <select id="escolaridades" name="escolaridades" data-placeholder="Elija una escolaridad" class="form-control" style="width:350px;" tabindex="2"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="save-sp" type="button" value="Guardar" class="btn btn-primary" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">¿Qué drogas ha usado?</label>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <div class="input-group">
+                    <select id="drogas" data-placeholder="Elija entre estas drogas..." class="chzn-select" multiple style="width:350px;" tabindex="1"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">¿Ha padecido de alguna de estas enfermedades?</label>
+        <div class="row">
+            <div class="col-xs-6 col-sm-4">
+                <div class="input-group">
+                    <select id="enfermedades" data-placeholder="Elija entre estas enfermedades..." class="chzn-select" multiple style="width:350px;" tabindex="1"></select>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+@section Styles {
+    
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/plugins/toastr")
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+            $.getJSON('@Url.Action("GetEscolaridades")', function (_escolaridades) {
+                var opciones = $("#escolaridades");
+                    $.each(_escolaridades, function () {
+                        opciones.append(
+                            $("<option/>")
+                                .val(this.ID)
+                                .text(this.NOMBREESCOLARIDAD));
+                    });
+
+                });           
+            $.getJSON('@Url.Action("GetTiposDrogas")', function (_drogas) {
+                var op1 = $("#drogas");
+                op1.html('');
+                $.each(_drogas, function (key, val) {
+                    //$("#drogas").append($("<label>").text(this.NOMBRECIENTIFICO).prepend(
+                    //    $("<input>").attr('type', 'checkbox').val(this.ID).prop('checked', false)
+                    op1.append(
+                    $('<option value="' + val.ID + '">' + val.NOMBRECIENTIFICO + '</option>'));
+                });
+              //  $('.chzn-select').chosen();
+            });
+
+            $.getJSON('@Url.Action("GetEnfermedades")', function (_enfermedades) {
+                var op2 = $("#enfermedades");
+                op2.html('');
+                $.each(_enfermedades, function (key, val) {
+                    //$("#enfermedades").append($("<label>").text(this.NOMBRECIENTIFICO).prepend(
+                    //    $("<input>").attr('type', 'checkbox').val(this.ID).prop('checked', false)
+                    op2.append(
+                    $('<option value="' + val.ID + '">' + val.NOMBRECIENTIFICO + '</option>'));
+                });
+                $('.chzn-select').chosen();
+            });
+        });
+       
+        $('#save-sp').click(function () {
+            var element = this;
+
+            var ID = $('#escolaridades').val();
+            
+            
+            
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/SolicitudIngreso/SaveData',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(ID),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Alerta');
+                    }
+
+                },
+                error: function (req, status, err) {
+                    toastr.error(data.message, 'Error');
+                },
+                async: true,
+                processData: false
+            });
+        });
+
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+        
+
+        // funciónpara obtener las escolaridades
+    </script>
+}

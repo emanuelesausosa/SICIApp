@@ -1,0 +1,202 @@
+﻿@model  IEnumerable<SICIApp.Models.INGRESOMODEL>
+@{
+    ViewBag.Title = "Medicina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Solicitudes</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("SolicitudIngreso", "Index")
+            </li>
+            <li class="active">
+                <strong>Solicitudes</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Bandeja de Solicitudes de Ingreso</h5>
+                    <div class="ibox-tools">
+                        @Html.ActionLink("Nueva Solicitud", "NuevaFicha", null, new { @class = "btn btn-primary btn-xs" })
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped">
+                        <tr>
+                            <th>
+                                Fecha Solicitud
+                            </th>
+                            <th>
+                                Nombres Solicitante
+                            </th>
+                            <th>
+                                Apellidos Solicitante
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Centro Terapéutico
+                            </th>
+                            <th>
+                                Aceptado
+                            </th>
+
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FECHAINGRESOSISTEMA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FICHA.PRIMERNOMBRE)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDONOMBRE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FICHA.PRIMERAPELLIDO)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDOAPELLIDO)
+                                </td>
+
+                                @if (item.STATUSFLOW == 1)
+                                {
+                                    <td>
+                                        <p><span class="badge">Solicitado</span></p>
+                                    </td>
+                                }
+                                else
+                                    if (item.STATUSFLOW == 2)
+                                    {
+                                        <td>
+                                            <p><span class="badge badge-info">Evaluación médica</span></p>
+                                        </td>
+                                    }
+                                    else
+                                        if (item.STATUSFLOW == 3)
+                                        {
+                                            <td>
+                                                <p><span class="badge badge-inverse">Evaluación Psicológica</span></p>
+                                            </td>
+                                        }
+                                        else
+                                            if (item.STATUSFLOW == 4)
+                                            {
+                                                <td>
+                                                    <p><span class="badge badge-primary">Evaluación Social</span></p>
+                                                </td>
+                                            }
+                                            else
+                                                if (item.STATUSFLOW == 5)
+                                                {
+                                                    <td>
+                                                        <p><span class="badge badge-info">Preparado</span></p>
+                                                    </td>
+                                                }
+                                                else
+                                                    if (item.STATUSFLOW == 6)
+                                                    {
+                                                        <td>
+                                                            <p><span class="badge badge-success">Ingreso Finalizado</span></p>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <p><span class="badge badge-warning">DESCONOCIDO</span></p>
+                                                        </td>
+                                                    }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDCRENTROTERAPEUTICO)
+                                </td>
+                                @if (item.ACEPTADO == null)
+                                {
+                                    <td>
+                                        <p><span class="label"> -- </span></p>
+                                    </td>
+                                }
+                                else
+                                    if (item.ACEPTADO == true)
+                                    {
+                                        <td>
+                                            <p><span class="label label-success">ACEPTADO</span></p>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <p><span class="label label-warning-light">NO ACEPTADO</span></p>
+                                        </td>
+                                    }
+
+
+                                <td>
+                                    @Html.ActionLink("Evaluar Paciente", "EvaluacionMedica", new { ID = item.ID }, new { @class = "btn btn-white btn-sm" })
+                                    @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
+                                    <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update" />
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/plugins/wizardStepsStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/wizardSteps")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/toastr")
+
+    <script type="text/javascript">
+        $(function () {
+            $('.btn-update').click(function () {
+                var element = this;
+                // mensaje de procesando solocitud
+                toastr.info('Procesando', 'se ha procesado la solicitud');
+
+                $.ajax({
+                    url: '/SolicitudIngreso/ProcesarSolicitud',
+                    type: 'GET',
+                    //contentType: 'application/json; charset=utf-8',
+                    datatype: 'json',
+                    data: { 'IDINGRESO': $(this).attr('data-id') },
+                    success: function (data) {
+                        if(data.success)
+                        {
+                            toastr.success(data.message, 'Éxito');
+                        }
+                        else
+                        {
+                            toastr.error(data.message,'Error');
+                        }
+
+                    },
+                    error: function (req, status, err) {
+                        alert('error desconocido! ' + err);
+                    }
+
+                });
+            });
+        });
+    </script>
+}
+
