@@ -1,0 +1,131 @@
+﻿@model SICIApp.Models.PRO_CABANIAMODEL
+
+@{
+    ViewBag.Title = "Detalle Cabania";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Detalle Cabania</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "Cabanias")
+            </li>
+            <li class="active">
+                <strong>Detalle Cabania</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Detalle Cabania</h5>
+                </div>
+                <div class="ibox-content">
+
+
+				    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCRIPCION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAPACIDAD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAPACIDAD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GEOLAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GEOLAT)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GEOLONG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GEOLONG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ACTIVO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ACTIVO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDCENTROTERAPEUTICO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDCENTROTERAPEUTICO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IDNIVEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDNIVEL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USUARIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USUARIO)
+        </dd>
+
+    </dl>
+
+
+	    @Html.ActionLink("Editar", "EditarCabania", new { ID = Model.ID }, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Todas", "Cabanias", null, new { @class = "btn btn-white"})
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -62,7 +62,7 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>List of <#= ViewDataTypeShortName #></h5>
+                    <h5>Lista de <#= ViewDataTypeShortName #></h5>
 					<div class="ibox-tools">
 						@Html.ActionLink("Crear Nuevo", "Nuevo", null, new { @class = "btn btn-primary btn-xs"})
 					</div>

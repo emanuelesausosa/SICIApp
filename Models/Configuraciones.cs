@@ -631,4 +631,148 @@ namespace SICIApp.Models
           public virtual ICollection<TER_MATRICULA> TER_MATRICULA { get; set; }
       }
       #endregion
+
+      #region CABANIA - MODEL
+       public partial class PRO_CABANIAMODEL
+    {
+        public PRO_CABANIAMODEL()
+        {
+            this.PRO_CABANIADESARROLLO = new HashSet<PRO_CABANIADESARROLLO>();
+        }
+    
+        [Key]
+        public int ID { get; set; }
+
+        [Display(Name="NOMBRE")]
+        [Required]
+        [StringLength(50, ErrorMessage="El nombre debe de ser de un máximo de 50 caracteres")]
+        public string NOMBRE { get; set; }
+
+        [Display(Name="DESCRIPCIÓN")]
+        [DataType(DataType.MultilineText)]
+        public string DESCRIPCION { get; set; }
+
+        [Display(Name="CAPACIDAD")]
+        [Required]
+        [Range(1,99, ErrorMessage="Debe de establecer un número entre 1 y 99")]
+        public Nullable<int> CAPACIDAD { get; set; }
+
+
+        [HiddenInput(DisplayValue = false)]
+        public Nullable<double> GEOLAT { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
+        public Nullable<double> GEOLONG { get; set; }
+
+        [Display(Name="ACTIVO")]
+        public Nullable<bool> ACTIVO { get; set; }
+
+        [Display(Name="CENTRO TERAPÉUTICO")]
+        public string IDCENTROTERAPEUTICO { get; set; }
+
+        [Display(Name="NIVEL")]
+        public Nullable<int> IDNIVEL { get; set; }
+
+        [HiddenInput(DisplayValue=false)]
+        public string USUARIO { get; set; }
+    
+        public virtual CENTROTERAPEUTICO CENTROTERAPEUTICO { get; set; }
+        public virtual PRO_NIVEL PRO_NIVEL { get; set; }
+        public virtual ICollection<PRO_CABANIADESARROLLO> PRO_CABANIADESARROLLO { get; set; }
+    }
+      #endregion
+
+    //
+    ///*****************SECCIÓN DE CONFIGURACIONES DE CONTABILIDADES **********/////
+    ///****************************************************************************
+    ///
+
+       #region ESTADOPAGO -MODEL
+       public partial class CONT_ESTADOPAGOMODEL
+       {
+           public CONT_ESTADOPAGOMODEL()
+           {
+               this.CONT_CODOTALONARIO = new HashSet<CONT_CODOTALONARIO>();
+           }
+           
+           [Key]
+           public int ID { get; set; }
+
+           [Display(Name = "NOMBRE")]
+           [Required]
+           [StringLength(25, ErrorMessage = "El nombre debe de ser de un máximo de 25 caracteres")]
+           public string NOMBRE { get; set; }
+
+           [Display(Name = "DESCRIPCIÓN")]
+           [DataType(DataType.MultilineText)]
+           public string DESCRIPCION { get; set; }
+
+
+           public virtual ICollection<CONT_CODOTALONARIO> CONT_CODOTALONARIO { get; set; }
+       }
+       #endregion
+
+       #region TIPOCONCEPTO PAGP - MODEL
+       public partial class CONT_TIPOCONCEPTOPAGOMODEL
+    {
+        public CONT_TIPOCONCEPTOPAGOMODEL()
+        {
+            this.CONT_CODOTALONARIO = new HashSet<CONT_CODOTALONARIO>();
+        }
+    
+           [Key]
+           public int ID { get; set; }
+
+           [Display(Name = "NOMBRE")]
+           [Required]
+           [StringLength(25, ErrorMessage = "El nombre debe de ser de un máximo de 25 caracteres")]
+           public string NOMBRE { get; set; }
+
+           [Display(Name = "DESCRIPCIÓN")]
+           [DataType(DataType.MultilineText)]
+           public string DESCRIPCION { get; set; }
+    
+        public virtual ICollection<CONT_CODOTALONARIO> CONT_CODOTALONARIO { get; set; }
+    }
+       #endregion
+
+       #region MES - MODEL
+       public partial class CONT_MESMODEL
+    {
+        public CONT_MESMODEL()
+        {
+            this.CONT_CODOTALONARIO = new HashSet<CONT_CODOTALONARIO>();
+        }
+
+        [Key]
+        public int ID { get; set; }
+
+        [Display(Name = "NOMBRE")]
+        [Required]
+        [StringLength(25, ErrorMessage = "El nombre debe de ser de un máximo de 25 caracteres")]
+        public string NOMBREMES { get; set; }
+
+        [Display(Name = "FECHA INICIO MES")]
+        [Required]
+        [DataType(DataType.Date)]
+        public Nullable<System.DateTime> FECHAINICIO { get; set; }
+
+        [Display(Name = "FECHA FIN DE MES")]
+        [Required]
+        [DataType(DataType.Date)]
+        public Nullable<System.DateTime> FECHACIERRE { get; set; }
+
+        [Display(Name = "FECHA CORTE")]
+        [Required]
+        [DataType(DataType.Date)]
+        public Nullable<System.DateTime> FECHACORTE { get; set; }
+
+        [Display(Name = "DESCRIPCIÓN")]
+        [DataType(DataType.MultilineText)]
+        public string DESCRIPCION { get; set; }
+    
+        public virtual ICollection<CONT_CODOTALONARIO> CONT_CODOTALONARIO { get; set; }
+    }
+       #endregion
+
 }

@@ -1,0 +1,838 @@
+﻿@model SICIApp.Entities.FICHA
+
+@{
+    ViewBag.Title = "Perfil del Paciente";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>SICI | @ViewBag.Title</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Primary Inspinia style -->
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+
+</head>
+
+<body id="page-top" class="landing-page">
+    <div class="navbar-wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header page-scroll">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Rehabilitacion")">PACIENTES</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="page-scroll" href="#page-top">Ficha</a></li>
+                        <li><a class="page-scroll" href="#features">Social</a></li>
+                        <li><a class="page-scroll" href="#team">Médica</a></li>
+                        <li><a class="page-scroll" href="#testimonials">Psquiátrica</a></li>
+                        <li><a class="page-scroll" href="#pricing">Psicológica</a></li>
+                        <li><a class="page-scroll" href="#contact">Otros</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div id="inSlider" class="carousel carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#inSlider" data-slide-to="0" class="active"></li>
+            <li data-target="#inSlider" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>
+                            @Model.NUMEROIDENTIDAD<br />
+                            @Model.PRIMERNOMBRE @Model.SEGUNDONOMBRE<br />
+                            @Model.PRIMERAPELLIDO @Model.SEGUNDOAPELLIDO<br />                            
+                        </h1>
+                        <p>Nacionalidad: <strong>@Model.NACIONALIDAD</strong></p>
+                        <h2>                            
+                               Domicilio: <strong>@Model.DATOSPERSONALES1.DIRECCIONDOMICILIO</strong> <br />
+                               Estado Civil: <strong>@Model.DATOSPERSONALES1.ESTADOCIVIL</strong>  <br />
+                               Fecha nacimiento: <strong>@Model.DATOSPERSONALES1.FECHANACIMIENTO</strong><br />
+                               Lugar de nacimiento: <strong>@Model.DATOSPERSONALES1.CITY1.NAME</strong>
+                        </h2>
+                    </div>
+                    <div class="carousel-image wow zoomIn">
+                        <img class="img-circle" src="~/Images/a2.jpg" alt="profile" width="432" height="378" />
+                    </div>
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back one"></div>
+                @{
+                    var _elementIngresoActivo = Model.INGRESO.Where(i => i.FECHAEGRESOPV == null).Single();
+                    
+                    // sección de datos sociales:
+                    // campos calculados
+                    var edad = new TimeSpan(); 
+                        edad = (TimeSpan)(DateTime.Now - Model.DATOSPERSONALES1.FECHANACIMIENTO); 
+                    var _edad = new DateTime();
+                    var _tiempoConsumo = (int)(_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.EDADCOMIENZO - _edad.Year);
+                }
+            </div>
+            <div class="item">
+                <div class="container">
+                    <div class="carousel-caption blank">
+                        
+                        <h1>
+                            Número de expediente: @_elementIngresoActivo.NUMEXPEDIENTE<br />
+                            Fecha Ingreso: @_elementIngresoActivo.FECHAREALINGRESOPV <br /> 
+                            @_elementIngresoActivo.PRO_PROMOCIONNIVEL.Where(i=>i.ESTADO=="ACTIVO").Single().PRO_NIVEL.NOMBRE / @_elementIngresoActivo.PRO_PROMOCIONNIVEL.Where(i => i.ESTADO == "ACTIVO").Single().PRO_NIVEL.PRO_FASE.NOMBRE<br />
+                        </h1>
+                        <p>Observaciones: @_elementIngresoActivo.OBSERVACIONES</p>                        
+                    </div>
+                    <div class="carousel-image wow zoomIn">
+                        <img class="img-circle" src="~/Images/a2.jpg" alt="profile" width="432" height="378" />
+                    </div>
+                </div>
+                <!-- Set background for slide in css -->
+                <div class="header-back two"></div>
+            </div>
+        </div>
+        <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#inSlider" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
+    <section id="features" class="container services">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Problemas con Drogas<br /> <span class="navy">Información sobre los problemas con drogas</span> </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-danger pull-right">Drogas</span>
+                        <h5>Inicio drogas</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <ul class="todo-list m-t small-list">
+                            <li>
+                                <h3>Edad de inicio en drogas: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.EDADCOMIENZO</strong></h3>
+                            </li>
+                            <li>
+                                <h3>Años de consumo: <strong class="text-danger">@_tiempoConsumo años <i class="fa fa-bolt"></i></strong></h3>
+                            </li>
+                            <li>
+                                <h3>Edad actual: <strong>@_edad.Add(edad).Year</strong></h3>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-danger pull-right">Drogas</span>
+                        <h5>Abstinencia</h5>
+                    </div>
+                    <div class="ibox-content">                      
+                        
+                        <ul class="todo-list m-t small-list">
+                            <li>
+                                <h1 class="no-margins"><small>¿Intentó dejarlas?</small>@{var res = (bool)_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.INTENTODEJARLAS ? "SI" : "NO";} <strong>@res</strong></h1>
+                            </li>
+                            <li>
+                                <h3>Tiempo sin consumir:</h3>
+                            </li>
+                            <li>
+                                <h4>Días: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIADIAS</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Semanas: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIASEMANAS</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Meses: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.ABSTINENCIAMESES</strong></h4>
+                            </li>
+                        </ul>                           
+                                                  
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Drogas que ha usado</h5>
+                        <span class="label label-danger pull-right">Drogas</span>
+                    </div>
+                    <div class="ibox-content">
+                        <ul class="todo-list m-t small-list">
+                            @foreach (var itemDroga in _elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMODROGAS)
+                            {
+                                <li><h4>@itemDroga.DATOSPROBLEMADROGAS_DROGAS.NOMBRECIENTIFICO</h4></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>  
+            <div class="col-lg-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Problemas por uso de drogas</h5>
+                        <span class="label label-danger pull-right">Drogas</span>
+                    </div>
+                    <div class="ibox-content">
+                        <ul class="todo-list m-t small-list"> 
+                            <li>
+                               <h4>Problemas físicos: @{var _respf = (bool)_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.PROBLEMAFISICO ? "SI" : "NO";} <strong>@_respf</strong></h4> 
+                            </li>
+                            <li>
+                                <h4>Problemas Mentales: @{var _respm = (bool)_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.PROBLEMAMENTAL ? "SI" : "NO";}<strong>@_respm</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Detalle Problemas:@{var _resdp = _elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.EXPLIQUEPROBLEMAS;} <strong>@_resdp</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Tratamiento por problemas de drogas: @{var _restd = (bool)_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.TRATAMIENTOMEDICO ? "SI" : "NO";}<strong>@_restd</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Lugar de tratamiento: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.LUGARTRATAMIENTO</strong></h4>
+                            </li>
+                            <li>
+                                <h4>Año de tratamiento: <strong>@_elementIngresoActivo.DATOSPROBLEMADROGAS_CONSUMO.ANIOTRATAMIENTO</strong></h4>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>                      
+        </div>
+    </section>
+
+    <section class="container features">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Información Académica<br /> <span class="navy">Educación formal y oficios</span> </h1>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center wow fadeInLeft">
+                <div>
+                    <i class="fa fa-mobile features-icon"></i>
+                    <h2>Sabe Leer</h2>
+                    <p>@{var _resiaEst = (bool)_elementIngresoActivo.INFORMACIONACADEMICA_ESTUDIOS.SABELEERYESCRIBIR ? "SI" : "NO"; } <strong>@_resiaEst</strong></p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-bar-chart features-icon"></i>
+                    <h2>Oficios</h2>
+                    <ul class="todo-list m-t small-list">
+                        @foreach(var itemOficio in _elementIngresoActivo.INFORMACIONACADEMICA_ESTUDIOS.INFORMACIONACADEMICA_ESTUDIOSOFICIO)
+                        {
+                            <li>
+                                <p><strong>@itemOficio.INFORMACIONACADEMICA_OFICIOS.NOMBREOFICIO</strong></p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 text-center  wow zoomIn">
+                <img src="~/Images/landing/birrete.png" alt="dashboard" class="img-responsive">
+            </div>
+            <div class="col-md-3 text-center wow fadeInRight">
+                <div>
+                    <i class="fa fa-envelope features-icon"></i>
+                    <h2>Grado Académico</h2>
+                    @foreach (var itemEscolaridad in _elementIngresoActivo.INFORMACIONACADEMICA_ESTUDIOS.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD)
+                    {
+                        <p><strong>@itemEscolaridad.INFORMACIONACADEMICA_ESCOLARIDAD.NOMBREESCOLARIDAD</strong></p>
+                        <p>(@itemEscolaridad.INFORMACIONACADEMICA_ESCOLARIDAD.DESCRIPCIONESCOLARIDAD)</p>
+                    }
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-google features-icon"></i>
+                    <h2>Observaciones</h2>
+                    @foreach (var itemEscolaridad in _elementIngresoActivo.INFORMACIONACADEMICA_ESTUDIOS.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD)
+                    {
+                        <p><strong>@itemEscolaridad.DESCRIPCION</strong></p>                        
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Datos Delictivos</h1>
+                <p>Datos delictivos</p>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-6 features-text wow fadeInLeft"> 
+                <ul class="todo-list m-t small-list">
+                    <li>
+                        <h3>Ha cometido actos delictivos: <strong>@{var _resddQ1 = (bool)_elementIngresoActivo.DATOSDELICTIVOS.HACOMETIDO ? "SI" : "NO"; } @_resddQ1</strong></h3>
+                    </li>
+                    <li>
+                        <h3>Detalle: <strong>@_elementIngresoActivo.DATOSDELICTIVOS.DETALLESACTOS</strong></h3>
+                    </li>                    
+                </ul>                
+            </div>
+            <div class="col-lg-6 text-right wow fadeInRight">
+                <ul class="todo-list m-t small-list" >
+                    <li>
+                        <h3>Ha estado Preso: <strong>@{var _resddQ2 = (bool)_elementIngresoActivo.DATOSDELICTIVOS.HAESTADOPRESO ? "SI" : "NO";}@_resddQ2</strong></h3>
+                    </li>
+                    <li>
+                        <h3>
+                            Detalle: <strong>@_elementIngresoActivo.DATOSDELICTIVOS.DESTALLESRECLUSION</strong>
+                        </h3>
+                    </li>
+                    <li>
+                        <h3>Tiene juicio pendiente: <strong>@{var _resddQ3 = (bool)_elementIngresoActivo.DATOSDELICTIVOS.JUICIOPENDIENTE ? "SI" : "NO";} @_resddQ3</strong></h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="container features">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Información Condición física<br /> <span class="navy">Información sobre condición física</span> </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 text-center wow fadeInLeft">
+                <div>
+                    <i class="fa fa-mobile features-icon"></i>
+                    <h2>Padece de alguna Enfermedad</h2>
+                    <p>@{var _resdcfQ1= (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.PADECE? "SI" : "NO"; } <strong>@_resdcfQ1</strong></p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-bar-chart features-icon"></i>
+                    <h2>Detalles de enfermedad que padece</h2>
+                    <p><strong>@_elementIngresoActivo.CONDICIONFISICA_INGRESO.DETALLE</strong></p>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-bar-chart features-icon"></i>
+                    <h2>Ha padecido de:</h2>
+                    <ul class="todo-list m-t small-list">
+                        @foreach(var itemEnfermedades in  _elementIngresoActivo.CONDICIONFISICA_INTERNOENFERMEDADES)
+                        {
+                            <li>
+                                <h3>@itemEnfermedades.CONDICIONFISICA_ENFERMEDADES.NOMBRECIENTIFICO</h3>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 text-center wow zoomIn">
+                <img src="~/Images/landing/birrete.png" alt="dashboard" class="img-responsive">
+            </div>
+            <div class="col-md-3 text-center wow fadeInRight">
+                <div>
+                    <i class="fa fa-mobile features-icon"></i>
+                    <h2>Generales</h2>
+                    <ul class="todo-list m-t small-list">
+                        <li>
+                            <h3>¿Ha recibido tratamiento?: <strong>@{var _resdcfQ2 = (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.RECIBIOTRATAMIENTO ? "SI" : "NO";}@_resdcfQ2</strong></h3>
+                        </li>
+                        <li>
+                            <h3>¿Tiene impedimentos?: <strong>@{var _resdcfQ3 = (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.TIENEIMPEDIMENTOS ? "SI" : "NO";}@_resdcfQ3</strong></h3>
+                        </li>
+                        <li>
+                            <h3>¿Duerme bien?: <strong>@{var _resdcfQ4 = (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.DUERMEBIEN ? "SI" : "NO";}@_resdcfQ4</strong></h3>
+                        </li>
+                        <li>
+                            <h3>¿Padece de los nervios?: <strong>@{var _resdcfQ5 = (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.PADECENERVIOS ? "SI" : "NO";}@_resdcfQ5</strong></h3>
+                        </li>
+                        <li>
+                            <h3>¿Ha sido operado?: <strong>@{var _resdcfQ6 = (bool)_elementIngresoActivo.CONDICIONFISICA_INGRESO.HASIDOOPERADO ? "SI" : "NO";}@_resdcfQ6</strong></h3>
+                        </li>
+                    </ul>
+                </div>
+                <div class="m-t-lg">
+                    <i class="fa fa-bar-chart features-icon"></i>
+                    <h2>Observaciones generales:</h2>                    
+                        @_elementIngresoActivo.CONDICIONFISICA_INGRESO.ONSERVACIONESGENERALES                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>Motivos Ingreso<br /> <span class="navy">Motivos por los cuales desea ingresar</span> </h1>
+            </div>
+        </div>
+        <div class="row features-block">
+            <div class="col-lg-6 features-text wow fadeInLeft">
+                <h2>¿Ingresa voluntariamente?</h2>
+                <p>@{var _resmi1 = (bool)_elementIngresoActivo.MOTIVOSINGRESO.VOLUNTARIAMENTE ? "SI" : "NO";} @_resmi1</p> <br />
+                <h2>¿Está dispuesto a sujetarse a las reglas del PV?</h2>
+                <p>@{var _resmi2 = (bool)_elementIngresoActivo.MOTIVOSINGRESO.DISPUESTOASUJETARSEPV ? "SI" : "NO";} @_resmi2</p> <br />
+                <h2>Fecha de firma del acuerdo</h2>
+                <p> @_elementIngresoActivo.MOTIVOSINGRESO.FECHAFIRMAACUERDO</p> <br />
+            </div>
+            <div class="col-lg-6 text-right wow fadeInRight">
+                <h2>Observaciones</h2>
+                <p>@_elementIngresoActivo.MOTIVOSINGRESO.DESCRIPCION</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="gray-section team">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Signos Vitales</h1>
+                    <p>Evaluación de signos vitales, Evaluación Médica</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 wow fadeInLeft">
+                    <div class="team-member">                        
+                        <h1 class="img-circle">@_elementIngresoActivo.SIGNOSVITALES.PESO</h1>
+                        <h4><span class="navy">Peso en </span>Libras</h4>
+                        <p>Peso estimado en libras, equivalente a @{var _pesoKG = ((double)_elementIngresoActivo.SIGNOSVITALES.PESO / 2.22);} @_pesoKG KG</p>                        
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="team-member wow zoomIn">
+                        <h1 class="img-circle">@_elementIngresoActivo.SIGNOSVITALES.PRESIONARTERIAL</h1>
+                        <h4><span class="navy">Presión </span>Arterial</h4>
+                        <p>Presión arterial calculada en</p>                        
+                    </div>
+                </div>
+                <div class="col-sm-4 wow fadeInRight">
+                    <div class="team-member">
+                        <h1 class="img-circle">@_elementIngresoActivo.SIGNOSVITALES.FRECUENCIACARDIACA</h1>
+                        <h4><span class="navy">Frecuencia </span>Cardiaca</h4>
+                        <p>Frecuencia cardiaca calculada en minutos por pulso</p>                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                    <p>Valide estos datos con el médico responsable</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Aparatos y sistemas</h1>
+                    <p>Evalación médica de aparatos y sistemas</p>
+                </div>
+            </div>
+            <div class="row features-block">
+                @{int c = 0;}
+                @foreach (var itemAparatos in _elementIngresoActivo.APARATOSSISTEMAS)
+                {
+                    if (c == 0 || c == 1)
+                    {
+                        <div class="col-lg-3 features-text wow fadeInLeft">
+                            <small>Evaluación médica</small>
+                            <h2>@itemAparatos.APARATOSSISTEMAS_SISTEMAS.NOMBRE</h2>
+                            <p>@itemAparatos.DIAGNOSTICO</p>
+                            <p>Fecha evaluado: @itemAparatos.FECHADIAGNOSTICO</p>
+                        </div>
+                        c++;
+                    }
+                    else
+                        if (c == 2 || c == 3)
+                        {
+                            <div class="col-lg-3 features-text text-right wow fadeInRight">
+                                <small>Evaluación médica</small>
+                                <h2>@itemAparatos.APARATOSSISTEMAS_SISTEMAS.NOMBRE</h2>
+                                <p>@itemAparatos.DIAGNOSTICO</p>
+                                <p>Fecha evaluado: @itemAparatos.FECHADIAGNOSTICO</p>
+                            </div>
+                            c++;
+                        }
+                        else
+                        {
+                                <div class="col-lg-12 features-text wow">
+                                    <small>Evaluación médica</small>
+                                    <h2>@itemAparatos.APARATOSSISTEMAS_SISTEMAS.NOMBRE</h2>
+                                    <p>@itemAparatos.DIAGNOSTICO</p>
+                                    <p>Fecha evaluado: @itemAparatos.FECHADIAGNOSTICO</p>
+                                </div>
+                            }
+                            
+                }
+                
+                
+                
+            </div>
+        </div>
+
+    </section>
+
+    <section class="timeline gray-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Diagnósticos Genrales</h1>
+                    <p>Evaluación de problemas generales</p>
+                </div>
+            </div>
+            <div class="row features-block">
+
+                <div class="col-lg-12">
+                    <div id="vertical-timeline" class="vertical-container light-timeline center-orientation">
+                        @foreach (var itemEvGenerales in _elementIngresoActivo.EVALUACIONMEDICADETALLE)
+                        {
+                            <div class="vertical-timeline-block">
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <i class="fa fa-briefcase"></i>
+                                </div>
+
+                                <div class="vertical-timeline-content">
+                                    <h2>@itemEvGenerales.TIPOEVALUACIONMEDICA.CATEGORIA</h2>
+                                    <p>
+                                        @itemEvGenerales.OBSERVACIONES
+                                    </p>                                    
+                                    <span class="vertical-date"> Evaluado <br /> <small>@itemEvGenerales.FECHADIAGNOSTICO</small> </span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+    
+
+    <section id="testimonials" class="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Evaluación Psiquiátrica</h1>
+                    <p>Evaluación de aspectos Generales</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 features-text">                    
+                    <h2>Síntomas Principales</h2>
+                    <i class="fa fa-bar-chart big-icon pull-right"></i>
+                    <p>@_elementIngresoActivo.PSQ_SINTOMASPRINCIPALES.DESCRIPCION</p>
+                    <span class="vertical-date"> Evaluado <br /> <small>@_elementIngresoActivo.PSQ_SINTOMASPRINCIPALES.FECHADIAGNOSTICO</small> </span>
+                </div>
+                <div class="col-lg-5 features-text">                    
+                    <h2>Enfermedad actual y pasada </h2>
+                    <i class="fa fa-bar-chart big-icon pull-right"></i>
+                    <p>@_elementIngresoActivo.PSQ_DETALLEENFERMEDADES.DESCRIPCION</p>
+                    <span class="vertical-date"> Evaluado <br /> <small>@_elementIngresoActivo.PSQ_SINTOMASPRINCIPALES.FECHADIAGNOSTICO</small> </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 features-text">                    
+                    <h2>Historial ingreso Proyecto victoria </h2>
+                    <i class="fa fa-clock-o big-icon pull-right"></i>
+                    <p>ha ingresado antes al P.V. @{var _respsq1 = (bool)_elementIngresoActivo.PSQ_HISTORIALINGRESOSPV.HAINGRESADOANTES ? "SI" : "NO";@_respsq1}</p>
+                    <p>@_elementIngresoActivo.PSQ_HISTORIALINGRESOSPV.DESCRIPCION</p>
+                    <span class="vertical-date"> Evaluado <br /> <small>@_elementIngresoActivo.PSQ_HISTORIALINGRESOSPV.FECHADIAGNOSTICO</small> </span>
+                </div>
+                <div class="col-lg-5 features-text">                    
+                    <h2>Observación final </h2>
+                    <i class="fa fa-users big-icon pull-right"></i>
+                    <p>@_elementIngresoActivo.PSQ_OBSERVACIONFINAL.DESCRIPCION</p>
+                    <span class="vertical-date"> Evaluado <br /> <small>@_elementIngresoActivo.PSQ_OBSERVACIONFINAL.FECHADIAGNOSTICO</small> </span>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="pricing">
+                <div class="row">
+                    <div class="col-lg-12 wow zoomIn">
+                        <ul class="pricing-plan list-unstyled selected">
+                            <li class="pricing-title">
+                                Examen Psico-patológico
+                            </li>
+                            <li class="pricing-desc">
+                                <p>
+                                    ¿Coopera? @{var _respsq2 = (bool)_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.COOPERA ? "SI" : "NO";} <strong>@_respsq2 ,</strong>
+                                    @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.DETALLECOOPERA
+                                </p>
+
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>T.E.P</span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.TEP</p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Lenguaje </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.LENGUAJE</p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Desorden de pensamiento </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.DESORDENPENSAMIENTO </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Intelecto </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.INTELECTO </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Afecto </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.AFECTO </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Auto-comprensión </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.AUTOCOMPRENSION </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Nivel de drogadicción </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.NIVELDROGADICCION </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Otros </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.OTROS </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Neurológicos </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.NEUROLOGICOS </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Diagnóstico </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.DIAGNOSTICO </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Recomendaciones </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.RECOMENDACIONES </p>
+                            </li>
+                            <li class="pricing-price">
+                                <p><span>Tratamiento </span> @_elementIngresoActivo.PSQ_EXAMENPSICOPATOLOGICO.TRATAMIENTO </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>App Pricing</h1>
+                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled">
+                        <li class="pricing-title">
+                            Basic
+                        </li>
+                        <li class="pricing-desc">
+                            Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.
+                        </li>
+                        <li class="pricing-price">
+                            <span>$16</span> / month
+                        </li>
+                        <li>
+                            Dashboards
+                        </li>
+                        <li>
+                            Projects view
+                        </li>
+                        <li>
+                            Contacts
+                        </li>
+                        <li>
+                            Calendar
+                        </li>
+                        <li>
+                            AngularJs
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-xs" href="#">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+
+                
+
+                <div class="col-lg-4 wow zoomIn">
+                    <ul class="pricing-plan list-unstyled">
+                        <li class="pricing-title">
+                            Premium
+                        </li>
+                        <li class="pricing-desc">
+                            Lorem ipsum dolor sit amet, illum fastidii dissentias quo ne. Sea ne sint animal iisque, nam an soluta sensibus.
+                        </li>
+                        <li class="pricing-price">
+                            <span>$160</span> / month
+                        </li>
+                        <li>
+                            Dashboards
+                        </li>
+                        <li>
+                            Projects view
+                        </li>
+                        <li>
+                            Contacts
+                        </li>
+                        <li>
+                            Calendar
+                        </li>
+                        <li>
+                            AngularJs
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-xs" href="#">Signup</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row m-t-lg">
+                <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg">
+                    <p>*Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. <span class="navy">Various versions</span>  have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="contact" class="gray-section contact">
+        <div class="container">
+            <div class="row m-b-lg">
+                <div class="col-lg-12 text-center">
+                    <div class="navy-line"></div>
+                    <h1>Contact Us</h1>
+                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod.</p>
+                </div>
+            </div>
+            <div class="row m-b-lg">
+                <div class="col-lg-3 col-lg-offset-3">
+                    <address>
+                        <strong><span class="navy">Company name, Inc.</span></strong><br />
+                        795 Folsom Ave, Suite 600<br />
+                        San Francisco, CA 94107<br />
+                        <abbr title="Phone">P:</abbr> (123) 456-7890
+                    </address>
+                </div>
+                <div class="col-lg-4">
+                    <p class="text-color">
+                        Consectetur adipisicing elit. Aut eaque, totam corporis laboriosam veritatis quis ad perspiciatis, totam corporis laboriosam veritatis, consectetur adipisicing elit quos non quis ad perspiciatis, totam corporis ea,
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <a href="mailto:test@email.com" class="btn btn-primary">Send us mail</a>
+                    <p class="m-t-sm">
+                        Or follow us on social platform
+                    </p>
+                    <ul class="list-inline social-icon">
+                        <li>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg m-b-lg">
+                    <p><strong>&copy; 2015 Company Name</strong><br /> consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section for main scripts render -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/bundles/inspinia")
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $('body').scrollspy({
+                target: '.navbar-fixed-top',
+                offset: 80
+            });
+
+            // Page scrolling feature
+            $('a.page-scroll').bind('click', function (event) {
+                var link = $(this);
+                $('html, body').stop().animate({
+                    scrollTop: $(link.attr('href')).offset().top - 50
+                }, 500);
+                event.preventDefault();
+            });
+        });
+
+        var cbpAnimatedHeader = (function () {
+            var docElem = document.documentElement,
+                    header = document.querySelector('.navbar-default'),
+                    didScroll = false,
+                    changeHeaderOn = 200;
+            function init() {
+                window.addEventListener('scroll', function (event) {
+                    if (!didScroll) {
+                        didScroll = true;
+                        setTimeout(scrollPage, 250);
+                    }
+                }, false);
+            }
+            function scrollPage() {
+                var sy = scrollY();
+                if (sy >= changeHeaderOn) {
+                    $(header).addClass('navbar-scroll')
+                }
+                else {
+                    $(header).removeClass('navbar-scroll')
+                }
+                didScroll = false;
+            }
+            function scrollY() {
+                return window.pageYOffset || docElem.scrollTop;
+            }
+            init();
+
+        })();
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -61,6 +61,73 @@
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
   </EntityType>
+  <EntityType Name="CONT_CODOTALONARIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHACREADO" Type="datetime" />
+    <Property Name="FECHAAPAGAR" Type="datetime" />
+    <Property Name="FECHAPAGO" Type="datetime" />
+    <Property Name="VALORAPAGAR" Type="money" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="IDTALONARIO" Type="int" />
+    <Property Name="IDMES" Type="int" />
+    <Property Name="IDTIPOCONCEPTO" Type="int" />
+    <Property Name="IDTIPOESTADO" Type="int" />
+  </EntityType>
+  <EntityType Name="CONT_ESTADOPAGO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="25" />
+    <Property Name="DESCRIPCION" Type="nchar" MaxLength="10" />
+    <Property Name="DESCRIPCION2" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="CONT_FACTURA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NUMEROENFISICO" Type="varchar" MaxLength="50" />
+    <Property Name="FECHACREACION" Type="datetime" />
+    <Property Name="VALORPAGADO" Type="money" />
+    <Property Name="DESCRIPCION" Type="nvarchar(max)" />
+    <Property Name="ESTADO" Type="varchar" MaxLength="25" />
+    <Property Name="ARCHIVO" Type="varchar" MaxLength="255" />
+    <Property Name="IDCODO" Type="int" />
+  </EntityType>
+  <EntityType Name="CONT_MES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBREMES" Type="varchar" MaxLength="25" />
+    <Property Name="FECHAINICIO" Type="datetime" />
+    <Property Name="FECHACIERRE" Type="datetime" />
+    <Property Name="FECHACORTE" Type="date" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="CONT_TALONARIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHACREADO" Type="datetime" />
+    <Property Name="ESTADO" Type="varchar" MaxLength="20" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="FECHACANCELADO" Type="datetime" />
+    <Property Name="IDINGRESO" Type="int" />
+  </EntityType>
+  <EntityType Name="CONT_TIPOCONCEPTOPAGO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="25" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+  </EntityType>
   <EntityType Name="APARATOSSISTEMAS">
     <Key>
       <PropertyRef Name="ID" />
@@ -554,6 +621,33 @@
     <Property Name="SEGUNDOAPELLIDO" Type="varchar" MaxLength="25" />
     <Property Name="NACIONALIDAD" Type="varchar" MaxLength="25" />
   </EntityType>
+  <EntityType Name="PRO_CABANIA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION" Type="varchar(max)" />
+    <Property Name="CAPACIDAD" Type="int" />
+    <Property Name="GEOLAT" Type="float" />
+    <Property Name="GEOLONG" Type="float" />
+    <Property Name="ACTIVO" Type="bit" />
+    <Property Name="IDCENTROTERAPEUTICO" Type="nvarchar" MaxLength="10" />
+    <Property Name="IDNIVEL" Type="int" />
+    <Property Name="USUARIO" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="PRO_CABANIADESARROLLO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCTDESARROLLO" Type="int" Nullable="false" />
+    <Property Name="IDCABANIA" Type="int" />
+    <Property Name="ACTIVO" Type="bit" />
+    <Property Name="FECHAINGRESO" Type="datetime" />
+    <Property Name="FECHAEGRESO" Type="datetime" />
+    <Property Name="USUARIO" Type="nvarchar" MaxLength="256" />
+  </EntityType>
   <EntityType Name="PRO_CRITERIO">
     <Key>
       <PropertyRef Name="ID" />
@@ -674,7 +768,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
     <Property Name="DESCRIPCION" Type="varchar(max)" />
   </EntityType>
@@ -927,6 +1021,78 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CONDICIONFISICA_INTERNOENFERMEDADES">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO">
+    <End Role="CONT_ESTADOPAGO" Type="Self.CONT_ESTADOPAGO" Multiplicity="0..1" />
+    <End Role="CONT_CODOTALONARIO" Type="Self.CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_ESTADOPAGO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTIPOESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_MES">
+    <End Role="CONT_MES" Type="Self.CONT_MES" Multiplicity="0..1" />
+    <End Role="CONT_CODOTALONARIO" Type="Self.CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_MES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDMES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_TALONARIO">
+    <End Role="CONT_TALONARIO" Type="Self.CONT_TALONARIO" Multiplicity="0..1" />
+    <End Role="CONT_CODOTALONARIO" Type="Self.CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_TALONARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTALONARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO">
+    <End Role="CONT_TIPOCONCEPTOPAGO" Type="Self.CONT_TIPOCONCEPTOPAGO" Multiplicity="0..1" />
+    <End Role="CONT_CODOTALONARIO" Type="Self.CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_TIPOCONCEPTOPAGO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTIPOCONCEPTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_FACTURA_CONT_CODOTALONARIO">
+    <End Role="CONT_CODOTALONARIO" Type="Self.CONT_CODOTALONARIO" Multiplicity="0..1" />
+    <End Role="CONT_FACTURA" Type="Self.CONT_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_FACTURA">
+        <PropertyRef Name="IDCODO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_TALONARIO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="CONT_TALONARIO" Type="Self.CONT_TALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_TALONARIO">
         <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
@@ -1359,6 +1525,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PRO_CABANIA_CENTROTERAPEUTICO">
+    <End Role="CENTROTERAPEUTICO" Type="Self.CENTROTERAPEUTICO" Multiplicity="0..1" />
+    <End Role="PRO_CABANIA" Type="Self.PRO_CABANIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIA">
+        <PropertyRef Name="IDCENTROTERAPEUTICO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIA_PRO_NIVEL">
+    <End Role="PRO_NIVEL" Type="Self.PRO_NIVEL" Multiplicity="0..1" />
+    <End Role="PRO_CABANIA" Type="Self.PRO_CABANIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIA">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO">
+    <End Role="CENTRODESARROLLOINGRESO" Type="Self.CENTRODESARROLLOINGRESO" Multiplicity="1" />
+    <End Role="PRO_CABANIADESARROLLO" Type="Self.PRO_CABANIADESARROLLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTRODESARROLLOINGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIADESARROLLO">
+        <PropertyRef Name="IDCTDESARROLLO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIADESARROLLO_PRO_CABANIA">
+    <End Role="PRO_CABANIA" Type="Self.PRO_CABANIA" Multiplicity="0..1" />
+    <End Role="PRO_CABANIADESARROLLO" Type="Self.PRO_CABANIADESARROLLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_CABANIA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIADESARROLLO">
+        <PropertyRef Name="IDCABANIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PRO_NIVEL_PRO_FASE">
     <End Role="PRO_FASE" Type="Self.PRO_FASE" Multiplicity="0..1" />
     <End Role="PRO_NIVEL" Type="Self.PRO_NIVEL" Multiplicity="*" />
@@ -1635,30 +1849,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TER_FALTA_INGRESO">
-    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
-    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="INGRESO">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TER_FALTA">
-        <PropertyRef Name="IDINGRESO" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TER_FALTA_TER_CATEGORIAFALTA">
-    <End Role="TER_CATEGORIAFALTA" Type="Self.TER_CATEGORIAFALTA" Multiplicity="0..1" />
-    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TER_CATEGORIAFALTA">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TER_FALTA">
-        <PropertyRef Name="IDCATEGORIAFALTA" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TER_INCIDENCIAAREA_INGRESO">
     <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
     <End Role="TER_INCIDENCIAAREA" Type="Self.TER_INCIDENCIAAREA" Multiplicity="*" />
@@ -1771,6 +1961,19 @@
     <Parameter Name="IDINGRESO" Type="int" Mode="In" />
     <Parameter Name="FECHADIAGNOSTICO" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="spEditarRecepcionPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="FECHAREALINGRESOPV" Type="datetime" Mode="In" />
+    <Parameter Name="OBSERVACIONES" Type="text" Mode="In" />
+    <Parameter Name="IDCABANIA" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spGuardarInfoAcademicaIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
+    <Parameter Name="SABELEERYESCRIBIR" Type="bit" Mode="In" />
+    <Parameter Name="IDESCOLARIDAD" Type="int" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
+  </Function>
   <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
@@ -1796,6 +1999,21 @@
     <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCONT_ESTADOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCONT_MES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBREMES" Type="varchar" Mode="In" />
+    <Parameter Name="FECHAINICIO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHACIERRE" Type="datetime" Mode="In" />
+    <Parameter Name="FECHACORTE" Type="date" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCONT_TIPOCONCEPTOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="spInsertNewDatosPersonales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDPERSONA" Type="int" Mode="In" />
@@ -1881,6 +2099,25 @@
   <Function Name="spInsertNewOficio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPROCabania" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CAPACIDAD" Type="int" Mode="In" />
+    <Parameter Name="GEOLAT" Type="float" Mode="In" />
+    <Parameter Name="GEOLONG" Type="float" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="IDCENTROTERAPEUTICO" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDNIVEL" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewPROCabaniaDesarrollo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDCTDESARROLLO" Type="int" Mode="In" />
+    <Parameter Name="IDCABANIA" Type="int" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="FECHAINGRESO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAEGRESO" Type="datetime" Mode="In" />
+    <Parameter Name="USUARIO" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="spInsertNewPROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -1982,6 +2219,24 @@
     <Parameter Name="NOMBRECIENTIFICO" Type="varchar" Mode="In" />
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCONT_ESTADOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCONT_MES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBREMES" Type="varchar" Mode="In" />
+    <Parameter Name="FECHAINICIO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHACIERRE" Type="datetime" Mode="In" />
+    <Parameter Name="FECHACORTE" Type="date" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCONT_TIPOCONCEPTOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="spUpdateDatosSocioEconomicosIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="IDINGRESO" Type="int" Mode="In" />
@@ -2112,6 +2367,27 @@
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBREOFICIO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCIONOFICIO" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePROCabania" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="CAPACIDAD" Type="int" Mode="In" />
+    <Parameter Name="GEOLAT" Type="float" Mode="In" />
+    <Parameter Name="GEOLONG" Type="float" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="IDCENTROTERAPEUTICO" Type="nvarchar" Mode="In" />
+    <Parameter Name="IDNIVEL" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="spUpdatePROCabaniaDesarrollo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="IDCTDESARROLLO" Type="int" Mode="In" />
+    <Parameter Name="IDCABANIA" Type="int" Mode="In" />
+    <Parameter Name="ACTIVO" Type="bit" Mode="In" />
+    <Parameter Name="FECHAINGRESO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAEGRESO" Type="datetime" Mode="In" />
+    <Parameter Name="USUARIO" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="spUpdatePROCriterio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -2256,6 +2532,12 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONT_CODOTALONARIO" EntityType="Self.CONT_CODOTALONARIO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
+    <EntitySet Name="CONT_ESTADOPAGO" EntityType="Self.CONT_ESTADOPAGO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
+    <EntitySet Name="CONT_FACTURA" EntityType="Self.CONT_FACTURA" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
+    <EntitySet Name="CONT_MES" EntityType="Self.CONT_MES" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
+    <EntitySet Name="CONT_TALONARIO" EntityType="Self.CONT_TALONARIO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
+    <EntitySet Name="CONT_TIPOCONCEPTOPAGO" EntityType="Self.CONT_TIPOCONCEPTOPAGO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
     <EntitySet Name="APARATOSSISTEMAS" EntityType="Self.APARATOSSISTEMAS" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
     <EntitySet Name="APARATOSSISTEMAS_SISTEMAS" EntityType="Self.APARATOSSISTEMAS_SISTEMAS" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
     <EntitySet Name="EVALUACIONMEDICADETALLE" EntityType="Self.EVALUACIONMEDICADETALLE" Schema="SICI_EVALUACIONMEDICA" store:Type="Tables" />
@@ -2303,6 +2585,8 @@
     <EntitySet Name="TIPOSDOCUMENTO" EntityType="Self.TIPOSDOCUMENTO" Schema="SICI_INGRESOINTERNO" store:Type="Tables" />
     <EntitySet Name="DATOSPERSONALES1" EntityType="Self.DATOSPERSONALES1" Schema="SICI_PERSONA" Table="DATOSPERSONALES" store:Type="Tables" />
     <EntitySet Name="FICHA" EntityType="Self.FICHA" Schema="SICI_PERSONA" store:Type="Tables" />
+    <EntitySet Name="PRO_CABANIA" EntityType="Self.PRO_CABANIA" Schema="SICI_PROMOCION" store:Type="Tables" />
+    <EntitySet Name="PRO_CABANIADESARROLLO" EntityType="Self.PRO_CABANIADESARROLLO" Schema="SICI_PROMOCION" store:Type="Tables" />
     <EntitySet Name="PRO_CRITERIO" EntityType="Self.PRO_CRITERIO" Schema="SICI_PROMOCION" store:Type="Tables" />
     <EntitySet Name="PRO_FASE" EntityType="Self.PRO_FASE" Schema="SICI_PROMOCION" store:Type="Tables" />
     <EntitySet Name="PRO_NIVEL" EntityType="Self.PRO_NIVEL" Schema="SICI_PROMOCION" store:Type="Tables" />
@@ -2369,6 +2653,30 @@
     <AssociationSet Name="FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO" Association="Self.FK_CONDICIONFISICA_INTERNOENFERMEDADES_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="CONDICIONFISICA_INTERNOENFERMEDADES" EntitySet="CONDICIONFISICA_INTERNOENFERMEDADES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO" Association="Self.FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO">
+      <End Role="CONT_ESTADOPAGO" EntitySet="CONT_ESTADOPAGO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_MES" Association="Self.FK_CONT_CODOTALONARIO_CONT_MES">
+      <End Role="CONT_MES" EntitySet="CONT_MES" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_TALONARIO" Association="Self.FK_CONT_CODOTALONARIO_CONT_TALONARIO">
+      <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" Association="Self.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO">
+      <End Role="CONT_TIPOCONCEPTOPAGO" EntitySet="CONT_TIPOCONCEPTOPAGO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_FACTURA_CONT_CODOTALONARIO" Association="Self.FK_CONT_FACTURA_CONT_CODOTALONARIO">
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+      <End Role="CONT_FACTURA" EntitySet="CONT_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_TALONARIO_INGRESO" Association="Self.FK_CONT_TALONARIO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
     </AssociationSet>
     <AssociationSet Name="FK_COUNTRYLANGUAGE_COUNTRY" Association="Self.FK_COUNTRYLANGUAGE_COUNTRY">
       <End Role="COUNTRY" EntitySet="COUNTRY" />
@@ -2510,6 +2818,22 @@
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="OBERVACIONPRELIMINAR" EntitySet="OBERVACIONPRELIMINAR" />
     </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIA_CENTROTERAPEUTICO" Association="Self.FK_PRO_CABANIA_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICO" />
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIA_PRO_NIVEL" Association="Self.FK_PRO_CABANIA_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO" Association="Self.FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO">
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
+      <End Role="PRO_CABANIADESARROLLO" EntitySet="PRO_CABANIADESARROLLO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIADESARROLLO_PRO_CABANIA" Association="Self.FK_PRO_CABANIADESARROLLO_PRO_CABANIA">
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+      <End Role="PRO_CABANIADESARROLLO" EntitySet="PRO_CABANIADESARROLLO" />
+    </AssociationSet>
     <AssociationSet Name="FK_PRO_NIVEL_PRO_FASE" Association="Self.FK_PRO_NIVEL_PRO_FASE">
       <End Role="PRO_FASE" EntitySet="PRO_FASE" />
       <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
@@ -2601,14 +2925,6 @@
     <AssociationSet Name="FK_TER_EXAMENPERSONALIDAD_INGRESO" Association="Self.FK_TER_EXAMENPERSONALIDAD_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TER_FALTA_INGRESO" Association="Self.FK_TER_FALTA_INGRESO">
-      <End Role="INGRESO" EntitySet="INGRESO" />
-      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TER_FALTA_TER_CATEGORIAFALTA" Association="Self.FK_TER_FALTA_TER_CATEGORIAFALTA">
-      <End Role="TER_CATEGORIAFALTA" EntitySet="TER_CATEGORIAFALTA" />
-      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
     </AssociationSet>
     <AssociationSet Name="FK_TER_INCIDENCIAAREA_INGRESO" Association="Self.FK_TER_INCIDENCIAAREA_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />

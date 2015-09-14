@@ -1,0 +1,108 @@
+﻿@model SICIApp.Models.CONT_MESMODEL
+
+@{
+    ViewBag.Title = "Editar Mes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Editar Mes</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Lista", "Meses")
+            </li>
+            <li class="active">
+                <strong>Editar Mes</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Todos", "Meses", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Editar Mes CONT_MESMODEL</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NOMBREMES, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("NOMBREMES", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NOMBREMES)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHAINICIO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHAINICIO)
+                @Html.ValidationMessageFor(model => model.FECHAINICIO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHACIERRE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHACIERRE)
+                @Html.ValidationMessageFor(model => model.FECHACIERRE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHACORTE, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHACORTE)
+                @Html.ValidationMessageFor(model => model.FECHACORTE)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DESCRIPCION, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DESCRIPCION)
+                @Html.ValidationMessageFor(model => model.DESCRIPCION)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "Meses", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+    </div>
+}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

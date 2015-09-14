@@ -183,8 +183,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
+    <Compile Include="Controllers\ContabilidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RehabilitacionController.cs" />
     <Compile Include="Controllers\SolicitudIngresoController.cs" />
     <Compile Include="Dominio\DBFactory.cs" />
     <Compile Include="Dominio\EmailSender.cs" />
@@ -228,6 +230,24 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\CONDICIONFISICA_INTERNOENFERMEDADES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_CODOTALONARIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_ESTADOPAGO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_FACTURA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_MES.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_TALONARIO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CONT_TIPOCONCEPTOPAGO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\COUNTRY.cs">
@@ -312,6 +332,12 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\OBERVACIONPRELIMINAR.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_CABANIA.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PRO_CABANIADESARROLLO.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\PRO_CRITERIO.cs">
@@ -439,6 +465,7 @@
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Configuraciones.cs" />
+    <Compile Include="Models\ContabilidadesModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IngresoModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -447,6 +474,8 @@
     <Compile Include="Services\SICIInterceptorLogging.cs" />
     <Compile Include="Services\SICIInterceptorTransientErrors.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\RehabilitacionViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
@@ -1278,9 +1307,33 @@
     <Content Include="Views\Configuraciones\NuevoCurso.cshtml" />
     <Content Include="Views\Configuraciones\EditarCurso.cshtml" />
     <Content Include="Views\SolicitudIngreso\_ProcesarSolicitudAlterna.cshtml" />
+    <Content Include="Views\SolicitudIngreso\SolicitudesPendientesAprobar.cshtml" />
+    <Content Include="Views\SolicitudIngreso\EvaluacionFinalIngreso.cshtml" />
+    <Content Include="Views\Rehabilitacion\NuevosIngresos.cshtml" />
+    <Content Include="Views\Rehabilitacion\_ProcesarSolicitudAlterna.cshtml" />
+    <Content Include="Views\Rehabilitacion\RecepcionPaciente.cshtml" />
+    <Content Include="Views\Rehabilitacion\Index.cshtml" />
+    <Content Include="Views\Configuraciones\Cabanias.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleCabania.cshtml" />
+    <Content Include="Views\Configuraciones\NuevaCabania.cshtml" />
+    <Content Include="Views\Configuraciones\EditarCabania.cshtml" />
+    <Content Include="Views\Rehabilitacion\PerfilPaciente.cshtml" />
+    <Content Include="Views\Configuraciones\EstadosPago.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleEstadoPago.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoEstadoPago.cshtml" />
+    <Content Include="Views\Configuraciones\EditarEstadoPago.cshtml" />
+    <Content Include="Views\Configuraciones\TiposConceptoPago.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleTipoConceptoPago.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoTipoConceptoPago.cshtml" />
+    <Content Include="Views\Configuraciones\EditarTipoConceptoPago.cshtml" />
+    <Content Include="Views\Configuraciones\Meses.cshtml" />
+    <Content Include="Views\Configuraciones\DetalleMes.cshtml" />
+    <Content Include="Views\Configuraciones\NuevoMes.cshtml" />
+    <Content Include="Views\Configuraciones\EditarMes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />
+    <Folder Include="Views\Contabilidades\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

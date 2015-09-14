@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1" ZoomLevel="80">
+      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="SICIBD2Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" FillColor="Gray" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" FillColor="Gray" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" FillColor="Gray" />
@@ -13,52 +13,52 @@
         <AssociationConnector Association="SICIBD2Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SICIBD2Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SICIBD2Model.AspNetUserRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SICIBD2Model.CITY" Width="1.5" PointX="0.75" PointY="41.125" FillColor="192, 0, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.COUNTRY" Width="1.5" PointX="1.5" PointY="35.375" FillColor="192, 0, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.COUNTRYLANGUAGE" Width="1.5" PointX="3.75" PointY="19.625" FillColor="192, 0, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSPERSONALE" Width="1.5" PointX="5.25" PointY="22.875" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CITY" Width="1.5" PointX="0.75" PointY="62.125" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.COUNTRY" Width="1.5" PointX="1.5" PointY="56.375" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.COUNTRYLANGUAGE" Width="1.5" PointX="3.75" PointY="28.625" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPERSONALE" Width="1.5" PointX="8.25" PointY="33.375" FillColor="192, 0, 0" />
         <AssociationConnector Association="SICIBD2Model.FK_DATOSPERSONALES_AspNetUsers" />
         <AssociationConnector Association="SICIBD2Model.FK_CITY_COUNTRY" />
         <AssociationConnector Association="SICIBD2Model.FK_DATOSPERSONALES_CITY" />
         <AssociationConnector Association="SICIBD2Model.FK_COUNTRYLANGUAGE_COUNTRY" />
-        <EntityTypeShape EntityType="SICIBD2Model.CENTROTERAPEUTICO" Width="1.5" PointX="6" PointY="69.25" FillColor="192, 0, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.USUARIOCENTROCONSULTA" Width="1.5" PointX="8.25" PointY="37.25" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CENTROTERAPEUTICO" Width="1.5" PointX="9" PointY="86.125" FillColor="192, 0, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.USUARIOCENTROCONSULTA" Width="1.5" PointX="11.25" PointY="46.75" FillColor="192, 0, 0" />
         <AssociationConnector Association="SICIBD2Model.FK_USUARIOCENTROCONSULTA_AspNetUsers" />
         <AssociationConnector Association="SICIBD2Model.FK_CENTROTERAPEUTICO_CITY" />
         <AssociationConnector Association="SICIBD2Model.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" />
-        <EntityTypeShape EntityType="SICIBD2Model.APARATOSSISTEMAS" Width="1.5" PointX="11.25" PointY="49.25" FillColor="192, 64, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS" Width="1.5" PointX="9" PointY="42.5" FillColor="192, 64, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.EVALUACIONMEDICADETALLE" Width="1.5" PointX="8.25" PointY="48.25" FillColor="192, 64, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.SIGNOSVITALES" Width="1.5" PointX="5.25" PointY="86.625" FillColor="192, 64, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.TIPOEVALUACIONMEDICA" Width="1.5" PointX="6" PointY="61.5" FillColor="192, 64, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSSOCIOECONOMICOS" Width="1.5" PointX="5.25" PointY="66.375" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.ESTADOMENTAL" Width="1.5" PointX="5.25" PointY="81.125" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO" Width="1.5" PointX="5.25" PointY="78.375" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN" Width="1.5" PointX="3.75" PointY="73.5" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Width="1.5" PointX="6" PointY="73.25" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Width="1.5" PointX="8.25" PointY="56.375" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.HISTORIALPERSONALFAMILIAR" Width="1.5" PointX="5.25" PointY="93" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.IMPRESIONDIAGNOSTICA" Width="1.5" PointX="5.25" PointY="43.5" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.OBERVACIONPRELIMINAR" Width="1.5" PointX="5.25" PointY="41" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.RECOMENDACIONES" Width="1.5" PointX="5.25" PointY="49.125" FillColor="192, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.CAUSASEGRESO" Width="1.5" PointX="9" PointY="45.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.CAUSASEGRESOINTERNO" Width="1.5" PointX="11.25" PointY="46.375" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES" Width="1.5" PointX="3" PointY="58.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_INGRESO" Width="1.5" PointX="5.25" PointY="95.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES" Width="1.5" PointX="5.25" PointY="58.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSDELICTIVOS" Width="1.5" PointX="5.25" PointY="46" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO" Width="1.5" PointX="2.125" PointY="90" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS" Width="1.5" PointX="11.25" PointY="52.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS" Width="1.5" PointX="9" PointY="59.5" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD" Width="1.5" PointX="5.25" PointY="107.875" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" Width="1.5" PointX="5.25" PointY="83.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Width="1.5" PointX="7.5" PointY="83.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Width="1.5" PointX="7.5" PointY="80.625" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS" Width="1.5" PointX="5.25" PointY="104.875" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.INGRESO" Width="1.5" PointX="3" PointY="49.25" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.MOTIVOSINGRESO" Width="1.5" PointX="5.25" PointY="54.875" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.DATOSPERSONALES1" Width="1.5" PointX="3" PointY="43.125" FillColor="0, 192, 192" />
-        <EntityTypeShape EntityType="SICIBD2Model.FICHA" Width="1.5" PointX="0.75" PointY="46.125" FillColor="0, 192, 192" />
+        <EntityTypeShape EntityType="SICIBD2Model.APARATOSSISTEMAS" Width="1.5" PointX="11.25" PointY="73.125" FillColor="192, 64, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.APARATOSSISTEMAS_SISTEMAS" Width="1.5" PointX="9" PointY="83.5" FillColor="192, 64, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.EVALUACIONMEDICADETALLE" Width="1.5" PointX="5.25" PointY="78.125" FillColor="192, 64, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.SIGNOSVITALES" Width="1.5" PointX="5.25" PointY="134.25" FillColor="192, 64, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.TIPOEVALUACIONMEDICA" Width="1.5" PointX="3" PointY="85.5" FillColor="192, 64, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSSOCIOECONOMICOS" Width="1.5" PointX="5.25" PointY="123.25" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.ESTADOMENTAL" Width="1.5" PointX="5.25" PointY="128.75" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO" Width="1.5" PointX="5.25" PointY="126" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMEN" Width="1.5" PointX="3.75" PointY="105.375" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_EXAMENCONTENIDO" Width="1.5" PointX="6" PointY="105.125" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.EXAMENPSICOMETRICO_INTERNOCALIFICACIONES" Width="1.5" PointX="8.25" PointY="80.25" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.HISTORIALPERSONALFAMILIAR" Width="1.5" PointX="5.25" PointY="141.75" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.IMPRESIONDIAGNOSTICA" Width="1.5" PointX="5.25" PointY="66.5" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.OBERVACIONPRELIMINAR" Width="1.5" PointX="5.25" PointY="63.875" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.RECOMENDACIONES" Width="1.5" PointX="5.25" PointY="83.375" FillColor="192, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CAUSASEGRESO" Width="1.5" PointX="6" PointY="89.5" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CAUSASEGRESOINTERNO" Width="1.5" PointX="8.25" PointY="69.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_ENFERMEDADES" Width="1.5" PointX="9" PointY="90.375" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_INGRESO" Width="1.5" PointX="5.25" PointY="144.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONDICIONFISICA_INTERNOENFERMEDADES" Width="1.5" PointX="11.25" PointY="81.375" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSDELICTIVOS" Width="1.5" PointX="5.25" PointY="74" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMO" Width="1.5" PointX="5.25" PointY="137.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_CONSUMODROGAS" Width="1.5" PointX="11.25" PointY="70.375" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPROBLEMADROGAS_DROGAS" Width="1.5" PointX="9" PointY="59.375" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESCOLARIDAD" Width="1.5" PointX="5.25" PointY="120.5" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOS" Width="1.5" PointX="5.25" PointY="131.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD" Width="1.5" PointX="7.5" PointY="128.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_ESTUDIOSOFICIO" Width="1.5" PointX="7.5" PointY="131.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INFORMACIONACADEMICA_OFICIOS" Width="1.5" PointX="5.25" PointY="117.5" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.INGRESO" Width="1.5" PointX="3" PointY="69.25" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.MOTIVOSINGRESO" Width="1.5" PointX="5.25" PointY="101.75" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DATOSPERSONALES1" Width="1.5" PointX="3" PointY="63" FillColor="0, 192, 192" />
+        <EntityTypeShape EntityType="SICIBD2Model.FICHA" Width="1.5" PointX="0.75" PointY="67.125" FillColor="0, 192, 192" />
         <AssociationConnector Association="SICIBD2Model.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" />
         <AssociationConnector Association="SICIBD2Model.FK_APARATOSSISTEMAS_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_EVALUACIONMEDICADETALLE_INGRESO" />
@@ -94,51 +94,51 @@
         <AssociationConnector Association="SICIBD2Model.FK_INGRESO_FICHA" />
         <AssociationConnector Association="SICIBD2Model.FK_MOTIVOSINGRESO_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_DATOSPERSONALES_FICHA" />
-        <EntityTypeShape EntityType="SICIBD2Model.DOCUMENTOSINGRESO" Width="1.5" PointX="11.25" PointY="55.125" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="SICIBD2Model.TIPOSDOCUMENTO" Width="1.5" PointX="9" PointY="62.5" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.DOCUMENTOSINGRESO" Width="1.5" PointX="8.25" PointY="65.125" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.TIPOSDOCUMENTO" Width="1.5" PointX="6" PointY="86.5" FillColor="0, 192, 0" />
         <AssociationConnector Association="SICIBD2Model.FK_DOCUMENTOSINGRESO_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_DOCUMENTOSINGRESO_TIPOSDOCUMENTO" />
-        <EntityTypeShape EntityType="SICIBD2Model.CENTRODESARROLLOINGRESO" Width="1.5" PointX="8.25" PointY="52.125" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="SICIBD2Model.CENTRODESARROLLOINGRESO" Width="1.5" PointX="11.25" PointY="77" FillColor="0, 192, 0" />
         <AssociationConnector Association="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" />
         <AssociationConnector Association="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_INGRESO" />
-        <EntityTypeShape EntityType="SICIBD2Model.PSQ_DETALLEENFERMEDADES" Width="1.5" PointX="5.25" PointY="32.375" FillColor="Blue" />
-        <EntityTypeShape EntityType="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO" Width="1.5" PointX="5.25" PointY="99.375" FillColor="Blue" />
-        <EntityTypeShape EntityType="SICIBD2Model.PSQ_HISTORIALINGRESOSPV" Width="1.5" PointX="5.25" PointY="35" FillColor="Blue" />
-        <EntityTypeShape EntityType="SICIBD2Model.PSQ_OBSERVACIONFINAL" Width="1.5" PointX="5.25" PointY="29.875" FillColor="Blue" />
-        <EntityTypeShape EntityType="SICIBD2Model.PSQ_SINTOMASPRINCIPALES" Width="1.5" PointX="5.25" PointY="27.375" FillColor="Blue" />
+        <EntityTypeShape EntityType="SICIBD2Model.PSQ_DETALLEENFERMEDADES" Width="1.5" PointX="5.25" PointY="58.625" FillColor="Blue" />
+        <EntityTypeShape EntityType="SICIBD2Model.PSQ_EXAMENPSICOPATOLOGICO" Width="1.5" PointX="5.25" PointY="148.25" FillColor="Blue" />
+        <EntityTypeShape EntityType="SICIBD2Model.PSQ_HISTORIALINGRESOSPV" Width="1.5" PointX="5.25" PointY="61.25" FillColor="Blue" />
+        <EntityTypeShape EntityType="SICIBD2Model.PSQ_OBSERVACIONFINAL" Width="1.5" PointX="5.25" PointY="51.625" FillColor="Blue" />
+        <EntityTypeShape EntityType="SICIBD2Model.PSQ_SINTOMASPRINCIPALES" Width="1.5" PointX="5.25" PointY="49.125" FillColor="Blue" />
         <AssociationConnector Association="SICIBD2Model.FK_PSQ_DETALLEENFERMEDADES_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_PSQ_EXAMENPSICOPATOLOGICO_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_PSQ_HISTORIALINGRESOSPV_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_PSQ_OBSERVACIONFINAL_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_PSQ_SINTOMASPRINCIPALES_INGRESO" />
-        <EntityTypeShape EntityType="SICIBD2Model.PRO_CRITERIO" Width="1.5" PointX="9.625" PointY="0.75" FillColor="OliveDrab" />
-        <EntityTypeShape EntityType="SICIBD2Model.PRO_FASE" Width="1.5" PointX="7.375" PointY="3.75" FillColor="OliveDrab" />
-        <EntityTypeShape EntityType="SICIBD2Model.PRO_NIVEL" Width="1.5" PointX="9.625" PointY="3.375" FillColor="OliveDrab" />
-        <EntityTypeShape EntityType="SICIBD2Model.PRO_NIVELCRITERIO" Width="1.5" PointX="11.875" PointY="3.625" FillColor="OliveDrab" />
-        <EntityTypeShape EntityType="SICIBD2Model.PRO_PROMOCIONNIVEL" Width="1.5" PointX="11.875" PointY="29" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_CRITERIO" Width="1.5" PointX="9" PointY="93.5" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_FASE" Width="1.5" PointX="0.75" PointY="81.5" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_NIVEL" Width="1.5" PointX="3" PointY="81" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_NIVELCRITERIO" Width="1.5" PointX="11.25" PointY="89.375" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_PROMOCIONNIVEL" Width="1.5" PointX="5.25" PointY="69.5" FillColor="OliveDrab" />
         <AssociationConnector Association="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_CRITERIO" />
         <AssociationConnector Association="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE" />
         <AssociationConnector Association="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_NIVEL" />
         <AssociationConnector Association="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_ACTITUD" Width="1.5" PointX="12" PointY="34.125" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_AREACRITERIOCALIF" Width="1.5" PointX="7.5" PointY="16.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD" Width="1.5" PointX="7.5" PointY="110.625" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_ASPECTOPERSONALIDAD" Width="1.5" PointX="5.25" PointY="114.625" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CALIFAREA" Width="1.5" PointX="5.25" PointY="16.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAAREA" Width="1.5" PointX="3" PointY="12.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER" Width="1.5" PointX="9.75" PointY="34.375" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAFALTA" Width="1.5" PointX="12" PointY="63.375" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAPERSONALIDAD" Width="1.5" PointX="3" PointY="114.875" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CRITERIOCALIFICACION" Width="1.5" PointX="5.25" PointY="12.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_CURSO" Width="1.5" PointX="12" PointY="43.125" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_EVALUACIONCARACTER" Width="1.5" PointX="14.25" PointY="49.25" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_EXAMENPERSONALIDAD" Width="1.5" PointX="5.25" PointY="110.5" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_FALTA" Width="1.5" PointX="14.25" PointY="52.875" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_INCIDENCIAAREA" Width="1.5" PointX="14.25" PointY="57" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_INSTRUCTOR" Width="1.5" PointX="12" PointY="39.625" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_MATRICULA" Width="1.5" PointX="14.25" PointY="44.125" FillColor="Chocolate" />
-        <EntityTypeShape EntityType="SICIBD2Model.TER_RESUMENEVOLUCION" Width="1.5" PointX="11.25" PointY="58.625" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_ACTITUD" Width="1.5" PointX="6" PointY="98.125" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_AREACRITERIOCALIF" Width="1.5" PointX="7.5" PointY="47.125" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_ASPECTOEXAMENPERSONALIDAD" Width="1.5" PointX="7.5" PointY="153.375" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_ASPECTOPERSONALIDAD" Width="1.5" PointX="5.25" PointY="157.375" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CALIFAREA" Width="1.5" PointX="5.25" PointY="46" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAAREA" Width="1.5" PointX="3" PointY="32.125" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAASPECTOCARCTER" Width="1.5" PointX="3.75" PointY="98.5" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAFALTA" Width="1.5" PointX="9" PointY="62.5" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CATEGORIAPERSONALIDAD" Width="1.5" PointX="3" PointY="157.625" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CRITERIOCALIFICACION" Width="1.5" PointX="5.25" PointY="32.125" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_CURSO" Width="1.5" PointX="6" PointY="94.75" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_EVALUACIONCARACTER" Width="1.5" PointX="8.25" PointY="77.25" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_EXAMENPERSONALIDAD" Width="1.5" PointX="5.25" PointY="153.25" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_FALTA" Width="1.5" PointX="11.25" PointY="66" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_INCIDENCIAAREA" Width="1.5" PointX="14.25" PointY="72" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_INSTRUCTOR" Width="1.5" PointX="6" PointY="92.25" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_MATRICULA" Width="1.5" PointX="8.25" PointY="72.25" FillColor="Chocolate" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_RESUMENEVOLUCION" Width="1.5" PointX="14.25" PointY="67.75" FillColor="Chocolate" />
         <AssociationConnector Association="SICIBD2Model.FK_TER_CALIFAREA_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_TER_EVALUACIONCARACTER_INGRESO" />
         <AssociationConnector Association="SICIBD2Model.FK_TER_EXAMENPERSONALIDAD_INGRESO" />
@@ -159,6 +159,24 @@
         <AssociationConnector Association="SICIBD2Model.FK_TER_FALTA_TER_CATEGORIAFALTA" />
         <AssociationConnector Association="SICIBD2Model.FK_TER_MATRICULA_TER_CURSO" />
         <AssociationConnector Association="SICIBD2Model.FK_TER_MATRICULA_TER_INSTRUCTOR" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_CABANIA" Width="1.5" PointX="11.25" PointY="84.625" FillColor="OliveDrab" />
+        <EntityTypeShape EntityType="SICIBD2Model.PRO_CABANIADESARROLLO" Width="1.5" PointX="13.5" PointY="78" FillColor="OliveDrab" />
+        <AssociationConnector Association="SICIBD2Model.FK_PRO_CABANIA_CENTROTERAPEUTICO" />
+        <AssociationConnector Association="SICIBD2Model.FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO" />
+        <AssociationConnector Association="SICIBD2Model.FK_PRO_CABANIA_PRO_NIVEL" />
+        <AssociationConnector Association="SICIBD2Model.FK_PRO_CABANIADESARROLLO_PRO_CABANIA" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_CODOTALONARIO" Width="1.5" PointX="7.5" PointY="42" FillColor="Orange" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_ESTADOPAGO" Width="1.5" PointX="5.25" PointY="39.25" FillColor="Orange" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_FACTURA" Width="1.5" PointX="9.75" PointY="42.625" FillColor="Orange" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_MES" Width="1.5" PointX="5.25" PointY="54.375" FillColor="Orange" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_TALONARIO" Width="1.5" PointX="5.25" PointY="42.75" FillColor="Orange" />
+        <EntityTypeShape EntityType="SICIBD2Model.CONT_TIPOCONCEPTOPAGO" Width="1.5" PointX="5.25" PointY="35.75" FillColor="Orange" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_MES" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TALONARIO" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_FACTURA_CONT_CODOTALONARIO" />
+        <AssociationConnector Association="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

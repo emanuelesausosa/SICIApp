@@ -821,7 +821,7 @@ namespace SICIApp.Controllers
             string error = "";
 
             // validaciones del ingreso
-            if (_model.ID == null)
+            if (_model.ID == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -1694,21 +1694,7 @@ namespace SICIApp.Controllers
                 _entity.IDESCOLARIDAD = _model.IDESCOLARIDAD;
                 _entity.DESCRIPCION = _model.DESCRIPCION;
 
-                // guardar los oficios
-                var oficiosSelect = new HashSet<string>(oficiosSeleccionados);
-                List<INFORMACIONACADEMICA_ESTUDIOSOFICIO> estudiosOficioList = new List<INFORMACIONACADEMICA_ESTUDIOSOFICIO>();
-
-                foreach (var ofi in oficiosSeleccionados)
-                {
-                    estudiosOficioList.Add(new INFORMACIONACADEMICA_ESTUDIOSOFICIO
-                    {
-                        IDESTUDIOS = _model.IDESTUDIOS,
-                        IDOFICIOS = Int32.Parse(ofi)
-                    });
-                }
-
-                //set data masiva
-                GuardarOficiosIngreso(estudiosOficioList);
+                
 
                 _context = null;
                
@@ -1722,6 +1708,23 @@ namespace SICIApp.Controllers
 
                 if(status == GuardarInfoAcademicaIngreso.Exito)
                 {
+                    // guardar los oficios
+                    var oficiosSelect = new HashSet<string>(oficiosSeleccionados);
+                    List<INFORMACIONACADEMICA_ESTUDIOSOFICIO> estudiosOficioList = new List<INFORMACIONACADEMICA_ESTUDIOSOFICIO>();
+
+                    foreach (var ofi in oficiosSeleccionados)
+                    {
+                        estudiosOficioList.Add(new INFORMACIONACADEMICA_ESTUDIOSOFICIO
+                        {
+                            IDESTUDIOS = _model.IDESTUDIOS,
+                            IDOFICIOS = Int32.Parse(ofi)
+                        });
+                    }
+
+                    //set data masiva
+                    GuardarOficiosIngreso(estudiosOficioList);
+
+                    // salida
                     return Json(new { success = true, message = "Se ha guardado el registro con éxito" }, JsonRequestBehavior.AllowGet);
                 }
 
@@ -1801,8 +1804,8 @@ namespace SICIApp.Controllers
             try {
 
                 // get entity
-                var _entity = await _context.DATOSPROBLEMADROGAS_CONSUMO.FindAsync(_model.IDINGRESO);
-
+                var _entity = new DATOSPROBLEMADROGAS_CONSUMO();
+                _entity = await _context.DATOSPROBLEMADROGAS_CONSUMO.FindAsync(_model.IDINGRESO);
                 // set entity
                 _entity.ANIOTRATAMIENTO = _model.ANIOTRATAMIENTO;
                 _entity.EDADCOMIENZO = _model.EDADCOMIENZO;
@@ -1816,7 +1819,11 @@ namespace SICIApp.Controllers
                 _entity.ABSTINENCIADIAS = _model.ABSTINENCIADIAS;
                 _entity.ABSTINENCIAMESES = _model.ABSTINENCIAMESES;
                 _entity.ABSTINENCIASEMANAS = _model.ABSTINENCIASEMANAS;
-                
+
+                // save data
+                _context.Entry(_entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
                 // transformación de datos para tipos de drogas seleccionadas
                 var drograsSeleccionadas = new HashSet<string>(drogasSelect);
 
@@ -1834,15 +1841,13 @@ namespace SICIApp.Controllers
 
                 // save data masiva para consumodrogas
                 GuardarConsumoDrogas(consumoDrogasList);
-                // save data
-                _context.Entry(_entity).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                
 
                 return Json(new {success= true, message="Éxito al guardar el registro!"}, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)
             {
-                return Json(new { success = true, message = ex.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -1934,6 +1939,10 @@ namespace SICIApp.Controllers
                 _entity.PADECENERVIOS = _model.PADECENERVIOS;
                 _entity.RECIBIOTRATAMIENTO = _model.RECIBIOTRATAMIENTO;
                 _entity.TIENEIMPEDIMENTOS = _model.TIENEIMPEDIMENTOS;
+
+                // save data
+                _context.Entry(_entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
                 
                 //enfermedades seleccionadas
                 var enfermedadesSeleccionadas = new HashSet<string>(enfSelec);
@@ -1950,11 +1959,7 @@ namespace SICIApp.Controllers
                 }
 
                 //guardar asingnación
-                GuardarEnfermedadesInterno(internosEnfermedadesList);
-
-                // save data
-                _context.Entry(_entity).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                GuardarEnfermedadesInterno(internosEnfermedadesList);              
 
                 return Json(new { success = true, message = "Éxito al guardar el registro!" }, JsonRequestBehavior.AllowGet);
             }catch(Exception ex)
@@ -2031,7 +2036,124 @@ namespace SICIApp.Controllers
         }
         #endregion
 
+        // procesamiento de solicitudes -- finalización, niega o acepta el ingreso
+        // bandeja de solicitudes --- flow 6
+        #region Procesamiento de Finalización de solicitud
+        public async Task<ActionResult> SolicitudesPendientesAprobar()
+        {
+            // obtener las solicitudes de ingreso
+            // primero los ingresos
+            //get entity
+            var _entity = await _context.INGRESO.Include(i => i.FICHA)
+                .Where(i => i.STATUSFLOW == 6)
+                .Include(i => i.CENTRODESARROLLOINGRESO)
+                .OrderBy(i => i.FECHAINGRESOSISTEMA)
+                .ToListAsync();
 
+            // set model
+            List<INGRESOMODEL> _model = new List<INGRESOMODEL>();
+
+
+            //set model ingresos
+            foreach (INGRESO entity in _entity)
+            {
+                _model.Add(
+                    new INGRESOMODEL
+                    {
+                        ID = entity.ID,
+                        NUMEXPEDIENTE = entity.NUMEXPEDIENTE,
+                        FECHAUTORIZACION = entity.FECHAUTORIZACION,
+                        FECHAINGRESOSISTEMA = entity.FECHAINGRESOSISTEMA,
+                        FECHAFIRMAACUERDO = entity.FECHAFIRMAACUERDO,
+                        FECHAREALINGRESOPV = entity.FECHAREALINGRESOPV,
+                        FECHAEGRESOPV = entity.FECHAEGRESOPV,
+                        OBSERVACIONES = entity.OBSERVACIONES,
+                        CONTRATO = entity.CONTRATO,
+                        IDPERSONA = entity.IDPERSONA,
+                        ACEPTADO = entity.ACEPTADO,
+                        STATUSFLOW = entity.STATUSFLOW,
+                        CENTRODESARROLLOINGRESO = entity.CENTRODESARROLLOINGRESO,
+                        FICHA = entity.FICHA
+                    });
+
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // GET de la definición de la evaluación
+        public async Task<ActionResult> EvaluacionFinalIngreso(int? ID)
+        {
+            // validaciones del ingreso
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // validar la existencia del ingreso
+            // get entity
+            var _entity = await _context.INGRESO.FindAsync(ID);
+
+
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // luego se comprueba algunos detalles
+            //si ese ingreso está activo
+            //solicitud de ficha por ingreso
+            _entity.FICHA = await _context.FICHA.FindAsync(_entity.IDPERSONA);
+
+            //elementos dinámicos+
+            ViewBag.ACEPTADO = new SelectList(ESTADO, "Value", "Text");
+            return View(_entity);
+        }
+
+        public static List<SelectListItem> ESTADO = new List<SelectListItem>
+        {
+           new SelectListItem{Text = "ACEPTADO", Value="1"},
+           new SelectListItem{Text="DENEGADO", Value="0"}
+        };
+
+        // modificación del estado
+        public async Task<ActionResult> EditarEstadoIngreso(INGRESOMODEL _model)
+        {
+            Thread.Sleep(2000);
+
+            try
+            {
+
+                // get entity 
+                var _entity = new INGRESO();
+
+                // find
+                _entity = await _context.INGRESO.FindAsync(_model.ID);
+
+                //set cambios
+                // _entity.FECHAFIRMAACUERDO = _model.FECHAFIRMAACUERDO;
+                _entity.FECHAUTORIZACION = _model.FECHAUTORIZACION;
+                _entity.ACEPTADO = _model.ACEPTADO;
+                //_entity.CONTRATO = _model.CONTRATO;
+                _entity.OBSERVACIONES = _model.OBSERVACIONES;
+
+                //save data 
+                _context.Entry(_entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+
+                return Json(new { success = true, message = "Se ha cambiado el estado con éxito!" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+
+        } 
+        #endregion
+
+        
         #region Pruebas Json 
         //prueba json and jquery data
         public ActionResult DataJson()

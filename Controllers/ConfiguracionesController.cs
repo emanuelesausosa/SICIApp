@@ -2400,7 +2400,7 @@ namespace SICIApp.Controllers
             // get model 
             var _model = new PRO_NIVELMODEL();
 
-            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+            ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE");
             return View(_model);
         }
 
@@ -2419,7 +2419,7 @@ namespace SICIApp.Controllers
                     if (_context.PRO_NIVEL.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
                     {
                         ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
-                        ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                        ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE", _model.IDFASE);
                         return View(_model);
                     }
                     else
@@ -2446,11 +2446,11 @@ namespace SICIApp.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                    ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE", _model.IDFASE);
                     return View(_model);
                 }
             }
-            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+            ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE", _model.IDFASE);
             return View(_model);
         }
 
@@ -2485,7 +2485,7 @@ namespace SICIApp.Controllers
             };
 
             // carga de elemntos dinámico
-            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+            ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE");
 
             // to view
             return View(_model);
@@ -2512,7 +2512,7 @@ namespace SICIApp.Controllers
                         if (_test.ID != _model.ID)
                         {
                             ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
-                            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+                            ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE", _model.IDFASE);
                             return View(_model);
                         }
                         else
@@ -2563,7 +2563,7 @@ namespace SICIApp.Controllers
                     return View(_model);
                 }
             }
-            ViewBag.IDFASE = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDFASE);
+            ViewBag.IDFASE = new SelectList(_context.PRO_FASE, "ID", "NOMBRE", _model.IDFASE);
             return View(_model);
         }
         #endregion
@@ -4350,6 +4350,290 @@ namespace SICIApp.Controllers
         }
         #endregion
 
+        // sección de mantenimiento de cabañas
+        #region Cabañas
+        // lista de cabañas
+        public async Task<ActionResult> Cabanias()
+        {
+            //get entity 
+            var _entity = await _context.PRO_CABANIA.ToListAsync();
+
+            // set model
+            List<PRO_CABANIAMODEL> _model = new List<PRO_CABANIAMODEL>();
+
+            //model set
+            foreach (PRO_CABANIA entity in _entity)
+            {
+                _model.Add(new PRO_CABANIAMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION,
+                    CAPACIDAD = entity.CAPACIDAD,
+                    GEOLAT = entity.GEOLAT,
+                    GEOLONG = entity.GEOLONG,
+                    ACTIVO = entity.ACTIVO,
+                    IDCENTROTERAPEUTICO = entity.IDCENTROTERAPEUTICO,
+                    IDNIVEL = entity.IDNIVEL,
+                    USUARIO = entity.USUARIO
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle fase
+
+        public async Task<ActionResult> DetalleCabania(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_CABANIA.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_CABANIAMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CAPACIDAD = _entity.CAPACIDAD,
+                GEOLAT = _entity.GEOLAT,
+                GEOLONG = _entity.GEOLONG,
+                ACTIVO = _entity.ACTIVO,
+                IDCENTROTERAPEUTICO = _entity.IDCENTROTERAPEUTICO,
+                IDNIVEL = _entity.IDNIVEL,
+                USUARIO = _entity.USUARIO
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear fase
+
+        //get 
+        public ActionResult NuevaCabania()
+        {
+            // get model 
+            var _model = new PRO_CABANIAMODEL();
+
+            //elementos dinámicos
+            ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE");
+            ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaCabania(PRO_CABANIAMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.PRO_CABANIA.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE", _model.IDCENTROTERAPEUTICO);
+                        ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_CABANIA
+                        {
+                            
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            CAPACIDAD = _model.CAPACIDAD,
+                            GEOLAT = _model.GEOLAT,
+                            GEOLONG = _model.GEOLONG,
+                            ACTIVO = _model.ACTIVO,
+                            IDCENTROTERAPEUTICO = _model.IDCENTROTERAPEUTICO,
+                            IDNIVEL = _model.IDNIVEL,
+                            USUARIO = _model.USUARIO
+                        };
+
+                        // guardar en el context
+                        _context.PRO_CABANIA.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Cabanias
+                        return RedirectToAction("Cabanias", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE", _model.IDCENTROTERAPEUTICO);
+                    ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+                    return View(_model);
+                }
+            }
+
+            ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE",_model.IDCENTROTERAPEUTICO);
+            ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+            return View(_model);
+        }
+
+        //editar cabaña
+        // get
+        public async Task<ActionResult> EditarCabania(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.PRO_CABANIA.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new PRO_CABANIAMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION,
+                CAPACIDAD = _entity.CAPACIDAD,
+                GEOLAT = _entity.GEOLAT,
+                GEOLONG = _entity.GEOLONG,
+                ACTIVO = _entity.ACTIVO,
+                IDCENTROTERAPEUTICO = _entity.IDCENTROTERAPEUTICO,
+                IDNIVEL = _entity.IDNIVEL,
+                USUARIO = _entity.USUARIO
+            };
+
+            //elementos dinámicos
+            ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE");
+            ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE");
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarCabania(PRO_CABANIAMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.PRO_CABANIA.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE", _model.IDCENTROTERAPEUTICO);
+                            ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new PRO_CABANIA();
+                            _entity = await _context.PRO_CABANIA.FindAsync(_model.ID);
+
+                            
+                            
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                            _entity.CAPACIDAD = _model.CAPACIDAD;
+                            _entity.GEOLAT = _model.GEOLAT;
+                            _entity.GEOLONG = _model.GEOLONG;
+                            _entity.ACTIVO = _model.ACTIVO;
+                            _entity.IDCENTROTERAPEUTICO = _model.IDCENTROTERAPEUTICO;
+                            _entity.IDNIVEL = _model.IDNIVEL;
+                            _entity.USUARIO = User.Identity.Name;
+                            
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Fases
+                            return RedirectToAction("Cabanias", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new PRO_CABANIA();
+                        _entity = await _context.PRO_CABANIA.FindAsync(_model.ID);
+
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.CAPACIDAD = _model.CAPACIDAD;
+                        _entity.GEOLAT = _model.GEOLAT;
+                        _entity.GEOLONG = _model.GEOLONG;
+                        _entity.ACTIVO = _model.ACTIVO;
+                        _entity.IDCENTROTERAPEUTICO = _model.IDCENTROTERAPEUTICO;
+                        _entity.IDNIVEL = _model.IDNIVEL;
+                        _entity.USUARIO = User.Identity.Name;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("Cabanias", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE", _model.IDCENTROTERAPEUTICO);
+                    ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+                    return View(_model);
+                }
+            }
+
+            ViewBag.IDCENTROTERAPEUTICO = new SelectList(_context.CENTROTERAPEUTICOes, "ID", "NOMBRE", _model.IDCENTROTERAPEUTICO);
+            ViewBag.IDNIVEL = new SelectList(_context.PRO_NIVEL, "ID", "NOMBRE", _model.IDNIVEL);
+            return View(_model);
+        } 
+        #endregion
+
         // get data JSon para cargar dropDown list, configuraciones
         public ActionResult GetFases()
         {
@@ -4360,6 +4644,718 @@ namespace SICIApp.Controllers
         }
 
         #endregion
+
+        //******************************************************************************************************************
+        ///---------------****************SSECCIÓN DE MANTENIMIENTO DE CONTABILIDADES ***************-----------------------
+        ///*****************************************************************************************************************
+        /// 
+
+   //mantenimiento de CAONTRABILIDADES
+        
+        // mantenimiento de TIPO ESTADO
+
+        #region CONFG. TIPOESTADO
+
+        // lista de ESTADOSPAGO
+        public async Task<ActionResult> EstadosPago()
+        {
+            //get entity 
+            var _entity = await _context.CONT_ESTADOPAGO.ToListAsync();
+
+            // set model
+            List<CONT_ESTADOPAGOMODEL> _model = new List<CONT_ESTADOPAGOMODEL>();
+
+            //model set
+            foreach (CONT_ESTADOPAGO entity in _entity)
+            {
+                _model.Add(new CONT_ESTADOPAGOMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle estado pago
+
+        public async Task<ActionResult> DetalleEstadoPago(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_ESTADOPAGO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_ESTADOPAGOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear estado pago
+
+        //get 
+        public ActionResult NuevoEstadoPago()
+        {
+            // get model 
+            var _model = new CONT_ESTADOPAGOMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoEstadoPago(CONT_ESTADOPAGOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.CONT_ESTADOPAGO.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_ESTADOPAGO
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.CONT_ESTADOPAGO.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("EstadosPago", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar estados pago
+        // get
+        public async Task<ActionResult> EditarEstadoPago(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_ESTADOPAGO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_ESTADOPAGOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarEstadoPago(CONT_ESTADOPAGOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.CONT_ESTADOPAGO.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new CONT_ESTADOPAGO();
+                            _entity = await _context.CONT_ESTADOPAGO.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de estados pago
+                            return RedirectToAction("EstadosPago", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_ESTADOPAGO();
+                        _entity = await _context.CONT_ESTADOPAGO.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Fases
+                        return RedirectToAction("EstadosPago", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        } 
+
+
+        #endregion
+
+        #region CONFG. TIPOCONCEPTOPAGO
+        // lista de tipos concepto pago
+        public async Task<ActionResult> TiposConceptoPago()
+        {
+            //get entity 
+            var _entity = await _context.CONT_TIPOCONCEPTOPAGO.ToListAsync();
+
+            // set model
+            List<CONT_TIPOCONCEPTOPAGOMODEL> _model = new List<CONT_TIPOCONCEPTOPAGOMODEL>();
+
+            //model set
+            foreach (CONT_TIPOCONCEPTOPAGO entity in _entity)
+            {
+                _model.Add(new CONT_TIPOCONCEPTOPAGOMODEL
+                {
+                    ID = entity.ID,
+                    NOMBRE = entity.NOMBRE,
+                    DESCRIPCION = entity.DESCRIPCION
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle Tipos Concepto Pago
+
+        public async Task<ActionResult> DetalleTipoConceptoPago(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_TIPOCONCEPTOPAGO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_TIPOCONCEPTOPAGOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear Tipo Concepto Pago
+
+        //get 
+        public ActionResult NuevoTipoConceptoPago()
+        {
+            // get model 
+            var _model = new CONT_TIPOCONCEPTOPAGOMODEL();
+
+            return View(_model);
+        }
+
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoTipoConceptoPago(CONT_TIPOCONCEPTOPAGOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del nombre
+                    if (_context.CONT_TIPOCONCEPTOPAGO.FirstOrDefault(i => i.NOMBRE == _model.NOMBRE) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_TIPOCONCEPTOPAGO
+                        {
+                            NOMBRE = _model.NOMBRE,
+                            DESCRIPCION = _model.DESCRIPCION
+                        };
+
+                        // guardar en el context
+                        _context.CONT_TIPOCONCEPTOPAGO.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de TiposConceptoPago
+                        return RedirectToAction("TiposConceptoPago", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar Tipo Concepto Pago 
+        // get
+        public async Task<ActionResult> EditarTipoConceptoPago(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_TIPOCONCEPTOPAGO.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_TIPOCONCEPTOPAGOMODEL
+            {
+                ID = _entity.ID,
+                NOMBRE = _entity.NOMBRE,
+                DESCRIPCION = _entity.DESCRIPCION
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarTipoConceptoPago(CONT_TIPOCONCEPTOPAGOMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del nombre
+                    var _test = await _context.CONT_TIPOCONCEPTOPAGO.FirstOrDefaultAsync(i => i.NOMBRE == _model.NOMBRE);
+                    //bool _nombreRepetido = false;
+                    //_nombreRepetido = (_test.ID != _model.ID && _test.NOMBRE == _model.NOMBRE) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este nombre, por favor elija otro!");
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new CONT_TIPOCONCEPTOPAGO();
+                            _entity = await _context.CONT_TIPOCONCEPTOPAGO.FindAsync(_model.ID);
+
+                            _entity.NOMBRE = _model.NOMBRE;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de TiposConceptoPago
+                            return RedirectToAction("TiposConceptoPago", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_TIPOCONCEPTOPAGO();
+                        _entity = await _context.CONT_TIPOCONCEPTOPAGO.FindAsync(_model.ID);
+
+                        _entity.NOMBRE = _model.NOMBRE;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de TiposConceptoPago
+                        return RedirectToAction("TiposConceptoPago", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        } 
+        #endregion
+
+        #region CONFG. MESES
+        // lista de Meses
+        public async Task<ActionResult> Meses()
+        {
+            //get entity 
+            var _entity = await _context.CONT_MES.ToListAsync();
+
+            // set model
+            List<CONT_MESMODEL> _model = new List<CONT_MESMODEL>();
+
+            //model set
+            foreach (CONT_MES entity in _entity)
+            {
+                _model.Add(new CONT_MESMODEL
+                {
+                    ID = entity.ID,
+                    NOMBREMES = entity.NOMBREMES,
+                    DESCRIPCION = entity.DESCRIPCION,
+                    FECHACIERRE = entity.FECHACIERRE,
+                    FECHAINICIO = entity.FECHAINICIO,
+                    FECHACORTE = entity.FECHACORTE
+                });
+            }
+
+            // to view
+            return View(_model);
+        }
+
+        // detalle mes
+
+        public async Task<ActionResult> DetalleMes(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_MES.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_MESMODEL
+            {
+                ID = _entity.ID,
+                NOMBREMES = _entity.NOMBREMES,
+                DESCRIPCION = _entity.DESCRIPCION,
+                FECHAINICIO = _entity.FECHAINICIO,
+                FECHACIERRE = _entity.FECHACIERRE,
+                FECHACORTE = _entity.FECHACORTE
+            };
+
+            // to view
+            return View(_model);
+        }
+
+        // crear mes
+
+        //get 
+        public ActionResult NuevoMes()
+        {
+            // get model 
+            var _model = new CONT_MESMODEL();
+            
+            //elementos dinámicos
+            ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text");
+
+            // to view
+            return View(_model);
+        }
+
+        // NOMBRES DE MESES
+        public static List<SelectListItem> meses = new List<SelectListItem>{
+            new SelectListItem{Text = "ENERO", Value="ENERO"},
+            new SelectListItem{Text="FEBRERO", Value="FEBRERO"},
+            new SelectListItem{Text="MARZO", Value="MARZO"},
+            new SelectListItem{Text="ABRIL", Value="ABRIL"},
+            new SelectListItem{Text="MAYO", Value="MAYO"},
+            new SelectListItem{Text="JUNIO", Value="JUNIO"},
+            new SelectListItem{Text="JULIO", Value="JULIO"},
+            new SelectListItem{Text="AGOSTO", Value="AGOSTO"},
+            new SelectListItem{Text="SEPTIEMBRE", Value="SEPTIEMBRE"},
+            new SelectListItem{Text="OCTUBRE", Value="OCTUBRE"},
+            new SelectListItem{Text="NOVIEMBRE", Value="NOVIEMBRE"},
+            new SelectListItem{Text="DICIEMBRE", Value="DICIEMBRE"}
+
+        };
+        //post
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevoMes(CONT_MESMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // coprobar la existencia del NOMBREMES
+                    if (_context.CONT_MES.FirstOrDefault(i => i.NOMBREMES == _model.NOMBREMES) != null)
+                    {
+                        ModelState.AddModelError("", "Ya existe un registro con este NOMBREMES, por favor elija otro!");
+                        ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text", _model.NOMBREMES);
+                        return View(_model);
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_MES
+                        {
+                            NOMBREMES = _model.NOMBREMES,
+                            DESCRIPCION = _model.DESCRIPCION,
+                            FECHAINICIO = _model.FECHAINICIO,
+                            FECHACIERRE = _model.FECHACIERRE,
+                            FECHACORTE = _model.FECHACORTE
+                        };
+
+                        // guardar en el context
+                        _context.CONT_MES.Add(_entity);
+                        await _context.SaveChangesAsync();
+
+                        // to lista de meses
+                        return RedirectToAction("Meses", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text", _model.NOMBREMES);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        }
+
+        //editar fase 
+        // get
+        public async Task<ActionResult> EditarMes(int? ID)
+        {
+            // comprobar la nulidad de ID
+            if (ID == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            //get entity
+            var _entity = await _context.CONT_MES.FindAsync(ID);
+
+            // comprobar si existe un registro con es id
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            // set model
+            var _model = new CONT_MESMODEL
+            {
+                ID = _entity.ID,
+                NOMBREMES = _entity.NOMBREMES,
+                DESCRIPCION = _entity.DESCRIPCION,
+                FECHACIERRE = _entity.FECHACIERRE,
+                FECHACORTE = _entity.FECHACORTE,
+                FECHAINICIO = _entity.FECHAINICIO
+            };
+
+            // elementos dinámicos
+            ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text");
+
+            // to view
+            return View(_model);
+        }
+
+        //post
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditarMes(CONT_MESMODEL _model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    // comprobar la existencia del NOMBREMES
+                    var _test = await _context.CONT_MES.FirstOrDefaultAsync(i => i.NOMBREMES == _model.NOMBREMES);
+                    //bool _NOMBREMESRepetido = false;
+                    //_NOMBREMESRepetido = (_test.ID != _model.ID && _test.NOMBREMES == _model.NOMBREMES) ? true : false;
+
+                    if (_test != null)
+                    {
+                        if (_test.ID != _model.ID)
+                        {
+                            ModelState.AddModelError("", "Ya existe un registro con este NOMBREMES, por favor elija otro!");
+                            ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text", _model.NOMBREMES);
+                            return View(_model);
+                        }
+                        else
+                        {
+                            // get entity
+                            var _entity = new CONT_MES();
+                            _entity = await _context.CONT_MES.FindAsync(_model.ID);
+
+                            _entity.NOMBREMES = _model.NOMBREMES;
+                            _entity.DESCRIPCION = _model.DESCRIPCION;
+                            _entity.FECHAINICIO = _model.FECHAINICIO;
+                            _entity.FECHACIERRE = _model.FECHACIERRE;
+                            _entity.FECHACORTE = _model.FECHACORTE;
+
+
+                            // guardar en el context
+                            _context.Entry(_entity).State = EntityState.Modified;
+                            await _context.SaveChangesAsync();
+
+                            // to lista de Meses
+                            return RedirectToAction("Meses", "Configuraciones");
+                        }
+                    }
+                    else
+                    {
+                        // get entity
+                        var _entity = new CONT_MES();
+                        _entity = await _context.CONT_MES.FindAsync(_model.ID);
+
+                        _entity.NOMBREMES = _model.NOMBREMES;
+                        _entity.DESCRIPCION = _model.DESCRIPCION;
+                        _entity.FECHAINICIO = _model.FECHAINICIO;
+                        _entity.FECHACIERRE = _model.FECHACIERRE;
+                        _entity.FECHACORTE = _model.FECHACORTE;
+
+                        // guardar en el context
+                        _context.Entry(_entity).State = EntityState.Modified;
+                        await _context.SaveChangesAsync();
+
+                        // to lista de Meses
+                        return RedirectToAction("Meses", "Configuraciones");
+                    }
+
+
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                    ViewBag.NOMBREMES = new SelectList(meses, "Value", "Text", _model.NOMBREMES);
+                    return View(_model);
+                }
+            }
+
+            return View(_model);
+        } 
+
+        #endregion
+
 
         // dispose data base context
         protected override void Dispose(bool disposing)

@@ -8,6 +8,7 @@ using SICIApp.Interfaces;
 using SICIApp.Models;
 using SICIApp.Services;
 using System.Data.Entity.Validation;
+using SICIApp.ViewModels;
 
 
 namespace SICIApp.Dominio
@@ -18,43 +19,25 @@ namespace SICIApp.Dominio
 
         public GuardarInfoAcademicaIngreso GuardarInfoAcademica(INFORMACIONACADEMICA_ESTUDIOS _entityBase, INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD _entity)
         {
-            _context = null;
-            _context = new SICIBD2Entities1();
-           // _context.Dispose();
 
-            try { 
 
-                // obtener el 
-                //var entityBase = new INFORMACIONACADEMICA_ESTUDIOS();
-                //entityBase = _entityBase;
+            try {
 
-                //guardar _entity --> navegar hasta el deep
-              // int res = GuardarInfoAcademicaEstudiosEscolariad(_entity);
-                
-                //if(res != 0)
-                //{
-                    //_context.Entry(_entityBase).State = System.Data.Entity.EntityState.Modified;
-                    _context.ChangeTracker.DetectChanges();
-                    _context.Entry(_entityBase).State = System.Data.Entity.EntityState.Modified;
-                    _context.SaveChanges();
+                // actualizar _entitybase ->INFORMACIONACADEMICA_ESTUDIOS
+                //agregar un nuevo INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD _entity
+                var res = _context.spGuardarInfoAcademicaIngreso(_entityBase.IDINGRESO, _entityBase.SABELEERYESCRIBIR, _entity.IDESCOLARIDAD, _entity.DESCRIPCION);
+
+                if (res != null)
+                {
                     return GuardarInfoAcademicaIngreso.Exito;
-                //}
-
-              //  return GuardarInfoAcademicaIngreso.ErrorAlguardarInfoEstudiosEscolaridad;
+                }
+                else
+                {
+                    return GuardarInfoAcademicaIngreso.ErrorAlguardarInfoEstudiosEscolaridad;
+                }
 
             }
-            //catch (DbEntityValidationException dbex)
-            //{
-            //    foreach (var mdlErrors in dbex.EntityValidationErrors)
-            //    {
-            //        foreach (var err in mdlErrors.ValidationErrors)
-            //        {
-            //            System.Console.WriteLine("Property:{0} Error:{1}", err.PropertyName, err.ErrorMessage);
-            //        }
-            //    }
-
-            //    return GuardarInfoAcademicaIngreso.ObjetoNulo;
-            //}
+            
 
             catch (Exception ex)
             {
@@ -63,17 +46,79 @@ namespace SICIApp.Dominio
             }
         }
 
-        private int GuardarInfoAcademicaEstudiosEscolariad(INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD _entity)
-        {
-            try {
-                _context.INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD.Add(_entity);
-                _context.SaveChanges();
+        
 
-                return 1;
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.StackTrace);
-                return 0;
+
+        public IEnumerable<PRO_CABANIA> GetCabaniasDisponibles(int? IDINGRESO)
+        {
+            string query = "DECLARE @IDINGRESO INT "
+                            + " SET @IDINGRESO = "+IDINGRESO+""
+                            + " SELECT "
+	                        +"    CA.*"
+                            +" FROM "
+	                        +"    [SICI_INGRESOINTERNO].[INGRESO] inn "
+	                        +"    INNER JOIN [SICI_INGRESOINTERNO].[CENTRODESARROLLOINGRESO] CDI "
+	                        +"    ON inn.ID = CDI.IDINGRESO "	
+	                        +"    INNER JOIN "
+	                        +"    [SICI_GENERALES].[CENTROTERAPEUTICO] CT "
+	                        +"    ON CT.ID = CDI.IDCENTROTERAPEUTICO "	
+	                        +"    INNER JOIN 	[SICI_PROMOCION].[PRO_CABANIA] ca "
+	                        +"    ON ca.IDCENTROTERAPEUTICO = CT.ID "
+                            + " WHERE "
+	                        +"    inn.[ID] = @IDINGRESO";
+            var data = this._context.Database.SqlQuery<Entities.PRO_CABANIA>(query);
+
+            return data.AsEnumerable();
+        }
+
+
+        public IQueryable<PRO_CABANIA> GetCabaniasDisponibles2(int? IDINGRESO)
+        {
+            string query = "DECLARE @IDINGRESO INT "
+                              + " SET @IDINGRESO = "+IDINGRESO+""
+                              + " SELECT "
+                              + "    CA.*"
+                              + " FROM "
+                              + "    [SICI_INGRESOINTERNO].[INGRESO] inn "
+                              + "    INNER JOIN [SICI_INGRESOINTERNO].[CENTRODESARROLLOINGRESO] CDI "
+                              + "    ON inn.ID = CDI.IDINGRESO "
+                              + "    INNER JOIN "
+                              + "    [SICI_GENERALES].[CENTROTERAPEUTICO] CT "
+                              + "    ON CT.ID = CDI.IDCENTROTERAPEUTICO "
+                              + "    INNER JOIN 	[SICI_PROMOCION].[PRO_CABANIA] ca "
+                              + "    ON ca.IDCENTROTERAPEUTICO = CT.ID "
+                              + " WHERE "
+                              + "    inn.[ID] = @IDINGRESO";
+            var data = this._context.Database.SqlQuery<Entities.PRO_CABANIA>(query);
+
+            return data.AsQueryable();
+        }
+
+
+        public IQueryable<TopDrogasViewModel> GetTopDrogas
+        {
+            get {
+
+                string query = "SELECT RANK() OVER( ORDER BY "
+                                + "COUNT(DRG.ID),"
+                                + "DRG.NOMBRECIENTIFICO DESC) AS RANK, "
+		                        +" COUNT(DRG.ID) AS OCURRENCIA,"
+		                        +" DRG.NOMBRECIENTIFICO"		                        
+                        +" FROM "
+	                     +   " [SICI_INGRESOINTERNO].[DATOSPROBLEMADROGAS_CONSUMODROGAS] DG"
+	                      +  " INNER JOIN [SICI_INGRESOINTERNO].[DATOSPROBLEMADROGAS_DROGAS] DRG"
+	                       + " ON DG.[IDDROGA] = DRG.[ID]"
+                        +" WHERE"
+	                     +   " DG.IDINGRESO IN ("
+						                       +" SELECT [ID]"
+						                       + "FROM [SICI_INGRESOINTERNO].[INGRESO]"
+	                      +  " )"
+	                       + " GROUP BY DRG.[ID], DRG.[NOMBRECIENTIFICO]"
+                            + " ORDER BY RANK";
+                var data = this._context.Database.SqlQuery<TopDrogasViewModel>(query);
+
+                return data.AsQueryable();
+                
             }
         }
     }

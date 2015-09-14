@@ -14,6 +14,11 @@ namespace SICIApp.Entities
     
     public partial class CENTRODESARROLLOINGRESO
     {
+        public CENTRODESARROLLOINGRESO()
+        {
+            this.PRO_CABANIADESARROLLO = new HashSet<PRO_CABANIADESARROLLO>();
+        }
+    
         public int ID { get; set; }
         public Nullable<System.DateTime> FECHATRASLADO { get; set; }
         public Nullable<bool> ACTIVO { get; set; }
@@ -23,5 +28,6 @@ namespace SICIApp.Entities
     
         public virtual CENTROTERAPEUTICO CENTROTERAPEUTICO { get; set; }
         public virtual INGRESO INGRESO { get; set; }
+        public virtual ICollection<PRO_CABANIADESARROLLO> PRO_CABANIADESARROLLO { get; set; }
     }
 }

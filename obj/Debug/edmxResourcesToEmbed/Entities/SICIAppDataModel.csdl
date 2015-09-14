@@ -489,6 +489,67 @@
       <End Role="TER_INSTRUCTOR" EntitySet="TER_INSTRUCTOR" />
       <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
     </AssociationSet>
+    <EntitySet Name="PRO_CABANIA" EntityType="SICIBD2Model.PRO_CABANIA" />
+    <EntitySet Name="PRO_CABANIADESARROLLO" EntityType="SICIBD2Model.PRO_CABANIADESARROLLO" />
+    <AssociationSet Name="FK_PRO_CABANIA_CENTROTERAPEUTICO" Association="SICIBD2Model.FK_PRO_CABANIA_CENTROTERAPEUTICO">
+      <End Role="CENTROTERAPEUTICO" EntitySet="CENTROTERAPEUTICOes" />
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO" Association="SICIBD2Model.FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO">
+      <End Role="CENTRODESARROLLOINGRESO" EntitySet="CENTRODESARROLLOINGRESO" />
+      <End Role="PRO_CABANIADESARROLLO" EntitySet="PRO_CABANIADESARROLLO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIA_PRO_NIVEL" Association="SICIBD2Model.FK_PRO_CABANIA_PRO_NIVEL">
+      <End Role="PRO_NIVEL" EntitySet="PRO_NIVEL" />
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PRO_CABANIADESARROLLO_PRO_CABANIA" Association="SICIBD2Model.FK_PRO_CABANIADESARROLLO_PRO_CABANIA">
+      <End Role="PRO_CABANIA" EntitySet="PRO_CABANIA" />
+      <End Role="PRO_CABANIADESARROLLO" EntitySet="PRO_CABANIADESARROLLO" />
+    </AssociationSet>
+    <FunctionImport Name="spEditarRecepcionPaciente" ReturnType="Collection(Int32)">
+      <Parameter Name="IDINGRESO" Mode="In" Type="Int32" />
+      <Parameter Name="FECHAREALINGRESOPV" Mode="In" Type="DateTime" />
+      <Parameter Name="OBSERVACIONES" Mode="In" Type="String" />
+      <Parameter Name="IDCABANIA" Mode="In" Type="Int32" />
+      <Parameter Name="USUARIO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="spGuardarInfoAcademicaIngreso" ReturnType="Collection(Int32)">
+      <Parameter Name="IDINGRESO" Mode="In" Type="Int32" />
+      <Parameter Name="SABELEERYESCRIBIR" Mode="In" Type="Boolean" />
+      <Parameter Name="IDESCOLARIDAD" Mode="In" Type="Int32" />
+      <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="CONT_CODOTALONARIO" EntityType="SICIBD2Model.CONT_CODOTALONARIO" />
+    <EntitySet Name="CONT_ESTADOPAGO" EntityType="SICIBD2Model.CONT_ESTADOPAGO" />
+    <EntitySet Name="CONT_FACTURA" EntityType="SICIBD2Model.CONT_FACTURA" />
+    <EntitySet Name="CONT_MES" EntityType="SICIBD2Model.CONT_MES" />
+    <EntitySet Name="CONT_TALONARIO" EntityType="SICIBD2Model.CONT_TALONARIO" />
+    <EntitySet Name="CONT_TIPOCONCEPTOPAGO" EntityType="SICIBD2Model.CONT_TIPOCONCEPTOPAGO" />
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO" Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO">
+      <End Role="CONT_ESTADOPAGO" EntitySet="CONT_ESTADOPAGO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_MES" Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_MES">
+      <End Role="CONT_MES" EntitySet="CONT_MES" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_TALONARIO" Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TALONARIO">
+      <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO">
+      <End Role="CONT_TIPOCONCEPTOPAGO" EntitySet="CONT_TIPOCONCEPTOPAGO" />
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_FACTURA_CONT_CODOTALONARIO" Association="SICIBD2Model.FK_CONT_FACTURA_CONT_CODOTALONARIO">
+      <End Role="CONT_CODOTALONARIO" EntitySet="CONT_CODOTALONARIO" />
+      <End Role="CONT_FACTURA" EntitySet="CONT_FACTURA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CONT_TALONARIO_INGRESO" Association="SICIBD2Model.FK_CONT_TALONARIO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CITY">
     <Key>
@@ -616,6 +677,7 @@
     <NavigationProperty Name="CITY" Relationship="SICIBD2Model.FK_CENTROTERAPEUTICO_CITY" FromRole="CENTROTERAPEUTICO" ToRole="CITY" />
     <NavigationProperty Name="USUARIOCENTROCONSULTAs" Relationship="SICIBD2Model.FK_USUARIOCENTROCONSULTA_CENTROTERAPEUTICO" FromRole="CENTROTERAPEUTICO" ToRole="USUARIOCENTROCONSULTA" />
     <NavigationProperty Name="CENTRODESARROLLOINGRESO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" FromRole="CENTROTERAPEUTICO" ToRole="CENTRODESARROLLOINGRESO" />
+    <NavigationProperty Name="PRO_CABANIA" Relationship="SICIBD2Model.FK_PRO_CABANIA_CENTROTERAPEUTICO" FromRole="CENTROTERAPEUTICO" ToRole="PRO_CABANIA" />
   </EntityType>
   <EntityType Name="USUARIOCENTROCONSULTA">
     <Key>
@@ -1027,6 +1089,7 @@
     <NavigationProperty Name="TER_INCIDENCIAAREA" Relationship="SICIBD2Model.FK_TER_INCIDENCIAAREA_INGRESO" FromRole="INGRESO" ToRole="TER_INCIDENCIAAREA" />
     <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_INGRESO" FromRole="INGRESO" ToRole="TER_MATRICULA" />
     <NavigationProperty Name="TER_RESUMENEVOLUCION" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO" FromRole="INGRESO" ToRole="TER_RESUMENEVOLUCION" />
+    <NavigationProperty Name="CONT_TALONARIO" Relationship="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" FromRole="INGRESO" ToRole="CONT_TALONARIO" />
   </EntityType>
   <EntityType Name="MOTIVOSINGRESO">
     <Key>
@@ -1559,6 +1622,7 @@
     <Property Name="IDINGRESO" Type="Int32" />
     <NavigationProperty Name="CENTROTERAPEUTICO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO" FromRole="CENTRODESARROLLOINGRESO" ToRole="CENTROTERAPEUTICO" />
     <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CENTRODESARROLLOINGRESO_INGRESO" FromRole="CENTRODESARROLLOINGRESO" ToRole="INGRESO" />
+    <NavigationProperty Name="PRO_CABANIADESARROLLO" Relationship="SICIBD2Model.FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO" FromRole="CENTRODESARROLLOINGRESO" ToRole="PRO_CABANIADESARROLLO" />
   </EntityType>
   <Association Name="FK_CENTRODESARROLLOINGRESO_CENTROTERAPEUTICO">
     <End Type="SICIBD2Model.CENTROTERAPEUTICO" Role="CENTROTERAPEUTICO" Multiplicity="0..1" />
@@ -1733,6 +1797,7 @@
     <NavigationProperty Name="PRO_FASE" Relationship="SICIBD2Model.FK_PRO_NIVEL_PRO_FASE" FromRole="PRO_NIVEL" ToRole="PRO_FASE" />
     <NavigationProperty Name="PRO_NIVELCRITERIO" Relationship="SICIBD2Model.FK_PRO_NIVELCRITERIO_PRO_NIVEL" FromRole="PRO_NIVEL" ToRole="PRO_NIVELCRITERIO" />
     <NavigationProperty Name="PRO_PROMOCIONNIVEL" Relationship="SICIBD2Model.FK_PRO_PROMOCIONNIVEL_PRO_NIVEL" FromRole="PRO_NIVEL" ToRole="PRO_PROMOCIONNIVEL" />
+    <NavigationProperty Name="PRO_CABANIA" Relationship="SICIBD2Model.FK_PRO_CABANIA_PRO_NIVEL" FromRole="PRO_NIVEL" ToRole="PRO_CABANIA" />
   </EntityType>
   <EntityType Name="PRO_NIVELCRITERIO">
     <Key>
@@ -2287,6 +2352,235 @@
       </Principal>
       <Dependent Role="TER_MATRICULA">
         <PropertyRef Name="IDINSTRUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PRO_CABANIA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CAPACIDAD" Type="Int32" />
+    <Property Name="GEOLAT" Type="Double" />
+    <Property Name="GEOLONG" Type="Double" />
+    <Property Name="ACTIVO" Type="Boolean" />
+    <Property Name="IDCENTROTERAPEUTICO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="IDNIVEL" Type="Int32" />
+    <Property Name="USUARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CENTROTERAPEUTICO" Relationship="SICIBD2Model.FK_PRO_CABANIA_CENTROTERAPEUTICO" FromRole="PRO_CABANIA" ToRole="CENTROTERAPEUTICO" />
+    <NavigationProperty Name="PRO_NIVEL" Relationship="SICIBD2Model.FK_PRO_CABANIA_PRO_NIVEL" FromRole="PRO_CABANIA" ToRole="PRO_NIVEL" />
+    <NavigationProperty Name="PRO_CABANIADESARROLLO" Relationship="SICIBD2Model.FK_PRO_CABANIADESARROLLO_PRO_CABANIA" FromRole="PRO_CABANIA" ToRole="PRO_CABANIADESARROLLO" />
+  </EntityType>
+  <EntityType Name="PRO_CABANIADESARROLLO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCTDESARROLLO" Type="Int32" Nullable="false" />
+    <Property Name="IDCABANIA" Type="Int32" />
+    <Property Name="ACTIVO" Type="Boolean" />
+    <Property Name="FECHAINGRESO" Type="DateTime" Precision="3" />
+    <Property Name="FECHAEGRESO" Type="DateTime" Precision="3" />
+    <Property Name="USUARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CENTRODESARROLLOINGRESO" Relationship="SICIBD2Model.FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO" FromRole="PRO_CABANIADESARROLLO" ToRole="CENTRODESARROLLOINGRESO" />
+    <NavigationProperty Name="PRO_CABANIA" Relationship="SICIBD2Model.FK_PRO_CABANIADESARROLLO_PRO_CABANIA" FromRole="PRO_CABANIADESARROLLO" ToRole="PRO_CABANIA" />
+  </EntityType>
+  <Association Name="FK_PRO_CABANIA_CENTROTERAPEUTICO">
+    <End Type="SICIBD2Model.CENTROTERAPEUTICO" Role="CENTROTERAPEUTICO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_CABANIA" Role="PRO_CABANIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTROTERAPEUTICO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIA">
+        <PropertyRef Name="IDCENTROTERAPEUTICO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIADESARROLLO_CENTRODESARROLLOINGRESO">
+    <End Type="SICIBD2Model.CENTRODESARROLLOINGRESO" Role="CENTRODESARROLLOINGRESO" Multiplicity="1" />
+    <End Type="SICIBD2Model.PRO_CABANIADESARROLLO" Role="PRO_CABANIADESARROLLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CENTRODESARROLLOINGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIADESARROLLO">
+        <PropertyRef Name="IDCTDESARROLLO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIA_PRO_NIVEL">
+    <End Type="SICIBD2Model.PRO_NIVEL" Role="PRO_NIVEL" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_CABANIA" Role="PRO_CABANIA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_NIVEL">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIA">
+        <PropertyRef Name="IDNIVEL" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PRO_CABANIADESARROLLO_PRO_CABANIA">
+    <End Type="SICIBD2Model.PRO_CABANIA" Role="PRO_CABANIA" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.PRO_CABANIADESARROLLO" Role="PRO_CABANIADESARROLLO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRO_CABANIA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PRO_CABANIADESARROLLO">
+        <PropertyRef Name="IDCABANIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CONT_CODOTALONARIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHACREADO" Type="DateTime" Precision="3" />
+    <Property Name="FECHAAPAGAR" Type="DateTime" Precision="3" />
+    <Property Name="FECHAPAGO" Type="DateTime" Precision="3" />
+    <Property Name="VALORAPAGAR" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IDTALONARIO" Type="Int32" />
+    <Property Name="IDMES" Type="Int32" />
+    <Property Name="IDTIPOCONCEPTO" Type="Int32" />
+    <Property Name="IDTIPOESTADO" Type="Int32" />
+    <NavigationProperty Name="CONT_ESTADOPAGO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO" FromRole="CONT_CODOTALONARIO" ToRole="CONT_ESTADOPAGO" />
+    <NavigationProperty Name="CONT_MES" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_MES" FromRole="CONT_CODOTALONARIO" ToRole="CONT_MES" />
+    <NavigationProperty Name="CONT_TALONARIO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TALONARIO" FromRole="CONT_CODOTALONARIO" ToRole="CONT_TALONARIO" />
+    <NavigationProperty Name="CONT_TIPOCONCEPTOPAGO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" FromRole="CONT_CODOTALONARIO" ToRole="CONT_TIPOCONCEPTOPAGO" />
+    <NavigationProperty Name="CONT_FACTURA" Relationship="SICIBD2Model.FK_CONT_FACTURA_CONT_CODOTALONARIO" FromRole="CONT_CODOTALONARIO" ToRole="CONT_FACTURA" />
+  </EntityType>
+  <EntityType Name="CONT_ESTADOPAGO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="CONT_CODOTALONARIO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO" FromRole="CONT_ESTADOPAGO" ToRole="CONT_CODOTALONARIO" />
+  </EntityType>
+  <EntityType Name="CONT_FACTURA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NUMEROENFISICO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FECHACREACION" Type="DateTime" Precision="3" />
+    <Property Name="VALORPAGADO" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ESTADO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ARCHIVO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="IDCODO" Type="Int32" />
+    <NavigationProperty Name="CONT_CODOTALONARIO" Relationship="SICIBD2Model.FK_CONT_FACTURA_CONT_CODOTALONARIO" FromRole="CONT_FACTURA" ToRole="CONT_CODOTALONARIO" />
+  </EntityType>
+  <EntityType Name="CONT_MES">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBREMES" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAINICIO" Type="DateTime" Precision="3" />
+    <Property Name="FECHACIERRE" Type="DateTime" Precision="3" />
+    <Property Name="FECHACORTE" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="CONT_CODOTALONARIO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_MES" FromRole="CONT_MES" ToRole="CONT_CODOTALONARIO" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="CONT_TALONARIO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHACREADO" Type="DateTime" Precision="3" />
+    <Property Name="ESTADO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="FECHACANCELADO" Type="DateTime" Precision="3" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <NavigationProperty Name="CONT_CODOTALONARIO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TALONARIO" FromRole="CONT_TALONARIO" ToRole="CONT_CODOTALONARIO" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" FromRole="CONT_TALONARIO" ToRole="INGRESO" />
+  </EntityType>
+  <EntityType Name="CONT_TIPOCONCEPTOPAGO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CONT_CODOTALONARIO" Relationship="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" FromRole="CONT_TIPOCONCEPTOPAGO" ToRole="CONT_CODOTALONARIO" />
+  </EntityType>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_ESTADOPAGO">
+    <End Type="SICIBD2Model.CONT_ESTADOPAGO" Role="CONT_ESTADOPAGO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_CODOTALONARIO" Role="CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_ESTADOPAGO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTIPOESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_MES">
+    <End Type="SICIBD2Model.CONT_MES" Role="CONT_MES" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_CODOTALONARIO" Role="CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_MES">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDMES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_TALONARIO">
+    <End Type="SICIBD2Model.CONT_TALONARIO" Role="CONT_TALONARIO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_CODOTALONARIO" Role="CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_TALONARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTALONARIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO">
+    <End Type="SICIBD2Model.CONT_TIPOCONCEPTOPAGO" Role="CONT_TIPOCONCEPTOPAGO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_CODOTALONARIO" Role="CONT_CODOTALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_TIPOCONCEPTOPAGO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="IDTIPOCONCEPTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_FACTURA_CONT_CODOTALONARIO">
+    <End Type="SICIBD2Model.CONT_CODOTALONARIO" Role="CONT_CODOTALONARIO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_FACTURA" Role="CONT_FACTURA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CONT_CODOTALONARIO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_FACTURA">
+        <PropertyRef Name="IDCODO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CONT_TALONARIO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.CONT_TALONARIO" Role="CONT_TALONARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CONT_TALONARIO">
+        <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

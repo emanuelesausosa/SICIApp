@@ -5,39 +5,9 @@
 <div class="row  border-bottom white-bg dashboard-header">
 
     <div class="col-sm-3">
-        <h2>Welcome Amelia</h2>
-        <small>You have 42 messages and 6 notifications.</small>
-        <ul class="list-group clear-list m-t">
-            <li class="list-group-item fist-item">
-                <span class="pull-right">
-                    09:00 pm
-                </span>
-                <span class="label label-success">1</span> Please contact me
-            </li>
-            <li class="list-group-item">
-                <span class="pull-right">
-                    10:16 am
-                </span>
-                <span class="label label-info">2</span> Sign a contract
-            </li>
-            <li class="list-group-item">
-                <span class="pull-right">
-                    08:22 pm
-                </span>
-                <span class="label label-primary">3</span> Open new shop
-            </li>
-            <li class="list-group-item">
-                <span class="pull-right">
-                    11:06 pm
-                </span>
-                <span class="label label-default">4</span> Call back to Sylvia
-            </li>
-            <li class="list-group-item">
-                <span class="pull-right">
-                    12:00 am
-                </span>
-                <span class="label label-primary">5</span> Write a letter to Sandra
-            </li>
+        <h2>Drogas más usadas</h2>
+        <small>En orden ascendente</small>
+        <ul id="topdrogas" class="list-group clear-list m-t">                        
         </ul>
     </div>
     <div class="col-sm-6">
@@ -514,6 +484,30 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            //<li class="list-group-item fist-item">
+            //    <span class="pull-right">
+            //        09:00 pm
+            //    </span>
+            //    <span class="label label-success">1</span> Please contact me
+            //</li>
+            var itemsData = [];
+            var itemsDataX = [];
+            // data de drogas más usadas
+            $.getJSON('@Url.Action("GetTopCasosUsoDrogas")', function (_topdrogas) {                
+                
+                itemsData = _topdrogas;                
+                $.each(_topdrogas, function (i, item) {
+                    itemsData.push('<li class="list-group-item fist-item"><span class="pull-right">' + item.OCURRENCIA + '</span><span class="label label-success">' + item.RANK + '</span> ' + item.NOMBRECIENTIFICO + '</li>');
+                    itemsDataX.push({
+                        val1: item.OCURRENCIA,
+                        val2: item.RANK
+                    });
+                });
+                $('#topdrogas').append(itemsData);
+            });
+
+            
+
             var data2 = [
                [gd(2012, 1, 1), 7], [gd(2012, 1, 2), 6], [gd(2012, 1, 3), 4], [gd(2012, 1, 4), 8],
                [gd(2012, 1, 5), 9], [gd(2012, 1, 6), 7], [gd(2012, 1, 7), 5], [gd(2012, 1, 8), 4],
@@ -691,7 +685,8 @@
                 [0, 1], [1, 0], [2, 2], [3, 0], [4, 1], [5, 3], [6, 1], [7, 5], [8, 2], [9, 3], [10, 2], [11, 1], [12, 0], [13, 2], [14, 8], [15, 0], [16, 0]
             ];
             $("#flot-dashboard-chart").length && $.plot($("#flot-dashboard-chart"), [
-                data1, data2
+                //data1, data2
+                itemsDataX
             ],
                     {
                         series: {

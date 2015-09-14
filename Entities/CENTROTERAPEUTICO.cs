@@ -18,6 +18,7 @@ namespace SICIApp.Entities
         {
             this.USUARIOCENTROCONSULTAs = new HashSet<USUARIOCENTROCONSULTA>();
             this.CENTRODESARROLLOINGRESO = new HashSet<CENTRODESARROLLOINGRESO>();
+            this.PRO_CABANIA = new HashSet<PRO_CABANIA>();
         }
     
         public string ID { get; set; }
@@ -28,5 +29,6 @@ namespace SICIApp.Entities
         public virtual CITY CITY { get; set; }
         public virtual ICollection<USUARIOCENTROCONSULTA> USUARIOCENTROCONSULTAs { get; set; }
         public virtual ICollection<CENTRODESARROLLOINGRESO> CENTRODESARROLLOINGRESO { get; set; }
+        public virtual ICollection<PRO_CABANIA> PRO_CABANIA { get; set; }
     }
 }

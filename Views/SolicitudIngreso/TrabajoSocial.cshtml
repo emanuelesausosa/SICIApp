@@ -30,125 +30,164 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-
-                    <table class="table table-striped">
-                        <tr>
-                            <th>
-                                Fecha Solicitud
-                            </th>
-                            <th>
-                                Nombres Solicitante
-                            </th>
-                            <th>
-                                Apellidos Solicitante
-                            </th>
-                            <th>
-                                Status
-                            </th>
-                            <th>
-                                Centro Terapéutico
-                            </th>
-                            <th>
-                                Aceptado
-                            </th>
-
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
+                    <input type="text" class="form-control input-sm m-b-xs" id="filter" placeholder="Buscar..." />
+                    <table class="footable table table-stripped" data-page-size="20" data-filter="#filter" id="table-elements">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FECHAINGRESOSISTEMA)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FICHA.PRIMERNOMBRE)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDONOMBRE)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FICHA.PRIMERAPELLIDO)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDOAPELLIDO)
-                                </td>
+                                <th>
+                                    Fecha Solicitud
+                                </th>
+                                <th>
+                                    Nombres Solicitante
+                                </th>
+                                <th>
+                                    Apellidos Solicitante
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Centro Terapéutico
+                                </th>
+                                <th>
+                                    Aceptado
+                                </th>
 
-                                @if (item.STATUSFLOW == 1)
-                                {
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FECHAINGRESOSISTEMA)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FICHA.PRIMERNOMBRE)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDONOMBRE)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FICHA.PRIMERAPELLIDO)  @Html.DisplayFor(modelItem => item.FICHA.SEGUNDOAPELLIDO)
+                                    </td>
+
+                                   @if (item.STATUSFLOW == 1)
+                                   {
                                     <td>
                                         <p><span class="badge">Solicitado</span></p>
                                     </td>
-                                }
-                                else
-                                    if (item.STATUSFLOW == 2)
-                                    {
+                                   }
+                                   else
+                                       if (item.STATUSFLOW == 2)
+                                       {
                                         <td>
                                             <p><span class="badge badge-info">Evaluación médica</span></p>
                                         </td>
-                                    }
-                                    else
-                                        if (item.STATUSFLOW == 3)
-                                        {
+                                       }
+                                       else
+                                           if (item.STATUSFLOW == 3)
+                                           {
                                             <td>
                                                 <p><span class="badge badge-inverse">Evaluación Psiquiátrica</span></p>
                                             </td>
-                                        }
-                                        else
-                                            if (item.STATUSFLOW == 4)
-                                            {
+                                           }
+                                           else
+                                               if (item.STATUSFLOW == 4)
+                                               {
                                                 <td>
                                                     <p><span class="badge badge-primary">Evaluación Psicológica</span></p>
                                                 </td>
-                                            }
-                                            else
-                                                if (item.STATUSFLOW == 5)
-                                                {
+                                               }
+                                               else
+                                                   if (item.STATUSFLOW == 5)
+                                                   {
                                                     <td>
                                                         <p><span class="badge badge-info">Evaluación Social</span></p>
                                                     </td>
-                                                }
-                                                else
-                                                    if (item.STATUSFLOW == 6)
-                                                    {
+                                                   }
+                                                   else
+                                                       if (item.STATUSFLOW == 6)
+                                                       {
                                                         <td>
-                                                            <p><span class="badge badge-success">Ingreso Finalizado</span></p>
+                                                            <p><span class="badge badge-success">Preparado</span></p>
                                                         </td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>
-                                                            <p><span class="badge badge-warning">DESCONOCIDO</span></p>
-                                                        </td>
-                                                    }
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IDCRENTROTERAPEUTICO)
-                                </td>
-                                @if (item.ACEPTADO == null)
-                                {
+                                                       }
+                                                       else
+                                                           if (item.STATUSFLOW == 7)
+                                                           {
+                                                            <td>
+                                                                <p><span class="badge badge-warning">NO ACEPTADO</span></p>
+                                                            </td>
+                                                           }
+                                                           else
+                                                               if (item.STATUSFLOW == 8)
+                                                               {
+                                                                <td>
+                                                                    <p><span class="badge badge-success">Ingresado</span></p>
+                                                                </td>
+                                                               }
+                                                               else
+                                                                   if (item.STATUSFLOW == 9)
+                                                                   {
+                                                                    <td>
+                                                                        <p><span class="badge badge-primary">Ingresado a CT</span></p>
+                                                                    </td>
+                                                                   }
+                                                                   else
+                                                                       if (item.STATUSFLOW == 10)
+                                                                       {
+                                                                        <td>
+                                                                            <p><span class="badge badge-disable">Egresado</span></p>
+                                                                        </td>
+                                                                       }
+
+                                                                       else
+                                                                       {
+                                                                        <td>
+                                                                            <p><span class="badge badge-danger">DESCONOCIDO</span></p>
+                                                                        </td>
+                                                                       }
                                     <td>
-                                        <p><span class="label"> -- </span></p>
+                                        @Html.DisplayFor(modelItem => item.IDCRENTROTERAPEUTICO)
                                     </td>
-                                }
-                                else
-                                    if (item.ACEPTADO == true)
+                                    @if (item.ACEPTADO == null)
                                     {
                                         <td>
-                                            <p><span class="label label-success">ACEPTADO</span></p>
+                                            <p><span class="label"> -- </span></p>
                                         </td>
                                     }
                                     else
-                                    {
-                                        <td>
-                                            <p><span class="label label-warning-light">NO ACEPTADO</span></p>
-                                        </td>
-                                    }
+                                        if (item.ACEPTADO == true)
+                                        {
+                                            <td>
+                                                <p><span class="label label-success">ACEPTADO</span></p>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <p><span class="label label-warning-light">NO ACEPTADO</span></p>
+                                            </td>
+                                        }
 
 
-                                <td>
-                                    @Html.ActionLink("Evaluar Paciente", "EvaluacionSocial", new { ID = item.ID }, new { @class = "btn btn-warning btn-sm" })
-                                    @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
-                                    @* <!-- <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>-->*@
-                                    <button type="button" id="new-insert" data-id="@item.ID" class="btn-update" data-toggle="modal" data-target="#myModal2">
-                                        Procesar
-                                    </button>
+                                    <td>
+                                        @Html.ActionLink("Evaluar Paciente", "EvaluacionSocial", new { ID = item.ID }, new { @class = "btn btn-warning btn-sm" })
+                                        @*@Html.ActionLink("Procesar", "ProcesarIngreso", new { ID = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
+                                        @* <!-- <input type="button" data-id="@item.ID" value="PROCESAR" class="btn-update"/>-->*@
+                                        <button type="button" id="new-insert" data-id="@item.ID" class="btn-update" data-toggle="modal" data-target="#myModal2">
+                                            Procesar
+                                        </button>
 
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">
+                                    <ul class="pagination pull-right"></ul>
                                 </td>
                             </tr>
-                        }
+                        </tfoot>
 
                     </table>
                     <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">

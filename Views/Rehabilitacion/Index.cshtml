@@ -1,0 +1,100 @@
+﻿@model SICIApp.ViewModels.RehabilitacionViewModel
+
+@{
+    ViewBag.Title = "Rehabilitación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Rehabilitación</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")">Inicio</a>
+            </li>
+            <li class="active">
+                <strong>Pacientes</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        @foreach (var element in Model.Fases)
+        {
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h1>@element.NOMBRE<small class="m-l-sm">@element.DESCRIPCION</small></h1>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            @foreach (var elementNiv in element.PRO_NIVEL)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h2>@elementNiv.NOMBRE<small class="m-l-sm">@elementNiv.DESCRIPCION</small></h2>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="ibox-content">
+                                                <div class="row">
+                                                    @foreach (var elementPromo in elementNiv.PRO_PROMOCIONNIVEL.Where(i => i.ESTADO == "ACTIVO"))
+                                                    {
+                                                        <div class="col-lg-3">
+                                                            <div class="contact-box center-version">
+
+                                                                <a href="@Url.Action("PerfilPaciente", "Rehabilitacion", new { IDFICHA = elementPromo.INGRESO.FICHA.ID })">
+
+                                                                    <img alt="image" class="img-circle" src="~/Images/a2.jpg">
+
+
+                                                                    <h3 class="m-b-xs"><strong>@elementPromo.INGRESO.FICHA.PRIMERNOMBRE @elementPromo.INGRESO.FICHA.PRIMERAPELLIDO</strong></h3>
+
+                                                                    <div class="font-bold">@elementNiv.NOMBRE / @element.NOMBRE</div>
+                                                                    <address class="m-t-md">
+                                                                        <strong>Lugar de origen: @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.CITY1.NAME</strong><br>
+                                                                        @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.DIRECCIONDOMICILIO<br>
+                                                                        Madre: @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.NOMBREMADRE<br>
+                                                                        Padre: @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.NOMBREPADRE<br>
+                                                                        <abbr title="Tel Fijo">Tel.:</abbr> (@elementPromo.INGRESO.FICHA.DATOSPERSONALES1.COUNTRY.CODE) @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.TELEFONOFIJO
+                                                                        <abbr title="Movil">Movil:</abbr> (@elementPromo.INGRESO.FICHA.DATOSPERSONALES1.COUNTRY.CODE) @elementPromo.INGRESO.FICHA.DATOSPERSONALES1.TELEFONOMOVIL
+                                                                    </address>
+
+                                                                </a>
+                                                                <div class="contact-box-footer">
+                                                                    <div class="m-t-xs btn-group">
+                                                                        <a class="btn btn-xs btn-white"><i class="fa fa-phone"></i> Call </a>
+                                                                        <a class="btn btn-xs btn-white"><i class="fa fa-envelope"></i> Email</a>
+                                                                        <a class="btn btn-xs btn-white"><i class="fa fa-user-plus"></i> Follow</a>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="ibox-footer"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="ibox-footer"></div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

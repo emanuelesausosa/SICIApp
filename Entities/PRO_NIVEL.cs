@@ -18,6 +18,7 @@ namespace SICIApp.Entities
         {
             this.PRO_NIVELCRITERIO = new HashSet<PRO_NIVELCRITERIO>();
             this.PRO_PROMOCIONNIVEL = new HashSet<PRO_PROMOCIONNIVEL>();
+            this.PRO_CABANIA = new HashSet<PRO_CABANIA>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,6 @@ namespace SICIApp.Entities
         public virtual PRO_FASE PRO_FASE { get; set; }
         public virtual ICollection<PRO_NIVELCRITERIO> PRO_NIVELCRITERIO { get; set; }
         public virtual ICollection<PRO_PROMOCIONNIVEL> PRO_PROMOCIONNIVEL { get; set; }
+        public virtual ICollection<PRO_CABANIA> PRO_CABANIA { get; set; }
     }
 }

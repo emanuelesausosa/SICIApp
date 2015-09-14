@@ -1,0 +1,267 @@
+﻿@model SICIApp.Entities.INGRESO
+
+@{
+    ViewBag.Title = "Evaluacion Final de Ingreso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Rehabilitación</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Rehabilitacion", "Index")">Rehabilitación</a>
+            </li>
+            <li class="active">
+                <strong>Recepción Paciente</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="wrapper wrapper-content animated fadeInUp">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="m-b-md">
+                            <button type="button" id="new-insert" data-id="@Model.ID" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal2">
+                                INGRESAR AL PROGRAMA
+                            </button>
+                            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" id="new-insert-container">
+                                    <div class="modal-content animated flipInY" id="new-insert-diag">
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Recepción Ingreso para <strong>@Model.FICHA.PRIMERNOMBRE @Model.FICHA.PRIMERAPELLIDO</strong> </h2>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>Status:</dt>
+                            @if (Model.ACEPTADO == true)
+                            {
+                                <dd><span class="label label-primary">Aceptado</span></dd>
+                            }
+                            else
+                            {
+                                <dd><span class="label label-warning">En proceso</span></dd>
+                            }
+
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <dl class="dl-horizontal">
+
+                        <dt>Nombre del paciente:</dt>
+                        <dd>@Model.FICHA.PRIMERNOMBRE @Model.FICHA.SEGUNDONOMBRE @Model.FICHA.PRIMERAPELLIDO @Model.FICHA.SEGUNDOAPELLIDO</dd>
+                        <dt>Cógigo ingreso:</dt>
+                        <dd id="@Model.ID">@Model.ID</dd>
+                        <dt>Client:</dt>
+                        <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
+                        <dt>Version:</dt>
+                        <dd> 	v1.4.2 </dd>
+                    </dl>
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal">
+
+                            <dt>Last Updated:</dt>
+                            <dd>16.08.2014 12:15:57</dd>
+                            <dt>Created:</dt>
+                            <dd> 	10.07.2014 23:36:57 </dd>
+                            <dt>Participants:</dt>
+                            <dd class="project-people">
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a3.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a1.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a2.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a4.jpg"></a>
+                                <a href=""><img alt="image" class="img-circle" src="~/Images/a5.jpg"></a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="dl-horizontal">
+                            <dt>Completed:</dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                                <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Proceso de Ingreso a Centro Terapéutico<small class="m-l-sm">Recepción Paciente</small></h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="tabs-container">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tab-1">RECEPCIÓN PACIENTE</a></li>
+
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <h3>Recepción Paciente <small>(Nuevo Ingreso)</small></h3>
+                                                    <!--formulario para recepción nuevo ingreso-->
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group" id="data_1">
+                                                            <label class="control-label col-md-2">Fecha de Ingreso al Centro Terapéutico</label>
+                                                            <div class="input-group date">
+                                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input id="evni-1" type="text" class="form-control" value="09/25/2015" style="width:350px;">
+                                                            </div>
+                                                        </div>                                                        
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Explique el detalle</label>
+                                                            <div class="col-md-10">
+                                                                <textarea id="evni-2" class="summernote">
+                                                                    @Model.OBSERVACIONES
+                                                                </textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-md-2">Asignar a cabaña:</label>
+                                                            <div class="col-md-10">
+                                                               @Html.DropDownList("IDCABANIA", null, htmlAttributes: new {@class="form-control" })
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <input id="save-ni" data-id="@Model.ID" type="button" value="Guardar" class="btn btn-primary" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-footer">
+                        <span class="pull-right">
+                            The righ side of the footer
+                        </span>
+                        This is simple footer example
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@section Styles {
+    @Styles.Render("~/plugins/summernoteStyles")
+    @Styles.Render("~/plugins/toastrStyles")
+    @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
+    @Styles.Render("~/Content/plugins/chosen/chosenStyles")
+    @Styles.Render("~/plugins/dataPickerStyles")
+}
+
+@section Scripts {
+    @Scripts.Render("~/plugins/summernote")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/plugins/validate")
+    @Scripts.Render("~/plugins/iCheck")
+    @Scripts.Render("~/plugins/chosen")
+    @Scripts.Render("~/plugins/dataPicker")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.summernote').summernote();
+
+            $('#new-insert').click(function () {
+                var url = "/Rehabilitacion/ProcesarSolicitudAlterna";
+                var ID = $(this).attr('data-id');
+                $.get(url + '/' + ID, function (data) {
+                    $('#new-insert-diag').html(data);
+                    $('#myModal2').modal('show');
+                });
+            });
+
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                calendarWeeks: true,
+                autoclose: true
+            });
+        });
+
+        $('#save-ni').click(function () {
+
+            var element = this;            
+
+            var _model = {
+                id: $(this).attr('data-id'),
+                fecharealingresopv: $('#evni-1').val(),                
+                observaciones: $('#evni-2').code().trim(),
+                idcabania: $('#IDCABANIA').val()
+            }
+
+//            var idcabania = $('#IDCABANIA').val();
+
+            toastr.info('Procesando', 'se ha procesado la solicitud');
+
+            $.ajax({
+                url: '/Rehabilitacion/EditarRecepcionPaciente',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                processData: false,
+                datatype: 'json',
+                data: JSON.stringify(_model),
+                success: function (data) {
+                    if (data.success) {
+                        toastr.success(data.message, 'Éxito');
+                    }
+                    else {
+                        toastr.warning(data.message, 'Error');
+                    }
+
+                },
+                error: function (req, status, err) {
+
+                    toastr.error('error desconocido!' +err +'', 'Error');
+                },
+                async: true,
+                processData: false
+
+            });
+        });
+
+    </script>
+
+}
+
+
+
+

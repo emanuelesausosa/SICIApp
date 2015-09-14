@@ -95,6 +95,23 @@
                             <li class="@Html.IsSelected(action: "Cursos")">
                                 <a href="@Url.Action("Cursos", "Configuraciones")">Cursos</a>
                             </li>
+                            <li class="@Html.IsSelected(action: "Cabanias")">
+                                <a href="@Url.Action("Cabanias", "Configuraciones")">Cabañas</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Contabilidad<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li class="@Html.IsSelected(action: "Meses")">
+                                <a href="@Url.Action("Meses", "Configuraciones")">Meses</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "TiposConceptoPago")">
+                                <a href="@Url.Action("TiposConceptoPago", "Configuraciones")">Tipos Concepto Pago</a>
+                            </li>
+                            <li class="@Html.IsSelected(action: "EstadosPago")">
+                                <a href="@Url.Action("EstadosPago", "Configuraciones")">Estados Pago</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -120,8 +137,22 @@
                     <li class="@Html.IsSelected(action:"TrabajoSocial")">
                         <a href="@Url.Action("TrabajoSocial", "SolicitudIngreso")"><i class="fa fa-users"></i> <span class="nav-label">Trabajo Social</span></a>
                     </li>
+                    <li class="@Html.IsSelected(action:"SolicitudesPendientesAprobar")">
+                        <a href="@Url.Action("SolicitudesPendientesAprobar", "SolicitudIngreso")"><i class="fa fa-anchor"></i> <span class="nav-label">Solicitudes por Aprobar</span></a>
+                    </li>
                 </ul>
-            </li>            
+            </li>    
+            <li class="@Html.IsSelected(controller:"Rehabilitacion")">
+                <a href="#"><i class="fa fa-hospital-o"></i><span class="nav-label">Rehabilitación</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(action: "Index")">
+                        <a href="@Url.Action("Index", "Rehabilitacion")"><i class="fa fa-tag"></i> <span class="nav-label">Pacientes</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "NuevosIngresos")">
+                        <a href="@Url.Action("NuevosIngresos", "Rehabilitacion")"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Nuevos Ingresos</span></a>
+                    </li>
+                </ul>
+            </li>        
         </ul>
     </div>
 </nav>

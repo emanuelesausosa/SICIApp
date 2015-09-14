@@ -102,6 +102,14 @@ namespace SICIApp.Entities
         public virtual DbSet<TER_INSTRUCTOR> TER_INSTRUCTOR { get; set; }
         public virtual DbSet<TER_MATRICULA> TER_MATRICULA { get; set; }
         public virtual DbSet<TER_RESUMENEVOLUCION> TER_RESUMENEVOLUCION { get; set; }
+        public virtual DbSet<PRO_CABANIA> PRO_CABANIA { get; set; }
+        public virtual DbSet<PRO_CABANIADESARROLLO> PRO_CABANIADESARROLLO { get; set; }
+        public virtual DbSet<CONT_CODOTALONARIO> CONT_CODOTALONARIO { get; set; }
+        public virtual DbSet<CONT_ESTADOPAGO> CONT_ESTADOPAGO { get; set; }
+        public virtual DbSet<CONT_FACTURA> CONT_FACTURA { get; set; }
+        public virtual DbSet<CONT_MES> CONT_MES { get; set; }
+        public virtual DbSet<CONT_TALONARIO> CONT_TALONARIO { get; set; }
+        public virtual DbSet<CONT_TIPOCONCEPTOPAGO> CONT_TIPOCONCEPTOPAGO { get; set; }
     
         public virtual ObjectResult<Nullable<int>> spCrearProcesamientoIngreso(Nullable<int> iDINGRESO, Nullable<System.DateTime> fECHADIAGNOSTICO)
         {
@@ -114,6 +122,52 @@ namespace SICIApp.Entities
                 new ObjectParameter("FECHADIAGNOSTICO", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spCrearProcesamientoIngreso", iDINGRESOParameter, fECHADIAGNOSTICOParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spEditarRecepcionPaciente(Nullable<int> iDINGRESO, Nullable<System.DateTime> fECHAREALINGRESOPV, string oBSERVACIONES, Nullable<int> iDCABANIA, string uSUARIO)
+        {
+            var iDINGRESOParameter = iDINGRESO.HasValue ?
+                new ObjectParameter("IDINGRESO", iDINGRESO) :
+                new ObjectParameter("IDINGRESO", typeof(int));
+    
+            var fECHAREALINGRESOPVParameter = fECHAREALINGRESOPV.HasValue ?
+                new ObjectParameter("FECHAREALINGRESOPV", fECHAREALINGRESOPV) :
+                new ObjectParameter("FECHAREALINGRESOPV", typeof(System.DateTime));
+    
+            var oBSERVACIONESParameter = oBSERVACIONES != null ?
+                new ObjectParameter("OBSERVACIONES", oBSERVACIONES) :
+                new ObjectParameter("OBSERVACIONES", typeof(string));
+    
+            var iDCABANIAParameter = iDCABANIA.HasValue ?
+                new ObjectParameter("IDCABANIA", iDCABANIA) :
+                new ObjectParameter("IDCABANIA", typeof(int));
+    
+            var uSUARIOParameter = uSUARIO != null ?
+                new ObjectParameter("USUARIO", uSUARIO) :
+                new ObjectParameter("USUARIO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spEditarRecepcionPaciente", iDINGRESOParameter, fECHAREALINGRESOPVParameter, oBSERVACIONESParameter, iDCABANIAParameter, uSUARIOParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spGuardarInfoAcademicaIngreso(Nullable<int> iDINGRESO, Nullable<bool> sABELEERYESCRIBIR, Nullable<int> iDESCOLARIDAD, string dESCRIPCION)
+        {
+            var iDINGRESOParameter = iDINGRESO.HasValue ?
+                new ObjectParameter("IDINGRESO", iDINGRESO) :
+                new ObjectParameter("IDINGRESO", typeof(int));
+    
+            var sABELEERYESCRIBIRParameter = sABELEERYESCRIBIR.HasValue ?
+                new ObjectParameter("SABELEERYESCRIBIR", sABELEERYESCRIBIR) :
+                new ObjectParameter("SABELEERYESCRIBIR", typeof(bool));
+    
+            var iDESCOLARIDADParameter = iDESCOLARIDAD.HasValue ?
+                new ObjectParameter("IDESCOLARIDAD", iDESCOLARIDAD) :
+                new ObjectParameter("IDESCOLARIDAD", typeof(int));
+    
+            var dESCRIPCIONParameter = dESCRIPCION != null ?
+                new ObjectParameter("DESCRIPCION", dESCRIPCION) :
+                new ObjectParameter("DESCRIPCION", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spGuardarInfoAcademicaIngreso", iDINGRESOParameter, sABELEERYESCRIBIRParameter, iDESCOLARIDADParameter, dESCRIPCIONParameter);
         }
     }
 }

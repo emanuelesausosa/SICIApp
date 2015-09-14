@@ -224,7 +224,7 @@
                                                             <div class="row">
                                                                 <div class="col-xs-6 col-sm-4">
                                                                     <div class="input-group">
-                                                                        <select id="drogas" data-placeholder="Elija entre estas drogas..." class="" multiple style="width:350px;" tabindex="1"></select>
+                                                                      <select id="drogas" class="select2_demo_3" multiple="multiple" data-placeholder="Elija entre estas drogas..." style="width:350px;" tabindex="1"></select>                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -323,7 +323,7 @@
                                                             <div class="row">
                                                                 <div class="col-xs-6 col-sm-4">
                                                                     <div class="input-group">
-                                                                        <select id="enfermedades" data-placeholder="Elija entre estas enfermedades..." class="" multiple style="width:350px;" tabindex="1"></select>
+                                                                        <select id="enfermedades" data-placeholder="Elija entre estas enfermedades..." class="select2_demo_3" multiple style="width:350px;" tabindex="1"></select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -433,7 +433,7 @@
     @Styles.Render("~/Content/plugins/iCheck/iCheckStyles")
     @Styles.Render("~/Content/plugins/chosen/chosenStyles")
     @Styles.Render("~/plugins/dataPickerStyles")
-
+    @Styles.Render("~/plugins/select2Styles")
 
 }
 
@@ -445,11 +445,18 @@
     @Scripts.Render("~/plugins/iCheck")
     @Scripts.Render("~/plugins/chosen")
     @Scripts.Render("~/plugins/dataPicker")
-
+    @Scripts.Render("~/plugins/select2")
 
 
     <script type="text/javascript">
     $(document).ready(function () {
+
+        $(".select2_demo_1").select2();
+        $(".select2_demo_2").select2();
+        $(".select2_demo_3").select2({
+            placeholder: "Select a state",
+            allowClear: true
+        });
 
         $('#new-insert').click(function () {
             var url = "/SolicitudIngreso/ProcesarSolicitudAlterna";
@@ -517,6 +524,7 @@
 
         $('.summernote').summernote();
 
+        
     });
 
         
@@ -616,7 +624,7 @@
         }
 
         var _model = {
-            idngreso: $(this).attr('data-id'),
+            idingreso: $(this).attr('data-id'),
             aniotratamiento: $('#evso-pd11').val(),
             edadcomienzo: $('#evso-pd1').val(),
             expliqueproblemas: $('#evso-pd8').val(),
@@ -640,6 +648,8 @@
             _model: _model,
             drogasSelect: drogasSelectX
         }
+
+        toastr.info('Procesando', 'se ha procesado la solicitud');
 
         $.ajax({
             url: '/SolicitudIngreso/GuardarDatosProblematicaDrogasConsumo',
@@ -695,6 +705,8 @@
             juiciopendiente: _p3
 
         }
+
+        toastr.info('Procesando', 'se ha procesado la solicitud');
 
         $.ajax({
             url: '/SolicitudIngreso/GuardarDatosDelictivos',
@@ -757,6 +769,7 @@
 
 
         var _model = {
+            idingreso: $(this).attr('data-id'),
             detalle: $('#evso-cf2').val(),
             duermebien: _p4,
             hasidooperado: _p6,
@@ -776,6 +789,8 @@
             _model: _model,
             enfSelec: enfSelecX
         }
+
+        toastr.info('Procesando', 'se ha procesado la solicitud');
 
         $.ajax({
             url: '/SolicitudIngreso/GuardarDatosCondicionFisica',
@@ -817,11 +832,14 @@
             _p2 = true;
         }
         var _model = {
+            idingreso: $(this).attr('data-id'),
             fechafirmaacuerdo: $('#evso-mi4').val(),
             descripcion: $('#evso-m2').code(),
             dispuestoasujetarsepv: _p2,
             voluntariamente: _p1
         }
+
+        toastr.info('Procesando', 'se ha procesado la solicitud');
 
         $.ajax({
             url: '/SolicitudIngreso/GuardarMotivosIngreso',
