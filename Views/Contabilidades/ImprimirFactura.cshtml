@@ -1,0 +1,103 @@
+﻿@model SICIApp.Entities.CONT_FACTURA
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SICI | Imprimir Factura</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content p-xl">
+        <div class="ibox-content p-xl">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h5>De:</h5>
+                    <address>
+                        <strong>ABAC, Proyecto Victoria, Org.</strong><br>
+                        Col. Las Palmas,  600/10<br>
+                        Tegucigalpa, Honduras<br>
+                        <abbr title="Telefonos">Tel:</abbr> (504) 2222-2222
+                    </address>
+                </div>
+
+                <div class="col-sm-6 text-right">
+                    <h4>Talonario y cuota No.</h4>
+                    <h4 class="text-navy">@Model.CONT_CODOTALONARIO.CONT_TALONARIO.ID - @Model.CONT_CODOTALONARIO.ID</h4>
+                    <span>Para:</span>
+                    <address>
+                        <strong>@Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.PRIMERNOMBRE @Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.PRIMERAPELLIDO.</strong><br>
+                        @Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.DATOSPERSONALES1.DIRECCIONDOMICILIO<br>
+                        @Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.DATOSPERSONALES1.CITY.NAME<br>
+                        <abbr title="Phone">Tel.:</abbr> (@Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.DATOSPERSONALES1.CITY1.COUNTRYCODE) @Model.CONT_CODOTALONARIO.CONT_TALONARIO.INGRESO.FICHA.DATOSPERSONALES1.TELEFONOMOVIL
+                    </address>
+                    <p>
+                        <span><strong>Fecha de Factura:</strong> @DateTime.Now.ToString()</span><br />
+                        <span><strong>Fecha Caducidad:</strong> @Model.CONT_CODOTALONARIO.FECHAAPAGAR.ToString()</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="table-responsive m-t">
+                <table class="table invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Detalle factura</th>
+                            <th>Cantidad</th>
+                            <th>Valor Cuota</th>
+                            <th>ISV</th>
+                            <th>Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div><strong>Pago de @Model.CONT_CODOTALONARIO.CONT_ESTADOPAGO.NOMBRE</strong></div>
+                                <small>@Model.DESCRIPCION</small>
+                            </td>
+                            <td>1</td>
+                            <td>@Model.VALORPAGADO</td>
+                            <td>--</td>
+                            <td>@Model.VALORPAGADO</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div><!-- /table-responsive -->
+
+            <table class="table invoice-total">
+                <tbody>
+                    <tr>
+                        <td><strong>Sub Total :</strong></td>
+                        <td>@Model.VALORPAGADO</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ISV :</strong></td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL :</strong></td>
+                        <td>@Model.VALORPAGADO</td>
+                    </tr>
+                </tbody>
+            </table>           
+
+            <div class="well m-t">
+                <strong>Comentarios</strong>
+                Isaísas 53:3-4
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    window.print();
+</script>

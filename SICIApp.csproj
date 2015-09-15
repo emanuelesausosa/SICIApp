@@ -1330,10 +1330,19 @@
     <Content Include="Views\Configuraciones\DetalleMes.cshtml" />
     <Content Include="Views\Configuraciones\NuevoMes.cshtml" />
     <Content Include="Views\Configuraciones\EditarMes.cshtml" />
+    <Content Include="Views\Contabilidades\PacientesActivos.cshtml" />
+    <Content Include="Views\Contabilidades\Index.cshtml" />
+    <Content Include="Views\Contabilidades\PagosPendientes.cshtml" />
+    <Content Include="Views\Contabilidades\PacienteNoActivo.cshtml" />
+    <Content Include="Views\Contabilidades\ConfigurarTalonario.cshtml" />
+    <Content Include="Views\Contabilidades\ActualizarTalonarioIngreso.cshtml" />
+    <Content Include="Views\Contabilidades\ConfigurarCuotas.cshtml" />
+    <Content Include="Views\Contabilidades\StatusCuotaRevisar.cshtml" />
+    <Content Include="Views\Contabilidades\PagarCuota.cshtml" />
+    <Content Include="Views\Contabilidades\ImprimirFactura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />
-    <Folder Include="Views\Contabilidades\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

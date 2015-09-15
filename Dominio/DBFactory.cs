@@ -46,9 +46,6 @@ namespace SICIApp.Dominio
             }
         }
 
-        
-
-
         public IEnumerable<PRO_CABANIA> GetCabaniasDisponibles(int? IDINGRESO)
         {
             string query = "DECLARE @IDINGRESO INT "
@@ -120,6 +117,68 @@ namespace SICIApp.Dominio
                 return data.AsQueryable();
                 
             }
+        }
+
+
+        public GuardarCodosTalonariosMasivos GuardarCodosMasivos(List<CONT_CODOTALONARIO> CodosListToAdd)
+        {
+            // se incializa el _context
+           SICIBD2Entities1 _context = new SICIBD2Entities1();
+           _context.Configuration.AutoDetectChangesEnabled = false;
+
+           try { 
+               //contador de registros
+           int count = 0;
+
+            //se recorre lista para hacer la inserción mediante el método add to context
+           for (int i = 0; i < CodosListToAdd.Count; i++ )
+           {
+               ++count;
+               _context = AddToContext(
+                   _context,
+                   new CONT_CODOTALONARIO {
+                       FECHAAPAGAR = CodosListToAdd[i].FECHAAPAGAR,
+                       FECHACREADO = CodosListToAdd[i].FECHACREADO,
+                       DESCRIPCION = CodosListToAdd[i].DESCRIPCION,
+                       IDMES = CodosListToAdd[i].IDMES,
+                       IDTALONARIO = CodosListToAdd[i].IDTALONARIO,
+                       IDTIPOCONCEPTO = CodosListToAdd[i].IDTIPOCONCEPTO,
+                       IDTIPOESTADO = CodosListToAdd[i].IDTIPOESTADO,
+                       VALORAPAGAR = CodosListToAdd[i].VALORAPAGAR
+                   },
+                   count,
+                   CodosListToAdd.Count, 
+                   true
+                   );
+           }
+
+               return GuardarCodosTalonariosMasivos.Exito;
+           }catch(Exception ex)
+           {
+               Console.WriteLine(ex.Message);
+               return GuardarCodosTalonariosMasivos.ErrorAlGuardarInfo;
+           }
+        }
+
+        private SICIBD2Entities1 AddToContext(SICIBD2Entities1 _context, 
+            CONT_CODOTALONARIO cONT_CODOTALONARIO, 
+            int count, 
+            int p1, 
+            bool p2)
+        {
+            _context.Set<CONT_CODOTALONARIO>().Add(cONT_CODOTALONARIO);
+            if(count % p1 == 0)
+            {
+                _context.SaveChanges();
+                if(p2)
+                {
+                    _context.Dispose();
+                    _context = new SICIBD2Entities1();
+                    _context.Configuration.AutoDetectChangesEnabled = false;
+                }
+            }
+
+            return _context;
         }
     }
 }

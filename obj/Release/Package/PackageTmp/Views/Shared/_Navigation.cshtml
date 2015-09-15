@@ -152,7 +152,18 @@
                         <a href="@Url.Action("NuevosIngresos", "Rehabilitacion")"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Nuevos Ingresos</span></a>
                     </li>
                 </ul>
-            </li>        
+            </li>
+            <li class="@Html.IsSelected(controller:"Contabilidades")">
+                <a href="#"><i class="fa fa-money"></i><span class="nav-label">Contabilidades</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(action: "Index")">
+                        <a href="@Url.Action("Index", "Contabilidades")"><span class="nav-label">Contabilidades</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "NuevosIngresos")">
+                        <a href="@Url.Action("PacientesActivos", "Contabilidades")"><span class="nav-label">Pacientes Activos</span></a>
+                    </li>
+                </ul>
+            </li>   
         </ul>
     </div>
 </nav>

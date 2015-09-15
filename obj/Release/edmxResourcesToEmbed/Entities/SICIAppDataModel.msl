@@ -1619,6 +1619,34 @@
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONT_CODOTALONARIO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCONT_CODOTALONARIO">
+            <ScalarProperty Name="IDTIPOESTADO" ParameterName="IDTIPOESTADO" />
+            <ScalarProperty Name="IDTIPOCONCEPTO" ParameterName="IDTIPOCONCEPTO" />
+            <ScalarProperty Name="IDMES" ParameterName="IDMES" />
+            <ScalarProperty Name="IDTALONARIO" ParameterName="IDTALONARIO" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="VALORAPAGAR" ParameterName="VALORAPAGAR" />
+            <ScalarProperty Name="FECHAPAGO" ParameterName="FECHAPAGO" />
+            <ScalarProperty Name="FECHAAPAGAR" ParameterName="FECHAAPAGAR" />
+            <ScalarProperty Name="FECHACREADO" ParameterName="FECHACREADO" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCONT_CODOTALONARIO">
+            <ScalarProperty Name="IDTIPOESTADO" ParameterName="IDTIPOESTADO" Version="Current" />
+            <ScalarProperty Name="IDTIPOCONCEPTO" ParameterName="IDTIPOCONCEPTO" Version="Current" />
+            <ScalarProperty Name="IDMES" ParameterName="IDMES" Version="Current" />
+            <ScalarProperty Name="IDTALONARIO" ParameterName="IDTALONARIO" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="VALORAPAGAR" ParameterName="VALORAPAGAR" Version="Current" />
+            <ScalarProperty Name="FECHAPAGO" ParameterName="FECHAPAGO" Version="Current" />
+            <ScalarProperty Name="FECHAAPAGAR" ParameterName="FECHAAPAGAR" Version="Current" />
+            <ScalarProperty Name="FECHACREADO" ParameterName="FECHACREADO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CONT_ESTADOPAGO">
       <EntityTypeMapping TypeName="SICIBD2Model.CONT_ESTADOPAGO">
@@ -1655,6 +1683,30 @@
           <ScalarProperty Name="NUMEROENFISICO" ColumnName="NUMEROENFISICO" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONT_FACTURA">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCONT_FACTURA">
+            <ScalarProperty Name="IDCODO" ParameterName="IDCODO" />
+            <ScalarProperty Name="ARCHIVO" ParameterName="ARCHIVO" />
+            <ScalarProperty Name="ESTADO" ParameterName="ESTADO" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="VALORPAGADO" ParameterName="VALORPAGADO" />
+            <ScalarProperty Name="FECHACREACION" ParameterName="FECHACREACION" />
+            <ScalarProperty Name="NUMEROENFISICO" ParameterName="NUMEROENFISICO" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCONT_FACTURA">
+            <ScalarProperty Name="IDCODO" ParameterName="IDCODO" Version="Current" />
+            <ScalarProperty Name="ARCHIVO" ParameterName="ARCHIVO" Version="Current" />
+            <ScalarProperty Name="ESTADO" ParameterName="ESTADO" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="VALORPAGADO" ParameterName="VALORPAGADO" Version="Current" />
+            <ScalarProperty Name="FECHACREACION" ParameterName="FECHACREACION" Version="Current" />
+            <ScalarProperty Name="NUMEROENFISICO" ParameterName="NUMEROENFISICO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CONT_MES">
@@ -1699,6 +1751,26 @@
           <ScalarProperty Name="FECHACREADO" ColumnName="FECHACREADO" />
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SICIBD2Model.CONT_TALONARIO">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SICIBD2Model.Store.spInsertNewCONT_TALONARIO">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" />
+            <ScalarProperty Name="FECHACANCELADO" ParameterName="FECHACANCELADO" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" />
+            <ScalarProperty Name="ESTADO" ParameterName="ESTADO" />
+            <ScalarProperty Name="FECHACREADO" ParameterName="FECHACREADO" />
+            <ResultBinding Name="ID" ColumnName="ID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SICIBD2Model.Store.spUpdateCONT_TALONARIO">
+            <ScalarProperty Name="IDINGRESO" ParameterName="IDINGRESO" Version="Current" />
+            <ScalarProperty Name="FECHACANCELADO" ParameterName="FECHACANCELADO" Version="Current" />
+            <ScalarProperty Name="DESCRIPCION" ParameterName="DESCRIPCION" Version="Current" />
+            <ScalarProperty Name="ESTADO" ParameterName="ESTADO" Version="Current" />
+            <ScalarProperty Name="FECHACREADO" ParameterName="FECHACREADO" Version="Current" />
+            <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CONT_TIPOCONCEPTOPAGO">

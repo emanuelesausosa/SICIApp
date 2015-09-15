@@ -2000,9 +2000,29 @@
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
+  <Function Name="spInsertNewCONT_CODOTALONARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FECHACREADO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAAPAGAR" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAPAGO" Type="datetime" Mode="In" />
+    <Parameter Name="VALORAPAGAR" Type="money" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IDTALONARIO" Type="int" Mode="In" />
+    <Parameter Name="IDMES" Type="int" Mode="In" />
+    <Parameter Name="IDTIPOCONCEPTO" Type="int" Mode="In" />
+    <Parameter Name="IDTIPOESTADO" Type="int" Mode="In" />
+  </Function>
   <Function Name="spInsertNewCONT_ESTADOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCONT_FACTURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NUMEROENFISICO" Type="varchar" Mode="In" />
+    <Parameter Name="FECHACREACION" Type="datetime" Mode="In" />
+    <Parameter Name="VALORPAGADO" Type="money" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ESTADO" Type="varchar" Mode="In" />
+    <Parameter Name="ARCHIVO" Type="varchar" Mode="In" />
+    <Parameter Name="IDCODO" Type="int" Mode="In" />
   </Function>
   <Function Name="spInsertNewCONT_MES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBREMES" Type="varchar" Mode="In" />
@@ -2010,6 +2030,13 @@
     <Parameter Name="FECHACIERRE" Type="datetime" Mode="In" />
     <Parameter Name="FECHACORTE" Type="date" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewCONT_TALONARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FECHACREADO" Type="datetime" Mode="In" />
+    <Parameter Name="ESTADO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="FECHACANCELADO" Type="datetime" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
   </Function>
   <Function Name="spInsertNewCONT_TIPOCONCEPTOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -2220,10 +2247,32 @@
     <Parameter Name="NOMBRESINOMIMO" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
   </Function>
+  <Function Name="spUpdateCONT_CODOTALONARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="FECHACREADO" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAAPAGAR" Type="datetime" Mode="In" />
+    <Parameter Name="FECHAPAGO" Type="datetime" Mode="In" />
+    <Parameter Name="VALORAPAGAR" Type="money" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="IDTALONARIO" Type="int" Mode="In" />
+    <Parameter Name="IDMES" Type="int" Mode="In" />
+    <Parameter Name="IDTIPOCONCEPTO" Type="int" Mode="In" />
+    <Parameter Name="IDTIPOESTADO" Type="int" Mode="In" />
+  </Function>
   <Function Name="spUpdateCONT_ESTADOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCONT_FACTURA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="NUMEROENFISICO" Type="varchar" Mode="In" />
+    <Parameter Name="FECHACREACION" Type="datetime" Mode="In" />
+    <Parameter Name="VALORPAGADO" Type="money" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ESTADO" Type="varchar" Mode="In" />
+    <Parameter Name="ARCHIVO" Type="varchar" Mode="In" />
+    <Parameter Name="IDCODO" Type="int" Mode="In" />
   </Function>
   <Function Name="spUpdateCONT_MES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
@@ -2232,6 +2281,14 @@
     <Parameter Name="FECHACIERRE" Type="datetime" Mode="In" />
     <Parameter Name="FECHACORTE" Type="date" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+  </Function>
+  <Function Name="spUpdateCONT_TALONARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="FECHACREADO" Type="datetime" Mode="In" />
+    <Parameter Name="ESTADO" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar(max)" Mode="In" />
+    <Parameter Name="FECHACANCELADO" Type="datetime" Mode="In" />
+    <Parameter Name="IDINGRESO" Type="int" Mode="In" />
   </Function>
   <Function Name="spUpdateCONT_TIPOCONCEPTOPAGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />

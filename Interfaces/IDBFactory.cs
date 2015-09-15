@@ -18,6 +18,10 @@ namespace SICIApp.Interfaces
         GuardarInfoAcademicaIngreso GuardarInfoAcademica(INFORMACIONACADEMICA_ESTUDIOS _entityBase, INFORMACIONACADEMICA_ESTUDIOSESCOLARIDAD _entity);
         IEnumerable<PRO_CABANIA> GetCabaniasDisponibles(int? IDINGRESO);
         IQueryable<PRO_CABANIA> GetCabaniasDisponibles2(int? IDINGRESO);
-        IQueryable<TopDrogasViewModel> GetTopDrogas { get; } 
+        IQueryable<TopDrogasViewModel> GetTopDrogas { get; }
+
+      // proceso de inserción de codos masivos
+        GuardarCodosTalonariosMasivos GuardarCodosMasivos(List<CONT_CODOTALONARIO> CodosListToAdd);
+
     }
 }

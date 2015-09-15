@@ -1,0 +1,155 @@
+﻿@model SICIApp.Models.CONT_TALONARIOMODEL
+
+@{
+    ViewBag.Title = "Actualizar Talonario - "+@Model.INGRESO.FICHA.PRIMERNOMBRE +" "+@Model.INGRESO.FICHA.PRIMERAPELLIDO+"";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Actualizar Talonario</h2>
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Pacientes", "PacientesActivos")
+            </li>
+            <li class="active">
+                <strong>Actualizar Talonario Ingreso</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-8">
+        <div class="title-action">
+			@Html.ActionLink("Pacientes", "PacientesActivos", null, new { @class = "btn btn-primary"})
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="ibox">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="m-b-md">
+                            <h2>Pagos pendientes de @Model.INGRESO.FICHA.PRIMERNOMBRE @Model.INGRESO.FICHA.PRIMERAPELLIDO</h2>
+                        </div>
+                        <dl class="dl-horizontal">
+                            <dt>Status:</dt>
+                            @if (Model.INGRESO.ACEPTADO == true)
+                            {
+                                <dd><span class="label label-primary">Aceptado</span></dd>
+                            }
+                            else
+                            {
+                                <dd><span class="label label-warning">En proceso</span></dd>
+                            }
+
+
+                        </dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <dl class="dl-horizontal">
+
+                        <dt>Nombre del paciente:</dt>
+                        <dd>@Model.INGRESO.FICHA.PRIMERNOMBRE @Model.INGRESO.FICHA.SEGUNDONOMBRE @Model.INGRESO.FICHA.PRIMERAPELLIDO @Model.INGRESO.FICHA.SEGUNDOAPELLIDO</dd>
+                        <dt>Cógigo ingreso:</dt>
+                        <dd id="@Model.ID">@Model.ID</dd>
+                        <dt>Client:</dt>
+                        <dd><a href="#" class="text-navy"> Zender Company</a> </dd>
+                        <dt>Version:</dt>
+                        <dd> 	v1.4.2 </dd>
+                    </dl>
+                    <div class="col-lg-7" id="cluster_info">
+                        <dl class="dl-horizontal"></dl>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <dl class="dl-horizontal">
+                            <dt>Completed:</dt>
+                            <dd>
+                                <div class="progress progress-striped active m-b-sm">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                                <small>Project completed in <strong>60%</strong>. Remaining close the project, sign a contract and invoice.</small>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Actualizar Talonario Ingreso</h5>
+                </div>
+                <div class="ibox-content">
+
+				@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model=>model.IDINGRESO)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHACREADO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHACREADO)
+                @Html.ValidationMessageFor(model => model.FECHACREADO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ESTADO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ESTADO)
+                @Html.ValidationMessageFor(model => model.ESTADO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DESCRIPCION, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DESCRIPCION)
+                @Html.ValidationMessageFor(model => model.DESCRIPCION)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FECHACANCELADO, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FECHACANCELADO)
+                @Html.ValidationMessageFor(model => model.FECHACANCELADO)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+				@Html.ActionLink("Cancelar", "PacientesActivos", null, new { @class = "btn btn-white"})
+            </div>
+        </div>
+    </div>
+}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

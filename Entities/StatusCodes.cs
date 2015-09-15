@@ -40,4 +40,13 @@ namespace SICIApp.Entities
 
         ClaveNula = 4,
     }
+
+    public enum GuardarCodosTalonariosMasivos
+    {
+        Exito = 0,
+
+        ErrorAlGuardarInfo = 1,       
+
+        ErrorGeneral = 2
+    }
 }

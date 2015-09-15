@@ -82,10 +82,12 @@ namespace SICIApp.Models
         [Required]
         [Display(Name = "ID TALONARIO")]
         public Nullable<int> IDTALONARIO { get; set; }
-
+        
+  
         [Required]
-        [Display(Name = "MES")]
-        public Nullable<int> IDMES { get; set; }
+        [Display(Name = "NÚMERO PERIODOS")]
+        [Range(1, 12, ErrorMessage="Debe de elegir un número de periodos entre 1 y 12")]
+        public int NUMEROPERIODOS { get; set; }
 
         [Required]
         [Display(Name = "CONCEPTO")]
@@ -94,6 +96,9 @@ namespace SICIApp.Models
         [Required]
         [Display(Name = "ESTADO")]
         public Nullable<int> IDTIPOESTADO { get; set; }
+
+        [HiddenInput(DisplayValue=false)]
+        public Nullable<int> IDINGRESO { get; set; }
     
         public virtual CONT_ESTADOPAGO CONT_ESTADOPAGO { get; set; }
         public virtual CONT_MES CONT_MES { get; set; }
