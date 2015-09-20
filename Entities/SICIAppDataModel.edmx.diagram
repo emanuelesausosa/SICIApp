@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="bd9cb21f6d3a41c693b69ec1f5ac8436" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="SICIBD2Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" FillColor="Gray" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetRole" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" FillColor="Gray" />
         <EntityTypeShape EntityType="SICIBD2Model.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" FillColor="Gray" />
@@ -177,6 +177,12 @@
         <AssociationConnector Association="SICIBD2Model.FK_CONT_CODOTALONARIO_CONT_TIPOCONCEPTOPAGO" />
         <AssociationConnector Association="SICIBD2Model.FK_CONT_FACTURA_CONT_CODOTALONARIO" />
         <AssociationConnector Association="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" />
+        <EntityTypeShape EntityType="SICIBD2Model.AWBuildVersion" Width="1.5" PointX="3.375" PointY="0.75" FillColor="Black" />
+        <EntityTypeShape EntityType="SICIBD2Model.DatabaseLog" Width="1.5" PointX="5.375" PointY="0.75" FillColor="Black" />
+        <EntityTypeShape EntityType="SICIBD2Model.ErrorLog" Width="1.5" PointX="7.375" PointY="0.75" FillColor="Black" />
+        <EntityTypeShape EntityType="SICIBD2Model.AppLog" Width="1.5" PointX="9.375" PointY="0.75" FillColor="Black" />
+        <EntityTypeShape EntityType="SICIBD2Model.TER_PERMISO" Width="1.5" PointX="5.25" PointY="108.75" FillColor="Chocolate" />
+        <AssociationConnector Association="SICIBD2Model.FK_TER_PERMISO_INGRESO" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

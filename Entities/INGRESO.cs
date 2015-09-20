@@ -33,6 +33,7 @@ namespace SICIApp.Entities
             this.TER_MATRICULA = new HashSet<TER_MATRICULA>();
             this.TER_RESUMENEVOLUCION = new HashSet<TER_RESUMENEVOLUCION>();
             this.CONT_TALONARIO = new HashSet<CONT_TALONARIO>();
+            this.TER_PERMISO = new HashSet<TER_PERMISO>();
         }
     
         public int ID { get; set; }
@@ -84,5 +85,6 @@ namespace SICIApp.Entities
         public virtual ICollection<TER_MATRICULA> TER_MATRICULA { get; set; }
         public virtual ICollection<TER_RESUMENEVOLUCION> TER_RESUMENEVOLUCION { get; set; }
         public virtual ICollection<CONT_TALONARIO> CONT_TALONARIO { get; set; }
+        public virtual ICollection<TER_PERMISO> TER_PERMISO { get; set; }
     }
 }

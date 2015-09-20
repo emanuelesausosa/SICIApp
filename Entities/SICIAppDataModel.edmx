@@ -15,6 +15,19 @@
           <Property Name="Model" Type="varbinary(max)" Nullable="false" />
           <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
         </EntityType>
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="IdAppLog" />
+          </Key>
+          <Property Name="IdAppLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostTime" Type="datetime" />
+          <Property Name="Componente" Type="nvarchar" MaxLength="50" />
+          <Property Name="Metodo" Type="nvarchar" MaxLength="50" />
+          <Property Name="TiempoTomado" Type="time" Precision="7" />
+          <Property Name="Propiedades" Type="varchar(max)" />
+          <Property Name="Usuario" Type="varchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -65,6 +78,42 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AWBuildVersion">
+          <Key>
+            <PropertyRef Name="SystemInformationID" />
+          </Key>
+          <Property Name="SystemInformationID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Database Version" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="VersionDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DatabaseLog">
+          <Key>
+            <PropertyRef Name="DatabaseLogID" />
+          </Key>
+          <Property Name="DatabaseLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostTime" Type="datetime" Nullable="false" />
+          <Property Name="DatabaseUser" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Event" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Schema" Type="nvarchar" MaxLength="128" />
+          <Property Name="Object" Type="nvarchar" MaxLength="128" />
+          <Property Name="TSQL" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="XmlEvent" Type="xml" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrorTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ErrorNumber" Type="int" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorState" Type="int" />
+          <Property Name="ErrorProcedure" Type="nvarchar" MaxLength="126" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" Nullable="false" />
         </EntityType>
         <EntityType Name="CONT_CODOTALONARIO">
           <Key>
@@ -882,6 +931,22 @@
           <Property Name="HORAFIN" Type="time" Precision="7" />
           <Property Name="URLCERTIFICADO" Type="varchar" MaxLength="255" />
           <Property Name="ESTADO" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="TER_PERMISO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHAINICIO" Type="date" />
+          <Property Name="FECHAFIN" Type="date" />
+          <Property Name="HORAINICIO" Type="time" Precision="7" />
+          <Property Name="HORAFIN" Type="time" Precision="7" />
+          <Property Name="OBSERVACIONES" Type="varchar(max)" />
+          <Property Name="MOTIVO" Type="varchar" MaxLength="100" />
+          <Property Name="FECHAEMISION" Type="datetime" />
+          <Property Name="MONITOR" Type="varchar" MaxLength="50" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="256" />
+          <Property Name="IDINGRESO" Type="int" />
         </EntityType>
         <EntityType Name="TER_RESUMENEVOLUCION">
           <Key>
@@ -1854,6 +1919,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TER_FALTA_INGRESO">
+          <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+          <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGRESO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TER_FALTA">
+              <PropertyRef Name="IDINGRESO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TER_FALTA_TER_CATEGORIAFALTA">
+          <End Role="TER_CATEGORIAFALTA" Type="Self.TER_CATEGORIAFALTA" Multiplicity="0..1" />
+          <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TER_CATEGORIAFALTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TER_FALTA">
+              <PropertyRef Name="IDCATEGORIAFALTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TER_INCIDENCIAAREA_INGRESO">
           <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
           <End Role="TER_INCIDENCIAAREA" Type="Self.TER_INCIDENCIAAREA" Multiplicity="*" />
@@ -1911,6 +2000,18 @@
             </Principal>
             <Dependent Role="TER_MATRICULA">
               <PropertyRef Name="IDINSTRUCTOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TER_PERMISO_INGRESO">
+          <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+          <End Role="TER_PERMISO" Type="Self.TER_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGRESO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TER_PERMISO">
+              <PropertyRef Name="IDINGRESO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1982,6 +2083,15 @@
         <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
           <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+        </Function>
+        <Function Name="spInsertNewAppLogItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tipo" Type="nvarchar" Mode="In" />
+          <Parameter Name="PostTime" Type="datetime" Mode="In" />
+          <Parameter Name="Componente" Type="nvarchar" Mode="In" />
+          <Parameter Name="Metodo" Type="nvarchar" Mode="In" />
+          <Parameter Name="TiempoTomado" Type="time" Mode="In" />
+          <Parameter Name="Propiedades" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
         </Function>
         <Function Name="spInsertNewCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -2589,11 +2699,15 @@
         </Function>
         <EntityContainer Name="SICIBD2ModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppLog" EntityType="Self.AppLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AWBuildVersion" EntityType="Self.AWBuildVersion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DatabaseLog" EntityType="Self.DatabaseLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CONT_CODOTALONARIO" EntityType="Self.CONT_CODOTALONARIO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
           <EntitySet Name="CONT_ESTADOPAGO" EntityType="Self.CONT_ESTADOPAGO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
           <EntitySet Name="CONT_FACTURA" EntityType="Self.CONT_FACTURA" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
@@ -2671,6 +2785,7 @@
           <EntitySet Name="TER_INCIDENCIAAREA" EntityType="Self.TER_INCIDENCIAAREA" Schema="SICI_TERAPIA" store:Type="Tables" />
           <EntitySet Name="TER_INSTRUCTOR" EntityType="Self.TER_INSTRUCTOR" Schema="SICI_TERAPIA" store:Type="Tables" />
           <EntitySet Name="TER_MATRICULA" EntityType="Self.TER_MATRICULA" Schema="SICI_TERAPIA" store:Type="Tables" />
+          <EntitySet Name="TER_PERMISO" EntityType="Self.TER_PERMISO" Schema="SICI_TERAPIA" store:Type="Tables" />
           <EntitySet Name="TER_RESUMENEVOLUCION" EntityType="Self.TER_RESUMENEVOLUCION" Schema="SICI_TERAPIA" store:Type="Tables" />
           <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="Self.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
             <End Role="APARATOSSISTEMAS_SISTEMAS" EntitySet="APARATOSSISTEMAS_SISTEMAS" />
@@ -2988,6 +3103,14 @@
             <End Role="INGRESO" EntitySet="INGRESO" />
             <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
           </AssociationSet>
+          <AssociationSet Name="FK_TER_FALTA_INGRESO" Association="Self.FK_TER_FALTA_INGRESO">
+            <End Role="INGRESO" EntitySet="INGRESO" />
+            <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TER_FALTA_TER_CATEGORIAFALTA" Association="Self.FK_TER_FALTA_TER_CATEGORIAFALTA">
+            <End Role="TER_CATEGORIAFALTA" EntitySet="TER_CATEGORIAFALTA" />
+            <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+          </AssociationSet>
           <AssociationSet Name="FK_TER_INCIDENCIAAREA_INGRESO" Association="Self.FK_TER_INCIDENCIAAREA_INGRESO">
             <End Role="INGRESO" EntitySet="INGRESO" />
             <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
@@ -3007,6 +3130,10 @@
           <AssociationSet Name="FK_TER_MATRICULA_TER_INSTRUCTOR" Association="Self.FK_TER_MATRICULA_TER_INSTRUCTOR">
             <End Role="TER_INSTRUCTOR" EntitySet="TER_INSTRUCTOR" />
             <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TER_PERMISO_INGRESO" Association="Self.FK_TER_PERMISO_INGRESO">
+            <End Role="INGRESO" EntitySet="INGRESO" />
+            <End Role="TER_PERMISO" EntitySet="TER_PERMISO" />
           </AssociationSet>
           <AssociationSet Name="FK_TER_RESUMENEVOLUCION_INGRESO" Association="Self.FK_TER_RESUMENEVOLUCION_INGRESO">
             <End Role="INGRESO" EntitySet="INGRESO" />
@@ -3579,6 +3706,24 @@
             <End Role="INGRESO" EntitySet="INGRESO" />
             <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
           </AssociationSet>
+          <EntitySet Name="AWBuildVersion" EntityType="SICIBD2Model.AWBuildVersion" />
+          <EntitySet Name="DatabaseLog" EntityType="SICIBD2Model.DatabaseLog" />
+          <EntitySet Name="ErrorLog" EntityType="SICIBD2Model.ErrorLog" />
+          <EntitySet Name="AppLog" EntityType="SICIBD2Model.AppLog" />
+          <FunctionImport Name="spInsertNewAppLogItem" ReturnType="Collection(Int32)">
+            <Parameter Name="Tipo" Mode="In" Type="String" />
+            <Parameter Name="PostTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Componente" Mode="In" Type="String" />
+            <Parameter Name="Metodo" Mode="In" Type="String" />
+            <Parameter Name="TiempoTomado" Mode="In" Type="Time" />
+            <Parameter Name="Propiedades" Mode="In" Type="String" />
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="TER_PERMISO" EntityType="SICIBD2Model.TER_PERMISO" />
+          <AssociationSet Name="FK_TER_PERMISO_INGRESO" Association="SICIBD2Model.FK_TER_PERMISO_INGRESO">
+            <End Role="INGRESO" EntitySet="INGRESO" />
+            <End Role="TER_PERMISO" EntitySet="TER_PERMISO" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CITY">
           <Key>
@@ -4119,6 +4264,7 @@
           <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_INGRESO" FromRole="INGRESO" ToRole="TER_MATRICULA" />
           <NavigationProperty Name="TER_RESUMENEVOLUCION" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO" FromRole="INGRESO" ToRole="TER_RESUMENEVOLUCION" />
           <NavigationProperty Name="CONT_TALONARIO" Relationship="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" FromRole="INGRESO" ToRole="CONT_TALONARIO" />
+          <NavigationProperty Name="TER_PERMISO" Relationship="SICIBD2Model.FK_TER_PERMISO_INGRESO" FromRole="INGRESO" ToRole="TER_PERMISO" />
         </EntityType>
         <EntityType Name="MOTIVOSINGRESO">
           <Key>
@@ -5609,6 +5755,84 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="CONT_TALONARIO">
+              <PropertyRef Name="IDINGRESO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AWBuildVersion">
+          <Key>
+            <PropertyRef Name="SystemInformationID" />
+          </Key>
+          <Property Name="SystemInformationID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Database_Version" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="VersionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="DatabaseLog">
+          <Key>
+            <PropertyRef Name="DatabaseLogID" />
+          </Key>
+          <Property Name="DatabaseLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DatabaseUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Event" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Schema" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Object" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="TSQL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="XmlEvent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+          </Key>
+          <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorState" Type="Int32" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorLine" Type="Int32" />
+          <Property Name="ErrorMessage" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="IdAppLog" />
+          </Key>
+          <Property Name="IdAppLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostTime" Type="DateTime" Precision="3" />
+          <Property Name="Componente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TiempoTomado" Type="Time" Precision="7" />
+          <Property Name="Propiedades" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TER_PERMISO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHAINICIO" Type="DateTime" Precision="0" />
+          <Property Name="FECHAFIN" Type="DateTime" Precision="0" />
+          <Property Name="HORAINICIO" Type="Time" Precision="7" />
+          <Property Name="HORAFIN" Type="Time" Precision="7" />
+          <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MOTIVO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHAEMISION" Type="DateTime" Precision="3" />
+          <Property Name="MONITOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IDINGRESO" Type="Int32" />
+          <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_PERMISO_INGRESO" FromRole="TER_PERMISO" ToRole="INGRESO" />
+        </EntityType>
+        <Association Name="FK_TER_PERMISO_INGRESO">
+          <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+          <End Type="SICIBD2Model.TER_PERMISO" Role="TER_PERMISO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INGRESO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TER_PERMISO">
               <PropertyRef Name="IDINGRESO" />
             </Dependent>
           </ReferentialConstraint>
@@ -7412,6 +7636,77 @@
                   <ScalarProperty Name="ID" ParameterName="ID" Version="Current" />
                 </UpdateFunction>
               </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AWBuildVersion">
+            <EntityTypeMapping TypeName="SICIBD2Model.AWBuildVersion">
+              <MappingFragment StoreEntitySet="AWBuildVersion">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+                <ScalarProperty Name="Database_Version" ColumnName="Database Version" />
+                <ScalarProperty Name="SystemInformationID" ColumnName="SystemInformationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatabaseLog">
+            <EntityTypeMapping TypeName="SICIBD2Model.DatabaseLog">
+              <MappingFragment StoreEntitySet="DatabaseLog">
+                <ScalarProperty Name="XmlEvent" ColumnName="XmlEvent" />
+                <ScalarProperty Name="TSQL" ColumnName="TSQL" />
+                <ScalarProperty Name="Object" ColumnName="Object" />
+                <ScalarProperty Name="Schema" ColumnName="Schema" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="DatabaseUser" ColumnName="DatabaseUser" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="DatabaseLogID" ColumnName="DatabaseLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLog">
+            <EntityTypeMapping TypeName="SICIBD2Model.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ErrorTime" ColumnName="ErrorTime" />
+                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppLog">
+            <EntityTypeMapping TypeName="SICIBD2Model.AppLog">
+              <MappingFragment StoreEntitySet="AppLog">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Propiedades" ColumnName="Propiedades" />
+                <ScalarProperty Name="TiempoTomado" ColumnName="TiempoTomado" />
+                <ScalarProperty Name="Metodo" ColumnName="Metodo" />
+                <ScalarProperty Name="Componente" ColumnName="Componente" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="IdAppLog" ColumnName="IdAppLog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spInsertNewAppLogItem" FunctionName="SICIBD2Model.Store.spInsertNewAppLogItem" />
+          <EntitySetMapping Name="TER_PERMISO">
+            <EntityTypeMapping TypeName="SICIBD2Model.TER_PERMISO">
+              <MappingFragment StoreEntitySet="TER_PERMISO">
+                <ScalarProperty Name="IDINGRESO" ColumnName="IDINGRESO" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="MONITOR" ColumnName="MONITOR" />
+                <ScalarProperty Name="FECHAEMISION" ColumnName="FECHAEMISION" />
+                <ScalarProperty Name="MOTIVO" ColumnName="MOTIVO" />
+                <ScalarProperty Name="OBSERVACIONES" ColumnName="OBSERVACIONES" />
+                <ScalarProperty Name="HORAFIN" ColumnName="HORAFIN" />
+                <ScalarProperty Name="HORAINICIO" ColumnName="HORAINICIO" />
+                <ScalarProperty Name="FECHAFIN" ColumnName="FECHAFIN" />
+                <ScalarProperty Name="FECHAINICIO" ColumnName="FECHAINICIO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
         </EntityContainerMapping>

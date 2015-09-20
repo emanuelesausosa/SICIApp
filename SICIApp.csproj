@@ -182,8 +182,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\ContabilidadesController.cs" />
+    <Compile Include="Controllers\HistoricosSolicitudesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RehabilitacionController.cs" />
@@ -196,6 +198,9 @@
     <Compile Include="Entities\APARATOSSISTEMAS_SISTEMAS.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\AppLog.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\AspNetRole.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -206,6 +211,9 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\AspNetUserLogin.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\AWBuildVersion.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\CAUSASEGRESO.cs">
@@ -259,6 +267,9 @@
     <Compile Include="Entities\C__MigrationHistory.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\DatabaseLog.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\DATOSDELICTIVOS.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -281,6 +292,9 @@
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\DOCUMENTOSINGRESO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ErrorLog.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ESTADOMENTAL.cs">
@@ -443,6 +457,9 @@
     <Compile Include="Entities\TER_MATRICULA.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\TER_PERMISO.cs">
+      <DependentUpon>SICIAppDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\TER_RESUMENEVOLUCION.cs">
       <DependentUpon>SICIAppDataModel.tt</DependentUpon>
     </Compile>
@@ -468,6 +485,7 @@
     <Compile Include="Models\ContabilidadesModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IngresoModel.cs" />
+    <Compile Include="Models\LogsModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Logger.cs" />
@@ -739,6 +757,7 @@
     <Content Include="Scripts\app\skin.config.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\SICIAppProfileFTP.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -1340,6 +1359,16 @@
     <Content Include="Views\Contabilidades\StatusCuotaRevisar.cshtml" />
     <Content Include="Views\Contabilidades\PagarCuota.cshtml" />
     <Content Include="Views\Contabilidades\ImprimirFactura.cshtml" />
+    <Content Include="Views\Rehabilitacion\Nivel5.cshtml" />
+    <Content Include="Views\Rehabilitacion\PerfilCompletoPaciente.cshtml" />
+    <Content Include="Views\Administracion\DMLLogs.cshtml" />
+    <Content Include="Views\Administracion\DMLLogDetalle.cshtml" />
+    <Content Include="Views\Administracion\DMLErrorSPLogs.cshtml" />
+    <Content Include="Views\Administracion\DMLErrorSPLogDetalle.cshtml" />
+    <Content Include="Views\Administracion\Index.cshtml" />
+    <Content Include="Views\HistoricosSolicitudes\Index.cshtml" />
+    <Content Include="Views\HistoricosSolicitudes\DetalleFicha.cshtml" />
+    <Content Include="Views\Rehabilitacion\_NuevaIncidencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\DocumentosIngreso\" />

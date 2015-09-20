@@ -45,6 +45,7 @@ namespace SICIApp.Controllers
         // en esta sección se despliega el vistazoi completo de los pacientes
         // por Fases--> Niveles --> Paciente
         // aquí se muestran las fases, niveles y pacientes
+        #region Todos los pacientes, Index
         public async Task<ActionResult> Index()
         {
             //var _entity = await _context.INGRESO.Include(i => i.FICHA)
@@ -58,19 +59,37 @@ namespace SICIApp.Controllers
             var _viewModels = new RehabilitacionViewModel();
 
             //set fases
-           _viewModels.Fases = await _context.PRO_FASE.ToListAsync();
+            _viewModels.Fases = await _context.PRO_FASE.ToListAsync();
 
             //set viewmodel Niveles
             //_viewModels.PromocionesNiveles = await _context.PRO_PROMOCIONNIVEL.Include(i => i.INGRESO)
             //    .Include(i => i.PRO_NIVEL)
             //    .Where(i => i.ESTADO == "ACTIVO").ToListAsync();
-            
-           
+
+
             // set Niveles
             //_viewModels.Niveles = await _context.PRO_NIVEL.ToListAsync();
 
             return View(_viewModels);
-        }
+        } 
+        #endregion
+
+        // Nuevos Ingresos, Ingreso de Nivel 5
+        // esta es una vista especializada para ingresos de nivel 5. nuevos pacientes
+        #region Vista de Nivel 5
+        public async Task<ActionResult> Nivel5()
+        {
+            var _entity = await _context.INGRESO.Include(i => i.FICHA)
+             .Where(i => i.STATUSFLOW == 9)
+             .Where(i => i.PRO_PROMOCIONNIVEL.FirstOrDefault(k => k.ESTADO == "ACTIVO").IDNIVEL == 1)
+             .Include(i => i.CENTRODESARROLLOINGRESO)
+             .OrderBy(i => i.FECHAINGRESOSISTEMA)
+             .ToListAsync();
+
+
+            return View(_entity);
+        } 
+        #endregion
 
         // procesamiento de solicitudes
         #region Procesamiento de solicitudes
@@ -470,7 +489,156 @@ namespace SICIApp.Controllers
             //to view
             return View(_entity);
         }
+
+
+        // perfil completo del Paciente, esto es por ingreso (1) el ingreso activo
+        // existe otra vista del Perfil del Paciente completo de todos sus re-ingreso
+        public async Task<ActionResult> PerfilCompletoPaciente(int? IDINGRESO)
+        {
+            // comprobar que el id no es nulo
+            if (IDINGRESO == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //get entity
+            var _entity = await _context.INGRESO.FindAsync(IDINGRESO);
+
+            //comprobar que existe la entitad
+            if (_entity == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (_entity.ACEPTADO != true)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            // se comprueba si no ha sido aceptado, pero no procesado a Rehabilitación
+            if (_entity.ACEPTADO == true && _entity.STATUSFLOW == 8)
+            {
+                return RedirectToAction("SolicitudesPendientesAprobar", "SolicitudIngreso");
+            }
+
+            //se comprueba si no fue aceptado y el status es 7, se envía a históricos, no aceptados
+            if (_entity.ACEPTADO == false && _entity.STATUSFLOW == 7)
+            {
+                return RedirectToAction("PacientesNoAceptados", "HistoricosSolicitudes");
+            }
+
+            // se comprueba que el ingreso está activo
+            if (_entity.STATUSFLOW == 10 || _entity.FECHAEGRESOPV != null)
+            {
+                // lo redirige a una viñeta temporal, para inforemarle que este paciente 
+                //egresó del Centro terapéutico y que solo podrá ver su perfil en modo de lectura
+                return RedirectToAction("PacienteEgresado", "HistoricosSolicitudes", new { IDINGRESO = _entity.ID });
+            }
+
+            //to view
+            return View(_entity);
+        }
+
+
         #endregion
         
+        // métodos asincrónicos para registro de info  en rehabilitación
+        // guardar resumen evolutivo área
+        // este método actualiza un registro en la tabla Resumen Evolutivo Área
+        [Authorize]
+        public async Task<ActionResult> GuardarResumenEvolucionArea(TER_RESUMENEVOLUCION _model)
+        {
+            Thread.Sleep(2000);
+            try {
+
+                // obtener la entity
+                var _entity = await _context.TER_RESUMENEVOLUCION.FindAsync(_model.ID);
+
+                //set new data to entity
+                _entity.INICIOPROCESO = _model.INICIOPROCESO;
+                _entity.DURANTEPROCESO = _model.DURANTEPROCESO;
+                _entity.FINPROCESO = _model.FINPROCESO;
+                _entity.PXSISTFAMILIAR = _model.PXSISTFAMILIAR;
+                _entity.USUARIO = User.Identity.Name;
+                _entity.FECHAULTIMAACTUALIZACION = DateTime.Now;
+
+                //guardar en el context
+                _context.Entry(_entity).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Registro guardado con éxito!" }, JsonRequestBehavior.AllowGet);
+
+            }catch(Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        // proceso mediente el cual se inseta una nueva incidencia
+        //GET
+        [Authorize]
+        public  ActionResult NuevaIncidencia(int? ID, int? IDCATEGORIAAREA)
+        {
+            try {
+
+                // get model
+                var _model = new TER_INCIDENCIAAREA();
+
+                _model.IDINGRESO = ID;
+                _model.IDCATEGORIAAREA = IDCATEGORIAAREA;
+                _model.INGRESO = _context.INGRESO.Find(ID);
+                _model.TER_CATEGORIAAREA = _context.TER_CATEGORIAAREA.Find(IDCATEGORIAAREA);
+               
+
+                // to PartialView
+                return PartialView("_NuevaIncidencia", _model);
+
+            }catch(Exception ex)
+            {
+                return View("ErrorNuevaIncidencia", ex.Message);
+            }
+        }
+
+        // proceso mediente el cual se inseta una nueva incidencia
+        //POST
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> NuevaIncidencia(TER_INCIDENCIAAREA _model)
+        {
+            try {
+
+                // set entity
+                var _entity = new TER_INCIDENCIAAREA();
+                _entity.ACCIONREALIZADA = _model.ACCIONREALIZADA;
+                _entity.ACTITUD = _model.ACTITUD;
+                _entity.ACTITUDESMOSTRADAS = _model.ACTITUDESMOSTRADAS;
+                _entity.DETALLEGENRAL = _model.DETALLEGENRAL;
+                _entity.EXPLICACIONCONDUCTA = _model.EXPLICACIONCONDUCTA;
+                _entity.FECHADUAGNOSTICO = _model.FECHADUAGNOSTICO;
+                _entity.FECHAREGISTRO = DateTime.Now;
+                _entity.IDCATEGORIAAREA = _model.IDCATEGORIAAREA;
+                _entity.IDINGRESO = _model.IDINGRESO;
+                _entity.MONITOR = _model.MONITOR;
+                _entity.MOTIVOVISITA = _model.MOTIVOVISITA;
+                _entity.OBSERVACIONEXTRA = _model.OBSERVACIONEXTRA;
+                _entity.PRONOSTICO = _model.PRONOSTICO;
+                _entity.PSICOTERAPIA = _model.PSICOTERAPIA;
+                _entity.RECOMENDACIONES = _model.RECOMENDACIONES;
+                _entity.USUARIO = User.Identity.Name;
+
+
+                // guardar en el context
+                _context.TER_INCIDENCIAAREA.Add(_entity);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("PerfilCompletoPaciente", new { IDINGRESO = _model.IDINGRESO });
+
+            }catch(Exception ex)
+            {
+                return View("ErrorNuevaIncidencia", ex.Message);
+            }
+        }
+       
     }
 }

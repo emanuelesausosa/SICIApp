@@ -10,6 +10,19 @@
     <Property Name="Model" Type="varbinary(max)" Nullable="false" />
     <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
   </EntityType>
+  <EntityType Name="AppLog">
+    <Key>
+      <PropertyRef Name="IdAppLog" />
+    </Key>
+    <Property Name="IdAppLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tipo" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostTime" Type="datetime" />
+    <Property Name="Componente" Type="nvarchar" MaxLength="50" />
+    <Property Name="Metodo" Type="nvarchar" MaxLength="50" />
+    <Property Name="TiempoTomado" Type="time" Precision="7" />
+    <Property Name="Propiedades" Type="varchar(max)" />
+    <Property Name="Usuario" Type="varchar" MaxLength="255" />
+  </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
       <PropertyRef Name="Id" />
@@ -60,6 +73,42 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AWBuildVersion">
+    <Key>
+      <PropertyRef Name="SystemInformationID" />
+    </Key>
+    <Property Name="SystemInformationID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Database Version" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="VersionDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DatabaseLog">
+    <Key>
+      <PropertyRef Name="DatabaseLogID" />
+    </Key>
+    <Property Name="DatabaseLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PostTime" Type="datetime" Nullable="false" />
+    <Property Name="DatabaseUser" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Event" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Schema" Type="nvarchar" MaxLength="128" />
+    <Property Name="Object" Type="nvarchar" MaxLength="128" />
+    <Property Name="TSQL" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="XmlEvent" Type="xml" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="ErrorLogID" />
+    </Key>
+    <Property Name="ErrorLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ErrorTime" Type="datetime" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ErrorNumber" Type="int" Nullable="false" />
+    <Property Name="ErrorSeverity" Type="int" />
+    <Property Name="ErrorState" Type="int" />
+    <Property Name="ErrorProcedure" Type="nvarchar" MaxLength="126" />
+    <Property Name="ErrorLine" Type="int" />
+    <Property Name="ErrorMessage" Type="nvarchar" MaxLength="4000" Nullable="false" />
   </EntityType>
   <EntityType Name="CONT_CODOTALONARIO">
     <Key>
@@ -877,6 +926,22 @@
     <Property Name="HORAFIN" Type="time" Precision="7" />
     <Property Name="URLCERTIFICADO" Type="varchar" MaxLength="255" />
     <Property Name="ESTADO" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="TER_PERMISO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHAINICIO" Type="date" />
+    <Property Name="FECHAFIN" Type="date" />
+    <Property Name="HORAINICIO" Type="time" Precision="7" />
+    <Property Name="HORAFIN" Type="time" Precision="7" />
+    <Property Name="OBSERVACIONES" Type="varchar(max)" />
+    <Property Name="MOTIVO" Type="varchar" MaxLength="100" />
+    <Property Name="FECHAEMISION" Type="datetime" />
+    <Property Name="MONITOR" Type="varchar" MaxLength="50" />
+    <Property Name="USUARIO" Type="nvarchar" MaxLength="256" />
+    <Property Name="IDINGRESO" Type="int" />
   </EntityType>
   <EntityType Name="TER_RESUMENEVOLUCION">
     <Key>
@@ -1849,6 +1914,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TER_FALTA_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_FALTA_TER_CATEGORIAFALTA">
+    <End Role="TER_CATEGORIAFALTA" Type="Self.TER_CATEGORIAFALTA" Multiplicity="0..1" />
+    <End Role="TER_FALTA" Type="Self.TER_FALTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TER_CATEGORIAFALTA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_FALTA">
+        <PropertyRef Name="IDCATEGORIAFALTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_TER_INCIDENCIAAREA_INGRESO">
     <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
     <End Role="TER_INCIDENCIAAREA" Type="Self.TER_INCIDENCIAAREA" Multiplicity="*" />
@@ -1906,6 +1995,18 @@
       </Principal>
       <Dependent Role="TER_MATRICULA">
         <PropertyRef Name="IDINSTRUCTOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TER_PERMISO_INGRESO">
+    <End Role="INGRESO" Type="Self.INGRESO" Multiplicity="0..1" />
+    <End Role="TER_PERMISO" Type="Self.TER_PERMISO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_PERMISO">
+        <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1977,6 +2078,15 @@
   <Function Name="spInsertNewAparatoSistema_Sistema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="text" Mode="In" />
+  </Function>
+  <Function Name="spInsertNewAppLogItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tipo" Type="nvarchar" Mode="In" />
+    <Parameter Name="PostTime" Type="datetime" Mode="In" />
+    <Parameter Name="Componente" Type="nvarchar" Mode="In" />
+    <Parameter Name="Metodo" Type="nvarchar" Mode="In" />
+    <Parameter Name="TiempoTomado" Type="time" Mode="In" />
+    <Parameter Name="Propiedades" Type="varchar(max)" Mode="In" />
+    <Parameter Name="Usuario" Type="varchar" Mode="In" />
   </Function>
   <Function Name="spInsertNewCausasEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
@@ -2584,11 +2694,15 @@
   </Function>
   <EntityContainer Name="SICIBD2ModelStoreContainer">
     <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppLog" EntityType="Self.AppLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AWBuildVersion" EntityType="Self.AWBuildVersion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DatabaseLog" EntityType="Self.DatabaseLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CONT_CODOTALONARIO" EntityType="Self.CONT_CODOTALONARIO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
     <EntitySet Name="CONT_ESTADOPAGO" EntityType="Self.CONT_ESTADOPAGO" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
     <EntitySet Name="CONT_FACTURA" EntityType="Self.CONT_FACTURA" Schema="SICI_CONTABILIDADES" store:Type="Tables" />
@@ -2666,6 +2780,7 @@
     <EntitySet Name="TER_INCIDENCIAAREA" EntityType="Self.TER_INCIDENCIAAREA" Schema="SICI_TERAPIA" store:Type="Tables" />
     <EntitySet Name="TER_INSTRUCTOR" EntityType="Self.TER_INSTRUCTOR" Schema="SICI_TERAPIA" store:Type="Tables" />
     <EntitySet Name="TER_MATRICULA" EntityType="Self.TER_MATRICULA" Schema="SICI_TERAPIA" store:Type="Tables" />
+    <EntitySet Name="TER_PERMISO" EntityType="Self.TER_PERMISO" Schema="SICI_TERAPIA" store:Type="Tables" />
     <EntitySet Name="TER_RESUMENEVOLUCION" EntityType="Self.TER_RESUMENEVOLUCION" Schema="SICI_TERAPIA" store:Type="Tables" />
     <AssociationSet Name="FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS" Association="Self.FK_APARATOSSISTEMAS_APARATOSSISTEMAS_SISTEMAS">
       <End Role="APARATOSSISTEMAS_SISTEMAS" EntitySet="APARATOSSISTEMAS_SISTEMAS" />
@@ -2983,6 +3098,14 @@
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="TER_EXAMENPERSONALIDAD" EntitySet="TER_EXAMENPERSONALIDAD" />
     </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_INGRESO" Association="Self.FK_TER_FALTA_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_FALTA_TER_CATEGORIAFALTA" Association="Self.FK_TER_FALTA_TER_CATEGORIAFALTA">
+      <End Role="TER_CATEGORIAFALTA" EntitySet="TER_CATEGORIAFALTA" />
+      <End Role="TER_FALTA" EntitySet="TER_FALTA" />
+    </AssociationSet>
     <AssociationSet Name="FK_TER_INCIDENCIAAREA_INGRESO" Association="Self.FK_TER_INCIDENCIAAREA_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="TER_INCIDENCIAAREA" EntitySet="TER_INCIDENCIAAREA" />
@@ -3002,6 +3125,10 @@
     <AssociationSet Name="FK_TER_MATRICULA_TER_INSTRUCTOR" Association="Self.FK_TER_MATRICULA_TER_INSTRUCTOR">
       <End Role="TER_INSTRUCTOR" EntitySet="TER_INSTRUCTOR" />
       <End Role="TER_MATRICULA" EntitySet="TER_MATRICULA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TER_PERMISO_INGRESO" Association="Self.FK_TER_PERMISO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_PERMISO" EntitySet="TER_PERMISO" />
     </AssociationSet>
     <AssociationSet Name="FK_TER_RESUMENEVOLUCION_INGRESO" Association="Self.FK_TER_RESUMENEVOLUCION_INGRESO">
       <End Role="INGRESO" EntitySet="INGRESO" />

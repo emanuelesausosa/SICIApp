@@ -3,6 +3,11 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
+                    <span>
+                        <a href="@Url.Action("Index", "Home")">
+                            <img alt="image" class="img-small" width="100" src="~/Images/proyectovictoria.jpg" />
+                        </a>
+                    </span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
@@ -151,6 +156,9 @@
                     <li class="@Html.IsSelected(action: "NuevosIngresos")">
                         <a href="@Url.Action("NuevosIngresos", "Rehabilitacion")"><i class="fa fa-newspaper-o"></i> <span class="nav-label">Nuevos Ingresos</span></a>
                     </li>
+                    <li class="@Html.IsSelected(action: "Nivel5")">
+                        <a href="@Url.Action("Nivel5", "Rehabilitacion")"><i class="fa fa-file-video-o"></i> <span class="nav-label">Nivel 5</span></a>
+                    </li>
                 </ul>
             </li>
             <li class="@Html.IsSelected(controller:"Contabilidades")">
@@ -161,9 +169,28 @@
                     </li>
                     <li class="@Html.IsSelected(action: "NuevosIngresos")">
                         <a href="@Url.Action("PacientesActivos", "Contabilidades")"><span class="nav-label">Pacientes Activos</span></a>
+                    </li>                    
+                </ul>
+            </li>
+            <li class="@Html.IsSelected(controller:"Administracion")">
+                <a href="#"><i class="fa fa-slideshare"></i><span class="nav-label">Administración</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(action: "DMLLogs")">
+                        <a href="@Url.Action("DMLLogs", "Administracion")"><span class="nav-label"> DeployDB Logs</span></a>
+                    </li>
+                    <li class="@Html.IsSelected(action: "DMLErrorSPLogs")">
+                        <a href="@Url.Action("DMLErrorSPLogs", "Administracion")"><span class="nav-label">ErrorDB SP Logs</span></a>
                     </li>
                 </ul>
-            </li>   
+            </li>
+            <li class="@Html.IsSelected(controller: "HistoricosSolicitudes")">
+                <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Históricos</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="@Html.IsSelected(action: "Index")">
+                        <a href="@Url.Action("Index", "HistoricosSolicitudes")">Solicitudes</a>
+                    </li>                    
+                </ul>
+            </li>  
         </ul>
     </div>
 </nav>

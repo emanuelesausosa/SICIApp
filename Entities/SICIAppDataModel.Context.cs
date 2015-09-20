@@ -110,6 +110,11 @@ namespace SICIApp.Entities
         public virtual DbSet<CONT_MES> CONT_MES { get; set; }
         public virtual DbSet<CONT_TALONARIO> CONT_TALONARIO { get; set; }
         public virtual DbSet<CONT_TIPOCONCEPTOPAGO> CONT_TIPOCONCEPTOPAGO { get; set; }
+        public virtual DbSet<AWBuildVersion> AWBuildVersion { get; set; }
+        public virtual DbSet<DatabaseLog> DatabaseLog { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLog { get; set; }
+        public virtual DbSet<AppLog> AppLog { get; set; }
+        public virtual DbSet<TER_PERMISO> TER_PERMISO { get; set; }
     
         public virtual ObjectResult<Nullable<int>> spCrearProcesamientoIngreso(Nullable<int> iDINGRESO, Nullable<System.DateTime> fECHADIAGNOSTICO)
         {
@@ -168,6 +173,39 @@ namespace SICIApp.Entities
                 new ObjectParameter("DESCRIPCION", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spGuardarInfoAcademicaIngreso", iDINGRESOParameter, sABELEERYESCRIBIRParameter, iDESCOLARIDADParameter, dESCRIPCIONParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> spInsertNewAppLogItem(string tipo, Nullable<System.DateTime> postTime, string componente, string metodo, Nullable<System.TimeSpan> tiempoTomado, string propiedades, string usuario)
+        {
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(string));
+    
+            var postTimeParameter = postTime.HasValue ?
+                new ObjectParameter("PostTime", postTime) :
+                new ObjectParameter("PostTime", typeof(System.DateTime));
+    
+            var componenteParameter = componente != null ?
+                new ObjectParameter("Componente", componente) :
+                new ObjectParameter("Componente", typeof(string));
+    
+            var metodoParameter = metodo != null ?
+                new ObjectParameter("Metodo", metodo) :
+                new ObjectParameter("Metodo", typeof(string));
+    
+            var tiempoTomadoParameter = tiempoTomado.HasValue ?
+                new ObjectParameter("TiempoTomado", tiempoTomado) :
+                new ObjectParameter("TiempoTomado", typeof(System.TimeSpan));
+    
+            var propiedadesParameter = propiedades != null ?
+                new ObjectParameter("Propiedades", propiedades) :
+                new ObjectParameter("Propiedades", typeof(string));
+    
+            var usuarioParameter = usuario != null ?
+                new ObjectParameter("Usuario", usuario) :
+                new ObjectParameter("Usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("spInsertNewAppLogItem", tipoParameter, postTimeParameter, componenteParameter, metodoParameter, tiempoTomadoParameter, propiedadesParameter, usuarioParameter);
         }
     }
 }

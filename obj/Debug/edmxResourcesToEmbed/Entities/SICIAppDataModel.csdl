@@ -550,6 +550,24 @@
       <End Role="INGRESO" EntitySet="INGRESO" />
       <End Role="CONT_TALONARIO" EntitySet="CONT_TALONARIO" />
     </AssociationSet>
+    <EntitySet Name="AWBuildVersion" EntityType="SICIBD2Model.AWBuildVersion" />
+    <EntitySet Name="DatabaseLog" EntityType="SICIBD2Model.DatabaseLog" />
+    <EntitySet Name="ErrorLog" EntityType="SICIBD2Model.ErrorLog" />
+    <EntitySet Name="AppLog" EntityType="SICIBD2Model.AppLog" />
+    <FunctionImport Name="spInsertNewAppLogItem" ReturnType="Collection(Int32)">
+      <Parameter Name="Tipo" Mode="In" Type="String" />
+      <Parameter Name="PostTime" Mode="In" Type="DateTime" />
+      <Parameter Name="Componente" Mode="In" Type="String" />
+      <Parameter Name="Metodo" Mode="In" Type="String" />
+      <Parameter Name="TiempoTomado" Mode="In" Type="Time" />
+      <Parameter Name="Propiedades" Mode="In" Type="String" />
+      <Parameter Name="Usuario" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="TER_PERMISO" EntityType="SICIBD2Model.TER_PERMISO" />
+    <AssociationSet Name="FK_TER_PERMISO_INGRESO" Association="SICIBD2Model.FK_TER_PERMISO_INGRESO">
+      <End Role="INGRESO" EntitySet="INGRESO" />
+      <End Role="TER_PERMISO" EntitySet="TER_PERMISO" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="CITY">
     <Key>
@@ -1090,6 +1108,7 @@
     <NavigationProperty Name="TER_MATRICULA" Relationship="SICIBD2Model.FK_TER_MATRICULA_INGRESO" FromRole="INGRESO" ToRole="TER_MATRICULA" />
     <NavigationProperty Name="TER_RESUMENEVOLUCION" Relationship="SICIBD2Model.FK_TER_RESUMENEVOLUCION_INGRESO" FromRole="INGRESO" ToRole="TER_RESUMENEVOLUCION" />
     <NavigationProperty Name="CONT_TALONARIO" Relationship="SICIBD2Model.FK_CONT_TALONARIO_INGRESO" FromRole="INGRESO" ToRole="CONT_TALONARIO" />
+    <NavigationProperty Name="TER_PERMISO" Relationship="SICIBD2Model.FK_TER_PERMISO_INGRESO" FromRole="INGRESO" ToRole="TER_PERMISO" />
   </EntityType>
   <EntityType Name="MOTIVOSINGRESO">
     <Key>
@@ -2580,6 +2599,84 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="CONT_TALONARIO">
+        <PropertyRef Name="IDINGRESO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AWBuildVersion">
+    <Key>
+      <PropertyRef Name="SystemInformationID" />
+    </Key>
+    <Property Name="SystemInformationID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Database_Version" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="VersionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="DatabaseLog">
+    <Key>
+      <PropertyRef Name="DatabaseLogID" />
+    </Key>
+    <Property Name="DatabaseLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DatabaseUser" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Event" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Schema" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Object" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TSQL" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="XmlEvent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ErrorLog">
+    <Key>
+      <PropertyRef Name="ErrorLogID" />
+    </Key>
+    <Property Name="ErrorLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ErrorTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ErrorNumber" Type="Int32" Nullable="false" />
+    <Property Name="ErrorSeverity" Type="Int32" />
+    <Property Name="ErrorState" Type="Int32" />
+    <Property Name="ErrorProcedure" Type="String" MaxLength="126" FixedLength="false" Unicode="true" />
+    <Property Name="ErrorLine" Type="Int32" />
+    <Property Name="ErrorMessage" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AppLog">
+    <Key>
+      <PropertyRef Name="IdAppLog" />
+    </Key>
+    <Property Name="IdAppLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PostTime" Type="DateTime" Precision="3" />
+    <Property Name="Componente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Metodo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TiempoTomado" Type="Time" Precision="7" />
+    <Property Name="Propiedades" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Usuario" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TER_PERMISO">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHAINICIO" Type="DateTime" Precision="0" />
+    <Property Name="FECHAFIN" Type="DateTime" Precision="0" />
+    <Property Name="HORAINICIO" Type="Time" Precision="7" />
+    <Property Name="HORAFIN" Type="Time" Precision="7" />
+    <Property Name="OBSERVACIONES" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MOTIVO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FECHAEMISION" Type="DateTime" Precision="3" />
+    <Property Name="MONITOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="USUARIO" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="IDINGRESO" Type="Int32" />
+    <NavigationProperty Name="INGRESO" Relationship="SICIBD2Model.FK_TER_PERMISO_INGRESO" FromRole="TER_PERMISO" ToRole="INGRESO" />
+  </EntityType>
+  <Association Name="FK_TER_PERMISO_INGRESO">
+    <End Type="SICIBD2Model.INGRESO" Role="INGRESO" Multiplicity="0..1" />
+    <End Type="SICIBD2Model.TER_PERMISO" Role="TER_PERMISO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INGRESO">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TER_PERMISO">
         <PropertyRef Name="IDINGRESO" />
       </Dependent>
     </ReferentialConstraint>
