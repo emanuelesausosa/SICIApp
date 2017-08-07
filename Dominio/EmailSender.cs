@@ -14,7 +14,7 @@ namespace SICIApp.Dominio
     public class EmailSender : IEmailSender
     {
         public const string clienteMail = "emanuelesausosa@gmail.com";
-        public const string clientePassword = "emso07PRO$$77%%";
+        public const string clientePassword = "*******************";
         public const string smtpCliente = "smtp.gmail.com";
         public const int smtpPuerto = 587;
         public const bool enableSsl = true;
